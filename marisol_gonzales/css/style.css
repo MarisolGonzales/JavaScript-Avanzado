@@ -265,3 +265,8 @@ footer {
         grid-template-columns: 1fr;
     }
 }
+
+/* RETO 1 */
+.estado--enriesgo {
+    color: #cc5de8;
+}

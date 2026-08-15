@@ -47,23 +47,28 @@ function obtenerEstado(promedio) {
     if (promedio >= 18) {
         return "Excelente";
     }
-
     if (promedio >= 15) {
         return "Logro destacado";
     }
 
-    if (promedio >= NOTA_APROBATORIA) {
+    // RETO 1
+    if (promedio >= 12) { 
         return "Aprobado";
     }
-
-    return "Requiere refuerzo";
+    if (promedio >= 8) {  
+        return "Requiere refuerzo";
+    }
+    return "En riesgo"; 
 }
 
 function obtenerClaseEstado(promedio) {
     if (promedio >= 18) return "estado--excelente";
     if (promedio >= 15) return "estado--logrado";
-    if (promedio >= NOTA_APROBATORIA) return "estado--aprobado";
-    return "estado--refuerzo";
+    if (promedio >= 12) return "estado--aprobado";
+
+    //RETO 1
+    if (promedio >= 8) return "estado--refuerzo"; 
+    return "estado--enriesgo"; 
 }
 
 function limpiarMensajeError() {
