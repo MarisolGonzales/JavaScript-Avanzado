@@ -55,6 +55,10 @@ JavaScript.">
                         <input id="envioExpres" type="checkbox">
                         Entrega express (S/ 15.00)
                     </label>
+                    <label class="opcion">
+                        <input id="instalacionTecnica" type="checkbox">
+                        Instalación técnica (S/ 35.00)
+                    </label>
                 </fieldset>
                 <p id="mensajeError" class="mensaje-error" role="alert" hidden></p>
                 <div class="acciones campo--completo">
@@ -92,12 +96,17 @@ JavaScript.">
                     <dt>Envío</dt>
                     <dd><output id="envioResultado"></output></dd>
                 </div>
+                <div>
+    <dt>Instalación</dt>
+    <dd><output id="instalacionResultado"></output></dd>
+</div>
                 <div class="total">
                     <dt>Total</dt>
                     <dd><output id="totalResultado"></output></dd>
                 </div>
             </dl>
             <p id="explicacionBanderas" class="detalle-banderas"></p>
+            <p id="mensajeEnvio" class="detalle-banderas"></p>
         </section>
         <aside class="tarjeta nota campo--completo" aria-labelledby="titulo-precision">
             <h2 id="titulo-precision">¿Por qué se calcula en céntimos?</h2>
