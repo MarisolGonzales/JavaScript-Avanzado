@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Cuenta - NEXUS GAMING</title>
+    <!-- Ruta relativa para subir 2 niveles y encontrar styles.css -->
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .auth-container {
+            max-width: 400px;
+            margin: 60px auto;
+            padding: 30px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .auth-form input {
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid var(--glass-border);
+            background: var(--bg-surface);
+            color: #fff;
+            outline: none;
+        }
+        .btn-submit {
+            background: var(--gog-purple);
+            color: #000;
+            padding: 12px;
+            font-weight: 700;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .btn-submit:hover {
+            background: var(--gog-purple-hover);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Crear Cuenta</h2>
+        <form class="auth-form" id="form-registro">
+            <input type="text" id="reg-nombre" placeholder="Nombre de usuario" required>
+            <input type="email" id="reg-email" placeholder="Correo electrónico" required>
+            <input type="password" id="reg-password" placeholder="Contraseña" required>
+            <button type="submit" class="btn-submit">Registrarse</button>
+        </form>
+        <p style="margin-top: 15px; font-size: 13px; color: var(--text-muted);">
+            ¿Ya tienes cuenta? <a href="login.html" style="color: var(--gog-purple);">Inicia sesión aquí</a>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('form-registro').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const usuario = {
+                nombre: document.getElementById('reg-nombre').value,
+                email: document.getElementById('reg-email').value,
+                avatar: "https://ui-avatars.com/api/?name=" + encodeURIComponent(document.getElementById('reg-nombre').value) + "&background=ab7fff&color=000"
+            };
+            // Guarda la sesión con la llave exacta que busca tu inicio.js
+            localStorage.setItem('nexus_usuario_activo', JSON.stringify(usuario));
+            alert('¡Cuenta creada con éxito!');
+            window.location.href = '../../index.html';
+        });
+    </script>
+</body>
+</html>

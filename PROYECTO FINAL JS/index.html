@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS GAMING</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- NAVBAR GLASS -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>NEXUS <span>GAMING</span></h1>
+        </div>
+        
+        <div class="nav-derecha">
+            <ul class="menu">
+                <li><a href="paginas/catalogo/catalogo.html">Catálogo</a></li>
+                <li><a href="paginas/cliente/perfil.html">Atención al Cliente</a></li>
+                <li><a href="#">Información</a></li>
+                <li><a href="paginas/cliente/historial.html">Registro de tarjeta</a></li>
+            </ul>
+
+            <!-- CONTENEDOR DINÁMICO DE SESIÓN QUE LEE TU JS -->
+            <div id="user-nav" class="user-nav-box">
+                <!-- Se llena mediante inicio.js -->
+            </div>
+
+            <button class="btn-carrito">🛒 Carrito <span class="badge">0</span></button>
+        </div>
+    </nav>
+
+    <!-- CARRUSEL PRINCIPAL ESTILO EPIC GAMES -->
+    <section class="epic-carousel-container">
+        
+        <!-- BANNER PRINCIPAL GRANDE (IZQUIERDA) -->
+        <div class="banner-promocional">
+            <img class="banner-img" id="banner-img" src="juegos/witcher3-banner.jpg" alt="Banner Juego">
+            
+            <div class="banner-overlay">
+                <div class="banner-contenido">
+                    <span class="tag-destacado" id="banner-tag">OFERTA DESTACADA</span>
+                    <h2 id="banner-title">The Witcher 3: Wild Hunt</h2>
+                    <p id="banner-desc">Explora un mundo abierto lleno de monstruos, magia y aventuras inolvidables con un 75% de descuento.</p>
+                    <div class="banner-precio">
+                        <span class="descuento" id="banner-discount">-75%</span>
+                        <span class="precio-original" id="banner-old-price">PEN 119.00</span>
+                        <span class="precio-final" id="banner-price">PEN 29.75</span>
+                    </div>
+                    <div class="banner-acciones">
+                        <button class="btn-banner-compra">Añadir al carrito</button>
+                        <button class="btn-banner-deseos">♡ A mi lista de deseos</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LISTA LATERAL DE MINIATURAS (DERECHA) -->
+        <div class="carousel-list" id="carousel-list">
+            <!-- Se genera dinámicamente desde JS -->
+        </div>
+
+    </section>
+
+    <!-- BUSCADOR -->
+    <section class="seccion-busqueda">
+        <div class="buscador">
+            <input type="text" placeholder="Buscar títulos, franquicias o gift cards...">
+            <button type="button">BUSCAR</button>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE PRODUCTOS EN GRILLA -->
+    <section class="destacados">
+        <h2>🏷️ Imperdibles y Ofertas</h2>
+        <div class="cards">
+            
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="juegos/minecraft.jpg" alt="Minecraft">
+                    <span class="badge-discount">-20%</span>
+                </div>
+                <div class="card-info">
+                    <h3>Minecraft Ultra</h3>
+                    <div class="card-footer-price">
+                        <p class="precio">PEN 89.00</p>
+                        <button class="buy-cart">🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-img-wrapper">
+                    <img src="juegos/gtav.png" alt="GTA V">
+                    <span class="badge-discount">-50%</span>
+                </div>
+                <div class="card-info">
+                    <h3>Grand Theft Auto V</h3>
+                    <div class="card-footer-price">
+                        <p class="precio">PEN 60.00</p>
+                        <button class="buy-cart">🛒</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <script src="inicio.js"></script>
+</body>
+</html>

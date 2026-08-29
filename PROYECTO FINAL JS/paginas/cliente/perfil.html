@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - NEXUS GAMING</title>
+    <!-- Ruta relativa para subir 2 niveles y encontrar styles.css -->
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        .perfil-layout {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 30px;
+        }
+        .perfil-sidebar {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+        }
+        .perfil-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 2px solid var(--gog-purple);
+        }
+        .perfil-nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 25px;
+            text-align: left;
+        }
+        .perfil-nav-links a {
+            padding: 10px 15px;
+            color: var(--text-muted);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        .perfil-nav-links a:hover, .perfil-nav-links a.active {
+            background: rgba(171, 127, 255, 0.15);
+            color: #fff;
+        }
+        .perfil-content {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 30px;
+        }
+        .perfil-content h2 {
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
+        }
+        .info-group {
+            margin-bottom: 15px;
+        }
+        .info-group label {
+            font-size: 13px;
+            color: var(--text-muted);
+            display: block;
+        }
+        .info-group p {
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .btn-volver {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--gog-purple);
+            color: #000;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+        .btn-volver:hover {
+            background: var(--gog-purple-hover);
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="perfil-layout">
+        <!-- COLUMNA IZQUIERDA: MENÚ Y DATOS DE SESIÓN -->
+        <div class="perfil-sidebar">
+            <img id="perfil-img-avatar" src="" alt="Avatar" class="perfil-avatar">
+            <h3 id="perfil-nombre-usuario">Cargando...</h3>
+            <p id="perfil-email-usuario" style="font-size: 13px; color: var(--text-muted);"></p>
+
+            <div class="perfil-nav-links">
+                <a href="perfil.html" class="active">👤 Mi Perfil</a>
+                <a href="biblioteca.html">🎮 Mi Biblioteca</a>
+                <a href="historial.html">📜 Historial de Compras</a>
+            </div>
+        </div>
+
+        <!-- COLUMNA DERECHA: INFORMACIÓN DETALLADA -->
+        <div class="perfil-content">
+            <h2>Detalles de la Cuenta</h2>
+            
+            <div class="info-group">
+                <label>Nombre de usuario</label>
+                <p id="info-nombre">-</p>
+            </div>
+
+            <div class="info-group">
+                <label>Correo Electrónico</label>
+                <p id="info-email">-</p>
+            </div>
+
+            <div class="info-group">
+                <label>Estado de la Cuenta</label>
+                <p style="color: #4cd137;">Activa (NEXUS Member)</p>
+            </div>
+
+            <a href="../../index.html" class="btn-volver">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <!-- SCRIPT QUE CARGA LOS DATOS DEL USUARIO ACTIVO -->
+    <script>
+        const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
+
+        if (usuarioSesion) {
+            const usuario = JSON.parse(usuarioSesion);
+
+            // Rellenar datos en pantalla
+            document.getElementById('perfil-img-avatar').src = usuario.avatar;
+            document.getElementById('perfil-nombre-usuario').textContent = usuario.nombre;
+            document.getElementById('perfil-email-usuario').textContent = usuario.email;
+            
+            document.getElementById('info-nombre').textContent = usuario.nombre;
+            document.getElementById('info-email').textContent = usuario.email;
+        } else {
+            alert('No has iniciado sesión.');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
