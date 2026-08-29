@@ -2,263 +2,80 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Calculadora académica</title>
-
     <link rel="stylesheet" href="./css/styles.css">
-
     <script src="./js/app.js" defer></script>
-
 </head>
 
-
 <body>
-
     <header class="encabezado">
-
-        <div class="encabezado__contenido">
-
-            <p class="etiqueta">
-                JavaScript · Semana 1
-            </p>
-
-            <h1>
-                Calculadora académica
-            </h1>
-
-            <p>
-                Registra tres notas y obtén un diagnóstico inmediato.
-            </p>
-
+        <div class="encabezado_contenido">
+            <p class="etiqueta">JavaScript Semana 1</p>
+            <h1>Calculadora académica</h1>
+            <p>Registra tres notas y obtén un diagnóstico inmediato.</p>
         </div>
-
     </header>
-
-
     <main class="contenedor">
-
-
-        <!-- FORMULARIO -->
-
         <section class="tarjeta" aria-labelledby="titulo-formulario">
-
-            <div class="tarjeta__cabecera">
-
+            <div class="tarjeta_cabecera">
                 <div>
-
-                    <p class="etiqueta">
-                        Registro
-                    </p>
-
-                    <h2 id="titulo-formulario">
-                        Datos del estudiante
-                    </h2>
-
+                    <p class="etiqueta">Registro</p>
+                    <h2 id="titulo-formulario">Datos del estudiante</h2>
                 </div>
-
-                <span class="escala">
-                    Escala: 0 a 20
-                </span>
-
+                <span class="escala">Escala: 0 a 20</span>
             </div>
-
-
             <form id="formNotas" novalidate>
-
-
-                <!-- NOMBRE -->
-
                 <div class="campo campo--completo">
-
-                    <label for="nombre">
-                        Nombre del estudiante
-                    </label>
-
+                    <label for="nombre">Nombre del estudiante</label>
                     <input id="nombre" name="nombre" type="text" autocomplete="name" placeholder="Ej.: Ana Torres"
                         required>
-
                 </div>
-
-
-                <!-- NOTAS -->
-
                 <div class="rejilla-notas">
-
-
                     <div class="campo">
-
-                        <label for="nota1">
-                            Nota 1
-                        </label>
-
+                        <label for="nota1">Nota 1</label>
                         <input id="nota1" name="nota1" type="number" min="0" max="20" step="0.01" inputmode="decimal"
                             required>
-
                     </div>
-
-
                     <div class="campo">
-
-                        <label for="nota2">
-                            Nota 2
-                        </label>
-
+                        <label for="nota2">Nota 2</label>
                         <input id="nota2" name="nota2" type="number" min="0" max="20" step="0.01" inputmode="decimal"
                             required>
-
                     </div>
-
-
                     <div class="campo">
-
-                        <label for="nota3">
-                            Nota 3
-                        </label>
-
+                        <label for="nota3">Nota 3</label>
                         <input id="nota3" name="nota3" type="number" min="0" max="20" step="0.01" inputmode="decimal"
                             required>
-
                     </div>
-
-
                 </div>
-
-
-                <!-- MENSAJE DE ERROR -->
-
                 <p id="mensajeError" class="mensaje-error" role="alert" hidden></p>
-
-
-                <!-- BOTONES -->
-
                 <div class="acciones">
-
-                    <button class="boton boton--principal" type="submit">
-                        Calcular promedio
-                    </button>
-
-
-                    <button class="boton boton--secundario" type="reset">
-                        Limpiar
-                    </button>
-
+                    <button class="boton boton--principal" type="submit">Calcular promedio</button>
+                    <button class="boton boton--secundario" type="reset">Limpiar</button>
                 </div>
-
-
             </form>
-
         </section>
-
-
-        <!-- RESULTADO -->
-
         <section id="panelResultado" class="tarjeta resultado" aria-labelledby="titulo-resultado" aria-live="polite"
             hidden>
-
-            <p class="etiqueta">
-                Resultado
-            </p>
-
-            <h2 id="titulo-resultado">
-                Resumen académico
-            </h2>
-
-
-            <p id="nombreResultado" class="resultado__nombre"></p>
-
-
-            <div class="resultado__datos">
-
+            <p class="etiqueta">Resultado</p>
+            <h2 id="titulo-resultado">Resumen académico</h2>
+            <p id="nombreResultado" class="resultado_nombre"></p>
+            <div class="resultado_datos">
                 <div>
-
-                    <span>
-                        Promedio
-                    </span>
-
-                    <output id="promedioResultado" for="nota1 nota2 nota3">
-                        -
-                    </output>
-
+                    <span>Promedio</span>
+                    <output id="promedioResultado" for="nota1 nota2 nota3">-</output>
                 </div>
-
-
-                <p id="estadoResultado" class="resultado__estado"></p>
-
+                <p id="estadoResultado" class="resultado_estado"></p>
             </div>
-
-
-            <!-- BARRA DE PROGRESO -->
-
             <div class="barra" aria-hidden="true">
-
-                <div id="barraProgreso" class="barra__valor"></div>
-
+                <div id="barraProgreso" class="barra_valor"></div>
             </div>
-
-
         </section>
-
-
-        <!-- EXPLICACIÓN DEL RETO -->
-
-        <section class="tarjeta informacion">
-
-            <p class="etiqueta">
-                Reto de extensión
-            </p>
-
-            <h2>
-                Diagnóstico académico
-            </h2>
-
-            <p>
-                La aplicación clasifica el promedio del estudiante
-                según la escala establecida.
-            </p>
-
-            <ul>
-
-                <li>
-                    18 a 20: Excelente
-                </li>
-
-                <li>
-                    15 a menos de 18: Logro destacado
-                </li>
-
-                <li>
-                    12 a menos de 15: Aprobado
-                </li>
-
-                <li>
-                    8 a menos de 12: Requiere refuerzo
-                </li>
-
-                <li>
-                    Menor de 8: En riesgo
-                </li>
-
-            </ul>
-
-        </section>
-
-
     </main>
-
-
     <footer>
-
-        <p>
-            Laboratorio de fundamentos de JavaScript y DOM.
-        </p>
-
+        <p>Laboratorio de fundamentos de JavaScript y DOM.</p>
     </footer>
-
-
 </body>
 
 </html>
