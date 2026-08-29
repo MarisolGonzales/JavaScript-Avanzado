@@ -42,7 +42,8 @@
       });
     }
     render();
-n    document.getElementById('simulatePurchase').addEventListener('click', function(){
+
+    document.getElementById('simulatePurchase').addEventListener('click', function(){
       var ach = readJSON('achievements') || {};
       if(!ach.first_purchase){
         ach.first_purchase = { unlocked:true, message:'Has realizado tu primera compra (simulado)', unlockedAt: new Date().toISOString() };
