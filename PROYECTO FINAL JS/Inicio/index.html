@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>NEXUS GAMING | Mi pagina de Videojuegos</title>
+<link href="style.css" rel="stylesheet" /></head>
+
+<body>
+    <button class="btn-carrito" id="btnCarrito">🛒 Carrito</button>
+
+    <!-- MODAL CARRITO -->
+    <div class="modal" id="modalCarrito">
+        <div class="modal-content">
+            <span class="close" id="cerrarModal">×</span>
+            <h2>Tu carrito</h2>
+            <div class="lista-carrito" id="listaCarrito"></div>
+            <div class="estado-compra" id="estadoCompra">Tu carrito está listo.</div>
+            <div class="resumen">
+                <h3>Total: S/ <span id="totalCarrito">0.00</span></h3>
+            </div>
+            <button class="pagar" type="button">Pagar</button>
+        </div>
+    </div>
+
+    <!-- MODAL BOLETA -->
+    <div class="modal modal-boleta" id="modalBoleta">
+        <div class="modal-content boleta-content">
+            <span class="close" id="cerrarBoleta">×</span>
+            <div class="boleta-header">
+                <h2>Boleta de compra</h2>
+                <p>NEXUS GAMING STORE</p>
+            </div>
+            <p class="boleta-subtitle">Compra digital confirmada</p>
+            <div class="boleta-info">
+                <p><strong>Cliente:</strong> <span id="clienteBoleta">Usuario invitado</span></p>
+                <p><strong>Correo:</strong> <span id="correoBoleta">Sin correo registrado</span></p>
+                <p><strong>ID:</strong> <span id="documentoBoleta">Sin ID</span></p>
+                <p><strong>Fecha:</strong> <span id="fechaBoleta"></span></p>
+            </div>
+            <div class="detalle-boleta" id="detalleBoleta"></div>
+            <div class="resumen-boleta">
+                <h3>Total pagado: S/ <span id="totalBoleta">0.00</span></h3>
+            </div>
+            <button class="pagar" id="descargarBoleta" type="button">Descargar boleta</button>
+        </div>
+    </div>
+
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>⚡ NEXUS GAMING</h1>
+            </div>
+
+            <div class="nav-derecha">
+                <input class="menu-toggle" id="menu-toggle" type="checkbox" />
+                <div class="perfil-cliente">
+                    <button aria-label="Perfil de usuario" class="perfil-icono" id="perfilIcono" type="button">
+                        <img alt="Perfil" id="perfilAvatar" src="" style="display:none;" />
+                        <svg fill="none" height="22" id="perfilIconoDefault" stroke="currentColor" stroke-width="2"
+                            viewbox="0 0 24 24" width="22">
+                            <circle cx="12" cy="8" r="4"></circle>
+                            <path d="M4 20c0-4.4 3.6-8 8-8s8 3.6 8 8"></path>
+                        </svg>
+                    </button>
+                    <div class="perfil-tooltip" id="perfilTooltip">
+                        <p class="perfil-tooltip-nombre" id="tooltipNombre"></p>
+                        <p class="perfil-tooltip-correo" id="tooltipCorreo"></p>
+                    </div>
+                </div>
+                <label class="hamburguesa" for="menu-toggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </label>
+                <ul class="menu">
+                    <li><a href="paginas/catalogo/index.html"style="color: #00f5d4;">Catálogo</a></li>
+                    <li><a href="paginas/atencion_al_cliente/index.html"style="color: #00f5d4;">Atencion al Cliente</a></li>
+                    <li><a href="paginas/informacion/index.html" style="color: #00f5d4;">Informacion</a></li>
+                    <li><a href="paginas/registro_de_tarjeta/index.html"style="color: #00f5d4;">Registro de tarjeta</a></li>
+                    <li><a href="paginas/iniciar_sesion/index.html" style="color: #00f5d4;">Iniciar sesion</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="perfil-modal-overlay" id="perfilModalOverlay">
+            <div class="perfil-modal">
+                <button class="perfil-modal-cerrar" id="perfilModalCerrar" type="button">✕</button>
+                <div class="perfil-modal-avatar-wrap">
+                    <img alt="Foto de perfil" id="modalAvatar" src="" />
+                    <label class="perfil-cambiar-foto" for="perfilAvatarInput">Cambiar foto</label>
+                    <input accept="image/*" hidden="" id="perfilAvatarInput" type="file" />
+                </div>
+                <h3 id="modalNombre"></h3>
+                <p class="perfil-dato"><strong>Correo</strong><span id="modalCorreo"></span></p>
+                <p class="perfil-dato"><strong>ID de cuenta</strong><span id="modalId"></span></p>
+                <button class="perfil-ver-mas" id="perfilVerMas" type="button">Ver más</button>
+                <button class="perfil-logout" id="perfilLogout" type="button">Cerrar sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- BANNER HERO -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Eleva tu experiencia de juego al siguiente nivel</h2>
+            <p>Descubre títulos épicos, licencias digitales instantáneas y promociones de temporada.</p>
+            <!-- BUSCADOR -->
+            <div class="buscador">
+                <input id="buscarJuego" placeholder="Buscar títulos, franquicias o gift cards..." type="text" />
+                <button onclick="buscarJuego()" type="button">Buscar</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIONES REORDENADAS -->
+    <section class="home-section ofertas">
+        <h2>🏷️ Imperdibles y Ofertas</h2>
+        <div class="cards" id="ofertasGrid"></div>
+    </section>
+
+    <section class="destacados">
+        <h2>🔥 Títulos Destacados</h2>
+        <div class="cards" id="destacadosGrid"></div>
+    </section>
+
+    <section class="home-section lo-nuevo">
+        <h2>⚡ Recién Llegados</h2>
+        <div class="cards" id="novedadesGrid"></div>
+    </section>
+
+    <section class="home-section gratis">
+        <h2>🎮 Juegos Free-to-Play</h2>
+        <div class="cards" id="gratisGrid"></div>
+    </section>
+
+    <section class="home-section preferencias">
+        <h2>✨ Recomendados para ti</h2>
+        <div class="cards" id="preferenciasGrid"></div>
+    </section>
+
+    <section class="home-section proximos">
+        <h2>⏳ Próximos Lanzamientos</h2>
+        <div class="cards" id="proximosGrid"></div>
+    </section>
+
+    <!-- BENEFICIOS -->
+    <section class="beneficios">
+        <div class="beneficio">
+            <h3>🚀 Licencias Inmediatas</h3>
+            <p>Obtén tus accesos digitales en pantalla y por email al instante.</p>
+        </div>
+        <div class="beneficio">
+            <h3>🛡️ Compras Blindadas</h3>
+            <p>Transacciones cifradas con soporte postventa 24/7.</p>
+        </div>
+        <div class="beneficio">
+            <h3>💎 Precios Exclusivos</h3>
+            <p>Descuentos permanentes y recompensas por cada compra.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-contenido">
+            <div>
+                <h4>NEXUS GAMING STORE</h4>
+                <p>Tu plataforma definitiva para contenido digital.</p>
+            </div>
+            <div>
+                <h4>Comunidad</h4>
+                <p>Facebook</p>
+                <p>Instagram</p>
+                <p>Tiktok</p>
+                <p>Discord</p>
+            </div>
+            <div>
+                <h4>Atención</h4>
+                <li><a href="paginas/soporte/index.html">soporte@nexusgaming.com</a></li>
+                <p></p>
+                <p>+51 987 654 321</p>
+            </div>
+        </div>
+        <p class="copy">© 2026 NEXUS GAMING - Todos los derechos reservados</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="js/catalogo-datos.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/carrito.js"></script>
+</body>
+
+</html>
