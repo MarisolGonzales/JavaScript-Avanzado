@@ -7,7 +7,8 @@
     price: 89.90,
     category: 'Aventura',
     developer: 'Mojang',
-    img: 'https://via.placeholder.com/640x360.png?text=Minecraft',
+    // img se intentará resolver en la carpeta local 'juegos' usando el id + extensión, con fallback a placeholder
+    img: null,
     description: 'Explora, construye y crea en mundos infinitos. Juego de ejemplo para la práctica.'
   };
 
@@ -38,8 +39,21 @@
 
   // Mostrar datos (podría leerse querystring ?id=...)
   function renderGame(game){n    titleEl.textContent = game.title;
-    imgEl.src = game.img;
     imgEl.alt = game.title + ' portada';
+    (function loadLocalImage(imgEl, game){
+      var exts = ['.png','.jpg','.jpeg','.webp','.svg'];
+      var base = 'juegos/' + game.id;
+      var idx = 0;
+      function attempt(){
+        if(idx >= exts.length){
+          imgEl.src = 'https://via.placeholder.com/640x360.png?text=' + encodeURIComponent(game.title);
+          return;
+        }
+        imgEl.onerror = function(){ idx++; attempt(); };
+        imgEl.src = base + exts[idx];
+      }
+      attempt();
+    })(imgEl, game);
     priceEl.textContent = 'Precio: S/ ' + game.price.toFixed(2);
     catEl.textContent = game.category;
     devEl.textContent = game.developer;
