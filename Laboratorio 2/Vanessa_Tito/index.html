@@ -1,291 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta name="description" content="Cotizador comercial inteligente para practicar JavaScript Avanzado">
-
     <title>Cotizador Comercial Inteligente</title>
-
-    <link rel="stylesheet" href="./css/styles.css">
-    <script src="./js/app.js" defer></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-
-    <header class="encabezado">
-        <div class="contenedor">
-
-            <p class="etiqueta">
-                JavaScript Avanzado · Laboratorio 02
-            </p>
-
-            <h1>Cotizador comercial inteligente</h1>
-
-            <p class="bajada">
-                Calcula subtotal, descuento, IGV, envío y total
-                utilizando números, operadores, BigInt y banderas de bits.
-            </p>
-
-        </div>
-    </header>
-
-
-    <main class="contenedor cuadricula">
-
-        <!-- FORMULARIO -->
-        <section class="tarjeta">
-
-            <p class="etiqueta">Datos de entrada</p>
-
-            <h2>Configura la cotización</h2>
-
-            <form id="formCotizacion" novalidate>
-
-                <div class="campo campo--completo">
-                    <label for="producto">
-                        Producto o servicio
-                    </label>
-
-                    <input id="producto" name="producto" type="text" maxlength="60" placeholder="Ej.: Laptop Lenovo"
-                        required>
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="precio">
-                        Precio unitario (S/)
-                    </label>
-
-                    <input id="precio" name="precio" type="number" min="0.01" max="1000000" step="0.01"
-                        placeholder="0.00" required>
-
-                </div>
-
-
-                <div class="campo">
-
-                    <label for="cantidad">
-                        Cantidad
-                    </label>
-
-                    <input id="cantidad" name="cantidad" type="number" min="1" max="10000" step="1" value="1" required>
-
-                </div>
-
-
-                <div class="campo campo--completo">
-
-                    <label for="descuento">
-                        Descuento solicitado (%)
-                    </label>
-
-                    <input id="descuento" name="descuento" type="number" min="0" max="50" step="1" value="0" required>
-
-                    <small>
-                        El descuento máximo permitido es 50 %.
-                    </small>
-
-                </div>
-
-
-                <fieldset class="opciones campo--completo">
-
-                    <legend>
-                        Opciones comerciales
-                    </legend>
-
-                    <label class="opcion">
-
-                        <input id="clienteFrecuente" type="checkbox">
-
-                        Cliente frecuente
-                        (mínimo 5 % de descuento)
-
-                    </label>
-
-
-                    <label class="opcion">
-
-                        <input id="envioExpres" type="checkbox">
-
-                        Entrega express
-                        (S/ 15.00)
-
-                    </label>
-
-
-                    <!-- MEJORA DEL RETO -->
-                    <label class="opcion">
-
-                        <input id="instalacionTecnica" type="checkbox">
-
-                        Instalación técnica
-                        (S/ 35.00)
-
-                    </label>
-
-                </fieldset>
-
-
-                <p id="mensajeError" class="mensaje-error" role="alert" hidden></p>
-
-
-                <div class="acciones campo--completo">
-
-                    <button type="submit">
-                        Calcular cotización
-                    </button>
-
-                    <button type="reset" class="boton-secundario">
-                        Limpiar
-                    </button>
-
-                </div>
-
-            </form>
-
-        </section>
-
-
-        <!-- RESULTADO -->
-
-        <section id="panelResultado" class="tarjeta resultado" hidden>
-
-            <p class="etiqueta">
-                Resultado
-            </p>
-
-            <h2>
-                Resumen de la cotización
-            </h2>
-
-
-            <p class="operacion">
-                Operación:
-                <output id="idOperacion"></output>
-            </p>
-
-
-            <p id="productoResultado" class="producto-resultado"></p>
-
-
-            <dl class="resumen">
-
-                <div>
-                    <dt>Subtotal</dt>
-                    <dd>
-                        <output id="subtotalResultado"></output>
-                    </dd>
-                </div>
-
-
-                <div>
-                    <dt>Descuento</dt>
-                    <dd>
-                        <output id="descuentoResultado"></output>
-                    </dd>
-                </div>
-
-
-                <div>
-                    <dt>Base imponible</dt>
-                    <dd>
-                        <output id="baseResultado"></output>
-                    </dd>
-                </div>
-
-
-                <div>
-                    <dt>IGV (18 %)</dt>
-                    <dd>
-                        <output id="igvResultado"></output>
-                    </dd>
-                </div>
-
-
-                <div>
-                    <dt>Envío</dt>
-                    <dd>
-                        <output id="envioResultado"></output>
-                    </dd>
-                </div>
-
-
-                <div>
-                    <dt>Instalación</dt>
-                    <dd>
-                        <output id="instalacionResultado"></output>
-                    </dd>
-                </div>
-
-
-                <div class="total">
-
-                    <dt>Total</dt>
-
-                    <dd>
-                        <output id="totalResultado"></output>
-                    </dd>
-
-                </div>
-
-            </dl>
-
-
-            <p id="explicacionBanderas" class="detalle-banderas"></p>
-
-
-            <!-- MEJORA: ENVÍO GRATUITO -->
-
-            <p id="mensajeEnvioGratis" class="envio-gratis"></p>
-
-
-            <!-- MEJORA: MEDIA -->
-
-            <div class="media-box">
-
-                <h3>
-                    Promedio de componentes
-                </h3>
-
-                <p id="mediaResultado"></p>
-
+    <div class="container">
+        <h1>Cotizador Comercial Inteligente</h1>
+
+        <form id="form-cotizador">
+            <div class="form-group">
+                <label for="base-imponible">Base Imponible (S/):</label>
+                <input type="number" id="base-imponible" step="0.01" min="0" placeholder="Ej. 120.50" required>
             </div>
 
-        </section>
+            <div class="form-group">
+                <label for="porcentaje-descuento">Descuento Base (%):</label>
+                <input type="number" id="porcentaje-descuento" step="0.1" min="0" max="100" value="0">
+            </div>
 
+            <div class="form-group">
+                <label for="costo-envio">Costo de Envío (S/):</label>
+                <input type="number" id="costo-envio" step="0.01" min="0" value="15.00">
+            </div>
 
-        <!-- INFORMACIÓN -->
+            <fieldset>
+                <legend>Opciones de Venta (Banderas Bitwise)</legend>
+                <label>
+                    <input type="checkbox" id="chk-frecuente" value="1"> Cliente Frecuente (5% desc. extra)
+                </label><br>
+                <label>
+                    <input type="checkbox" id="chk-express" value="2"> Envío Express (+S/ 20.00)
+                </label>
+            </fieldset>
 
-        <aside class="tarjeta nota">
+            <button type="submit">Calcular Cotización</button>
+        </form>
 
-            <h2>
-                ¿Por qué se calcula en céntimos?
-            </h2>
-
-            <p>
-                JavaScript utiliza <code>Number</code> con punto flotante
-                binario. Por eso el programa convierte los precios a
-                céntimos enteros antes de realizar las operaciones.
-            </p>
-
-        </aside>
-
-    </main>
-
-
-    <footer>
-
-        <div class="contenedor">
-            UTP · JavaScript Avanzado · Semana 2
+        <div id="resultado" class="resultado-card">
+            <h2>Resumen de Cotización</h2>
+            <p><strong>ID Cotización:</strong> <span id="out-id">-</span></p>
+            <p><strong>Subtotal Base:</strong> S/ <span id="out-subtotal">0.00</span></p>
+            <p><strong>Descuento Aplicado:</strong> S/ <span id="out-descuento">0.00</span></p>
+            <p><strong>Costo Envío Final:</strong> S/ <span id="out-envio">0.00</span></p>
+            <p><strong>IGV (18%):</strong> S/ <span id="out-igv">0.00</span></p>
+            <h3>Total a Pagar: S/ <span id="out-total">0.00</span></h3>
         </div>
+    </div>
 
-    </footer>
-
+    <script src="app.js"></script>
 </body>
 
 </html>
