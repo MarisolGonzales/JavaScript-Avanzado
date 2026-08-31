@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compra - NEXUS GAMING</title>
+
+    <!-- Estilos generales del proyecto -->
+    <link rel="stylesheet" href="../../styles.css">
+
+    <!-- Estilos propios del carrito y la compra -->
+    <link rel="stylesheet" href="carrito.css">
+
+    <!-- Iconos Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>NEXUS <span>GAMING</span></h1>
+        </div>
+
+        <div class="nav-derecha">
+            <ul class="menu">
+                <li><a href="../../index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="../catalogo/catalogo.html"><i class="fa-solid fa-gamepad"></i> Catálogo</a></li>
+                <li><a href="carrito.html"><i class="fa-solid fa-cart-shopping"></i> Mi Carrito</a></li>
+                <li><a href="../cliente/historial.html"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+            </ul>
+
+            <button class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+                <span class="badge" id="contador-carrito">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="contenedor-carrito">
+
+        <div class="titulo-pagina">
+            <h2><i class="fa-solid fa-credit-card"></i> DATOS DE COMPRA</h2>
+            <p>Completa tus datos y elige tu método de pago.</p>
+        </div>
+
+        <div id="mensaje" class="mensaje"></div>
+
+        <div class="layout-carrito">
+
+            <!-- FORMULARIO DE COMPRA -->
+            <section class="panel">
+                <h3 class="panel-titulo"><i class="fa-solid fa-user-pen"></i> Datos del comprador</h3>
+
+                <form class="form-compra" id="form-compra">
+
+                    <div class="grupo-campo">
+                        <label for="nombre"><i class="fa-solid fa-user"></i> Nombre completo</label>
+                        <input type="text" id="nombre" placeholder="Ej: Paco Perez">
+                    </div>
+
+                    <div class="grupo-campo">
+                        <label for="correo"><i class="fa-solid fa-envelope"></i> Correo electrónico</label>
+                        <input type="text" id="correo" placeholder="Ej: correo@gmail.com">
+                    </div>
+
+                    <!-- MÉTODOS DE PAGO -->
+                    <div class="grupo-campo">
+                        <label><i class="fa-solid fa-wallet"></i> Método de pago</label>
+                        <div class="metodos-pago">
+                            <label class="metodo seleccionado" id="metodo-tarjeta">
+                                <input type="radio" name="metodo" value="Tarjeta" checked>
+                                <i class="fa-solid fa-credit-card"></i>
+                                <span>Tarjeta</span>
+                            </label>
+
+                            <label class="metodo" id="metodo-yape">
+                                <input type="radio" name="metodo" value="Yape">
+                                <i class="fa-solid fa-mobile-screen-button"></i>
+                                <span>Yape</span>
+                            </label>
+
+                            <label class="metodo" id="metodo-plin">
+                                <input type="radio" name="metodo" value="Plin">
+                                <i class="fa-solid fa-money-bill-transfer"></i>
+                                <span>Plin</span>
+                            </label>
+
+                            <label class="metodo" id="metodo-paypal">
+                                <input type="radio" name="metodo" value="PayPal">
+                                <i class="fa-brands fa-paypal"></i>
+                                <span>PayPal</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- DATOS DE LA TARJETA -->
+                    <div class="datos-pago visible" id="datos-tarjeta">
+                        <div class="grupo-campo">
+                            <label for="tarjeta-numero"><i class="fa-solid fa-hashtag"></i> Número de tarjeta (16 dígitos)</label>
+                            <input type="text" id="tarjeta-numero" maxlength="19" placeholder="4589 1234 5678 1234">
+                        </div>
+
+                        <div class="fila-doble">
+                            <div class="grupo-campo">
+                                <label for="tarjeta-fecha"><i class="fa-solid fa-calendar"></i> Vencimiento (MM/AA)</label>
+                                <input type="text" id="tarjeta-fecha" maxlength="5" placeholder="09/28">
+                            </div>
+
+                            <div class="grupo-campo">
+                                <label for="tarjeta-cvv"><i class="fa-solid fa-lock"></i> CVV</label>
+                                <input type="password" id="tarjeta-cvv" maxlength="3" placeholder="123">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- DATOS DE YAPE / PLIN -->
+                    <div class="datos-pago" id="datos-billetera">
+                        <div class="grupo-campo">
+                            <label for="billetera-celular"><i class="fa-solid fa-phone"></i> Número de celular (9 dígitos)</label>
+                            <input type="text" id="billetera-celular" maxlength="9" placeholder="987654321">
+                        </div>
+
+                        <div class="grupo-campo">
+                            <label for="billetera-codigo"><i class="fa-solid fa-key"></i> Código de aprobación (6 dígitos)</label>
+                            <input type="text" id="billetera-codigo" maxlength="6" placeholder="123456">
+                        </div>
+
+                        <p class="aviso-info">
+                            <i class="fa-solid fa-circle-info"></i>
+                            El código de aprobación llegará a tu aplicación de Yape o Plin.
+                        </p>
+                    </div>
+
+                    <!-- DATOS DE PAYPAL -->
+                    <div class="datos-pago" id="datos-paypal">
+                        <div class="grupo-campo">
+                            <label for="paypal-correo"><i class="fa-brands fa-paypal"></i> Correo de tu cuenta PayPal</label>
+                            <input type="text" id="paypal-correo" placeholder="correo@gmail.com">
+                        </div>
+
+                        <p class="aviso-info">
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                            Al confirmar te llevaremos a PayPal para que apruebes el pago desde tu cuenta.
+                            Nunca te pediremos tu contraseña aquí.
+                        </p>
+                    </div>
+
+                    <button type="submit" class="btn-primario">
+                        <i class="fa-solid fa-circle-check"></i> CONFIRMAR COMPRA
+                    </button>
+
+                    <a href="carrito.html" class="btn-secundario">
+                        <i class="fa-solid fa-arrow-left"></i> VOLVER AL CARRITO
+                    </a>
+                </form>
+
+                <!-- COMPROBANTE QUE SE MUESTRA AL PAGAR -->
+                <div class="comprobante" id="comprobante">
+                    <i class="fa-solid fa-circle-check icono-ok"></i>
+                    <h3>¡Compra realizada correctamente!</h3>
+                    <p id="texto-final">Tus juegos ya fueron enviados a tu biblioteca.</p>
+
+                    <div class="detalle-boleta" id="detalle-boleta">
+                        <!-- Se genera desde compra.js -->
+                    </div>
+
+                    <div class="acciones-finales">
+                        <a href="../catalogo/catalogo.html" class="btn-primario">
+                            <i class="fa-solid fa-gamepad"></i> SEGUIR COMPRANDO
+                        </a>
+                        <a href="../cliente/biblioteca.html" class="btn-secundario">
+                            <i class="fa-solid fa-bookmark"></i> IR A MI BIBLIOTECA
+                        </a>
+                        <a href="../../index.html" class="btn-secundario">
+                            <i class="fa-solid fa-house"></i> VOLVER AL INICIO
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESUMEN DEL PEDIDO -->
+            <aside class="panel resumen">
+                <h3 class="panel-titulo"><i class="fa-solid fa-receipt"></i> Tu pedido</h3>
+
+                <ul class="lista-resumen" id="lista-resumen">
+                    <!-- Se genera desde compra.js -->
+                </ul>
+
+                <div class="linea-resumen">
+                    <span>Regalos</span>
+                    <span id="res-regalos">0</span>
+                </div>
+
+                <div class="linea-total">
+                    <span>TOTAL</span>
+                    <span id="res-total">S/ 0.00</span>
+                </div>
+            </aside>
+
+        </div>
+    </main>
+
+    <script src="compra.js"></script>
+</body>
+</html>

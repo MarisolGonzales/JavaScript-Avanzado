@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito - NEXUS GAMING</title>
+
+    <!-- Estilos generales del proyecto -->
+    <link rel="stylesheet" href="../../styles.css">
+    <!-- Estilos propios del carrito y la compra -->
+    <link rel="stylesheet" href="carrito.css">
+    <!-- Iconos Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <nav class="navbar">
+        <div class="logo">
+            <h1>NEXUS <span>GAMING</span></h1>
+        </div>
+
+        <div class="nav-derecha">
+            <ul class="menu">
+                <li><a href="../../index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="../catalogo/catalogo.html"><i class="fa-solid fa-gamepad"></i> Catálogo</a></li>
+                <li><a href="../cliente/biblioteca.html"><i class="fa-solid fa-bookmark"></i> Mi Biblioteca</a></li>
+                <li><a href="../cliente/historial.html"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+            </ul>
+
+            <button class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+                <span class="badge" id="contador-carrito">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <main class="contenedor-carrito">
+
+        <div class="titulo-pagina">
+            <h2><i class="fa-solid fa-cart-shopping"></i> MI CARRITO</h2>
+            <p>Revisa los juegos que agregaste desde el catálogo y continúa con tu compra.</p>
+        </div>
+
+        <div id="mensaje" class="mensaje"></div>
+
+        <div class="layout-carrito">
+
+            <!-- JUEGOS QUE ESTÁN EN EL CARRITO -->
+            <section class="panel">
+                <h3 class="panel-titulo"><i class="fa-solid fa-list-check"></i> Juegos en tu carrito</h3>
+                <div id="lista-carrito">
+                </div>
+            </section>
+
+            <!-- PRECIOS -->
+            <aside class="panel resumen">
+                <h3 class="panel-titulo"><i class="fa-solid fa-receipt"></i> Resumen de compra</h3>
+
+                <div class="linea-resumen">
+                    <span>Juegos</span>
+                    <span id="res-cantidad">0</span>
+                </div>
+
+                <div class="linea-resumen">
+                    <span>Regalos</span>
+                    <span id="res-regalos">0</span>
+                </div>
+
+                <div class="linea-total">
+                    <span>TOTAL</span>
+                    <span id="res-total">S/ 0.00</span>
+                </div>
+
+
+                <button class="btn-primario" id="btn-comprar">
+                    <i class="fa-solid fa-credit-card"></i> CONTINUAR COMPRA
+                </button>
+
+                <a href="../catalogo/catalogo.html" class="btn-secundario">
+                    <i class="fa-solid fa-gamepad"></i> SEGUIR COMPRANDO
+                </a>
+
+                <button class="btn-peligro" id="btn-vaciar">
+                    <i class="fa-solid fa-trash-can"></i> VACIAR CARRITO
+                </button>
+            </aside>
+
+        </div>
+    </main>
+
+    <!-- ==========================================
+         MODAL PARA ELEGIR A QUIÉN REGALAR EL JUEGO
+         ========================================== -->
+    <div class="modal-fondo" id="modal-regalo">
+        <div class="modal">
+
+            <div class="modal-cabecera">
+                <h3><i class="fa-solid fa-gift"></i> Enviar como regalo</h3>
+                <button class="btn-cerrar" id="btn-cerrar-modal"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <p class="modal-juego" id="modal-juego"></p>
+
+            <div class="modal-opciones">
+                <button type="button" class="opcion-regalo activa" id="opcion-amigos">
+                    <i class="fa-solid fa-user-group"></i> Mis amigos
+                </button>
+                <button type="button" class="opcion-regalo" id="opcion-correo">
+                    <i class="fa-solid fa-envelope"></i> Por correo
+                </button>
+            </div>
+
+            <!-- OPCIÓN 1: ELEGIR UN AMIGO -->
+            <div class="panel-opcion visible" id="panel-amigos">
+                <div id="lista-amigos">
+                    <!-- Se genera desde carrito.js -->
+                </div>
+            </div>
+
+            <!-- OPCIÓN 2: ENVIARLO POR CORREO -->
+            <div class="panel-opcion" id="panel-correo">
+                <div class="grupo-campo">
+                    <label for="regalo-nombre"><i class="fa-solid fa-user"></i> Nombre de la persona</label>
+                    <input type="text" id="regalo-nombre" placeholder="Nombre y apellido">
+                </div>
+
+                <div class="grupo-campo">
+                    <label for="regalo-correo"><i class="fa-solid fa-envelope"></i> Correo electrónico</label>
+                    <input type="text" id="regalo-correo" placeholder="correo@gmail.com">
+                </div>
+
+                <p class="aviso-info">
+                    <i class="fa-solid fa-circle-info"></i>
+                    Al terminar la compra se enviará el código del juego a ese correo.
+                </p>
+            </div>
+
+            <div id="mensaje-modal" class="mensaje"></div>
+
+            <div class="modal-pie">
+                <button class="btn-primario" id="btn-confirmar-regalo">
+                    <i class="fa-solid fa-gift"></i> ENVIAR COMO REGALO
+                </button>
+
+                <button class="btn-peligro" id="btn-quitar-regalo">
+                    <i class="fa-solid fa-xmark"></i> QUITAR EL REGALO
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="carrito.js"></script>
+</body>
+</html>
