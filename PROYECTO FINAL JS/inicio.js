@@ -178,6 +178,17 @@ document.addEventListener('click', (e) => {
 });
 
 
+// Botón del carrito
+function activarBotonCarrito() {
+    const btnCarrito = document.querySelector('.btn-carrito');
+    if (!btnCarrito) return;
+
+    btnCarrito.addEventListener('click', () => {
+        window.location.href = 'paginas/carrito/carrito.html';
+    });
+}
+
+
 /* ==========================================
    3. INICIALIZACIÓN
    ========================================== */
@@ -186,4 +197,5 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCarouselList();
     startAutoSlide();
     actualizarNavbarSesion();
+    activarBotonCarrito();
 });
