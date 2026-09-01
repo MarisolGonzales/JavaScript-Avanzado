@@ -10,17 +10,17 @@ document.addEventListener('DOMContentLoaded', () => {
     let juegosComprados = JSON.parse(localStorage.getItem('nexus_mis_juegos')) || [
         {
             title: "The Witcher 3: Wild Hunt",
-            image: "../../juegos/witcher3-banner.jpg",
+            image: "../../JUEGOS/witcher3-banner.jpg",
             description: "Rol de mundo abierto épico."
         },
         {
             title: "Grand Theft Auto V",
-            image: "../../juegos/gtav-cover.png",
+            image: "../../JUEGOS/gtav-cover.png",
             description: "Acción en mundo abierto en Los Santos."
         },
         {
             title: "Minecraft Ultra Edition",
-            image: "../../juegos/minecraft.jpg",
+            image: "../../JUEGOS/minecraft.jpg",
             description: "Construye y sobrevive en mundos infinitos."
         }
     ];
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="empty-library">
                 <h3>Tu biblioteca está vacía</h3>
                 <p>Aún no has agregado ningún juego. Explora el catálogo para conseguir ofertas increíbles.</p>
-                <a href="../catalogo/catalogo.html" class="btn-explorar">Ir al Catálogo</a>
+                <a href="catalogo.html" class="btn-explorar">Ir al Catálogo</a>
             </div>
         `;
     } else {

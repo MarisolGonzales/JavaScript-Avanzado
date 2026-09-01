@@ -4,8 +4,8 @@ const featuredGames = [
         title: "The Witcher 3: Wild Hunt",
         description: "Explora un mundo abierto lleno de monstruos, magia y aventuras inolvidables con un 75% de descuento.",
         tag: "OFERTA DESTACADA",
-        bannerImg: "juegos/witcher3-banner.jpg", // Tu banner panorámico
-        thumbImg: "juegos/witcher3-banner.jpg",  // Tu carátula/icono de la derecha
+        bannerImg: "JUEGOS/witcher3-banner.jpg",
+        thumbImg: "JUEGOS/witcher3.jpg",
         discount: "-75%",
         oldPrice: "PEN 119.00",
         price: "PEN 29.75"
@@ -14,8 +14,8 @@ const featuredGames = [
         title: "Grand Theft Auto V",
         description: "Disfruta de la aclamada experiencia de mundo abierto de Los Santos y Blaine County.",
         tag: "DISPONIBLE AHORA",
-        bannerImg: "juegos/gtav-cover.png",     // Tu banner panorámico guardado en juegos/
-        thumbImg: "juegos/gtav.png",             // Tu carátula vertical guardada en juegos/
+        bannerImg: "JUEGOS/gtav-cover.png",
+        thumbImg: "JUEGOS/gtav.png",
         discount: "-50%",
         oldPrice: "PEN 120.00",
         price: "PEN 60.00"
@@ -24,11 +24,31 @@ const featuredGames = [
         title: "Minecraft Ultra Edition",
         description: "Construye, explora y sobrevive en mundos infinitos con texturas HD avanzadas.",
         tag: "NUEVO CONTENIDO",
-        bannerImg: "juegos/minecraft-cover.jpg", // Tu banner panorámico guardado en juegos/
-        thumbImg: "juegos/minecraft.jpg",         // Tu carátula vertical guardada en juegos/
+        bannerImg: "JUEGOS/minecraft-cover.jpg",
+        thumbImg: "JUEGOS/minecraft.jpg",
         discount: "-20%",
         oldPrice: "PEN 110.00",
         price: "PEN 89.00"
+    },
+    {
+        title: "Dota 2",
+        description: "Competencia estratégica por equipos con partidas intensas y una comunidad enorme de jugadores.",
+        tag: "TOP MULTIJUGADOR",
+        bannerImg: "JUEGOS/Dota_2.jpg",
+        thumbImg: "JUEGOS/Dota_2.jpg",
+        discount: "-0%",
+        oldPrice: "PEN 0.00",
+        price: "PEN 0.00"
+    },
+    {
+        title: "Left 4 Dead 2",
+        description: "Coopera con amigos para sobrevivir a oleadas de infectados en escenarios tensos y caóticos.",
+        tag: "COOPERATIVO",
+        bannerImg: "JUEGOS/Left_4_Dead_2.jpg",
+        thumbImg: "JUEGOS/Left_4_Dead_2.jpg",
+        discount: "-25%",
+        oldPrice: "PEN 20.00",
+        price: "PEN 15.00"
     }
 ];
 
@@ -133,9 +153,9 @@ function actualizarNavbarSesion() {
                     <span class="arrow">▾</span>
                 </button>
                 <div class="dropdown-menu" id="dropdown-menu">
-                    <a href="paginas/cliente/perfil.html">👤 Mi Perfil</a>
-                    <a href="paginas/cliente/biblioteca.html">🎮 Mi Biblioteca</a>
-                    <a href="paginas/cliente/historial.html">📜 Historial de Compras</a>
+                    <a href="pages/html/perfil.html">👤 Mi Perfil</a>
+                    <a href="pages/html/biblioteca.html">🎮 Mi Biblioteca</a>
+                    <a href="pages/html/historial.html">📜 Historial de Compras</a>
                     <hr>
                     <a href="#" id="btn-logout" class="logout-link">🚪 Cerrar Sesión</a>
                 </div>
@@ -160,7 +180,7 @@ function actualizarNavbarSesion() {
     } else {
         // Si no ha iniciado sesión: Mostrar únicamente el botón "Iniciar Sesión"
         userNav.innerHTML = `
-            <a href="paginas/cliente/login.html" class="btn-iniciar-sesion">Iniciar Sesión</a>
+            <a href="pages/html/login.html" class="btn-iniciar-sesion">Iniciar Sesión</a>
         `;
     }
 }
@@ -184,7 +204,7 @@ function activarBotonCarrito() {
     if (!btnCarrito) return;
 
     btnCarrito.addEventListener('click', () => {
-        window.location.href = 'paginas/carrito/carrito.html';
+        window.location.href = 'pages/html/carrito.html';
     });
 }
 

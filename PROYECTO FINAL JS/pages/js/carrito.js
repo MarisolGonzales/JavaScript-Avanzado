@@ -359,7 +359,7 @@ function dibujarCarrito() {
             <div class="carrito-vacio">
                 <i class="fa-solid fa-cart-flatbed"></i>
                 <p>Tu carrito está vacío. Ve al catálogo para agregar juegos.</p>
-                <a href="../catalogo/catalogo.html" class="btn-primario">
+                <a href="catalogo.html" class="btn-primario">
                     <i class="fa-solid fa-gamepad"></i> IR AL CATÁLOGO
                 </a>
             </div>

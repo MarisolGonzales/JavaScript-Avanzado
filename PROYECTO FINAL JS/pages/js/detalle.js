@@ -1,16 +1,54 @@
 // detalle.js - Maneja detalle del juego, favoritos y notificaciones de logros
 (function(){
-  // Datos de ejemplo. En integración real, estos vendrían del catálogo o querystring.
-  var sampleGame = {
-    id: 'minecraft',
-    title: 'Minecraft',
-    price: 89.90,
-    category: 'Aventura',
-    developer: 'Mojang',
-    // img se intentará resolver en la carpeta local 'juegos' usando el id + extensión, con fallback a placeholder
-    img: null,
-    description: 'Explora, construye y crea en mundos infinitos. Juego de ejemplo para la práctica.'
+  var gameCatalog = {
+    witcher3: {
+      id: 'witcher3',
+      title: 'The Witcher 3: Wild Hunt',
+      price: 29.75,
+      category: 'RPG',
+      developer: 'CD Projekt Red',
+      img: '../../JUEGOS/witcher3.jpg',
+      description: 'Explora un mundo abierto lleno de monstruos, magia y decisiones que cambian la historia.'
+    },
+    gtav: {
+      id: 'gtav',
+      title: 'Grand Theft Auto V',
+      price: 60.00,
+      category: 'Acción',
+      developer: 'Rockstar Games',
+      img: '../../JUEGOS/gtav.png',
+      description: 'Una experiencia de mundo abierto con misiones, coches y tensión constante en Los Santos.'
+    },
+    minecraft: {
+      id: 'minecraft',
+      title: 'Minecraft Ultra Edition',
+      price: 89.00,
+      category: 'Aventura',
+      developer: 'Mojang',
+      img: '../../JUEGOS/minecraft.jpg',
+      description: 'Explora, construye y crea en mundos infinitos con una experiencia visual mejorada.'
+    },
+    dota2: {
+      id: 'dota2',
+      title: 'Dota 2',
+      price: 0,
+      category: 'MOBA',
+      developer: 'Valve',
+      img: '../../JUEGOS/Dota_2.jpg',
+      description: 'Combates estratégicos por equipos en un juego de habilidad, coordinación y decisiones instantáneas.'
+    },
+    left4dead2: {
+      id: 'left4dead2',
+      title: 'Left 4 Dead 2',
+      price: 15.00,
+      category: 'Cooperativo',
+      developer: 'Valve',
+      img: '../../JUEGOS/Left_4_Dead_2.jpg',
+      description: 'Sobrevive junto a otros jugadores a hordas de infectados en escenarios intensos.'
+    }
   };
+
+  var sampleGame = gameCatalog.minecraft;
 
   // Utilidades simples para localStorage (guardado como JSON)
   function readJSON(key){
@@ -39,29 +77,18 @@
 
   // Mostrar datos (podría leerse querystring ?id=...)
   function renderGame(game){
-n    titleEl.textContent = game.title;
+    titleEl.textContent = game.title;
     imgEl.alt = game.title + ' portada';
-    (function loadLocalImage(imgEl, game){
-      var exts = ['.png','.jpg','.jpeg','.webp','.svg'];
-      var base = 'juegos/' + game.id;
-      var idx = 0;
-      function attempt(){
-        if(idx >= exts.length){
-          imgEl.src = 'https://via.placeholder.com/640x360.png?text=' + encodeURIComponent(game.title);
-          return;
-        }
-        imgEl.onerror = function(){ idx++; attempt(); };
-        imgEl.src = base + exts[idx];
-      }
-      attempt();
-    })(imgEl, game);
+    imgEl.src = game.img || 'https://via.placeholder.com/640x360.png?text=' + encodeURIComponent(game.title);
     priceEl.textContent = 'Precio: S/ ' + game.price.toFixed(2);
     catEl.textContent = game.category;
     devEl.textContent = game.developer;
     descEl.textContent = game.description;
   }
 
-  renderGame(sampleGame);
+  var params = new URLSearchParams(window.location.search);
+  var selectedId = params.get('id') || sampleGame.id;
+  renderGame(gameCatalog[selectedId] || sampleGame);
 
   // FAVORITOS: almacena un array de ids en 'favorites'
   

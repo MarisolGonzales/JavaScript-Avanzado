@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Detalle del juego - NEXUS GAMING</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../css/detalle.css">
+  <meta name="theme-color" content="#040406">
+</head>
+<body>
+  <main class="detail-page">
+    <header class="detail-header">
+      <h1 id="title">Detalle del juego</h1>
+      <div class="detail-links">
+        <a href="favoritos.html">Favoritos</a>
+        <span>•</span>
+        <a href="logros.html">Logros</a>
+      </div>
+    </header>
+
+    <section class="game-card">
+      <img id="img" class="game-cover" src="" alt="Portada del juego">
+      <div class="game-meta">
+        <p class="price" id="price"></p>
+        <p><strong>Categoría:</strong> <span id="category"></span></p>
+        <p><strong>Desarrollador:</strong> <span id="developer"></span></p>
+        <p id="description"></p>
+
+        <div class="game-actions">
+          <button id="favBtn" class="btn-action">♡ Agregar a favoritos</button>
+          <button id="cartBtn" class="btn-action secondary">🛒 Agregar al carrito</button>
+          <a class="detail-link" href="favoritos.html">Ver favoritos</a>
+          <a class="detail-link" href="logros.html">Ver logros</a>
+        </div>
+
+        <div class="ach-list" id="achMessage"></div>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/detalle.js"></script>
+</body>
+</html>

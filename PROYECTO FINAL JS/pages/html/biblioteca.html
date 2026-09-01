@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Biblioteca - NEXUS GAMING</title>
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../css/biblioteca.css">
+</head>
+<body>
+
+    <!-- NAVBAR BÁSICA SUPERIOR -->
+    <nav class="navbar" style="padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; background: var(--bg-surface); border-bottom: 1px solid var(--glass-border);">
+        <div class="logo">
+            <h1 style="font-size: 20px;">NEXUS <span>GAMING</span></h1>
+        </div>
+        <div class="menu" style="display: flex; gap: 20px; list-style: none; align-items: center;">
+            <li><a href="../../index.html" style="color: var(--text-muted); text-decoration: none;">Inicio</a></li>
+            <li><a href="perfil.html" style="color: var(--text-muted); text-decoration: none;">Mi Perfil</a></li>
+            <li><a href="biblioteca.html" style="color: #fff; text-decoration: none; font-weight: bold;">Mi Biblioteca</a></li>
+            <li><a href="historial.html" style="color: var(--text-muted); text-decoration: none;">Historial</a></li>
+        </div>
+    </nav>
+
+    <div class="biblioteca-container">
+        <div class="biblioteca-header">
+            <h2>🎮 Mi Biblioteca de Juegos</h2>
+            <p>Aquí tienes tus juegos adquiridos listos para descargar y jugar.</p>
+        </div>
+
+        <!-- GRILLA DE JUEGOS DINÁMICA -->
+        <div class="grid-biblioteca" id="grid-biblioteca">
+            <!-- Se llenará mediante biblioteca.js -->
+        </div>
+    </div>
+
+    <!-- Archivo JS correspondiente a la Biblioteca -->
+    <script src="../js/biblioteca.js"></script>
+</body>
+</html>

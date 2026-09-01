@@ -1,0 +1,121 @@
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: radial-gradient(circle at top, rgba(171, 127, 255, 0.18), transparent 30%), var(--bg-main);
+  color: var(--text-main);
+}
+
+* { box-sizing: border-box; }
+
+.page-shell {
+  max-width: 980px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+.page-header {
+  margin-bottom: 26px;
+}
+
+.page-header h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+}
+
+.page-header .nav-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.page-header .nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.page-header .nav-links a:hover {
+  color: var(--gog-purple);
+}
+
+.achievement-list {
+  display: grid;
+  gap: 16px;
+}
+
+.achievement-item {
+  padding: 18px 20px;
+  background: rgba(20, 18, 26, 0.88);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+}
+
+.achievement-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.achievement-top strong {
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.status {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.status.unlocked {
+  background: rgba(80, 211, 126, 0.16);
+  color: #7bf0a0;
+}
+
+.status.locked {
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--text-muted);
+}
+
+.achievement-item p {
+  margin: 0;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.achievement-date {
+  margin-top: 10px;
+  color: #d7c5ff;
+  font-size: 0.8rem;
+}
+
+.simulator-card {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: rgba(20, 18, 26, 0.88);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+}
+
+.simulator-card button {
+  background: linear-gradient(135deg, var(--gog-purple), #8d5ef3);
+  color: #120f15;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+@media (max-width: 560px) {
+  .achievement-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
