@@ -1,0 +1,78 @@
+.historial-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.historial-header {
+    margin-bottom: 25px;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 15px;
+}
+
+.historial-header h2 {
+    font-size: 24px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.historial-header p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.tabla-wrapper {
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.tabla-historial {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    font-size: 14px;
+}
+
+.tabla-historial th {
+    background: rgba(171, 127, 255, 0.1);
+    color: #fff;
+    padding: 15px 20px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.tabla-historial td {
+    padding: 15px 20px;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.tabla-historial tr:last-child td {
+    border-bottom: none;
+}
+
+.tabla-historial tr:hover td {
+    background: rgba(255, 255, 255, 0.02);
+    color: #fff;
+}
+
+.juego-nombre {
+    color: #fff;
+    font-weight: 600;
+}
+
+.badge-estado {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    background: rgba(76, 209, 55, 0.15);
+    color: #4cd137;
+}

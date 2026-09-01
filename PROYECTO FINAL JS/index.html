@@ -1,43 +1,34 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXUS GAMING</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body>
-
-    <!-- NAVBAR GLASS -->
     <nav class="navbar">
         <div class="logo">
             <h1>NEXUS <span>GAMING</span></h1>
         </div>
-        
+
         <div class="nav-derecha">
             <ul class="menu">
-                <li><a href="paginas/catalogo/catalogo.html">Catálogo</a></li>
-                <li><a href="paginas/cliente/perfil.html">Atención al Cliente</a></li>
+                <li><a href="pages/html/catalogo.html">Catálogo</a></li>
+                <li><a href="pages/html/perfil.html">Atención al Cliente</a></li>
                 <li><a href="#">Información</a></li>
-                <li><a href="paginas/cliente/historial.html">Registro de tarjeta</a></li>
+                <li><a href="pages/html/historial.html">Registro de tarjeta</a></li>
             </ul>
 
-            <!-- CONTENEDOR DINÁMICO DE SESIÓN QUE LEE TU JS -->
-            <div id="user-nav" class="user-nav-box">
-                <!-- Se llena mediante inicio.js -->
-            </div>
-
+            <div id="user-nav" class="user-nav-box"></div>
             <button class="btn-carrito">🛒 Carrito <span class="badge">0</span></button>
         </div>
     </nav>
 
-    <!-- CARRUSEL PRINCIPAL ESTILO EPIC GAMES -->
     <section class="epic-carousel-container">
-        
-        <!-- BANNER PRINCIPAL GRANDE (IZQUIERDA) -->
         <div class="banner-promocional">
-            <img class="banner-img" id="banner-img" src="juegos/witcher3-banner.jpg" alt="Banner Juego">
-            
+            <img class="banner-img" id="banner-img" src="JUEGOS/witcher3-banner.jpg" alt="Banner Juego">
+
             <div class="banner-overlay">
                 <div class="banner-contenido">
                     <span class="tag-destacado" id="banner-tag">OFERTA DESTACADA</span>
@@ -56,14 +47,9 @@
             </div>
         </div>
 
-        <!-- LISTA LATERAL DE MINIATURAS (DERECHA) -->
-        <div class="carousel-list" id="carousel-list">
-            <!-- Se genera dinámicamente desde JS -->
-        </div>
-
+        <div class="carousel-list" id="carousel-list"></div>
     </section>
 
-    <!-- BUSCADOR -->
     <section class="seccion-busqueda">
         <div class="buscador">
             <input type="text" placeholder="Buscar títulos, franquicias o gift cards...">
@@ -71,14 +57,12 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DE PRODUCTOS EN GRILLA -->
     <section class="destacados">
         <h2>🏷️ Imperdibles y Ofertas</h2>
         <div class="cards">
-            
             <div class="card">
                 <div class="card-img-wrapper">
-                    <img src="juegos/minecraft.jpg" alt="Minecraft">
+                    <img src="JUEGOS/minecraft.jpg" alt="Minecraft">
                     <span class="badge-discount">-20%</span>
                 </div>
                 <div class="card-info">
@@ -92,7 +76,7 @@
 
             <div class="card">
                 <div class="card-img-wrapper">
-                    <img src="juegos/gtav.png" alt="GTA V">
+                    <img src="JUEGOS/gtav.png" alt="GTA V">
                     <span class="badge-discount">-50%</span>
                 </div>
                 <div class="card-info">
@@ -103,10 +87,9 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 
-    <script src="inicio.js"></script>
+    <script src="assets/js/inicio.js"></script>
 </body>
 </html>
