@@ -556,3 +556,69 @@ body {
   background: var(--gog-purple);
   color: #000;
 }
+
+/* ==========================================
+   DISEÑO RESPONSIVO Y MEDIA QUERIES
+   ========================================== */
+
+@media (max-width: 1024px) {
+  .epic-carousel-container {
+    grid-template-columns: 1fr; /* Pasa a una sola columna */
+    padding: 0 20px;
+  }
+  
+  .carousel-list {
+    flex-direction: row; /* Convierte la lista lateral en una barra horizontal de miniaturas */
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+  
+  .carousel-item {
+    min-width: 180px;
+  }
+
+  .navbar {
+    padding: 0 20px;
+  }
+
+  .seccion-busqueda, .destacados {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .nav-derecha {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+  }
+
+  .menu {
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .banner-promocional {
+    height: 400px;
+  }
+
+  .banner-overlay {
+    padding: 0 20px;
+  }
+
+  .banner-contenido h2 {
+    font-size: 26px;
+  }
+
+  .buscador {
+    max-width: 100%;
+  }
+}
