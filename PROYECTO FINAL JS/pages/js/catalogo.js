@@ -1,3 +1,6 @@
+/* ==========================================================================
+   CATÁLOGO DE JUEGOS - MÓDULO PRINCIPAL
+   ========================================================================== */
 const juegos = [
   {
     id: 'witcher3',
@@ -124,6 +127,16 @@ function renderCatalogo() {
         alert(`${juego.title} agregado al carrito.`);
       } else {
         alert('Este juego ya está en tu carrito.');
+      }
+    });
+  });
+
+  document.querySelectorAll('.game-card').forEach(card => {
+    card.addEventListener('click', (e) => {
+      if (e.target.closest('button') || e.target.closest('a')) return;
+      const btnDetalle = card.querySelector('.btn-secondary');
+      if (btnDetalle) {
+        window.location.href = btnDetalle.href;
       }
     });
   });
