@@ -26,7 +26,8 @@
     </nav>
 
     <section class="epic-carousel-container">
-        <div class="banner-promocional">
+        <!-- Banner principal enlazado a The Witcher 3 -->
+        <div class="banner-promocional" style="cursor: pointer;" onclick="window.location.href='pages/html/detalle.html?id=witcher3'">
             <img class="banner-img" id="banner-img" src="JUEGOS/witcher3-banner.jpg" alt="Banner Juego">
 
             <div class="banner-overlay">
@@ -40,8 +41,8 @@
                         <span class="precio-final" id="banner-price">PEN 29.75</span>
                     </div>
                     <div class="banner-acciones">
-                        <button class="btn-banner-compra">Añadir al carrito</button>
-                        <button class="btn-banner-deseos">♡ A mi lista de deseos</button>
+                        <button class="btn-banner-compra" onclick="event.stopPropagation();">Añadir al carrito</button>
+                        <button class="btn-banner-deseos" onclick="event.stopPropagation();">♡ A mi lista de deseos</button>
                     </div>
                 </div>
             </div>
@@ -60,7 +61,8 @@
     <section class="destacados">
         <h2>🏷️ Imperdibles y Ofertas</h2>
         <div class="cards">
-            <div class="card">
+            <!-- Tarjeta de Minecraft con enlace a detalle -->
+            <div class="card" style="cursor: pointer;" onclick="window.location.href='pages/html/detalle.html?id=minecraft'">
                 <div class="card-img-wrapper">
                     <img src="JUEGOS/minecraft.jpg" alt="Minecraft">
                     <span class="badge-discount">-20%</span>
@@ -69,12 +71,13 @@
                     <h3>Minecraft Ultra</h3>
                     <div class="card-footer-price">
                         <p class="precio">PEN 89.00</p>
-                        <button class="buy-cart">🛒</button>
+                        <button class="buy-cart" onclick="event.stopPropagation();">🛒</label>
                     </div>
                 </div>
             </div>
 
-            <div class="card">
+            <!-- Tarjeta de GTA V con enlace a detalle -->
+            <div class="card" style="cursor: pointer;" onclick="window.location.href='pages/html/detalle.html?id=gtav'">
                 <div class="card-img-wrapper">
                     <img src="JUEGOS/gtav.png" alt="GTA V">
                     <span class="badge-discount">-50%</span>
@@ -83,7 +86,7 @@
                     <h3>Grand Theft Auto V</h3>
                     <div class="card-footer-price">
                         <p class="precio">PEN 60.00</p>
-                        <button class="buy-cart">🛒</button>
+                        <button class="buy-cart" onclick="event.stopPropagation();">🛒</button>
                     </div>
                 </div>
             </div>
