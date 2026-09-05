@@ -1,6 +1,6 @@
-/* ==========================================
-   LÓGICA DE LA BIBLIOTECA DE JUEGOS (Refactorizada)
-   ========================================== */
+/* ==========================================================================
+     MÓDULO DE BIBLIOTECA DE JUEGOS
+   ========================================================================== */
 
 class JuegoBiblioteca {
     constructor(title, image, description) {
@@ -9,7 +9,7 @@ class JuegoBiblioteca {
         this.description = description;
     }
 
-    // Método de instancia para generar su propia estructura HTML
+    // Método funcional de clase para estructurar el HTML individual
     renderizar() {
         return `
             <div class="game-card-lib">
@@ -28,23 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const bibliotecaContainer = document.getElementById('grid-biblioteca');
     if (!bibliotecaContainer) return;
 
-    // Obtener juegos desde localStorage o usar los de prueba por defecto
+    // Obtener datos del LocalStorage o usar datos predeterminados 
     const juegosCrudos = JSON.parse(localStorage.getItem('nexus_mis_juegos')) || [
-        {
-            title: "The Witcher 3: Wild Hunt",
-            image: "../../JUEGOS/witcher3-banner.jpg",
-            description: "Rol de mundo abierto épico."
-        },
-        {
-            title: "Grand Theft Auto V",
-            image: "../../JUEGOS/gtav-cover.png",
-            description: "Acción en mundo abierto en Los Santos."
-        },
-        {
-            title: "Minecraft Ultra Edition",
-            image: "../../JUEGOS/minecraft.jpg",
-            description: "Construye y sobrevive en mundos infinitos."
-        }
+        { title: "The Witcher 3: Wild Hunt", image: "../../JUEGOS/witcher3-banner.jpg", description: "Rol de mundo abierto épico." },
+        { title: "Grand Theft Auto V", image: "../../JUEGOS/gtav-cover.png", description: "Acción en mundo abierto." }
     ];
 
     bibliotecaContainer.innerHTML = '';
@@ -53,17 +40,16 @@ document.addEventListener('DOMContentLoaded', () => {
         bibliotecaContainer.innerHTML = `
             <div class="empty-library">
                 <h3>Tu biblioteca está vacía</h3>
-                <p>Aún no has agregado ningún juego. Explora el catálogo para conseguir ofertas increíbles.</p>
+                <p>Aún no has agregado ningún juego.</p>
                 <a href="catalogo.html" class="btn-explorar">Ir al Catálogo</a>
             </div>
         `;
     } else {
-        // Uso de programación orientada a objetos y método funcional map()
+        // Uso del método funcional de arreglos `.map()` para transformar datos en componentes HTML 
         const juegosComprados = juegosCrudos.map(j => new JuegoBiblioteca(j.title, j.image, j.description));
-        
         bibliotecaContainer.innerHTML = juegosComprados.map(juego => juego.renderizar()).join('');
 
-        // Eventos para los botones de instalar generados dinámicamente
+        // Asignación de eventos a elementos creados dinámicamente
         document.querySelectorAll('.btn-instalar').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const tituloJuego = e.target.getAttribute('data-title');
