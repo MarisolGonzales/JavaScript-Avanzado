@@ -46,24 +46,7 @@
         </div>
     </div>
 
-    <!-- SCRIPT QUE CARGA LOS DATOS DEL USUARIO ACTIVO -->
-    <script>
-        const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
-
-        if (usuarioSesion) {
-            const usuario = JSON.parse(usuarioSesion);
-
-            // Rellenar datos en pantalla
-            document.getElementById('perfil-img-avatar').src = usuario.avatar;
-            document.getElementById('perfil-nombre-usuario').textContent = usuario.nombre;
-            document.getElementById('perfil-email-usuario').textContent = usuario.email;
-            
-            document.getElementById('info-nombre').textContent = usuario.nombre;
-            document.getElementById('info-email').textContent = usuario.email;
-        } else {
-            alert('No has iniciado sesión.');
-            window.location.href = 'login.html';
-        }
-    </script>
+    <!-- SCRIPT EXTERNO SEPARADO -->
+    <script src="../js/perfil.js"></script>
 </body>
 </html>

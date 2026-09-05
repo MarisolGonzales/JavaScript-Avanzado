@@ -1,16 +1,52 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const formPerfil = document.getElementById('form-perfil');
+/* ==========================================
+   LÓGICA DEL PERFIL DE USUARIO (Refactorizada)
+   ========================================== */
 
-    formPerfil.addEventListener('submit', (e) => {
-        e.preventDefault();
+class UsuarioSesion {
+    constructor(datosUsuario) {
+        this.nombre = datosUsuario?.nombre ?? "Usuario Invitado";
+        this.email = datosUsuario?.email ?? "Sin correo";
+        this.avatar = datosUsuario?.avatar ?? "https://ui-avatars.com/api/?name=User&background=ab7fff&color=000";
+    }
+
+    // Método para pintar los datos de la sesión en el DOM de perfil
+    renderizarPerfil() {
+        const imgAvatar = document.getElementById('perfil-img-avatar');
+        const nombreUsuario = document.getElementById('perfil-nombre-usuario');
+        const emailUsuario = document.getElementById('perfil-email-usuario');
         
-        const nombre = document.getElementById('nombre').value;
-        const correo = document.getElementById('correo').value;
+        const infoNombre = document.getElementById('info-nombre');
+        const infoEmail = document.getElementById('info-email');
 
-        // Guardar cambios en el almacenamiento local del navegador
-        localStorage.setItem('usuario_nombre', nombre);
-        localStorage.setItem('usuario_correo', correo);
+        if (imgAvatar) imgAvatar.src = this.avatar;
+        if (nombreUsuario) nombreUsuario.textContent = this.nombre;
+        if (emailUsuario) emailUsuario.textContent = this.email;
+        
+        if (infoNombre) infoNombre.textContent = this.nombre;
+        if (infoEmail) infoEmail.textContent = this.email;
+    }
+}
 
-        alert('¡Perfil actualizado con éxito!');
-    });
+document.addEventListener('DOMContentLoaded', () => {
+    // Obtener la sesión activa utilizando la llave exacta que genera registro.html
+    const usuarioSesionStr = localStorage.getItem('nexus_usuario_activo');
+
+    if (!usuarioSesionStr) {
+        alert('No has iniciado sesión.');
+        window.location.href = 'login.html';
+        return;
+    }
+
+    try {
+        const datosCrudos = JSON.parse(usuarioSesionStr);
+        
+        // Instanciar la clase de Usuario para estructurar y validar datos con operadores modernos
+        const usuarioActual = new UsuarioSesion(datosCrudos);
+        usuarioActual.renderizarPerfil();
+
+    } catch (error) {
+        console.error("Error al procesar la sesión del usuario:", error);
+        localStorage.removeItem('nexus_usuario_activo');
+        window.location.href = 'login.html';
+    }
 });
