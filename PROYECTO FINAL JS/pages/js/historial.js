@@ -1,13 +1,45 @@
 /* ==========================================
-   LÓGICA DEL HISTORIAL DE COMPRAS
+   LÓGICA DEL HISTORIAL DE COMPRAS (Refactorizada)
    ========================================== */
+
+class TransaccionManager {
+    constructor(transacciones) {
+        this.transacciones = transacciones;
+    }
+
+    // Método funcional reduce() para calcular el monto total gastado[cite: 9, 10]
+    calcularTotalGastado() {
+        return this.transacciones.reduce((acumulador, tx) => {
+            const numeroMonto = parseFloat(tx?.monto?.replace('PEN ', '')) || 0;
+            return acumulador + numeroMonto;
+        }, 0);
+    }
+
+    // Uso de Set para extraer los métodos de pago únicos sin duplicados[cite: 9, 10]
+    obtenerMetodosUnicos() {
+        return [...new Set(this.transacciones.map(tx => tx?.metodo))];
+    }
+
+    // Método map() para renderizar las filas de la tabla de forma declarativa[cite: 9, 10]
+    renderizarFilas() {
+        return this.transacciones.map(tx => `
+            <tr>
+                <td>${tx?.orden ?? 'N/D'}</td>
+                <td>${tx?.fecha ?? 'N/D'}</td>
+                <td class="juego-nombre">${tx?.juego ?? 'Desconocido'}</td>
+                <td>${tx?.metodo ?? 'N/D'}</td>
+                <td>${tx?.monto ?? 'PEN 0.00'}</td>
+                <td><span class="badge-estado">${tx?.estado ?? 'Completado'}</span></td>
+            </tr>
+        `).join('');
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const historialBody = document.getElementById('historial-body');
     if (!historialBody) return;
 
-    // Puedes obtener las transacciones desde localStorage o usar un arreglo por defecto
-    let transacciones = JSON.parse(localStorage.getItem('nexus_historial_compras')) || [
+    const transaccionesCrudas = JSON.parse(localStorage.getItem('nexus_historial_compras')) || [
         {
             orden: "#NX-8921",
             fecha: "12/08/2026",
@@ -34,21 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // Limpiar contenedor y renderizar filas ordenadamente
-    historialBody.innerHTML = '';
+    // Instanciar la clase gestora
+    const manager = new TransaccionManager(transaccionesCrudas);
 
-    transacciones.forEach(tx => {
-        const fila = document.createElement('tr');
-        
-        fila.innerHTML = `
-            <td>${tx.orden}</td>
-            <td>${tx.fecha}</td>
-            <td class="juego-nombre">${tx.juego}</td>
-            <td>${tx.metodo}</td>
-            <td>${tx.monto}</td>
-            <td><span class="badge-estado">${tx.estado}</span></td>
-        `;
+    // Inyectar filas con el método avanzado
+    historialBody.innerHTML = manager.renderizarFilas();
 
-        historialBody.appendChild(fila);
-    });
+    // Demostración en consola de los métodos avanzados solicitados en clase
+    console.log("Monto Total Gastado:", manager.calcularTotalGastado());
+    console.log("Métodos de pago únicos (Set):", manager.obtenerMetodosUnicos());
 });

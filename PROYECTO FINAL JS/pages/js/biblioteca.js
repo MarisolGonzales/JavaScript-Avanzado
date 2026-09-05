@@ -1,13 +1,35 @@
 /* ==========================================
-   LÓGICA DE LA BIBLIOTECA DE JUEGOS
+   LÓGICA DE LA BIBLIOTECA DE JUEGOS (Refactorizada)
    ========================================== */
+
+class JuegoBiblioteca {
+    constructor(title, image, description) {
+        this.title = title;
+        this.image = image;
+        this.description = description;
+    }
+
+    // Método de instancia para generar su propia estructura HTML
+    renderizar() {
+        return `
+            <div class="game-card-lib">
+                <img src="${this.image ?? '../../JUEGOS/default.jpg'}" alt="${this.title}">
+                <div class="game-card-body">
+                    <h3>${this.title}</h3>
+                    <p>${this.description ?? 'Juego añadido a tu cuenta.'}</p>
+                    <button class="btn-instalar" data-title="${this.title}">⬇ Instalar</button>
+                </div>
+            </div>
+        `;
+    }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
     const bibliotecaContainer = document.getElementById('grid-biblioteca');
     if (!bibliotecaContainer) return;
 
     // Obtener juegos desde localStorage o usar los de prueba por defecto
-    let juegosComprados = JSON.parse(localStorage.getItem('nexus_mis_juegos')) || [
+    const juegosCrudos = JSON.parse(localStorage.getItem('nexus_mis_juegos')) || [
         {
             title: "The Witcher 3: Wild Hunt",
             image: "../../JUEGOS/witcher3-banner.jpg",
@@ -27,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bibliotecaContainer.innerHTML = '';
 
-    if (juegosComprados.length === 0) {
+    if (juegosCrudos.length === 0) {
         bibliotecaContainer.innerHTML = `
             <div class="empty-library">
                 <h3>Tu biblioteca está vacía</h3>
@@ -36,25 +58,17 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
     } else {
-        juegosComprados.forEach(juego => {
-            const card = document.createElement('div');
-            card.className = 'game-card-lib';
+        // Uso de programación orientada a objetos y método funcional map()
+        const juegosComprados = juegosCrudos.map(j => new JuegoBiblioteca(j.title, j.image, j.description));
+        
+        bibliotecaContainer.innerHTML = juegosComprados.map(juego => juego.renderizar()).join('');
 
-            card.innerHTML = `
-                <img src="${juego.image}" alt="${juego.title}">
-                <div class="game-card-body">
-                    <h3>${juego.title}</h3>
-                    <p>${juego.description || 'Juego añadido a tu cuenta.'}</p>
-                    <button class="btn-instalar">⬇ Instalar</button>
-                </div>
-            `;
-
-            // Evento para el botón de instalar
-            card.querySelector('.btn-instalar').addEventListener('click', () => {
-                alert(`Iniciando descarga de ${juego.title}...`);
+        // Eventos para los botones de instalar generados dinámicamente
+        document.querySelectorAll('.btn-instalar').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const tituloJuego = e.target.getAttribute('data-title');
+                alert(`Iniciando descarga de ${tituloJuego}...`);
             });
-
-            bibliotecaContainer.appendChild(card);
         });
     }
 });
