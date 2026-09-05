@@ -1,0 +1,558 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --bg-main: #141218;
+  --bg-surface: #1e1a24;
+  --glass-bg: rgba(30, 26, 36, 0.75);
+  --glass-border: rgba(171, 127, 255, 0.2);
+  --gog-purple: #ab7fff;
+  --gog-purple-hover: #965bee;
+  --gog-purple-glow: rgba(171, 127, 255, 0.35);
+  --text-main: #ffffff;
+  --text-muted: #bdaece;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+
+/* NAVBAR GLASS */
+.navbar {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  height: 65px;
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+}
+
+.logo h1 span {
+  color: var(--gog-purple);
+}
+
+.nav-derecha {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.menu {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+.menu li a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 14px;
+  transition: color 0.2s ease;
+}
+
+.menu li a:hover {
+  color: var(--gog-purple);
+}
+
+/* DROPDOWN SESIÓN (INICIAR SESIÓN / CREAR CUENTA) ESTILO GOG */
+.nav-item-dropdown {
+  position: relative;
+}
+
+.sesion-dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 8px 0;
+  min-width: 170px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+}
+
+.nav-item-dropdown:hover .sesion-dropdown-menu {
+  display: block;
+}
+
+.sesion-dropdown-menu a {
+  display: block;
+  padding: 10px 18px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.sesion-dropdown-menu a:hover {
+  background: rgba(171, 127, 255, 0.15);
+  color: #fff;
+}
+
+/* ZONA DINÁMICA DE USUARIO Y MENU DESPLEGABLE DE PERFIL */
+.user-nav-box {
+  display: flex;
+  align-items: center;
+}
+
+.btn-iniciar-sesion {
+  background: var(--gog-purple);
+  color: #000;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 13px;
+  transition: all 0.25s ease;
+}
+
+.btn-iniciar-sesion:hover {
+  background: var(--gog-purple-hover);
+  color: #fff;
+  box-shadow: 0 0 15px var(--gog-purple-glow);
+}
+
+.user-menu-dropdown {
+  position: relative;
+}
+
+.btn-user-profile {
+  background: rgba(171, 127, 255, 0.1);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 4px 12px 4px 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.btn-user-profile:hover {
+  background: rgba(171, 127, 255, 0.2);
+  border-color: var(--gog-purple);
+}
+
+.nav-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid var(--gog-purple);
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 42px;
+  background: var(--bg-surface);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  width: 200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  padding: 8px 0;
+  backdrop-filter: blur(12px);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 10px 16px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dropdown-menu a:hover {
+  background: rgba(171, 127, 255, 0.15);
+  color: #fff;
+}
+
+.dropdown-menu hr {
+  border: none;
+  border-top: 1px solid var(--glass-border);
+  margin: 6px 0;
+}
+
+.logout-link {
+  color: #ff5555 !important;
+}
+
+.logout-link:hover {
+  background: rgba(255, 85, 85, 0.15) !important;
+}
+
+/* CARRITO */
+.btn-carrito {
+  background: rgba(171, 127, 255, 0.15);
+  border: 1px solid var(--gog-purple);
+  color: var(--gog-purple);
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.btn-carrito:hover {
+  background: var(--gog-purple);
+  color: #000;
+  box-shadow: 0 0 15px var(--gog-purple-glow);
+}
+
+.btn-carrito .badge {
+  background: var(--gog-purple);
+  color: #000;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-size: 11px;
+  margin-left: 4px;
+}
+
+/* CARRUSEL TIPO EPIC (GRID 2 COLUMNAS) */
+.epic-carousel-container {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: 16px;
+  max-width: 1400px;
+  margin: 20px auto 0;
+  padding: 0 40px;
+}
+
+/* BANNER PRINCIPAL GRANDE */
+.banner-promocional {
+  width: 100%;
+  height: 460px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  background: #141218;
+  border: 1px solid var(--glass-border);
+}
+
+.banner-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 1;
+}
+
+.banner-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(20, 18, 24, 0.95) 35%, rgba(20, 18, 24, 0.4) 70%, transparent 100%),
+    linear-gradient(to top, var(--bg-main) 0%, transparent 20%);
+  display: flex;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 2;
+}
+
+.banner-contenido {
+  max-width: 480px;
+  position: relative;
+  z-index: 3;
+}
+
+.tag-destacado {
+  background: var(--gog-purple);
+  color: #000;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 8px;
+  border-radius: 3px;
+  letter-spacing: 1px;
+}
+
+.banner-contenido h2 {
+  font-size: 34px;
+  font-weight: 900;
+  margin: 10px 0 6px;
+  color: #fff;
+  line-height: 1.1;
+}
+
+.banner-contenido p {
+  color: var(--text-muted);
+  font-size: 13.5px;
+  line-height: 1.4;
+  margin-bottom: 16px;
+}
+
+.banner-precio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.descuento {
+  background: #6c2bd9;
+  color: #fff;
+  padding: 4px 8px;
+  font-weight: 800;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.precio-original {
+  text-decoration: line-through;
+  color: #888;
+  font-size: 13px;
+}
+
+.precio-final {
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.banner-acciones {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-banner-compra {
+  background: var(--gog-purple);
+  color: #000;
+  border: none;
+  padding: 10px 20px;
+  font-weight: 800;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-banner-compra:hover {
+  background: var(--gog-purple-hover);
+  color: #fff;
+  box-shadow: 0 0 15px var(--gog-purple-glow);
+}
+
+.btn-banner-deseos {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: #fff;
+  padding: 10px 16px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-banner-deseos:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* LISTA LATERAL DERECHA (THUMBNAILS) */
+.carousel-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+}
+
+.carousel-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(30, 26, 36, 0.4);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.carousel-item img {
+  width: 48px;
+  height: 58px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.carousel-item span {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  transition: color 0.2s ease;
+}
+
+.carousel-item:hover {
+  background: rgba(30, 26, 36, 0.8);
+}
+
+.carousel-item:hover span {
+  color: #fff;
+}
+
+.carousel-item.active {
+  background: var(--glass-bg);
+  border-color: var(--gog-purple);
+  box-shadow: 0 0 15px var(--gog-purple-glow);
+}
+
+.carousel-item.active span {
+  color: #fff;
+  font-weight: 700;
+}
+
+/* BUSCADOR */
+.seccion-busqueda {
+  padding: 30px 40px 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.buscador {
+  display: flex;
+  gap: 10px;
+  max-width: 500px;
+}
+
+.buscador input {
+  flex: 1;
+  padding: 10px 18px;
+  border: 1px solid var(--glass-border);
+  background: var(--glass-bg);
+  color: #fff;
+  border-radius: 20px;
+  outline: none;
+}
+
+.buscador button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  background: var(--gog-purple);
+  color: #000;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* GRILLA DESTACADOS */
+.destacados {
+  padding: 30px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.destacados h2 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  border-color: var(--gog-purple);
+  box-shadow: 0 8px 25px var(--gog-purple-glow);
+}
+
+.card-img-wrapper {
+  position: relative;
+  height: 250px;
+}
+
+.card-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.badge-discount {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(108, 43, 217, 0.9);
+  color: #fff;
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 800;
+  border-radius: 4px;
+}
+
+.card-info {
+  padding: 12px;
+}
+
+.card-info h3 {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.card-footer-price {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-footer-price .precio {
+  font-weight: 800;
+  color: var(--gog-purple);
+}
+
+.card-footer-price .buy-cart {
+  background: rgba(171, 127, 255, 0.15);
+  border: 1px solid var(--gog-purple);
+  color: #fff;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.card-footer-price .buy-cart:hover {
+  background: var(--gog-purple);
+  color: #000;
+}
