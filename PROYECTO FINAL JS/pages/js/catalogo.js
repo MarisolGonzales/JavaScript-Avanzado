@@ -87,8 +87,9 @@ function renderCatalogo() {
     return;
   }
 
+  // Agregamos data-id al article para identificarlo directamente
   grid.innerHTML = lista.map(juego => `
-    <article class="game-card">
+    <article class="game-card" data-id="${juego.id}" style="cursor: pointer;">
       <img src="${juego.image}" alt="${juego.title}">
       <div class="game-info">
         <div class="game-top">
@@ -105,8 +106,10 @@ function renderCatalogo() {
     </article>
   `).join('');
 
+  // Evento para los botones de comprar
   document.querySelectorAll('.btn-buy').forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation(); // Evita que el clic active la tarjeta completa
       const id = button.dataset.id;
       const juego = juegos.find(item => item.id === id);
       const carrito = leerCarrito();
@@ -131,12 +134,15 @@ function renderCatalogo() {
     });
   });
 
+  // Evento dinámico para que toda la tarjeta abra los detalles al hacerle clic
   document.querySelectorAll('.game-card').forEach(card => {
     card.addEventListener('click', (e) => {
-      if (e.target.closest('button') || e.target.closest('a')) return;
-      const btnDetalle = card.querySelector('.btn-secondary');
-      if (btnDetalle) {
-        window.location.href = btnDetalle.href;
+      // Si hacen clic directamente en el botón de comprar o en el enlace "Detalle", no interferimos
+      if (e.target.closest('.btn-buy') || e.target.closest('a')) return;
+
+      const idJuego = card.dataset.id;
+      if (idJuego) {
+        window.location.href = `detalle.html?id=${idJuego}`;
       }
     });
   });
