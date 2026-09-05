@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atención al Cliente - NEXUS GAMING</title>
+    <!-- Vinculamos tu archivo CSS principal de la carpeta assets -->
+    <link rel="stylesheet" href="../../assets/css/styles.css">
+    <link rel="stylesheet" href="../css/ayuda.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <h1>NEXUS <span>GAMING</span></h1>
+        </div>
+        <div class="nav-derecha">
+            <ul class="menu">
+                <li><a href="../../index.html">Inicio</a></li>
+                <li><a href="catalogo.html">Catálogo</a></li>
+                <li><a href="ayuda.html" class="active">Atención al Cliente</a></li>
+                <li><a href="informacion.html">Información</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="ayuda-container">
+        <h2>💬 Centro de Soporte y Ayuda</h2>
+        <p class="ayuda-sub">Encuentra respuestas rápidas a tus consultas sobre compras, códigos de activación y biblioteca de juegos.</p>
+
+        <section class="faq-section">
+            <h3>Preguntas Frecuentes</h3>
+            
+            <div class="faq-card">
+                <h4>¿Cómo activo mi clave de juego comprada?</h4>
+                <p>Una vez realizada la compra, el código aparecerá en tu sección de <strong>Historial de Compras</strong> y se añadirá automáticamente a tu biblioteca virtual de Nexus Gaming.</p>
+            </div>
+
+            <div class="faq-card">
+                <h4>¿Qué métodos de pago aceptan?</h4>
+                <p>Aceptamos tarjetas de crédito y débito registradas de forma segura a través de nuestra pasarela validada en el sistema.</p>
+            </div>
+
+            <div class="faq-card">
+                <h4>¿Puedo regalar un juego a un amigo?</h4>
+                <p>Sí, al momento de añadir el juego al carrito de compras, puedes marcar la opción de regalo e ingresar el correo electrónico del destinatario.</p>
+            </div>
+        </section>
+
+        <section class="contacto-section">
+            <h3>¿Necesitas asistencia personalizada?</h3>
+            <p>Déjanos tu consulta y nuestro equipo te responderá a la brevedad.</p>
+            
+            <form id="form-ayuda" class="form-ayuda">
+                <input type="text" id="nombre-soporte" placeholder="Tu Nombre" required>
+                <input type="email" id="correo-soporte" placeholder="Tu Correo Electrónico" required>
+                <textarea id="mensaje-soporte" placeholder="Describe tu inconveniente..." rows="4" required></textarea>
+                <button type="submit" class="btn-enviar-soporte">Enviar Mensaje</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Vinculamos su archivo JavaScript aparte -->
+    <script src="../js/ayuda.js"></script>
+</body>
+</html>

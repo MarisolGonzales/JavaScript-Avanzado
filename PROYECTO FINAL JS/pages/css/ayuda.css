@@ -1,0 +1,92 @@
+.ayuda-container {
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    color: #fff;
+}
+
+.ayuda-container h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #7c3aed;
+    padding-bottom: 10px;
+}
+
+.ayuda-sub {
+    color: #aaa;
+    margin-bottom: 30px;
+}
+
+.faq-section {
+    margin-bottom: 40px;
+}
+
+.faq-section h3, .contacto-section h3 {
+    color: #a78bfa;
+    margin-bottom: 15px;
+}
+
+.faq-card {
+    background: #1e1e2f;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #2d2d44;
+}
+
+.faq-card h4 {
+    margin-bottom: 8px;
+    color: #fff;
+}
+
+.faq-card p {
+    color: #bbb;
+    font-size: 0.95rem;
+}
+
+.contacto-section {
+    background: #161622;
+    padding: 30px;
+    border-radius: 8px;
+    border: 1px solid #2d2d44;
+}
+
+.contacto-section p {
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.form-ayuda {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-ayuda input, 
+.form-ayuda textarea {
+    padding: 12px;
+    background: #22223b;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #fff;
+    font-family: inherit;
+}
+
+.form-ayuda textarea {
+    resize: vertical;
+}
+
+.btn-enviar-soporte {
+    background: #7c3aed;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-enviar-soporte:hover {
+    background: #6d28d9;
+}
