@@ -1,6 +1,7 @@
 // Arreglo con tus archivos guardados en la carpeta 'juegos/'
 const featuredGames = [
     {
+        id: "witcher3",
         title: "The Witcher 3: Wild Hunt",
         description: "Explora un mundo abierto lleno de monstruos, magia y aventuras inolvidables con un 75% de descuento.",
         tag: "OFERTA DESTACADA",
@@ -11,6 +12,7 @@ const featuredGames = [
         price: "PEN 29.75"
     },
     {
+        id: "gtav",
         title: "Grand Theft Auto V",
         description: "Disfruta de la aclamada experiencia de mundo abierto de Los Santos y Blaine County.",
         tag: "DISPONIBLE AHORA",
@@ -21,6 +23,7 @@ const featuredGames = [
         price: "PEN 60.00"
     },
     {
+        id: "minecraft",
         title: "Minecraft Ultra Edition",
         description: "Construye, explora y sobrevive en mundos infinitos con texturas HD avanzadas.",
         tag: "NUEVO CONTENIDO",
@@ -31,6 +34,7 @@ const featuredGames = [
         price: "PEN 89.00"
     },
     {
+        id: "dota2",
         title: "Dota 2",
         description: "Competencia estratégica por equipos con partidas intensas y una comunidad enorme de jugadores.",
         tag: "TOP MULTIJUGADOR",
@@ -41,6 +45,7 @@ const featuredGames = [
         price: "PEN 0.00"
     },
     {
+        id: "left4dead2",
         title: "Left 4 Dead 2",
         description: "Coopera con amigos para sobrevivir a oleadas de infectados en escenarios tensos y caóticos.",
         tag: "COOPERATIVO",
@@ -59,7 +64,6 @@ let autoSlideInterval;
    1. LÓGICA DEL CARRUSEL DINÁMICO
    ========================================== */
 
-// Dibujar la lista lateral de la derecha
 function renderCarouselList() {
     const listContainer = document.getElementById('carousel-list');
     if (!listContainer) return;
@@ -79,7 +83,6 @@ function renderCarouselList() {
     });
 }
 
-// Cambiar la información y la imagen del Banner Principal
 function selectGame(index) {
     currentIndex = index;
     const game = featuredGames[index];
@@ -103,7 +106,6 @@ function selectGame(index) {
     if (oldPriceElem) oldPriceElem.textContent = game.oldPrice;
     if (priceElem) priceElem.textContent = game.price;
 
-    // Actualizar el estado 'active' en la columna derecha
     const items = document.querySelectorAll('.carousel-item');
     items.forEach((item, idx) => {
         if (idx === index) {
@@ -128,23 +130,19 @@ function resetAutoSlide() {
     startAutoSlide();
 }
 
-
 /* ==========================================
    2. GESTIÓN DE SESIÓN DE USUARIO Y NAVBAR
    ========================================== */
 
-// Actualiza el navbar según el estado de la sesión
 function actualizarNavbarSesion() {
     const userNav = document.getElementById('user-nav');
     if (!userNav) return;
 
-    // Leer los datos del usuario activo guardados en localStorage tras el Login
     const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
 
     if (usuarioSesion) {
         const usuario = JSON.parse(usuarioSesion);
 
-        // Si inició sesión: Mostrar avatar, nombre y menú desplegable
         userNav.innerHTML = `
             <div class="user-menu-dropdown">
                 <button class="btn-user-profile" id="btn-user-toggle">
@@ -162,14 +160,12 @@ function actualizarNavbarSesion() {
             </div>
         `;
 
-        // Event listener para desplegar menú
         document.getElementById('btn-user-toggle').addEventListener('click', (e) => {
             e.stopPropagation();
             const dropdown = document.getElementById('dropdown-menu');
             if (dropdown) dropdown.classList.toggle('show');
         });
 
-        // Event listener para cerrar sesión
         document.getElementById('btn-logout').addEventListener('click', (e) => {
             e.preventDefault();
             localStorage.removeItem('nexus_usuario_activo');
@@ -178,14 +174,12 @@ function actualizarNavbarSesion() {
         });
 
     } else {
-        // Si no ha iniciado sesión: Mostrar únicamente el botón "Iniciar Sesión"
         userNav.innerHTML = `
             <a href="pages/html/login.html" class="btn-iniciar-sesion">Iniciar Sesión</a>
         `;
     }
 }
 
-// Cerrar el menú desplegable si se hace clic fuera de él
 document.addEventListener('click', (e) => {
     const dropdown = document.getElementById('dropdown-menu');
     const btnToggle = document.getElementById('btn-user-toggle');
@@ -197,8 +191,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-
-// Botón del carrito
 function activarBotonCarrito() {
     const btnCarrito = document.querySelector('.btn-carrito');
     if (!btnCarrito) return;
@@ -208,12 +200,56 @@ function activarBotonCarrito() {
     });
 }
 
+/* ==========================================
+   3. DELEGACIÓN DE EVENTOS (BURBUJA) PARA DETALLES
+   ========================================== */
+document.addEventListener('click', (e) => {
+    const banner = e.target.closest('.banner-promocional');
+    if (banner && !e.target.closest('button')) {
+        const juegoActual = featuredGames[currentIndex];
+        if (juegoActual) {
+            window.location.href = `pages/html/detalle.html?id=${juegoActual.id}`;
+        }
+        return;
+    }
+
+    const card = e.target.closest('.card');
+    if (card && !e.target.closest('.buy-cart')) {
+        const idJuego = card.dataset.id;
+        if (idJuego) {
+            window.location.href = `pages/html/detalle.html?id=${idJuego}`;
+        }
+        return;
+    }
+});
 
 /* ==========================================
-   3. INICIALIZACIÓN
+   4. LÓGICA DE BÚSQUEDA DESDE EL INICIO
    ========================================== */
-
 document.addEventListener('DOMContentLoaded', () => {
+    const inputBuscador = document.querySelector('.buscador input');
+    const btnBuscador = document.querySelector('.buscador button');
+
+    function ejecutarBusqueda() {
+        if (!inputBuscador) return;
+        const texto = inputBuscador.value.trim();
+        if (texto !== '') {
+            window.location.href = `pages/html/catalogo.html?busqueda=${encodeURIComponent(texto)}`;
+        }
+    }
+
+    if (btnBuscador) {
+        btnBuscador.addEventListener('click', ejecutarBusqueda);
+    }
+
+    if (inputBuscador) {
+        inputBuscador.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                ejecutarBusqueda();
+            }
+        });
+    }
+
     renderCarouselList();
     startAutoSlide();
     actualizarNavbarSesion();

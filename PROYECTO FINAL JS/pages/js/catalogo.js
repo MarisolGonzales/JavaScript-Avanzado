@@ -87,7 +87,6 @@ function renderCatalogo() {
     return;
   }
 
-  // Agregamos data-id al article para identificarlo directamente
   grid.innerHTML = lista.map(juego => `
     <article class="game-card" data-id="${juego.id}" style="cursor: pointer;">
       <img src="${juego.image}" alt="${juego.title}">
@@ -106,10 +105,9 @@ function renderCatalogo() {
     </article>
   `).join('');
 
-  // Evento para los botones de comprar
   document.querySelectorAll('.btn-buy').forEach(button => {
     button.addEventListener('click', (e) => {
-      e.stopPropagation(); // Evita que el clic active la tarjeta completa
+      e.stopPropagation();
       const id = button.dataset.id;
       const juego = juegos.find(item => item.id === id);
       const carrito = leerCarrito();
@@ -134,10 +132,8 @@ function renderCatalogo() {
     });
   });
 
-  // Evento dinámico para que toda la tarjeta abra los detalles al hacerle clic
   document.querySelectorAll('.game-card').forEach(card => {
     card.addEventListener('click', (e) => {
-      // Si hacen clic directamente en el botón de comprar o en el enlace "Detalle", no interferimos
       if (e.target.closest('.btn-buy') || e.target.closest('a')) return;
 
       const idJuego = card.dataset.id;
@@ -148,6 +144,15 @@ function renderCatalogo() {
   });
 }
 
+// Verificar si se abrió el catálogo mediante búsqueda desde la página de inicio
+function revisarParametroBusqueda() {
+  const params = new URLSearchParams(window.location.search);
+  const busquedaParam = params.get('busqueda');
+  if (busquedaParam && buscador) {
+    buscador.value = busquedaParam;
+  }
+}
+
 if (buscador) {
   buscador.addEventListener('input', renderCatalogo);
 }
@@ -156,5 +161,6 @@ document.getElementById('btn-carrito-catalogo')?.addEventListener('click', () =>
   window.location.href = 'carrito.html';
 });
 
+revisarParametroBusqueda();
 renderCatalogo();
 actualizarContadorCarrito();
