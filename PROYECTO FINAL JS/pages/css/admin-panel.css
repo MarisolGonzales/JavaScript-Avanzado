@@ -1,0 +1,216 @@
+/* ------------------------------------------
+   1. CONTENEDOR GENERAL DEL PANEL
+   ------------------------------------------ */
+.admin-panel-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+/* ------------------------------------------
+   2. ENCABEZADO DE BIENVENIDA
+   ------------------------------------------ */
+.admin-panel-hero {
+  margin-bottom: 40px;
+}
+
+.admin-panel-hero .eyebrow {
+  margin: 0 0 6px;
+  color: var(--gog-purple);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.admin-panel-hero h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  color: var(--text-main);
+}
+
+/* ------------------------------------------
+   3. CADA SECCIÓN (JUEGOS / VENTAS / ESTADÍSTICAS)
+   ------------------------------------------ */
+.admin-section {
+  scroll-margin-top: 90px; /* evita que el navbar fijo tape el título al saltar con anclas */
+  margin-bottom: 56px;
+  padding: 28px;
+  background: rgba(20, 18, 26, 0.88);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+}
+
+.admin-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 6px;
+  font-size: 1.4rem;
+  color: var(--text-main);
+}
+
+.admin-section h2 i {
+  color: var(--gog-purple);
+}
+
+.admin-section-desc {
+  margin: 0 0 22px;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+/* ------------------------------------------
+   4. BARRA DE HERRAMIENTAS (BOTÓN AGREGAR, ETC.)
+   ------------------------------------------ */
+.admin-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px;
+}
+
+.admin-toolbar .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(171, 127, 255, 0.7);
+  background: linear-gradient(135deg, var(--gog-purple), #8d5ef3);
+  color: #120f15;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(171, 127, 255, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.admin-toolbar .btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+/* ------------------------------------------
+   5. TABLAS (JUEGOS Y VENTAS)
+   ------------------------------------------ */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.admin-table thead {
+  background: rgba(171, 127, 255, 0.1);
+}
+
+.admin-table th {
+  text-align: left;
+  padding: 12px 14px;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.admin-table td {
+  padding: 12px 14px;
+  font-size: 0.92rem;
+  color: var(--text-main);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.admin-table tbody tr:hover {
+  background: rgba(171, 127, 255, 0.06);
+}
+
+.admin-table img {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Mensaje cuando una tabla no tiene datos todavía */
+.admin-table-vacio td {
+  text-align: center;
+  padding: 26px;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* Botones dentro de las filas (editar / eliminar) */
+.admin-table .btn-fila {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid var(--glass-border);
+  background: rgba(171, 127, 255, 0.08);
+  color: var(--text-main);
+  cursor: pointer;
+  margin-right: 6px;
+  transition: border-color 0.2s ease;
+}
+
+.admin-table .btn-fila:hover {
+  border-color: var(--gog-purple);
+}
+
+.admin-table .btn-fila.eliminar:hover {
+  border-color: #ff6b6b;
+  color: #ff6b6b;
+}
+
+/* ------------------------------------------
+   6. TARJETAS DE ESTADÍSTICAS
+   ------------------------------------------ */
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 18px;
+}
+
+.stat-card {
+  padding: 20px;
+  background: rgba(171, 127, 255, 0.08);
+  border: 1px solid rgba(171, 127, 255, 0.2);
+  border-radius: 14px;
+  text-align: center;
+}
+
+.stat-card h3 {
+  margin: 0 0 6px;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  color: var(--gog-purple);
+}
+
+.stat-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ------------------------------------------
+   7. RESPONSIVE
+   ------------------------------------------ */
+@media (max-width: 760px) {
+  .admin-section {
+    padding: 20px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 10px 8px;
+    font-size: 0.82rem;
+  }
+
+  .admin-table img {
+    width: 34px;
+    height: 34px;
+  }
+}
