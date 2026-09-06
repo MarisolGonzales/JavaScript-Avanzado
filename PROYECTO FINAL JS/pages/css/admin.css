@@ -1,0 +1,126 @@
+.admin-login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.admin-login-box {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(20, 18, 26, 0.88);
+  border: 1px solid var(--glass-border);
+  border-radius: 22px;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+  padding: 36px 32px 30px;
+}
+
+.admin-login-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.admin-login-header h1 {
+  margin: 0 0 6px;
+  font-size: clamp(1.6rem, 3vw, 2.1rem);
+  letter-spacing: 0.04em;
+  color: var(--text-main);
+}
+
+.admin-login-header h1 span {
+  color: var(--gog-purple);
+}
+
+.admin-login-header p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+#form-admin-login {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+#form-admin-login label {
+  margin-top: 14px;
+  margin-bottom: 4px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+#form-admin-login input {
+  min-height: 44px;
+  padding: 0 14px;
+  border-radius: 10px;
+  border: 1px solid var(--glass-border);
+  background: rgba(171, 127, 255, 0.08);
+  color: var(--text-main);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#form-admin-login input::placeholder {
+  color: var(--text-muted);
+}
+
+#form-admin-login input:focus {
+  border-color: var(--gog-purple);
+  box-shadow: 0 0 0 3px rgba(171, 127, 255, 0.2);
+}
+
+.admin-error-msg {
+  min-height: 18px;
+  margin: 10px 0 0;
+  color: #ff6b6b;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+#form-admin-login .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  margin-top: 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(171, 127, 255, 0.7);
+  background: linear-gradient(135deg, var(--gog-purple), #8d5ef3);
+  color: #120f15;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(171, 127, 255, 0.2);
+  transition: transform 0.2s ease;
+}
+
+#form-admin-login .btn-primary:hover {
+  transform: translateY(-1px);
+}
+
+.admin-volver {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 22px;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  transition: color 0.2s ease;
+}
+
+.admin-volver:hover {
+  color: var(--gog-purple);
+}
+
+@media (max-width: 480px) {
+  .admin-login-box {
+    padding: 28px 22px 24px;
+  }
+}

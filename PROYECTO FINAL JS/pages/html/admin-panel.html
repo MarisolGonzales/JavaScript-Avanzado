@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración - NEXUS GAMING</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../css/admin-panel.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">
+      <h1>NEXUS <span>GAMING</span></h1>
+    </div>
+
+    <div class="nav-derecha">
+      <ul class="menu">
+        <li><a href="#seccion-juegos"><i class="fa-solid fa-gamepad"></i> Juegos</a></li>
+        <li><a href="#seccion-ventas"><i class="fa-solid fa-cash-register"></i> Ventas</a></li>
+        <li><a href="#seccion-estadisticas"><i class="fa-solid fa-chart-line"></i> Estadísticas</a></li>
+      </ul>
+      <a href="../../index.html" class="btn-carrito">
+        <i class="fa-solid fa-right-from-bracket"></i> Salir
+      </a>
+    </div>
+  </nav>
+
+  <main class="admin-panel-page">
+
+    <header class="admin-panel-hero">
+      <p class="eyebrow">Panel de Administración</p>
+      <h1>Bienvenido, Administrador</h1>
+    </header>
+
+    <!-- SECCIÓN 1: JUEGOS -->
+    <section id="seccion-juegos" class="admin-section">
+      <h2><i class="fa-solid fa-gamepad"></i> Gestión de Juegos</h2>
+      <p class="admin-section-desc">Administra los juegos que se muestran en el catálogo.</p>
+
+      <div class="admin-toolbar">
+        <button class="btn-primary" id="btn-nuevo-juego">
+          <i class="fa-solid fa-plus"></i> Agregar juego
+        </button>
+      </div>
+
+      <table class="admin-table" id="tabla-juegos">
+        <thead>
+          <tr>
+            <th>Imagen</th>
+            <th>Nombre</th>
+            <th>Precio</th>
+            <th>Categoria</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-juegos"></tbody>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 2: VENTAS -->
+    <section id="seccion-ventas" class="admin-section">
+      <h2><i class="fa-solid fa-cash-register"></i> Ventas</h2>
+      <p class="admin-section-desc">Historial de compras realizadas en el carrito.</p>
+
+      <table class="admin-table" id="tabla-ventas">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Cliente</th>
+            <th>Juego</th>
+            <th>Monto</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-ventas"></tbody>
+      </table>
+    </section>
+
+    <!-- SECCIÓN 3: ESTADÍSTICAS -->
+    <section id="seccion-estadisticas" class="admin-section">
+      <h2><i class="fa-solid fa-chart-line"></i> Estadísticas</h2>
+      <p class="admin-section-desc">Resumen general de ventas del catálogo.</p>
+
+      <div class="stats-cards">
+        <div class="stat-card">
+          <h3 id="stat-total-ventas">PEN 0.00</h3>
+          <p>Ingresos totales</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="stat-juego-top">-</h3>
+          <p>Juego más vendido</p>
+        </div>
+        <div class="stat-card">
+          <h3 id="stat-cantidad-ventas">0</h3>
+          <p>Ventas registradas</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="../js/admin-panel.js"></script>
+</body>
+</html>

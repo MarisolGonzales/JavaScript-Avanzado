@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - NEXUS GAMING</title>
+  <link rel="stylesheet" href="../../assets/css/styles.css">
+  <link rel="stylesheet" href="../css/admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+  <main class="admin-login-page">
+    <section class="admin-login-box">
+      <div class="admin-login-header">
+        <h1>NEXUS <span>GAMING</span></h1>
+        <p>Panel de Administración</p>
+      </div>
+
+      <form id="form-admin-login">
+        <label for="admin-usuario">Usuario</label>
+        <input type="text" id="admin-usuario" placeholder="Ingresa tu usuario" required>
+
+        <label for="admin-password">Contraseña</label>
+        <input type="password" id="admin-password" placeholder="Ingresa tu contraseña" required>
+
+        <p id="admin-error" class="admin-error-msg"></p>
+
+        <button type="submit" class="btn-primary">
+          <i class="fa-solid fa-right-to-bracket"></i> Ingresar
+        </button>
+      </form>
+
+      <a href="../../index.html" class="admin-volver">
+        <i class="fa-solid fa-arrow-left"></i> Volver a la tienda
+      </a>
+    </section>
+  </main>
+
+  <script src="../js/admin.js"></script>
+</body>
+</html>
