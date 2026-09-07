@@ -134,7 +134,8 @@ function eliminarJuego(id) {
     dibujarCarrito();
 }
 
-function vaciarCarrito() {
+// Abre el modal que pide confirmación antes de vaciar el carrito
+function abrirModalVaciar() {
     const carrito = leerCarrito();
 
     if (carrito.length === 0) {
@@ -142,13 +143,28 @@ function vaciarCarrito() {
         return;
     }
 
-    const confirmar = confirm("¿Seguro que deseas vaciar tu carrito?");
+    // El texto cambia según si hay uno o varios juegos
+    let texto = "Se quitará <strong>1 juego</strong> de tu carrito.";
 
-    if (confirmar === true) {
-        guardarCarrito([]);
-        mostrarMensaje("Tu carrito quedó vacío.", "error", "mensaje");
-        dibujarCarrito();
+    if (carrito.length > 1) {
+        texto = "Se quitarán <strong>" + carrito.length + " juegos</strong> de tu carrito.";
     }
+
+    document.getElementById("modal-vaciar-texto").innerHTML = texto + " Esta acción no se puede deshacer.";
+    document.getElementById("modal-vaciar").classList.add("visible");
+}
+
+// Cierra el modal sin borrar nada
+function cerrarModalVaciar() {
+    document.getElementById("modal-vaciar").classList.remove("visible");
+}
+
+// Vacía el carrito de verdad (se llama al aceptar en el modal)
+function vaciarCarrito() {
+    guardarCarrito([]);
+    cerrarModalVaciar();
+    mostrarMensaje("Tu carrito quedó vacío.", "error", "mensaje");
+    dibujarCarrito();
 }
 
 function continuarCompra() {
@@ -446,8 +462,19 @@ document.addEventListener("DOMContentLoaded", function () {
     dibujarCarrito();
 
     // Botones del resumen
-    document.getElementById("btn-vaciar").addEventListener("click", vaciarCarrito);
+    document.getElementById("btn-vaciar").addEventListener("click", abrirModalVaciar);
     document.getElementById("btn-comprar").addEventListener("click", continuarCompra);
+
+    // Botones del modal de vaciar el carrito
+    document.getElementById("btn-si-vaciar").addEventListener("click", vaciarCarrito);
+    document.getElementById("btn-no-vaciar").addEventListener("click", cerrarModalVaciar);
+    document.getElementById("btn-cerrar-vaciar").addEventListener("click", cerrarModalVaciar);
+
+    document.getElementById("modal-vaciar").addEventListener("click", function (evento) {
+        if (evento.target.id === "modal-vaciar") {
+            cerrarModalVaciar();
+        }
+    });
 
     // Botones del modal
     document.getElementById("btn-cerrar-modal").addEventListener("click", cerrarModal);

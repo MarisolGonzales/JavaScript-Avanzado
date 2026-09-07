@@ -151,6 +151,32 @@
         </div>
     </div>
 
+    <!-- ==========================================
+         MODAL DE CONFIRMACIÓN PARA VACIAR EL CARRITO
+         ========================================== -->
+    <div class="modal-fondo" id="modal-vaciar">
+        <div class="modal modal-chico">
+
+            <div class="modal-cabecera">
+                <h3><i class="fa-solid fa-trash-can"></i> Vaciar carrito</h3>
+                <button class="btn-cerrar" id="btn-cerrar-vaciar"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <p class="modal-texto" id="modal-vaciar-texto"></p>
+
+            <div class="modal-pie">
+                <button class="btn-peligro" id="btn-si-vaciar">
+                    <i class="fa-solid fa-trash-can"></i> SÍ, VACIAR
+                </button>
+
+                <button class="btn-secundario" id="btn-no-vaciar">
+                    <i class="fa-solid fa-arrow-left"></i> CANCELAR
+                </button>
+            </div>
+
+        </div>
+    </div>
+
     <script src="../js/carrito.js"></script>
 </body>
 </html>
