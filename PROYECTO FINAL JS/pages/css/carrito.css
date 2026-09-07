@@ -395,6 +395,22 @@
     margin-top: 18px;
 }
 
+/* ---------- MODAL DE CONFIRMACIÓN (VACIAR CARRITO) ---------- */
+.modal-chico {
+    max-width: 380px;
+}
+
+.modal-texto {
+    font-size: 13.5px;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-top: 14px;
+}
+
+.modal-texto strong {
+    color: #fff;
+}
+
 /* ---------- CARRITO VACIO ---------- */
 .carrito-vacio {
     text-align: center;
