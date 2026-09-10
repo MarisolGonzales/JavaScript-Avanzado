@@ -309,7 +309,7 @@ function armarTextoMetodo() {
     return metodoElegido + " (celular ***" + celular.substring(6, 9) + ")";
 }
 
-function guardarCompra(orden, fecha, textoMetodo, carrito) {
+function guardarCompra(orden, fecha, textoMetodo, carrito, cliente) {
     
     // Historial de compras
     let historial = [];
@@ -354,9 +354,11 @@ function guardarCompra(orden, fecha, textoMetodo, carrito) {
         historial.push({
             orden: orden,
             fecha: fecha,
+            cliente: cliente,
             juego: nombreJuego,
             metodo: textoMetodo,
             monto: darFormatoSoles(item.precio),
+            montoNumero: item.precio,
             estado: "Completado"
         });
     });
@@ -433,7 +435,7 @@ function confirmarCompra(evento) {
     const fecha = new Date().toLocaleDateString("es-PE");
     const textoMetodo = armarTextoMetodo();
 
-    guardarCompra(orden, fecha, textoMetodo, carrito);
+    guardarCompra(orden, fecha, textoMetodo, carrito, nombre);
 
     // El carrito se vacía porque la compra ya se realizó
     localStorage.setItem(CLAVE_CARRITO, JSON.stringify([]));
