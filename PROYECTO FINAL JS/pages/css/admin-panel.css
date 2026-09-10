@@ -96,9 +96,22 @@
    ------------------------------------------ */
 .admin-table {
   width: 100%;
+  min-width: 560px; /* evita que las columnas se aplasten; en pantallas chicas el wrapper hace scroll */
   border-collapse: collapse;
-  overflow: hidden;
   border-radius: 12px;
+}
+
+/* Contenedor que permite deslizar la tabla horizontalmente sin romper el resto de la página */
+.tabla-scroll {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+}
+
+.tabla-scroll .admin-table {
+  border: none;
 }
 
 .admin-table thead {
@@ -198,9 +211,45 @@
 /* ------------------------------------------
    7. RESPONSIVE
    ------------------------------------------ */
+
+/* Tablets */
+@media (max-width: 1024px) {
+  .admin-panel-page {
+    padding: 32px 18px 70px;
+  }
+
+  .stats-cards {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
+}
+
+/* Móviles grandes / tablets chicas en vertical */
 @media (max-width: 760px) {
+  .admin-panel-page {
+    padding: 24px 14px 60px;
+  }
+
+  .admin-panel-hero {
+    margin-bottom: 28px;
+  }
+
   .admin-section {
     padding: 20px;
+    margin-bottom: 36px;
+    border-radius: 16px;
+  }
+
+  .admin-section h2 {
+    font-size: 1.2rem;
+  }
+
+  .admin-toolbar {
+    justify-content: stretch;
+  }
+
+  .admin-toolbar .btn-primary {
+    width: 100%;
+    justify-content: center;
   }
 
   .admin-table th,
@@ -212,5 +261,74 @@
   .admin-table img {
     width: 34px;
     height: 34px;
+  }
+
+  .stats-cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .stat-card {
+    padding: 16px;
+  }
+}
+
+/* Celulares en vertical (la mayoría de gamas) */
+@media (max-width: 480px) {
+  .admin-panel-page {
+    padding: 20px 12px 50px;
+  }
+
+  .admin-panel-hero .eyebrow {
+    font-size: 0.75rem;
+  }
+
+  .admin-panel-hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .admin-section {
+    padding: 16px;
+    border-radius: 14px;
+  }
+
+  .admin-section-desc {
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+  }
+
+  .admin-table {
+    min-width: 480px;
+  }
+
+  .admin-table .btn-fila {
+    width: 28px;
+    height: 28px;
+  }
+
+  /* Las tarjetas de estadísticas se apilan en una sola columna */
+  .stats-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Celulares muy angostos */
+@media (max-width: 360px) {
+  .admin-panel-hero h1 {
+    font-size: 1.4rem;
+  }
+
+  .admin-section h2 {
+    font-size: 1.05rem;
+  }
+
+  .admin-table {
+    min-width: 420px;
+  }
+
+  .admin-table th,
+  .admin-table td {
+    padding: 8px 6px;
+    font-size: 0.78rem;
   }
 }
