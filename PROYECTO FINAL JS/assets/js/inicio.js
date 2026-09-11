@@ -9,7 +9,8 @@ const featuredGames = [
         thumbImg: "JUEGOS/witcher3.jpg",
         discount: "-75%",
         oldPrice: "PEN 119.00",
-        price: "PEN 29.75"
+        price: "PEN 29.75",
+        precioNumero: 29.75
     },
     {
         id: "gtav",
@@ -20,7 +21,8 @@ const featuredGames = [
         thumbImg: "JUEGOS/gtav.png",
         discount: "-50%",
         oldPrice: "PEN 120.00",
-        price: "PEN 60.00"
+        price: "PEN 60.00",
+        precioNumero: 60.00
     },
     {
         id: "minecraft",
@@ -31,7 +33,8 @@ const featuredGames = [
         thumbImg: "JUEGOS/minecraft.jpg",
         discount: "-20%",
         oldPrice: "PEN 110.00",
-        price: "PEN 89.00"
+        price: "PEN 89.00",
+        precioNumero: 89.00
     },
     {
         id: "dota2",
@@ -42,7 +45,8 @@ const featuredGames = [
         thumbImg: "JUEGOS/Dota_2.jpg",
         discount: "-0%",
         oldPrice: "PEN 0.00",
-        price: "PEN 0.00"
+        price: "PEN 0.00",
+        precioNumero: 0
     },
     {
         id: "left4dead2",
@@ -53,7 +57,8 @@ const featuredGames = [
         thumbImg: "JUEGOS/Left_4_Dead_2.jpg",
         discount: "-25%",
         oldPrice: "PEN 20.00",
-        price: "PEN 15.00"
+        price: "PEN 15.00",
+        precioNumero: 15.00
     }
 ];
 
@@ -200,10 +205,70 @@ function activarBotonCarrito() {
     });
 }
 
+//FUNCIONES DEL CARRITO
+
+function leerCarritoGuardado() {
+    try {
+        const datos = localStorage.getItem('nexus_carrito');
+        if (datos) return JSON.parse(datos);
+    } catch (error) {
+        console.log('No se pudo leer el carrito: ' + error);
+    }
+    return [];
+}
+
+function actualizarContadorCarrito() {
+    const badge = document.querySelector('.btn-carrito .badge');
+    if (!badge) return;
+
+    badge.textContent = leerCarritoGuardado().length;
+}
+
+function agregarAlCarritoDesdeInicio(juego) {
+    if (!juego) return;
+
+    const carrito = leerCarritoGuardado();
+
+    if (carrito.some(item => item.id === juego.id)) {
+        alert('El juego ya está en el carrito.');
+        return;
+    }
+
+    carrito.push({
+        id: juego.id,
+        titulo: juego.title,
+        precio: juego.precioNumero,
+        imagen: juego.thumbImg,
+        regalo: false,
+        destinatario: '',
+        correoDestino: ''
+    });
+
+    localStorage.setItem('nexus_carrito', JSON.stringify(carrito));
+    actualizarContadorCarrito();
+    alert('Juego agregado al carrito.');
+}
+
 /* ==========================================
    3. DELEGACIÓN DE EVENTOS (BURBUJA) PARA DETALLES
    ========================================== */
 document.addEventListener('click', (e) => {
+
+    // Botón "Añadir al carrito"
+    if (e.target.closest('.btn-banner-compra')) {
+        agregarAlCarritoDesdeInicio(featuredGames[currentIndex]);
+        return;
+    }
+
+    // Botón del carrito de las tarjetas de "Imperdibles y Ofertas"
+    const botonCompra = e.target.closest('.buy-cart');
+    if (botonCompra) {
+        const tarjeta = botonCompra.closest('.card');
+        const juego = featuredGames.find(g => g.id === tarjeta.dataset.id);
+        agregarAlCarritoDesdeInicio(juego);
+        return;
+    }
+
     const banner = e.target.closest('.banner-promocional');
     if (banner && !e.target.closest('button')) {
         const juegoActual = featuredGames[currentIndex];
@@ -254,4 +319,5 @@ document.addEventListener('DOMContentLoaded', () => {
     startAutoSlide();
     actualizarNavbarSesion();
     activarBotonCarrito();
+    actualizarContadorCarrito();
 });
