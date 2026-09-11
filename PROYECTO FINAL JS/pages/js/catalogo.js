@@ -197,7 +197,51 @@ if (buscador) {
         mostrarCatalogo(resultados);
     });
 }
+function agregarAlCarrito(id) {
 
+    // 🔒 Validar si hay un usuario logueado desde la vista de catálogo
+    const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
+    if (!usuarioSesion) {
+        alert('Debes iniciar sesión para poder comprar o agregar juegos al carrito.');
+        window.location.href = 'login.html'; // Redirige al login estando en pages/html/
+        return;
+    }
+
+    const juego = juegos.find(j => j.id === id);
+
+    if (!juego) {
+        console.error("Juego no encontrado");
+        return;
+    }
+
+    let carrito = JSON.parse(localStorage.getItem("nexus_carrito")) || [];
+
+    // Opcional: validar si ya existe en el carrito también aquí
+    if (carrito.some(item => item.id === juego.id)) {
+        alert('El juego ya está en el carrito.');
+        window.location.href = "carrito.html";
+        return;
+    }
+
+    carrito.push({
+        id: juego.id,
+        titulo: juego.title,
+        precio: juego.price,
+        imagen: juego.image,
+        regalo: false,
+        destinatario: "",
+        correoDestino: ""
+    });
+
+    // Guardar carrito
+    localStorage.setItem("nexus_carrito", JSON.stringify(carrito));
+
+    // Actualizar contador
+    actualizarContadorCarrito();
+
+    // Ir automáticamente al carrito
+    window.location.href = "carrito.html";
+}
 // ===============================
 // BOTÓN DEL CARRITO
 // ===============================
