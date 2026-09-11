@@ -1,4 +1,6 @@
-// Arreglo con tus archivos guardados en la carpeta 'juegos/'
+/* ==========================================
+   ARREGLO DE JUEGOS DESTACADOS
+   ========================================== */
 const featuredGames = [
     {
         id: "witcher3",
@@ -201,11 +203,18 @@ function activarBotonCarrito() {
     if (!btnCarrito) return;
 
     btnCarrito.addEventListener('click', () => {
+        // 🔒 Validación también en el botón principal del carrito de la barra de navegación
+        const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
+        if (!usuarioSesion) {
+            alert('Acceso restringido: Debes iniciar sesión para ver tu carrito.');
+            window.location.href = 'pages/html/login.html';
+            return;
+        }
         window.location.href = 'pages/html/carrito.html';
     });
 }
 
-//FUNCIONES DEL CARRITO
+// FUNCIONES DEL CARRITO
 
 function leerCarritoGuardado() {
     try {
@@ -227,10 +236,19 @@ function actualizarContadorCarrito() {
 function agregarAlCarritoDesdeInicio(juego) {
     if (!juego) return;
 
+    // 🔒 BLOQUEO OBLIGATORIO: Validar si hay una sesión activa antes de permitir la compra desde el inicio
+    const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
+    if (!usuarioSesion) {
+        alert('Acceso restringido: Debes iniciar sesión para poder comprar o agregar juegos al carrito.');
+        window.location.href = 'pages/html/login.html';
+        return;
+    }
+
     const carrito = leerCarritoGuardado();
 
     if (carrito.some(item => item.id === juego.id)) {
         alert('El juego ya está en el carrito.');
+        window.location.href = 'pages/html/carrito.html';
         return;
     }
 
@@ -238,7 +256,7 @@ function agregarAlCarritoDesdeInicio(juego) {
         id: juego.id,
         titulo: juego.title,
         precio: juego.precioNumero,
-        imagen: '../../' + juego.thumbImg,
+        imagen: juego.thumbImg, // Mantener ruta limpia
         regalo: false,
         destinatario: '',
         correoDestino: ''
@@ -246,7 +264,9 @@ function agregarAlCarritoDesdeInicio(juego) {
 
     localStorage.setItem('nexus_carrito', JSON.stringify(carrito));
     actualizarContadorCarrito();
-    alert('Juego agregado al carrito.');
+    
+    alert('¡Juego agregado al carrito exitosamente!');
+    window.location.href = 'pages/html/carrito.html';
 }
 
 /* ==========================================
@@ -254,7 +274,7 @@ function agregarAlCarritoDesdeInicio(juego) {
    ========================================== */
 document.addEventListener('click', (e) => {
 
-    // Botón "Añadir al carrito"
+    // Botón "Añadir al carrito" del banner principal
     if (e.target.closest('.btn-banner-compra')) {
         agregarAlCarritoDesdeInicio(featuredGames[currentIndex]);
         return;
@@ -264,8 +284,10 @@ document.addEventListener('click', (e) => {
     const botonCompra = e.target.closest('.buy-cart');
     if (botonCompra) {
         const tarjeta = botonCompra.closest('.card');
-        const juego = featuredGames.find(g => g.id === tarjeta.dataset.id);
-        agregarAlCarritoDesdeInicio(juego);
+        if (tarjeta && tarjeta.dataset.id) {
+            const juego = featuredGames.find(g => g.id === tarjeta.dataset.id);
+            agregarAlCarritoDesdeInicio(juego);
+        }
         return;
     }
 

@@ -1,31 +1,31 @@
-// ===============================
-// CATÁLOGO DE JUEGOS
-// ===============================
+/* ==========================================================================
+   CATÁLOGO DE JUEGOS - NEXUS GAMING
+   ========================================================================== */
 
 const juegos = [
     {
         id: 1,
-        title: "The Witcher 3",
+        title: "The Witcher 3: Wild Hunt",
         price: 59.90,
         category: "RPG",
         image: "../../JUEGOS/witcher3.jpg",
-        description: "Una aventura épica de mundo abierto."
+        description: "Una aventura épica de mundo abierto impregnada de magia y decisiones con consecuencias."
     },
     {
         id: 2,
-        title: "GTA V",
+        title: "Grand Theft Auto V",
         price: 79.90,
         category: "Acción",
         image: "../../JUEGOS/gtav.png",
-        description: "Explora Los Santos y vive una gran aventura."
+        description: "Explora el vasto mundo abierto de Los Santos y Blaine County en una experiencia inolvidable."
     },
     {
         id: 3,
-        title: "Minecraft",
+        title: "Minecraft Ultra Edition",
         price: 69.90,
         category: "Aventura",
         image: "../../JUEGOS/minecraft.jpg",
-        description: "Construye, explora y sobrevive en un mundo infinito."
+        description: "Construye, sobrevive y da rienda suelta a tu imaginación en universos infinitos."
     },
     {
         id: 4,
@@ -33,7 +33,7 @@ const juegos = [
         price: 49.90,
         category: "Estrategia",
         image: "../../JUEGOS/Dota_2.jpg",
-        description: "Juego competitivo de estrategia y acción."
+        description: "Combates tácticos multijugador en equipo donde la estrategia define la victoria."
     },
     {
         id: 5,
@@ -41,81 +41,94 @@ const juegos = [
         price: 39.90,
         category: "Acción",
         image: "../../JUEGOS/Left_4_Dead_2.jpg",
-        description: "Sobrevive junto a tus amigos contra hordas de infectados."
+        description: "Acción cooperativa extrema para sobrevivir a implacables hordas de infectados."
     }
 ];
 
-// ===============================
-// MOSTRAR CATÁLOGO
-// ===============================
+// Referencias del DOM
+const catalogRows = document.querySelector(".catalog-rows") || document.getElementById("catalog-grid");
+const buscador = document.getElementById("search-input");
+const botonCarritoCatalogo = document.getElementById("btn-carrito-catalogo");
 
-const catalogGrid = document.getElementById("catalog-grid");
-
+/* ==========================================
+    RENDERIZADO DEL CATÁLOGO (ADAPTADO A TU CSS)
+   ========================================== */
 function mostrarCatalogo(lista = juegos) {
+    if (!catalogRows) return;
 
-    if (!catalogGrid) return;
+    // Si tu estructura usa contenedores por filas o un grid general, lo adaptamos dinámicamente
+    catalogRows.innerHTML = "";
 
-    catalogGrid.innerHTML = "";
+    if (lista.length === 0) {
+        catalogRows.innerHTML = `
+            <div class="empty-state">
+                <h3>No se encontraron juegos que coincidan con tu búsqueda.</h3>
+            </div>
+        `;
+        return;
+    }
+
+    // Creamos una sección principal con el riel/grilla compatible con tu CSS
+    const rowContainer = document.createElement("div");
+    rowContainer.innerHTML = `<h2 class="catalog-row-title">Todos los Juegos Disponibles</h2>`;
+    
+    const rail = document.createElement("div");
+    rail.className = "games-rail"; // Utiliza tu clase exacta de CSS
 
     lista.forEach(juego => {
-
         const tarjeta = document.createElement("div");
+        tarjeta.className = "game-card"; // Utiliza tu clase exacta de CSS
 
-        tarjeta.className = "game-card";
-
+        // Estructura interna exacta compatible con tus clases .game-info, .badge, .actions, etc.
         tarjeta.innerHTML = `
             <img src="${juego.image}" alt="${juego.title}">
-
             <div class="game-info">
+                <div class="game-top">
+                    <span class="badge">${juego.category}</span>
+                    <span style="color: #4ade80; font-weight: bold; font-size: 0.85rem;">S/ ${juego.price.toFixed(2)}</span>
+                </div>
                 <h3>${juego.title}</h3>
-
                 <p>${juego.description}</p>
-
-                <span class="category">
-                    ${juego.category}
-                </span>
-
-                <h4>
-                    S/ ${juego.price.toFixed(2)}
-                </h4>
-
-                <div class="game-buttons">
-
-                    <button
-                        class="btn-detalle"
-                        onclick="verDetalle(${juego.id})">
-                        Ver detalles
-                    </button>
-
-                    <button
-                        class="btn-carrito"
-                        onclick="agregarAlCarrito(${juego.id})">
-                        Añadir al carrito
-                    </button>
-
+                <div class="actions">
+                    <button class="btn-secondary" onclick="verDetalle(${juego.id})">Detalles</button>
+                    <button class="btn-buy" onclick="agregarAlCarrito(${juego.id})">Comprar</button>
                 </div>
             </div>
         `;
 
-        catalogGrid.appendChild(tarjeta);
+        rail.appendChild(tarjeta);
     });
+
+    rowContainer.appendChild(rail);
+    catalogRows.appendChild(rowContainer);
 }
 
-// ===============================
-// AGREGAR AL CARRITO
-// ===============================
-
+/* ==========================================
+   GESTIÓN DEL CARRITO Y SEGURIDAD DE SESIÓN
+   ========================================== */
 function agregarAlCarrito(id) {
-
-    const juego = juegos.find(j => j.id === id);
-
-    if (!juego) {
-        console.error("Juego no encontrado");
+    // 🔒 Validación estricta: Si el usuario no ha iniciado sesión, se le bloquea y redirige al login
+    const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
+    if (!usuarioSesion) {
+        alert('Acceso restringido: Debes iniciar sesión para poder comprar o agregar juegos al carrito.');
+        window.location.href = 'login.html';
         return;
     }
 
-    let carrito =
-        JSON.parse(localStorage.getItem("nexus_carrito")) || [];
+    const juego = juegos.find(j => j.id === id);
+    if (!juego) {
+        console.error("Juego no encontrado en el catálogo");
+        return;
+    }
+
+    let carrito = JSON.parse(localStorage.getItem("nexus_carrito")) || [];
+
+    // Verificar si el juego ya está agregado previamente
+    if (carrito.some(item => item.id === juego.id)) {
+        alert('Este juego ya se encuentra registrado en tu carrito.');
+        window.location.href = "carrito.html";
+        return;
+    }
 
     carrito.push({
         id: juego.id,
@@ -127,140 +140,63 @@ function agregarAlCarrito(id) {
         correoDestino: ""
     });
 
-    // Guardar carrito
-    localStorage.setItem(
-        "nexus_carrito",
-        JSON.stringify(carrito)
-    );
-
-    // Actualizar contador
+    localStorage.setItem("nexus_carrito", JSON.stringify(carrito));
     actualizarContadorCarrito();
 
-    // Ir automáticamente al carrito
+    alert(`¡${juego.title} se añadió correctamente al carrito!`);
     window.location.href = "carrito.html";
 }
 
-// ===============================
-// CONTADOR DEL CARRITO
-// ===============================
-
 function actualizarContadorCarrito() {
-
-    const carrito =
-        JSON.parse(localStorage.getItem("nexus_carrito")) || [];
-
-    const contador =
-        document.getElementById("cart-count");
+    const carrito = JSON.parse(localStorage.getItem("nexus_carrito")) || [];
+    const contador = document.getElementById("cart-count");
 
     if (contador) {
         contador.textContent = carrito.length;
     }
 }
 
-// ===============================
-// VER DETALLES
-// ===============================
-
+/* ==========================================
+   INTERACCIÓN DE DETALLES Y BUSCADOR
+   ========================================== */
 function verDetalle(id) {
-
     const juego = juegos.find(j => j.id === id);
-
     if (!juego) return;
 
     alert(
-        `${juego.title}\n\n` +
-        `Categoría: ${juego.category}\n` +
-        `Precio: S/ ${juego.price.toFixed(2)}\n\n` +
-        `${juego.description}`
+        `📌 ${juego.title}\n\n` +
+        `• Categoría: ${juego.category}\n` +
+        `• Precio Oficial: S/ ${juego.price.toFixed(2)}\n\n` +
+        `Descripción: ${juego.description}`
     );
 }
 
-// ===============================
-// BUSCADOR
-// ===============================
-
-const buscador =
-    document.getElementById("search-input");
-
+// Búsqueda en tiempo real conectada al input del catálogo
 if (buscador) {
-
     buscador.addEventListener("input", function () {
-
-        const texto =
-            this.value.toLowerCase().trim();
+        const texto = this.value.toLowerCase().trim();
 
         const resultados = juegos.filter(juego =>
             juego.title.toLowerCase().includes(texto) ||
-            juego.category.toLowerCase().includes(texto)
+            juego.category.toLowerCase().includes(texto) ||
+            juego.description.toLowerCase().includes(texto)
         );
 
         mostrarCatalogo(resultados);
     });
 }
-function agregarAlCarrito(id) {
 
-    // 🔒 Validar si hay un usuario logueado desde la vista de catálogo
-    const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
-    if (!usuarioSesion) {
-        alert('Debes iniciar sesión para poder comprar o agregar juegos al carrito.');
-        window.location.href = 'login.html'; // Redirige al login estando en pages/html/
-        return;
-    }
-
-    const juego = juegos.find(j => j.id === id);
-
-    if (!juego) {
-        console.error("Juego no encontrado");
-        return;
-    }
-
-    let carrito = JSON.parse(localStorage.getItem("nexus_carrito")) || [];
-
-    // Opcional: validar si ya existe en el carrito también aquí
-    if (carrito.some(item => item.id === juego.id)) {
-        alert('El juego ya está en el carrito.');
+// Botón global del carrito en la barra de navegación superior
+if (botonCarritoCatalogo) {
+    botonCarritoCatalogo.addEventListener("click", function () {
         window.location.href = "carrito.html";
-        return;
-    }
-
-    carrito.push({
-        id: juego.id,
-        titulo: juego.title,
-        precio: juego.price,
-        imagen: juego.image,
-        regalo: false,
-        destinatario: "",
-        correoDestino: ""
     });
+}
 
-    // Guardar carrito
-    localStorage.setItem("nexus_carrito", JSON.stringify(carrito));
-
-    // Actualizar contador
+/* ==========================================
+   INICIALIZACIÓN DE LA VISTA
+   ========================================== */
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarCatalogo();
     actualizarContadorCarrito();
-
-    // Ir automáticamente al carrito
-    window.location.href = "carrito.html";
-}
-// ===============================
-// BOTÓN DEL CARRITO
-// ===============================
-
-const botonCarrito =
-    document.getElementById("btn-carrito-catalogo");
-
-if (botonCarrito) {
-
-    botonCarrito.addEventListener("click", function () {
-
-        window.location.href = "carrito.html";
-
-    });
-}
-
-// ===============================
-// INICIAR
-// ===============================
-
-mostrarCatalogo();
-actualizarContadorCarrito();
+});
