@@ -1,202 +1,498 @@
-/* ==========================================================================
-   CATÁLOGO DE JUEGOS - NEXUS GAMING
-   ========================================================================== */
+/* ------------------------------------------
+   1. VARIABLES GENERALES
+   ------------------------------------------ */
+const CLAVE_CARRITO = "nexus_carrito";      // Nombre con el que se guarda el carrito
+const CLAVE_AMIGOS = "nexus_amigos";        // Lista de amigos del usuario
 
-const juegos = [
-    {
-        id: 1,
-        title: "The Witcher 3: Wild Hunt",
-        price: 59.90,
-        category: "RPG",
-        image: "../../JUEGOS/witcher3.jpg",
-        description: "Una aventura épica de mundo abierto impregnada de magia y decisiones con consecuencias."
-    },
-    {
-        id: 2,
-        title: "Grand Theft Auto V",
-        price: 79.90,
-        category: "Acción",
-        image: "../../JUEGOS/gtav.png",
-        description: "Explora el vasto mundo abierto de Los Santos y Blaine County en una experiencia inolvidable."
-    },
-    {
-        id: 3,
-        title: "Minecraft Ultra Edition",
-        price: 69.90,
-        category: "Aventura",
-        image: "../../JUEGOS/minecraft.jpg",
-        description: "Construye, sobrevive y da rienda suelta a tu imaginación en universos infinitos."
-    },
-    {
-        id: 4,
-        title: "Dota 2",
-        price: 49.90,
-        category: "Estrategia",
-        image: "../../JUEGOS/Dota_2.jpg",
-        description: "Combates tácticos multijugador en equipo donde la estrategia define la victoria."
-    },
-    {
-        id: 5,
-        title: "Left 4 Dead 2",
-        price: 39.90,
-        category: "Acción",
-        image: "../../JUEGOS/Left_4_Dead_2.jpg",
-        description: "Acción cooperativa extrema para sobrevivir a implacables hordas de infectados."
+let idJuegoEnModal = 0;                     // Juego que se está regalando
+let amigoElegido = null;                    // Amigo seleccionado dentro del modal
+let opcionRegalo = "amigos";                // Puede ser "amigos" o "correo"
+
+/* ------------------------------------------
+   2. FUNCIONES DE APOYO
+   ------------------------------------------ */
+
+// Formato de soles: 29.7 -> "S/ 29.70"
+function darFormatoSoles(monto) {
+    return "S/ " + monto.toFixed(2);
+}
+
+function leerCarrito() {
+    // El try-catch evita que la página se caiga si el dato guardado está dañado
+    try {
+        const datos = localStorage.getItem(CLAVE_CARRITO);
+
+        if (datos) {
+            return JSON.parse(datos);
+        }
+    } catch (error) {
+        console.log("No se pudo leer el carrito guardado: " + error);
     }
-];
 
-// Referencias del DOM
-const catalogRows = document.querySelector(".catalog-rows") || document.getElementById("catalog-grid");
-const buscador = document.getElementById("search-input");
-const botonCarritoCatalogo = document.getElementById("btn-carrito-catalogo");
+    return [];
+}
 
-/* ==========================================
-    RENDERIZADO DEL CATÁLOGO (ADAPTADO A TU CSS)
-   ========================================== */
-function mostrarCatalogo(lista = juegos) {
-    if (!catalogRows) return;
+function guardarCarrito(carrito) {
+    localStorage.setItem(CLAVE_CARRITO, JSON.stringify(carrito));
+}
+// Lista de amigos del usuario
+function leerAmigos() {
+    try {
+        const datos = localStorage.getItem(CLAVE_AMIGOS);
 
-    // Si tu estructura usa contenedores por filas o un grid general, lo adaptamos dinámicamente
-    catalogRows.innerHTML = "";
+        if (datos) {
+            return JSON.parse(datos);
+        }
+    } catch (error) {
+        console.log("No se pudo leer la lista de amigos: " + error);
+    }
 
-    if (lista.length === 0) {
-        catalogRows.innerHTML = `
-            <div class="empty-state">
-                <h3>No se encontraron juegos que coincidan con tu búsqueda.</h3>
-            </div>
-        `;
+    return [];
+}
+
+function mostrarMensaje(texto, tipo, donde) {
+    const caja = document.getElementById(donde);
+    let icono = "fa-circle-check";
+
+    if (tipo === "error") {
+        icono = "fa-triangle-exclamation";
+    }
+
+    caja.className = "mensaje visible " + tipo;
+    caja.innerHTML = '<i class="fa-solid ' + icono + '"></i>' + texto;
+}
+
+function ocultarMensaje(donde) {
+    document.getElementById(donde).className = "mensaje";
+}
+
+function buscarJuego(id) {
+    const carrito = leerCarrito();
+    let encontrado = null;
+
+    carrito.forEach(function (item) {
+        if (item.id === id) {
+            encontrado = item;
+        }
+    });
+
+    return encontrado;
+}
+
+// [^\s@]+  -> uno o más caracteres que no sean espacios ni arroba
+const FORMATO_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function esCorreoValido(correo) {
+    return FORMATO_CORREO.test(correo);
+}
+
+/* ------------------------------------------
+   3. CÁLCULOS DEL CARRITO
+   ------------------------------------------ */
+
+function calcularTotal(carrito) {
+    let total = 0;
+
+    carrito.forEach(function (item) {
+        total += item.precio;
+    });
+
+    return total;
+}
+
+function contarRegalos(carrito) {
+    let regalos = 0;
+
+    carrito.forEach(function (item) {
+        if (item.regalo === true) {
+            regalos += 1;
+        }
+    });
+
+    return regalos;
+}
+
+/* ------------------------------------------
+   4. ACCIONES DEL CARRITO
+   ------------------------------------------ */
+
+function eliminarJuego(id) {
+    const carrito = leerCarrito();
+    const nuevoCarrito = [];
+    let nombreEliminado = "";
+
+    carrito.forEach(function (item) {
+        if (item.id === id) {
+            nombreEliminado = item.titulo;
+        } else {
+            nuevoCarrito.push(item);
+        }
+    });
+
+    guardarCarrito(nuevoCarrito);
+    mostrarMensaje("Se eliminó " + nombreEliminado + " de tu carrito.", "error", "mensaje");
+    dibujarCarrito();
+}
+
+// Abre el modal que pide confirmación antes de vaciar el carrito
+function abrirModalVaciar() {
+    const carrito = leerCarrito();
+
+    if (carrito.length === 0) {
+        mostrarMensaje("Tu carrito ya está vacío.", "error", "mensaje");
         return;
     }
 
-    // Creamos una sección principal con el riel/grilla compatible con tu CSS
-    const rowContainer = document.createElement("div");
-    rowContainer.innerHTML = <h2 class="catalog-row-title">Todos los Juegos Disponibles</h2>;
-    
-    const rail = document.createElement("div");
-    rail.className = "games-rail"; // Utiliza tu clase exacta de CSS
+    // El texto cambia según si hay uno o varios juegos
+    let texto = "Se quitará <strong>1 juego</strong> de tu carrito.";
 
-    lista.forEach(juego => {
+    if (carrito.length > 1) {
+        texto = "Se quitarán <strong>" + carrito.length + " juegos</strong> de tu carrito.";
+    }
+
+    document.getElementById("modal-vaciar-texto").innerHTML = texto + " Esta acción no se puede deshacer.";
+    document.getElementById("modal-vaciar").classList.add("visible");
+}
+
+// Cierra el modal sin borrar nada
+function cerrarModalVaciar() {
+    document.getElementById("modal-vaciar").classList.remove("visible");
+}
+
+// Vacía el carrito de verdad (se llama al aceptar en el modal)
+function vaciarCarrito() {
+    guardarCarrito([]);
+    cerrarModalVaciar();
+    mostrarMensaje("Tu carrito quedó vacío.", "error", "mensaje");
+    dibujarCarrito();
+}
+
+function continuarCompra() {
+    const carrito = leerCarrito();
+
+    if (carrito.length === 0) {
+        mostrarMensaje("Tu carrito está vacío. Ve al catálogo y agrega juegos.", "error", "mensaje");
+        return;
+    }
+
+    window.location.href = "compra.html";
+}
+
+/* ------------------------------------------
+   5. MODAL DE REGALO
+   ------------------------------------------ */
+
+// Abre el modal para el juego elegido
+function abrirModal(id) {
+    const juego = buscarJuego(id);
+
+    idJuegoEnModal = id;
+    amigoElegido = null;
+
+    document.getElementById("modal-juego").innerHTML = "Vas a regalar <strong>" + juego.titulo + "</strong>";
+    document.getElementById("regalo-nombre").value = "";
+    document.getElementById("regalo-correo").value = "";
+
+    if (juego.regalo === true) {
+        document.getElementById("btn-quitar-regalo").style.display = "flex";
+    } else {
+        document.getElementById("btn-quitar-regalo").style.display = "none";
+    }
+
+    ocultarMensaje("mensaje-modal");
+    cambiarOpcion("amigos");
+    dibujarAmigos();
+
+    document.getElementById("modal-regalo").classList.add("visible");
+}
+
+function cerrarModal() {
+    document.getElementById("modal-regalo").classList.remove("visible");
+}
+
+function cambiarOpcion(opcion) {
+    opcionRegalo = opcion;
+
+    const botonAmigos = document.getElementById("opcion-amigos");
+    const botonCorreo = document.getElementById("opcion-correo");
+    const panelAmigos = document.getElementById("panel-amigos");
+    const panelCorreo = document.getElementById("panel-correo");
+
+    if (opcion === "amigos") {
+        botonAmigos.classList.add("activa");
+        botonCorreo.classList.remove("activa");
+        panelAmigos.classList.add("visible");
+        panelCorreo.classList.remove("visible");
+    } else {
+        botonCorreo.classList.add("activa");
+        botonAmigos.classList.remove("activa");
+        panelCorreo.classList.add("visible");
+        panelAmigos.classList.remove("visible");
+    }
+
+    ocultarMensaje("mensaje-modal");
+}
+
+// Dibuja la lista de amigos dentro del modal
+function dibujarAmigos() {
+    const contenedor = document.getElementById("lista-amigos");
+    const amigos = leerAmigos();
+
+    contenedor.innerHTML = "";
+
+    // Si el usuario todavía no tiene amigos se le ofrece enviarlo por correo
+    if (amigos.length === 0) {
+        contenedor.innerHTML = `
+            <div class="sin-amigos">
+                <i class="fa-solid fa-user-slash"></i>
+                <p>Todavía no tienes amigos agregados en tu cuenta.<br>
+                   Puedes enviarle el juego a cualquier persona usando su correo.</p>
+                <button type="button" class="btn-secundario" id="btn-ir-correo">
+                    <i class="fa-solid fa-envelope"></i> ENVIARLO POR CORREO
+                </button>
+            </div>
+        `;
+
+        document.getElementById("btn-ir-correo").addEventListener("click", function () {
+            cambiarOpcion("correo");
+        });
+
+        return;
+    }
+
+    amigos.forEach(function (amigo) {
         const tarjeta = document.createElement("div");
-        tarjeta.className = "game-card"; // Utiliza tu clase exacta de CSS
+        tarjeta.className = "amigo";
 
-        // Estructura interna exacta compatible con tus clases .game-info, .badge, .actions, etc.
+        // La inicial del nombre se usa como avatar
+        const inicial = amigo.nombre.charAt(0).toUpperCase();
+
         tarjeta.innerHTML = `
-            <img src="${juego.image}" alt="${juego.title}">
-            <div class="game-info">
-                <div class="game-top">
-                    <span class="badge">${juego.category}</span>
-                    <span style="color: #4ade80; font-weight: bold; font-size: 0.85rem;">S/ ${juego.price.toFixed(2)}</span>
-                </div>
-                <h3>${juego.title}</h3>
-                <p>${juego.description}</p>
-                <div class="actions">
-                    <button class="btn-secondary" onclick="verDetalle(${juego.id})">Detalles</button>
-                    <button class="btn-buy" onclick="agregarAlCarrito(${juego.id})">Comprar</button>
-                </div>
+            <div class="amigo-inicial">${inicial}</div>
+            <div class="amigo-datos">
+                <h4>${amigo.nombre}</h4>
+                <span>${amigo.correo}</span>
             </div>
+            <i class="fa-solid fa-circle-check check"></i>
         `;
 
-        rail.appendChild(tarjeta);
-    });
+        // Al hacer clic se marca ese amigo y se desmarcan los demás
+        tarjeta.addEventListener("click", function () {
+            const todos = document.querySelectorAll(".amigo");
 
-    rowContainer.appendChild(rail);
-    catalogRows.appendChild(rowContainer);
-}
+            todos.forEach(function (uno) {
+                uno.classList.remove("seleccionado");
+            });
 
-/* ==========================================
-   GESTIÓN DEL CARRITO Y SEGURIDAD DE SESIÓN
-   ========================================== */
-function agregarAlCarrito(id) {
-    // 🔒 Validación estricta: Si el usuario no ha iniciado sesión, se le bloquea y redirige al login
-    const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
-    if (!usuarioSesion) {
-        alert('Acceso restringido: Debes iniciar sesión para poder comprar o agregar juegos al carrito.');
-        window.location.href = 'login.html';
-        return;
-    }
+            tarjeta.classList.add("seleccionado");
+            amigoElegido = amigo;
+            ocultarMensaje("mensaje-modal");
+        });
 
-    const juego = juegos.find(j => j.id === id);
-    if (!juego) {
-        console.error("Juego no encontrado en el catálogo");
-        return;
-    }
-
-    let carrito = JSON.parse(localStorage.getItem("nexus_carrito")) || [];
-
-    // Verificar si el juego ya está agregado previamente
-    if (carrito.some(item => item.id === juego.id)) {
-        alert('Este juego ya se encuentra registrado en tu carrito.');
-        window.location.href = "carrito.html";
-        return;
-    }
-
-    carrito.push({
-        id: juego.id,
-        titulo: juego.title,
-        precio: juego.price,
-        imagen: juego.image,
-        regalo: false,
-        destinatario: "",
-        correoDestino: ""
-    });
-
-    localStorage.setItem("nexus_carrito", JSON.stringify(carrito));
-    actualizarContadorCarrito();
-
-    alert(¡${juego.title} se añadió correctamente al carrito!);
-    window.location.href = "carrito.html";
-}
-
-function actualizarContadorCarrito() {
-    const carrito = JSON.parse(localStorage.getItem("nexus_carrito")) || [];
-    const contador = document.getElementById("cart-count");
-
-    if (contador) {
-        contador.textContent = carrito.length;
-    }
-}
-
-/* ==========================================
-   INTERACCIÓN DE DETALLES Y BUSCADOR
-   ========================================== */
-function verDetalle(id) {
-    const juego = juegos.find(j => j.id === id);
-    if (!juego) return;
-
-    alert(
-        📌 ${juego.title}\n\n +
-        • Categoría: ${juego.category}\n +
-        • Precio Oficial: S/ ${juego.price.toFixed(2)}\n\n +
-        Descripción: ${juego.description}
-    );
-}
-
-// Búsqueda en tiempo real conectada al input del catálogo
-if (buscador) {
-    buscador.addEventListener("input", function () {
-        const texto = this.value.toLowerCase().trim();
-
-        const resultados = juegos.filter(juego =>
-            juego.title.toLowerCase().includes(texto) ||
-            juego.category.toLowerCase().includes(texto) ||
-            juego.description.toLowerCase().includes(texto)
-        );
-
-        mostrarCatalogo(resultados);
+        contenedor.appendChild(tarjeta);
     });
 }
 
-// Botón global del carrito en la barra de navegación superior
-if (botonCarritoCatalogo) {
-    botonCarritoCatalogo.addEventListener("click", function () {
-        window.location.href = "carrito.html";
+// Guarda el regalo con los datos elegidos en el modal
+function confirmarRegalo() {
+    let destinatario = "";
+    let correoDestino = "";
+
+    if (opcionRegalo === "amigos") {
+        if (amigoElegido === null) {
+            mostrarMensaje("Elige a un amigo de la lista o envíaselo por correo.", "error", "mensaje-modal");
+            return;
+        }
+
+        destinatario = amigoElegido.nombre;
+        correoDestino = amigoElegido.correo;
+
+    } else {
+        destinatario = document.getElementById("regalo-nombre").value.trim();
+        correoDestino = document.getElementById("regalo-correo").value.trim();
+
+        if (destinatario.length < 3) {
+            mostrarMensaje("Escribe el nombre de la persona (mínimo 3 letras).", "error", "mensaje-modal");
+            return;
+        }
+
+        if (esCorreoValido(correoDestino) === false) {
+            mostrarMensaje("El correo no es válido. Ejemplo: luis@gmail.com", "error", "mensaje-modal");
+            return;
+        }
+    }
+
+    // Se guardan los datos del regalo en el juego
+    const carrito = leerCarrito();
+
+    carrito.forEach(function (item) {
+        if (item.id === idJuegoEnModal) {
+            item.regalo = true;
+            item.destinatario = destinatario;
+            item.correoDestino = correoDestino;
+        }
     });
+
+    guardarCarrito(carrito);
+    cerrarModal();
+    mostrarMensaje("El juego se enviará como regalo a " + destinatario + ".", "ok", "mensaje");
+    dibujarCarrito();
 }
 
-/* ==========================================
-   INICIALIZACIÓN DE LA VISTA
-   ========================================== */
-document.addEventListener('DOMContentLoaded', () => {
-    mostrarCatalogo();
-    actualizarContadorCarrito();
+// Quita el regalo y el juego vuelve a ser para la cuenta del usuario
+function quitarRegalo() {
+    const carrito = leerCarrito();
+    let titulo = "";
+
+    carrito.forEach(function (item) {
+        if (item.id === idJuegoEnModal) {
+            item.regalo = false;
+            item.destinatario = "";
+            item.correoDestino = "";
+            titulo = item.titulo;
+        }
+    });
+
+    guardarCarrito(carrito);
+    cerrarModal();
+    mostrarMensaje(titulo + " ya no se enviará como regalo.", "error", "mensaje");
+    dibujarCarrito();
+}
+
+/* ------------------------------------------
+   6. DIBUJAR LA PÁGINA
+   ------------------------------------------ */
+
+// Dibuja los juegos del carrito y actualiza el resumen
+function dibujarCarrito() {
+    const contenedor = document.getElementById("lista-carrito");
+    const carrito = leerCarrito();
+
+    contenedor.innerHTML = "";
+
+    if (carrito.length === 0) {
+        contenedor.innerHTML = `
+            <div class="carrito-vacio">
+                <i class="fa-solid fa-cart-flatbed"></i>
+                <p>Tu carrito está vacío. Ve al catálogo para agregar juegos.</p>
+                <a href="catalogo.html" class="btn-primario">
+                    <i class="fa-solid fa-gamepad"></i> IR AL CATÁLOGO
+                </a>
+            </div>
+        `;
+    } else {
+        carrito.forEach(function (item) {
+            const fila = document.createElement("div");
+            fila.className = "item-carrito";
+
+            // Lo que se muestra cambia según si el juego es un regalo o no
+            let claseBotonRegalo = "btn-regalo";
+            let claseDatosRegalo = "datos-regalo";
+            let textoEstado = "Licencia digital para tu cuenta";
+            let datosRegalo = "";
+
+            if (item.regalo === true) {
+                claseBotonRegalo = "btn-regalo activo";
+                claseDatosRegalo = "datos-regalo visible";
+                textoEstado = '<span class="etiqueta-regalo"><i class="fa-solid fa-gift"></i> REGALO</span>';
+                datosRegalo = `
+                    <i class="fa-solid fa-paper-plane"></i>
+                    Para <strong>${item.destinatario}</strong> &middot; ${item.correoDestino}
+                    <button class="btn-cambiar">CAMBIAR</button>
+                `;
+            }
+
+            fila.innerHTML = `
+                <div class="item-fila">
+                    <img src="${item.imagen}" alt="${item.titulo}">
+                    <div class="item-info">
+                        <h4>${item.titulo}</h4>
+                        <span>${textoEstado}</span>
+                    </div>
+                    <div class="item-precio">${darFormatoSoles(item.precio)}</div>
+                    <button class="${claseBotonRegalo}" title="Enviar como regalo">
+                        <i class="fa-solid fa-gift"></i>
+                    </button>
+                    <button class="btn-eliminar" title="Eliminar del carrito">
+                        <i class="fa-solid fa-trash"></i>
+                    </button>
+                </div>
+
+                <div class="${claseDatosRegalo}">${datosRegalo}</div>
+            `;
+
+            // El botón de regalo abre el modal
+            fila.querySelector(".btn-regalo").addEventListener("click", function () {
+                abrirModal(item.id);
+            });
+
+            // El botón eliminar quita el juego
+            fila.querySelector(".btn-eliminar").addEventListener("click", function () {
+                eliminarJuego(item.id);
+            });
+
+            // El botón cambiar solo existe cuando el juego ya es un regalo
+            if (item.regalo === true) {
+                fila.querySelector(".btn-cambiar").addEventListener("click", function () {
+                    abrirModal(item.id);
+                });
+            }
+
+            contenedor.appendChild(fila);
+        });
+    }
+
+    actualizarResumen(carrito);
+}
+
+// Actualiza los precios del resumen y el contador del navbar
+function actualizarResumen(carrito) {
+    const total = calcularTotal(carrito);
+
+    document.getElementById("res-cantidad").textContent = carrito.length;
+    document.getElementById("res-regalos").textContent = contarRegalos(carrito);
+    document.getElementById("res-total").textContent = darFormatoSoles(total);
+    document.getElementById("contador-carrito").textContent = carrito.length;
+}
+
+/* ------------------------------------------
+   7. INICIO DE LA PÁGINA
+   ------------------------------------------ */
+document.addEventListener("DOMContentLoaded", function () {
+    dibujarCarrito();
+
+    // Botones del resumen
+    document.getElementById("btn-vaciar").addEventListener("click", abrirModalVaciar);
+    document.getElementById("btn-comprar").addEventListener("click", continuarCompra);
+
+    // Botones del modal de vaciar el carrito
+    document.getElementById("btn-si-vaciar").addEventListener("click", vaciarCarrito);
+    document.getElementById("btn-no-vaciar").addEventListener("click", cerrarModalVaciar);
+    document.getElementById("btn-cerrar-vaciar").addEventListener("click", cerrarModalVaciar);
+
+    document.getElementById("modal-vaciar").addEventListener("click", function (evento) {
+        if (evento.target.id === "modal-vaciar") {
+            cerrarModalVaciar();
+        }
+    });
+
+    // Botones del modal
+    document.getElementById("btn-cerrar-modal").addEventListener("click", cerrarModal);
+    document.getElementById("btn-confirmar-regalo").addEventListener("click", confirmarRegalo);
+    document.getElementById("btn-quitar-regalo").addEventListener("click", quitarRegalo);
+
+    document.getElementById("opcion-amigos").addEventListener("click", function () {
+        cambiarOpcion("amigos");
+    });
+
+    document.getElementById("opcion-correo").addEventListener("click", function () {
+        cambiarOpcion("correo");
+    });
+
+    // Cerrar el modal al hacer clic fuera de la ventana
+    document.getElementById("modal-regalo").addEventListener("click", function (evento) {
+        if (evento.target.id === "modal-regalo") {
+            cerrarModal();
+        }
+    });
 });
