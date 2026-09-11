@@ -203,7 +203,7 @@ function activarBotonCarrito() {
     if (!btnCarrito) return;
 
     btnCarrito.addEventListener('click', () => {
-        // 🔒 Validación también en el botón principal del carrito de la barra de navegación
+        // 🔒 Validación en el botón principal del carrito
         const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
         if (!usuarioSesion) {
             alert('Acceso restringido: Debes iniciar sesión para ver tu carrito.');
@@ -236,7 +236,7 @@ function actualizarContadorCarrito() {
 function agregarAlCarritoDesdeInicio(juego) {
     if (!juego) return;
 
-    // 🔒 BLOQUEO OBLIGATORIO: Validar si hay una sesión activa antes de permitir la compra desde el inicio
+    // 🔒 BLOQUEO OBLIGATORIO: Validar sesión activa
     const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
     if (!usuarioSesion) {
         alert('Acceso restringido: Debes iniciar sesión para poder comprar o agregar juegos al carrito.');
@@ -256,7 +256,7 @@ function agregarAlCarritoDesdeInicio(juego) {
         id: juego.id,
         titulo: juego.title,
         precio: juego.precioNumero,
-        imagen: juego.thumbImg, // Mantener ruta limpia
+        imagen: juego.thumbImg,
         regalo: false,
         destinatario: '',
         correoDestino: ''
