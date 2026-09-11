@@ -268,7 +268,7 @@ function agregarAlCarritoDesdeInicio(juego) {
         id: juego.id,
         titulo: juego.title,
         precio: juego.precioNumero,
-        imagen: juego.thumbImg,
+        imagen: '../../' + juego.thumbImg,
         regalo: false,
         destinatario: '',
         correoDestino: ''
