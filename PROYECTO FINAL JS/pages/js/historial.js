@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Renderizar datos en la tabla del DOM 
     historialBody.innerHTML = manager.renderizarFilas();
 
-    // Verificación en consola de los métodos avanzados solicitados en el laboratorio
+    // Verificación en consola de los métodos avanzados 
     console.log("Monto Total Gastado (reduce):", manager.calcularTotalGastado());
     console.log("Métodos de pago únicos (Set):", manager.obtenerMetodosUnicos());
 });
