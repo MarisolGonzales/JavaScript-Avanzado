@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const historialBody = document.getElementById('historial-body');
     if (!historialBody) return;
 
-    // Recuperación de transacciones desde LocalStorage - Semana 2
+    // Recuperación de transacciones desde LocalStorage 
     const transaccionesCrudas = JSON.parse(localStorage.getItem('nexus_historial_compras')) || [
         { orden: "#NX-8921", fecha: "12/08/2026", juego: "The Witcher 3", metodo: "VISA", monto: "PEN 29.75", estado: "Completado" },
         { orden: "#NX-5542", fecha: "02/07/2026", juego: "GTA V", metodo: "PayPal", monto: "PEN 60.00", estado: "Completado" }
