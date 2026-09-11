@@ -1,5 +1,7 @@
 /* ==========================================
-   ARREGLO DE JUEGOS DESTACADOS
+   DATOS Y CONFIGURACIÓN INICIAL
+   Este arreglo contiene los objetos con la información de los juegos 
+   destacados que se mostrarán dinámicamente en el carrusel de inicio.
    ========================================== */
 const featuredGames = [
     {
@@ -71,6 +73,7 @@ let autoSlideInterval;
    1. LÓGICA DEL CARRUSEL DINÁMICO
    ========================================== */
 
+// Esta función sirve para renderizar dinámicamente la lista lateral de miniaturas del carrusel en el HTML
 function renderCarouselList() {
     const listContainer = document.getElementById('carousel-list');
     if (!listContainer) return;
@@ -90,6 +93,7 @@ function renderCarouselList() {
     });
 }
 
+// Esta función sirve para cambiar la información e imagen principal del banner cuando el usuario selecciona un juego
 function selectGame(index) {
     currentIndex = index;
     const game = featuredGames[index];
@@ -125,6 +129,7 @@ function selectGame(index) {
     resetAutoSlide();
 }
 
+// Esta función sirve para activar el cambio automático de juegos en el carrusel cada 5 segundos
 function startAutoSlide() {
     autoSlideInterval = setInterval(() => {
         currentIndex = (currentIndex + 1) % featuredGames.length;
@@ -132,6 +137,7 @@ function startAutoSlide() {
     }, 5000);
 }
 
+// Esta función sirve para reiniciar el temporizador del carrusel cuando el usuario interactúa manualmente
 function resetAutoSlide() {
     clearInterval(autoSlideInterval);
     startAutoSlide();
@@ -141,6 +147,7 @@ function resetAutoSlide() {
    2. GESTIÓN DE SESIÓN DE USUARIO Y NAVBAR
    ========================================== */
 
+// Esta función sirve para actualizar la barra de navegación dependiendo de si el usuario ha iniciado sesión o no
 function actualizarNavbarSesion() {
     const userNav = document.getElementById('user-nav');
     if (!userNav) return;
@@ -187,6 +194,7 @@ function actualizarNavbarSesion() {
     }
 }
 
+// Este evento sirve para cerrar el menú desplegable del perfil si el usuario hace clic fuera de él
 document.addEventListener('click', (e) => {
     const dropdown = document.getElementById('dropdown-menu');
     const btnToggle = document.getElementById('btn-user-toggle');
@@ -198,12 +206,12 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// Esta función sirve para validar la sesión antes de dar acceso al carrito de compras desde el botón principal de la barra de navegación
 function activarBotonCarrito() {
     const btnCarrito = document.querySelector('.btn-carrito');
     if (!btnCarrito) return;
 
     btnCarrito.addEventListener('click', () => {
-        // 🔒 Validación en el botón principal del carrito
         const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
         if (!usuarioSesion) {
             alert('Acceso restringido: Debes iniciar sesión para ver tu carrito.');
@@ -214,8 +222,11 @@ function activarBotonCarrito() {
     });
 }
 
-// FUNCIONES DEL CARRITO
+/* ==========================================
+   3. GESTIÓN DEL CARRITO DE COMPRAS
+   ========================================== */
 
+// Esta función sirve para leer y parsear los datos de los juegos almacenados dentro del LocalStorage del carrito
 function leerCarritoGuardado() {
     try {
         const datos = localStorage.getItem('nexus_carrito');
@@ -226,6 +237,7 @@ function leerCarritoGuardado() {
     return [];
 }
 
+// Esta función sirve para actualizar la cantidad numérica reflejada en la insignia o badge del carrito
 function actualizarContadorCarrito() {
     const badge = document.querySelector('.btn-carrito .badge');
     if (!badge) return;
@@ -233,10 +245,10 @@ function actualizarContadorCarrito() {
     badge.textContent = leerCarritoGuardado().length;
 }
 
+// Esta función sirve para agregar juegos al carrito comprobando primero si hay sesión activa y evitando duplicados
 function agregarAlCarritoDesdeInicio(juego) {
     if (!juego) return;
 
-    // 🔒 BLOQUEO OBLIGATORIO: Validar sesión activa
     const usuarioSesion = localStorage.getItem('nexus_usuario_activo');
     if (!usuarioSesion) {
         alert('Acceso restringido: Debes iniciar sesión para poder comprar o agregar juegos al carrito.');
@@ -270,17 +282,17 @@ function agregarAlCarritoDesdeInicio(juego) {
 }
 
 /* ==========================================
-   3. DELEGACIÓN DE EVENTOS (BURBUJA) PARA DETALLES
+   4. DELEGACIÓN DE EVENTOS PARA NAVEGACIÓN Y COMPRAS
    ========================================== */
+
+// Este evento global sirve para interceptar los clics en la interfaz (delegación de eventos), manejando compras y redirecciones a detalles del juego
 document.addEventListener('click', (e) => {
 
-    // Botón "Añadir al carrito" del banner principal
     if (e.target.closest('.btn-banner-compra')) {
         agregarAlCarritoDesdeInicio(featuredGames[currentIndex]);
         return;
     }
 
-    // Botón del carrito de las tarjetas de "Imperdibles y Ofertas"
     const botonCompra = e.target.closest('.buy-cart');
     if (botonCompra) {
         const tarjeta = botonCompra.closest('.card');
@@ -311,8 +323,10 @@ document.addEventListener('click', (e) => {
 });
 
 /* ==========================================
-   4. LÓGICA DE BÚSQUEDA DESDE EL INICIO
+   5. INICIALIZACIÓN DE LA PÁGINA
    ========================================== */
+
+// Este evento escucha la carga del DOM para ejecutar el buscador, iniciar el carrusel y verificar la sesión
 document.addEventListener('DOMContentLoaded', () => {
     const inputBuscador = document.querySelector('.buscador input');
     const btnBuscador = document.querySelector('.buscador button');
