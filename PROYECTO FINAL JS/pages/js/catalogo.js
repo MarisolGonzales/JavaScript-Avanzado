@@ -1,237 +1,222 @@
+// ===============================
+// CATÁLOGO DE JUEGOS
+// ===============================
+
 const juegos = [
-  {
-    id: 'witcher3',
-    title: 'The Witcher 3: Wild Hunt',
-    price: 29.75,
-    category: 'RPG',
-    image: '../../JUEGOS/witcher3.jpg',
-    description: 'Una aventura épica con decisiones impactantes y un mundo abierto inmersivo.'
-  },
-  {
-    id: 'gtav',
-    title: 'Grand Theft Auto V',
-    price: 60.0,
-    category: 'Acción',
-    image: '../../JUEGOS/gtav.png',
-    description: 'Mundo abierto, crimen, carreras y cooperación con amigos, todo en Los Santos.'
-  },
-  {
-    id: 'minecraft',
-    title: 'Minecraft Ultra Edition',
-    price: 89.0,
-    category: 'Supervivencia',
-    image: '../../JUEGOS/minecraft.jpg',
-    description: 'Construye, explora y crea sin límites en un universo infinito.'
-  },
-  {
-    id: 'dota2',
-    title: 'Dota 2',
-    price: 0,
-    category: 'MOBA',
-    image: '../../JUEGOS/Dota_2.jpg',
-    description: 'Combates estratégicos por equipos con habilidad, coordinación y evolución constante.'
-  },
-  {
-    id: 'left4dead2',
-    title: 'Left 4 Dead 2',
-    price: 15.0,
-    category: 'Cooperativo',
-    image: '../../JUEGOS/Left_4_Dead_2.jpg',
-    description: 'Supervivencia intensa contra hordas con amigos en escenarios apocalípticos.'
-  }
+    {
+        id: 1,
+        title: "The Witcher 3",
+        price: 59.90,
+        category: "RPG",
+        image: "../../JUEGOS/witcher3.jpg",
+        description: "Una aventura épica de mundo abierto."
+    },
+    {
+        id: 2,
+        title: "GTA V",
+        price: 79.90,
+        category: "Acción",
+        image: "../../JUEGOS/gtav.png",
+        description: "Explora Los Santos y vive una gran aventura."
+    },
+    {
+        id: 3,
+        title: "Minecraft",
+        price: 69.90,
+        category: "Aventura",
+        image: "../../JUEGOS/minecraft.jpg",
+        description: "Construye, explora y sobrevive en un mundo infinito."
+    },
+    {
+        id: 4,
+        title: "Dota 2",
+        price: 49.90,
+        category: "Estrategia",
+        image: "../../JUEGOS/Dota_2.jpg",
+        description: "Juego competitivo de estrategia y acción."
+    },
+    {
+        id: 5,
+        title: "Left 4 Dead 2",
+        price: 39.90,
+        category: "Acción",
+        image: "../../JUEGOS/Left_4_Dead_2.jpg",
+        description: "Sobrevive junto a tus amigos contra hordas de infectados."
+    }
 ];
 
-const grid = document.getElementById('catalog-grid');
-const buscador = document.getElementById('buscador');
-const filtros = document.getElementById('category-filters');
-const carritoKey = 'nexus_carrito';
+// ===============================
+// MOSTRAR CATÁLOGO
+// ===============================
 
-let categoriaActiva = 'Todos';
+const catalogGrid = document.getElementById("catalog-grid");
 
-function leerCarrito() {
-  try {
-    return JSON.parse(localStorage.getItem(carritoKey)) || [];
-  } catch {
-    return [];
-  }
-}
+function mostrarCatalogo(lista = juegos) {
 
-function guardarCarrito(carrito) {
-  localStorage.setItem(carritoKey, JSON.stringify(carrito));
-}
+    if (!catalogGrid) return;
 
-function actualizarContadorCarrito() {
-  const contador = document.getElementById('contador-carrito');
+    catalogGrid.innerHTML = "";
 
-  if (contador) {
-    contador.textContent = leerCarrito().length;
-  }
-}
+    lista.forEach(juego => {
 
-function filtrarJuegos() {
-  const texto = buscador ? buscador.value.toLowerCase().trim() : '';
+        const tarjeta = document.createElement("div");
 
-  return juegos.filter(juego =>
-    (categoriaActiva === 'Todos' || juego.category === categoriaActiva) &&
-    (
-      juego.title.toLowerCase().includes(texto) ||
-      juego.category.toLowerCase().includes(texto) ||
-      juego.description.toLowerCase().includes(texto)
-    )
-  );
-}
+        tarjeta.className = "game-card";
 
-function renderFiltros() {
-  if (!filtros) return;
+        tarjeta.innerHTML = `
+            <img src="${juego.image}" alt="${juego.title}">
 
-  const categorias = ['Todos', ...new Set(juegos.map(juego => juego.category))];
+            <div class="game-info">
+                <h3>${juego.title}</h3>
 
-  filtros.innerHTML = categorias.map(categoria => `
-    <button
-      class="filter-chip ${categoria === categoriaActiva ? 'active' : ''}"
-      type="button"
-      data-category="${categoria}"
-    >
-      ${categoria}
-    </button>
-  `).join('');
+                <p>${juego.description}</p>
 
-  filtros.querySelectorAll('.filter-chip').forEach(boton => {
-    boton.addEventListener('click', () => {
-      categoriaActiva = boton.dataset.category;
-      renderFiltros();
-      renderCatalogo();
+                <span class="category">
+                    ${juego.category}
+                </span>
+
+                <h4>
+                    S/ ${juego.price.toFixed(2)}
+                </h4>
+
+                <div class="game-buttons">
+
+                    <button
+                        class="btn-detalle"
+                        onclick="verDetalle(${juego.id})">
+                        Ver detalles
+                    </button>
+
+                    <button
+                        class="btn-carrito"
+                        onclick="agregarAlCarrito(${juego.id})">
+                        Añadir al carrito
+                    </button>
+
+                </div>
+            </div>
+        `;
+
+        catalogGrid.appendChild(tarjeta);
     });
-  });
 }
 
-function tarjetaJuego(juego) {
-  const precio = juego.price === 0 ? 'Gratis' : `S/ ${juego.price.toFixed(2)}`;
+// ===============================
+// AGREGAR AL CARRITO
+// ===============================
 
-  return `
-    <article class="game-card" data-id="${juego.id}" tabindex="0">
-      <img src="${juego.image}" alt="Portada de ${juego.title}">
+function agregarAlCarrito(id) {
 
-      <div class="game-info">
-        <div class="game-top">
-          <span class="badge">${juego.category}</span>
-          <strong>${precio}</strong>
-        </div>
+    const juego = juegos.find(j => j.id === id);
 
-        <h3>${juego.title}</h3>
-        <p>${juego.description}</p>
-
-        <div class="actions">
-          <button class="btn-buy" data-id="${juego.id}">Añadir</button>
-          <a href="detalle.html?id=${juego.id}" class="btn-secondary">Detalle</a>
-        </div>
-      </div>
-    </article>
-  `;
-}
-
-function agregarEventosTarjetas() {
-  document.querySelectorAll('.btn-buy').forEach(button => {
-    button.addEventListener('click', event => {
-      event.stopPropagation();
-
-      const juego = juegos.find(item => item.id === button.dataset.id);
-      const carrito = leerCarrito();
-      const yaExiste = carrito.some(item => item.id === juego.id);
-
-      if (yaExiste) {
-        alert('Este juego ya está en tu carrito.');
+    if (!juego) {
+        console.error("Juego no encontrado");
         return;
-      }
+    }
 
-      carrito.push({
+    let carrito =
+        JSON.parse(localStorage.getItem("nexus_carrito")) || [];
+
+    carrito.push({
         id: juego.id,
         titulo: juego.title,
         precio: juego.price,
         imagen: juego.image,
         regalo: false,
-        destinatario: '',
-        correoDestino: ''
-      });
-
-      guardarCarrito(carrito);
-      actualizarContadorCarrito();
-      alert(`${juego.title} agregado al carrito.`);
-    });
-  });
-
-  document.querySelectorAll('.game-card').forEach(card => {
-    card.addEventListener('click', event => {
-      if (event.target.closest('.btn-buy') || event.target.closest('a')) return;
-
-      window.location.href = `detalle.html?id=${card.dataset.id}`;
+        destinatario: "",
+        correoDestino: ""
     });
 
-    card.addEventListener('keydown', event => {
-      if (event.key === 'Enter') {
-        window.location.href = `detalle.html?id=${card.dataset.id}`;
-      }
-    });
-  });
+    // Guardar carrito
+    localStorage.setItem(
+        "nexus_carrito",
+        JSON.stringify(carrito)
+    );
+
+    // Actualizar contador
+    actualizarContadorCarrito();
+
+    // Ir automáticamente al carrito
+    window.location.href = "carrito.html";
 }
 
-function renderCatalogo() {
-  if (!grid) return;
+// ===============================
+// CONTADOR DEL CARRITO
+// ===============================
 
-  const lista = filtrarJuegos();
+function actualizarContadorCarrito() {
 
-  if (!lista.length) {
-    grid.innerHTML = '<div class="empty-state">No se encontraron resultados.</div>';
-    return;
-  }
+    const carrito =
+        JSON.parse(localStorage.getItem("nexus_carrito")) || [];
 
-  const hayBusqueda = buscador && buscador.value.trim();
-  const hayFiltro = categoriaActiva !== 'Todos';
+    const contador =
+        document.getElementById("cart-count");
 
-  const grupos = hayBusqueda || hayFiltro
-    ? [['Resultados', lista]]
-    : [
-        ['Recomendados para ti', lista],
-        ['Gratis para jugar', lista.filter(juego => juego.price === 0)],
-        [
-          'Para jugar con amigos',
-          lista.filter(juego => ['MOBA', 'Cooperativo'].includes(juego.category))
-        ]
-      ];
-
-  grid.innerHTML = grupos
-    .filter(([, juegosGrupo]) => juegosGrupo.length)
-    .map(([titulo, juegosGrupo]) => `
-      <section class="catalog-row">
-        <h2 class="catalog-row-title">${titulo}</h2>
-        <div class="games-rail">
-          ${juegosGrupo.map(tarjetaJuego).join('')}
-        </div>
-      </section>
-    `)
-    .join('');
-
-  agregarEventosTarjetas();
+    if (contador) {
+        contador.textContent = carrito.length;
+    }
 }
 
-function revisarParametroBusqueda() {
-  const params = new URLSearchParams(window.location.search);
-  const busquedaParam = params.get('busqueda');
+// ===============================
+// VER DETALLES
+// ===============================
 
-  if (busquedaParam && buscador) {
-    buscador.value = busquedaParam;
-  }
+function verDetalle(id) {
+
+    const juego = juegos.find(j => j.id === id);
+
+    if (!juego) return;
+
+    alert(
+        `${juego.title}\n\n` +
+        `Categoría: ${juego.category}\n` +
+        `Precio: S/ ${juego.price.toFixed(2)}\n\n` +
+        `${juego.description}`
+    );
 }
+
+// ===============================
+// BUSCADOR
+// ===============================
+
+const buscador =
+    document.getElementById("search-input");
 
 if (buscador) {
-  buscador.addEventListener('input', renderCatalogo);
+
+    buscador.addEventListener("input", function () {
+
+        const texto =
+            this.value.toLowerCase().trim();
+
+        const resultados = juegos.filter(juego =>
+            juego.title.toLowerCase().includes(texto) ||
+            juego.category.toLowerCase().includes(texto)
+        );
+
+        mostrarCatalogo(resultados);
+    });
 }
 
-document.getElementById('btn-carrito-catalogo')?.addEventListener('click', () => {
-  window.location.href = 'carrito.html';
-});
+// ===============================
+// BOTÓN DEL CARRITO
+// ===============================
 
-revisarParametroBusqueda();
-renderFiltros();
-renderCatalogo();
+const botonCarrito =
+    document.getElementById("btn-carrito-catalogo");
+
+if (botonCarrito) {
+
+    botonCarrito.addEventListener("click", function () {
+
+        window.location.href = "carrito.html";
+
+    });
+}
+
+// ===============================
+// INICIAR
+// ===============================
+
+mostrarCatalogo();
 actualizarContadorCarrito();
