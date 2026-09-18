@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS GAMING - Inicio</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/img/nexus-icon.png" alt="NEXUS Gaming" class="logo-icon">
+            <h1>NEXUS <span>GAMING</span></h1>
+        </div>
+        <div class="nav-derecha">
+            <ul class="menu">
+                <li><a href="index.html" class="active"><i class="fa-solid fa-house"></i> Inicio</a></li>
+                <li><a href="views/catalogo.html"><i class="fa-solid fa-gamepad"></i> Catálogo</a></li>
+                <li><a href="views/biblioteca.html"><i class="fa-solid fa-bookmark"></i> Mi Biblioteca</a></li>
+                <li><a href="views/historial.html"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+                <li><a href="views/perfil.html"><i class="fa-solid fa-user"></i> Perfil</a></li>
+            </ul>
+            <a href="views/carrito.html" class="btn-carrito">
+                <i class="fa-solid fa-cart-shopping"></i> Carrito
+                <span class="badge" id="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- HERO: carrusel de key art a pantalla completa, estilo tienda editorial -->
+    <section class="hero" id="home-hero">
+        <div class="hero-slide active" data-title="The Witcher 3: Wild Hunt"
+             data-desc="Una aventura de mundo abierto llena de monstruos, magia y decisiones que cambian la historia."
+             data-price="S/ 59.90">
+            <img src="assets/img/witcher3-banner.jpg" alt="The Witcher 3: Wild Hunt">
+        </div>
+        <div class="hero-slide" data-title="Grand Theft Auto V"
+             data-desc="Explora el vasto mundo abierto de Los Santos y Blaine County en una experiencia inolvidable."
+             data-price="S/ 79.90">
+            <img src="assets/img/gtav-cover.png" alt="Grand Theft Auto V">
+        </div>
+        <div class="hero-slide" data-title="Minecraft Ultra Edition"
+             data-desc="Construye, sobrevive y da rienda suelta a tu imaginación en universos infinitos."
+             data-price="S/ 69.90">
+            <img src="assets/img/minecraft-cover.jpg" alt="Minecraft Ultra Edition">
+        </div>
+
+        <div class="hero-scrim"></div>
+
+        <div class="hero-content">
+            <span class="eyebrow">Juego destacado</span>
+            <h1 id="hero-title">The Witcher 3: Wild Hunt</h1>
+            <p class="hero-copy" id="hero-desc">Una aventura de mundo abierto llena de monstruos, magia y decisiones que cambian la historia.</p>
+            <div class="hero-meta">
+                <span class="hero-price" id="hero-price">S/ 59.90</span>
+            </div>
+            <div class="hero-actions">
+                <a href="views/catalogo.html" class="btn-primary">
+                    <i class="fa-solid fa-gamepad"></i> Ir al Catálogo
+                </a>
+                <a href="views/biblioteca.html" class="btn-secondary">
+                    <i class="fa-solid fa-bookmark"></i> Mi Biblioteca
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-dots" id="hero-dots">
+            <button class="hero-dot active" data-index="0" aria-label="Diapositiva 1"></button>
+            <button class="hero-dot" data-index="1" aria-label="Diapositiva 2"></button>
+            <button class="hero-dot" data-index="2" aria-label="Diapositiva 3"></button>
+        </div>
+    </section>
+
+    <main class="container">
+        <section class="section home-features">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-bolt"></i></div>
+                <h3>Catálogo dinámico</h3>
+                <p>Encuentra tus juegos favoritos filtrados por categorías y con búsqueda en tiempo real.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                <h3>Biblioteca personal</h3>
+                <p>Todos los juegos que adquieras se sincronizan directamente en tu espacio personal.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                <h3>Historial y actividad</h3>
+                <p>Lleva un registro detallado de tus movimientos y transacciones dentro de la plataforma.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2026 NEXUS GAMING
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script src="js/home.js"></script>
+</body>
+</html>
