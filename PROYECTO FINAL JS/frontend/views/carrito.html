@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Carrito - NEXUS GAMING</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="../assets/img/nexus-icon.png" alt="NEXUS Gaming" class="logo-icon">
+      <h1>NEXUS <span>GAMING</span></h1>
+    </div>
+    <div class="nav-derecha">
+      <ul class="menu">
+        <li><a href="../index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+        <li><a href="catalogo.html"><i class="fa-solid fa-gamepad"></i> Catálogo</a></li>
+        <li><a href="biblioteca.html"><i class="fa-solid fa-bookmark"></i> Mi Biblioteca</a></li>
+        <li><a href="historial.html"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+        <li><a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a></li>
+      </ul>
+      <a href="carrito.html" class="btn-carrito" id="btn-carrito-catalogo">
+        <i class="fa-solid fa-cart-shopping"></i> Carrito
+        <span class="badge" id="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <h1>Mi carrito</h1>
+    <p>Revisa los juegos que has seleccionado antes de finalizar la compra.</p>
+  </header>
+
+  <main class="page-body">
+    <div class="cart-layout">
+      <div class="cart-items-container" id="lista-carrito">
+        <!-- Items renderizados por carrito.js -->
+      </div>
+
+      <aside class="cart-summary">
+        <h3>Resumen del pedido</h3>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="cart-subtotal">S/ 0.00</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span class="total-amount" id="cart-total">S/ 0.00</span>
+        </div>
+        <button class="btn-checkout" id="btn-finalizar-compra">
+          <i class="fa-solid fa-lock"></i> Finalizar compra
+        </button>
+      </aside>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 NEXUS GAMING — Proyecto académico UTP · JavaScript Avanzado
+  </footer>
+
+  <!-- MODAL DE MÉTODOS DE PAGO -->
+  <div class="modal-overlay" id="modal-pago">
+    <div class="modal-card modal-pago-card">
+      <button class="modal-close" id="pago-close"><i class="fa-solid fa-xmark"></i></button>
+
+      <div id="pago-paso-metodo">
+        <div class="modal-body">
+          <h2>Método de pago</h2>
+          <p class="pago-total-label">Total a pagar: <span id="pago-total" class="total-amount">S/ 0.00</span></p>
+
+          <div class="payment-tabs" id="payment-tabs">
+            <button class="payment-tab active" data-metodo="tarjeta">
+              <i class="fa-solid fa-credit-card"></i> Tarjeta
+            </button>
+            <button class="payment-tab" data-metodo="yape">
+              <span class="payment-tab-badge badge-yape">Y</span> Yape
+            </button>
+            <button class="payment-tab" data-metodo="plin">
+              <span class="payment-tab-badge badge-plin">P</span> Plin
+            </button>
+          </div>
+
+          <!-- Formulario: Tarjeta -->
+          <form class="payment-panel active" id="panel-tarjeta" data-panel="tarjeta">
+            <div class="form-group">
+              <label for="tarjeta-numero">Número de tarjeta</label>
+              <input type="text" id="tarjeta-numero" placeholder="0000 0000 0000 0000" maxlength="19" inputmode="numeric" required>
+            </div>
+            <div class="form-group">
+              <label for="tarjeta-nombre">Nombre del titular</label>
+              <input type="text" id="tarjeta-nombre" placeholder="Como aparece en la tarjeta" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="tarjeta-exp">Vencimiento</label>
+                <input type="text" id="tarjeta-exp" placeholder="MM/AA" maxlength="5" required>
+              </div>
+              <div class="form-group">
+                <label for="tarjeta-cvv">CVV</label>
+                <input type="text" id="tarjeta-cvv" placeholder="123" maxlength="4" inputmode="numeric" required>
+              </div>
+            </div>
+            <button type="submit" class="btn-checkout">
+              <i class="fa-solid fa-lock"></i> Pagar con tarjeta
+            </button>
+          </form>
+
+          <!-- Formulario: Yape -->
+          <form class="payment-panel" id="panel-yape" data-panel="yape">
+            <div class="qr-placeholder">
+              <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <p class="payment-hint">Escanea el código QR desde tu app Yape o ingresa tu número asociado.</p>
+            <div class="form-group">
+              <label for="yape-numero">Número de celular</label>
+              <input type="tel" id="yape-numero" placeholder="9XX XXX XXX" maxlength="9" inputmode="numeric" required>
+            </div>
+            <button type="submit" class="btn-checkout">
+              <i class="fa-solid fa-mobile-screen"></i> Confirmar pago con Yape
+            </button>
+          </form>
+
+          <!-- Formulario: Plin -->
+          <form class="payment-panel" id="panel-plin" data-panel="plin">
+            <div class="qr-placeholder">
+              <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <p class="payment-hint">Escanea el código QR desde tu app Plin o ingresa tu número asociado.</p>
+            <div class="form-group">
+              <label for="plin-numero">Número de celular</label>
+              <input type="tel" id="plin-numero" placeholder="9XX XXX XXX" maxlength="9" inputmode="numeric" required>
+            </div>
+            <button type="submit" class="btn-checkout">
+              <i class="fa-solid fa-mobile-screen"></i> Confirmar pago con Plin
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <!-- Paso de confirmación -->
+      <div id="pago-paso-exito" class="modal-body pago-exito" style="display:none;">
+        <div class="exito-icono"><i class="fa-solid fa-circle-check"></i></div>
+        <h2>¡Pago realizado con éxito!</h2>
+        <p>Tus juegos ya están disponibles en tu biblioteca.</p>
+        <a href="biblioteca.html" class="btn-primary">
+          <i class="fa-solid fa-bookmark"></i> Ir a mi biblioteca
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/carrito.js"></script>
+</body>
+</html>

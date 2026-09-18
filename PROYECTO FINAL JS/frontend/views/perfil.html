@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Perfil - NEXUS GAMING</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="../assets/img/nexus-icon.png" alt="NEXUS Gaming" class="logo-icon">
+      <h1>NEXUS <span>GAMING</span></h1>
+    </div>
+    <div class="nav-derecha">
+      <ul class="menu">
+        <li><a href="../index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+        <li><a href="catalogo.html"><i class="fa-solid fa-gamepad"></i> Catálogo</a></li>
+        <li><a href="biblioteca.html"><i class="fa-solid fa-bookmark"></i> Mi Biblioteca</a></li>
+        <li><a href="historial.html"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+        <li><a href="perfil.html" class="active"><i class="fa-solid fa-user"></i> Perfil</a></li>
+      </ul>
+      <a href="carrito.html" class="btn-carrito" id="btn-carrito-catalogo">
+        <i class="fa-solid fa-cart-shopping"></i> Carrito
+        <span class="badge" id="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <h1>Mi perfil</h1>
+    <p>Gestiona tu información personal y revisa el estado de tu cuenta.</p>
+  </header>
+
+  <main class="page-body">
+    <div class="profile-layout">
+      <aside class="profile-card">
+        <div class="profile-avatar" id="profile-avatar">V</div>
+        <h3 class="profile-name" id="perfil-nombre">Vanessa Tito</h3>
+        <p class="profile-email" id="perfil-email">vanessa@utp.edu.pe</p>
+        <div class="profile-stat">
+          <span>Rango</span>
+          <span>Pro Gamer</span>
+        </div>
+        <div class="profile-stat">
+          <span>Estado de cuenta</span>
+          <span style="color: var(--success);">Activa</span>
+        </div>
+        <div class="profile-stat">
+          <span>Juegos en biblioteca</span>
+          <span id="perfil-total-juegos">0</span>
+        </div>
+      </aside>
+
+      <section class="profile-form">
+        <h3>Editar información</h3>
+        <form id="form-perfil">
+          <div class="form-group">
+            <label for="input-nombre">Nombre completo</label>
+            <input type="text" id="input-nombre" required>
+          </div>
+          <div class="form-group">
+            <label for="input-email">Correo electrónico</label>
+            <input type="email" id="input-email" required>
+          </div>
+          <button type="submit" class="btn-primary">
+            <i class="fa-solid fa-floppy-disk"></i> Guardar cambios
+          </button>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    &copy; 2026 NEXUS GAMING — Proyecto académico UTP · JavaScript Avanzado
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/usuario.js"></script>
+</body>
+</html>

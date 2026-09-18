@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo - NEXUS GAMING</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="logo">
+      <img src="../assets/img/nexus-icon.png" alt="NEXUS Gaming" class="logo-icon">
+      <h1>NEXUS <span>GAMING</span></h1>
+    </div>
+    <div class="nav-derecha">
+      <ul class="menu">
+        <li><a href="../index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
+        <li><a href="catalogo.html" class="active"><i class="fa-solid fa-gamepad"></i> Catálogo</a></li>
+        <li><a href="biblioteca.html"><i class="fa-solid fa-bookmark"></i> Mi Biblioteca</a></li>
+        <li><a href="historial.html"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+        <li><a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a></li>
+      </ul>
+      <a href="carrito.html" class="btn-carrito" id="btn-carrito-catalogo">
+        <i class="fa-solid fa-cart-shopping"></i> Carrito
+        <span class="badge" id="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <h1>Catálogo de juegos</h1>
+    <p>Explora todos los títulos disponibles, filtra por categoría y encuentra tu próxima aventura.</p>
+  </header>
+
+  <main class="page-body">
+    <section class="catalog-tools" aria-label="Buscar y filtrar catálogo">
+      <label class="search-box" for="search-input">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input
+          type="search"
+          id="search-input"
+          placeholder="Buscar títulos, géneros o franquicias..."
+          autocomplete="off"
+        >
+      </label>
+
+      <div class="category-filters" id="category-filters" aria-label="Categorías"></div>
+    </section>
+
+    <section class="catalog-rows" id="catalog-grid" aria-live="polite"></section>
+  </main>
+
+  <!-- MODAL DE DETALLES DEL JUEGO -->
+  <div class="modal-overlay" id="modal-detalle">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close" aria-label="Cerrar">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <img class="modal-img" id="modal-img" src="" alt="">
+      <div class="modal-body">
+        <span class="tag" id="modal-tag"></span>
+        <h2 id="modal-title"></h2>
+        <p class="game-desc" id="modal-desc"></p>
+        <div class="modal-footer">
+          <span class="price" id="modal-price"></span>
+          <button class="btn-buy" id="modal-buy">
+            <i class="fa-solid fa-cart-plus"></i> Comprar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2026 NEXUS GAMING — Proyecto académico UTP · JavaScript Avanzado
+  </footer>
+
+  <script src="../js/nav.js"></script>
+  <script src="../js/catalogo.js"></script>
+</body>
+</html>
