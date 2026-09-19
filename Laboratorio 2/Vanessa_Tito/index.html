@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cotizador Comercial Inteligente</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Cotizador Comercial Inteligente</h1>
+
+        <form id="form-cotizador">
+            <div class="form-group">
+                <label for="base-imponible">Base Imponible (S/):</label>
+                <input type="number" id="base-imponible" step="0.01" min="0" placeholder="Ej. 120.50" required>
+            </div>
+
+            <div class="form-group">
+                <label for="porcentaje-descuento">Descuento Base (%):</label>
+                <input type="number" id="porcentaje-descuento" step="0.1" min="0" max="100" value="0">
+            </div>
+
+            <div class="form-group">
+                <label for="costo-envio">Costo de Envío (S/):</label>
+                <input type="number" id="costo-envio" step="0.01" min="0" value="15.00">
+            </div>
+
+            <fieldset>
+                <legend>Opciones de Venta (Banderas Bitwise)</legend>
+                <label>
+                    <input type="checkbox" id="chk-frecuente" value="1"> Cliente Frecuente (5% desc. extra)
+                </label><br>
+                <label>
+                    <input type="checkbox" id="chk-express" value="2"> Envío Express (+S/ 20.00)
+                </label>
+            </fieldset>
+
+            <button type="submit">Calcular Cotización</button>
+        </form>
+
+        <div id="resultado" class="resultado-card">
+            <h2>Resumen de Cotización</h2>
+            <p><strong>ID Cotización:</strong> <span id="out-id">-</span></p>
+            <p><strong>Subtotal Base:</strong> S/ <span id="out-subtotal">0.00</span></p>
+            <p><strong>Descuento Aplicado:</strong> S/ <span id="out-descuento">0.00</span></p>
+            <p><strong>Costo Envío Final:</strong> S/ <span id="out-envio">0.00</span></p>
+            <p><strong>IGV (18%):</strong> S/ <span id="out-igv">0.00</span></p>
+            <h3>Total a Pagar: S/ <span id="out-total">0.00</span></h3>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>

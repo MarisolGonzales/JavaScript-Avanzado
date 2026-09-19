@@ -1,0 +1,51 @@
+<header class="page-header">
+  <h1>Centro de ayuda y soporte</h1>
+  <p>¿Problemas con tu cuenta, compras o métodos de pago? Escríbenos.</p>
+</header>
+
+<main class="page-body">
+  <div class="support-layout">
+    <section class="profile-form">
+      <h3>Enviar un ticket</h3>
+      <form [formGroup]="formSoporte" (ngSubmit)="enviarTicket()">
+        <div class="form-group">
+          <label>Asunto</label>
+          <input type="text" formControlName="asunto" placeholder="Ej. Problema con un pago">
+          <span class="form-hint" *ngIf="formSoporte.get('asunto')?.touched && formSoporte.get('asunto')?.invalid">El asunto es obligatorio.</span>
+        </div>
+        <div class="form-group">
+          <label>Mensaje</label>
+          <textarea formControlName="mensaje" placeholder="Describe tu problema con el mayor detalle posible..."></textarea>
+          <span class="form-hint" *ngIf="formSoporte.get('mensaje')?.touched && formSoporte.get('mensaje')?.invalid">El mensaje es obligatorio.</span>
+        </div>
+        <button type="submit" class="btn-primary" [disabled]="enviando">
+          <i class="fa-solid fa-paper-plane"></i> {{ enviando ? 'Enviando...' : 'Enviar ticket' }}
+        </button>
+      </form>
+    </section>
+
+    <aside class="support-info">
+      <div class="support-info-card">
+        <i class="fa-solid fa-envelope"></i>
+        <div>
+          <h4>Correo de soporte</h4>
+          <p>soporte&#64;nexusgaming.pe</p>
+        </div>
+      </div>
+      <div class="support-info-card">
+        <i class="fa-solid fa-clock"></i>
+        <div>
+          <h4>Horario de atención</h4>
+          <p>Lunes a sábado, 9:00 a.m. – 8:00 p.m.</p>
+        </div>
+      </div>
+      <div class="support-info-card">
+        <i class="fa-solid fa-circle-question"></i>
+        <div>
+          <h4>Preguntas frecuentes</h4>
+          <p>Reembolsos, activación de claves y recuperación de cuenta.</p>
+        </div>
+      </div>
+    </aside>
+  </div>
+</main>
