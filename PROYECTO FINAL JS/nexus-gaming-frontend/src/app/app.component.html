@@ -1,0 +1,25 @@
+<nav class="navbar">
+  <div class="logo">
+    <img src="assets/img/nexus-icon.png" alt="NEXUS Gaming" class="logo-icon">
+    <h1>NEXUS <span>GAMING</span></h1>
+  </div>
+  <div class="nav-derecha">
+    <ul class="menu">
+      <li><a routerLink="/home" routerLinkActive="active"><i class="fa-solid fa-house"></i> Inicio</a></li>
+      <li><a routerLink="/catalogo" routerLinkActive="active"><i class="fa-solid fa-gamepad"></i> Catálogo</a></li>
+      <li><a routerLink="/biblioteca" routerLinkActive="active"><i class="fa-solid fa-bookmark"></i> Mi Biblioteca</a></li>
+      <li><a routerLink="/historial" routerLinkActive="active"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
+      <li><a routerLink="/perfil" routerLinkActive="active"><i class="fa-solid fa-user"></i> Perfil</a></li>
+    </ul>
+    <a routerLink="/carrito" class="btn-carrito">
+      <i class="fa-solid fa-cart-shopping"></i> Carrito
+      <span class="badge">{{ totalCarrito$ | async }}</span>
+    </a>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+<footer>
+  &copy; 2026 NEXUS GAMING
+</footer>
