@@ -1,6 +1,9 @@
 # NEXUS GAMING — Angular + Node.js/Express
 
+HEAD
 Migración del proyecto de JavaScript Avanzado al stack que
+Migración del proyecto de JavaScript Avanzado al stack que
+02848ac (fix: remover node_modules y corregir lineas de codigo)
 pide el sílabo: **Angular** en el frontend y **Node.js con Express** en el
 backend (reemplaza a la versión anterior en Spring Boot).
 
