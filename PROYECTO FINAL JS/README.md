@@ -1,6 +1,6 @@
 # NEXUS GAMING — Angular + Node.js/Express
 
-Migración del proyecto de JavaScript Avanzado (Semanas 5–10) al stack que
+Migración del proyecto de JavaScript Avanzado al stack que
 pide el sílabo: **Angular** en el frontend y **Node.js con Express** en el
 backend (reemplaza a la versión anterior en Spring Boot).
 
