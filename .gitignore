@@ -1,0 +1,17 @@
+# Dependencias (se instalan con: npm install)
+node_modules/
+
+# Archivos autogenerados
+package-lock.json
+
+# Variables de entorno
+.env
+.env.local
+
+# Compilados
+dist/
+build/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
