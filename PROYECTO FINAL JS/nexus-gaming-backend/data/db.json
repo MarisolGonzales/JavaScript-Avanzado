@@ -1,0 +1,59 @@
+{
+  "juegos": [
+    {
+      "id": 1,
+      "title": "The Witcher 3: Wild Hunt",
+      "price": 59.9,
+      "category": "RPG",
+      "image": "assets/img/witcher3.jpg",
+      "banner": "assets/img/witcher3-banner.jpg",
+      "description": "Una aventura épica de mundo abierto impregnada de magia y decisiones con consecuencias."
+    },
+    {
+      "id": 2,
+      "title": "Grand Theft Auto V",
+      "price": 79.9,
+      "category": "Acción",
+      "image": "assets/img/gtav.png",
+      "banner": "assets/img/gtav-cover.png",
+      "description": "Explora el vasto mundo abierto de Los Santos y Blaine County en una experiencia inolvidable."
+    },
+    {
+      "id": 3,
+      "title": "Minecraft Ultra Edition",
+      "price": 69.9,
+      "category": "Aventura",
+      "image": "assets/img/minecraft.jpg",
+      "banner": "assets/img/minecraft-cover.jpg",
+      "description": "Construye, sobrevive y da rienda suelta a tu imaginación en universos infinitos."
+    },
+    {
+      "id": 4,
+      "title": "Dota 2",
+      "price": 49.9,
+      "category": "Estrategia",
+      "image": "assets/img/Dota_2.jpg",
+      "banner": "assets/img/Dota_2.jpg",
+      "description": "Combates tácticos multijugador en equipo donde la estrategia define la victoria."
+    },
+    {
+      "id": 5,
+      "title": "Left 4 Dead 2",
+      "price": 39.9,
+      "category": "Acción",
+      "image": "assets/img/Left_4_Dead_2.jpg",
+      "banner": "assets/img/Left_4_Dead_2.jpg",
+      "description": "Acción cooperativa extrema para sobrevivir a implacables hordas de infectados."
+    }
+  ],
+  "tickets": [],
+  "historial": [],
+  "usuarios": [
+    {
+      "id": 1,
+      "nombre": "Vanessa Tito",
+      "email": "vanessa@utp.edu.pe",
+      "rol": "usuario"
+    }
+  ]
+}

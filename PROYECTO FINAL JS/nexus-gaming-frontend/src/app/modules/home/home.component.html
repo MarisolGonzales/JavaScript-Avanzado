@@ -1,0 +1,91 @@
+<!-- HERO: carrusel de key art a pantalla completa -->
+<section class="hero" *ngIf="slides.length > 0">
+  <div
+    class="hero-slide"
+    *ngFor="let slide of slides; let i = index"
+    [class.active]="i === indiceActual">
+    <img [src]="slide.imagenHero" [alt]="slide.juego.title">
+  </div>
+
+  <div class="hero-scrim"></div>
+
+  <div class="hero-content" *ngIf="slides[indiceActual] as actual">
+    <span class="eyebrow">Juego destacado</span>
+    <h1>{{ actual.juego.title }}</h1>
+    <p class="hero-copy">{{ actual.juego.description }}</p>
+    <div class="hero-meta">
+      <span class="hero-price">{{ actual.juego.price | soles }}</span>
+    </div>
+    <div class="hero-actions">
+      <a routerLink="/catalogo" class="btn-primary">
+        <i class="fa-solid fa-gamepad"></i> Ir al Catálogo
+      </a>
+      <a routerLink="/biblioteca" class="btn-secondary">
+        <i class="fa-solid fa-bookmark"></i> Mi Biblioteca
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-dots">
+    <button
+      *ngFor="let slide of slides; let i = index"
+      class="hero-dot"
+      [class.active]="i === indiceActual"
+      (click)="irASlide(i)"
+      [attr.aria-label]="'Diapositiva ' + (i + 1)">
+    </button>
+  </div>
+</section>
+
+<main class="container">
+  <div class="error-conexion" *ngIf="errorConexion">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <div>
+      <h3>No se pudo conectar con el servidor</h3>
+      <p>Verifica que el backend esté corriendo en <code>http://localhost:3000</code> (carpeta <code>nexus-gaming-backend</code>, comando <code>npm run dev</code>) y refresca la página.</p>
+    </div>
+  </div>
+
+  <section class="section" *ngIf="!errorConexion">
+    <div class="section-head">
+      <h2>Destacados esta semana</h2>
+      <span class="section-sub">Los más jugados en NEXUS GAMING</span>
+    </div>
+
+    <div class="games-rail" *ngIf="!cargando; else cargandoTpl">
+      <div class="game-card" *ngFor="let juego of juegos">
+        <img class="game-thumb" [src]="juego.image" [alt]="juego.title">
+        <div class="game-info">
+          <div class="game-top">
+            <span class="tag">{{ juego.category }}</span>
+            <span class="price">{{ juego.price | soles }}</span>
+          </div>
+          <h3>{{ juego.title }}</h3>
+          <p class="game-desc">{{ juego.description }}</p>
+          <div class="game-actions">
+            <button class="btn-secondary" (click)="abrirDetalle(juego)">Detalles</button>
+            <button class="btn-buy" (click)="agregarAlCarrito(juego)">Comprar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ng-template #cargandoTpl>
+      <div class="games-rail">
+        <div class="game-card game-card-skeleton" *ngFor="let i of [1,2,3,4]"></div>
+      </div>
+    </ng-template>
+
+    <div class="home-ver-todos">
+      <a routerLink="/catalogo" class="btn-secondary">
+        Ver catálogo completo <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </div>
+  </section>
+</main>
+
+<app-modal-detalle-juego
+  [juego]="juegoSeleccionado"
+  (cerrar)="cerrarDetalle()"
+  (comprar)="agregarAlCarrito($event)">
+</app-modal-detalle-juego>

@@ -1,0 +1,26 @@
+<header class="page-header">
+  <h1>Mi biblioteca</h1>
+  <p>Todos los juegos que adquieras se sincronizarán aquí automáticamente.</p>
+</header>
+
+<main class="page-body">
+  <div class="library-grid" *ngIf="(biblioteca$ | async) as biblioteca">
+    <div class="empty-library" *ngIf="biblioteca.length === 0">
+      <i class="fa-solid fa-bookmark"></i>
+      <h3>Tu biblioteca está vacía</h3>
+      <p>Aún no posees ningún juego registrado. Adquiere títulos desde el catálogo.</p>
+      <a routerLink="/catalogo" class="btn-primary">Ir al catálogo</a>
+    </div>
+
+    <div class="library-card" *ngFor="let juego of biblioteca">
+      <img [src]="juego.imagen" [alt]="juego.titulo">
+      <div class="library-card-body">
+        <h3>{{ juego.titulo }}</h3>
+        <p class="library-date">Adquirido: {{ juego.fechaAdquisicion }}</p>
+        <button class="btn-jugar" (click)="jugar(juego.titulo)">
+          <i class="fa-solid fa-play"></i> Jugar
+        </button>
+      </div>
+    </div>
+  </div>
+</main>

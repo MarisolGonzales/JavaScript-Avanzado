@@ -1,0 +1,93 @@
+<header class="page-header">
+  <h1>Mi perfil</h1>
+  <p>Gestiona tu información personal y revisa el estado de tu cuenta.</p>
+</header>
+
+<main class="page-body">
+  <div class="profile-layout">
+    <aside class="profile-card">
+      <div class="profile-avatar">{{ inicialAvatar }}</div>
+      <h3 class="profile-name">{{ perfil.nombre }}</h3>
+      <p class="profile-email">{{ perfil.email }}</p>
+      <div class="profile-stat">
+        <span>Rango</span>
+        <span>{{ perfil.rol === 'admin' ? 'Administrador' : 'Pro Gamer' }}</span>
+      </div>
+      <div class="profile-stat">
+        <span>Estado de cuenta</span>
+        <span style="color: var(--success);">Activa</span>
+      </div>
+      <div class="profile-stat">
+        <span>Juegos en biblioteca</span>
+        <span>{{ totalJuegosBiblioteca }}</span>
+      </div>
+      <button class="btn-danger btn-logout" (click)="cerrarSesion()">
+        <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+      </button>
+    </aside>
+
+    <section class="profile-form">
+      <h3>Editar información</h3>
+      <form [formGroup]="formPerfil" (ngSubmit)="guardarCambios()">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" formControlName="nombre">
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" formControlName="email">
+          <span class="form-hint">Tip: los correos &#64;nexusgaming.pe obtienen acceso de administrador.</span>
+        </div>
+        <button type="submit" class="btn-primary">
+          <i class="fa-solid fa-floppy-disk"></i> Guardar cambios
+        </button>
+      </form>
+    </section>
+  </div>
+
+  <!-- PANEL DE ADMINISTRADOR -->
+  <section class="admin-panel" *ngIf="perfil.rol === 'admin'">
+    <div class="admin-panel-head">
+      <span class="tag"><i class="fa-solid fa-user-shield"></i> Acceso de administrador</span>
+      <h2>Panel de administrador</h2>
+      <p>Vista exclusiva para cuentas del staff de NEXUS GAMING.</p>
+    </div>
+
+    <div class="admin-stats">
+      <div class="admin-stat-card">
+        <span class="admin-stat-value">{{ totalJuegosCatalogo }}</span>
+        <span class="admin-stat-label">Juegos en catálogo</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="admin-stat-value">{{ ingresosTotales | soles }}</span>
+        <span class="admin-stat-label">Ingresos totales</span>
+      </div>
+      <div class="admin-stat-card">
+        <span class="admin-stat-value">{{ tickets.length }}</span>
+        <span class="admin-stat-label">Tickets pendientes</span>
+      </div>
+    </div>
+
+    <h3 class="admin-subtitle">Tickets de soporte</h3>
+    <div class="admin-tickets-list">
+      <div class="empty-state" style="padding: 40px 20px;" *ngIf="tickets.length === 0">
+        <i class="fa-solid fa-inbox"></i>
+        <h3>No hay tickets pendientes</h3>
+        <p>Los mensajes que envíen los usuarios desde Soporte aparecerán aquí.</p>
+      </div>
+
+      <div class="admin-ticket-item" *ngFor="let ticket of tickets">
+        <div class="admin-ticket-info">
+          <div class="admin-ticket-head">
+            <strong>{{ ticket.asunto }}</strong>
+            <span class="admin-ticket-fecha">{{ ticket.fecha }}</span>
+          </div>
+          <p>{{ ticket.mensaje }}</p>
+        </div>
+        <button class="btn-secondary" (click)="resolverTicket(ticket.id)">
+          <i class="fa-solid fa-check"></i> Marcar resuelto
+        </button>
+      </div>
+    </div>
+  </section>
+</main>
