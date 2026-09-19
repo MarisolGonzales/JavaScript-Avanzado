@@ -466,7 +466,11 @@ main {
    FEATURE CARDS (home)
    ========================================================================== */
 
-.home-features {
+.home-ver-todos {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 22px;
@@ -1258,4 +1262,198 @@ footer {
 .pago-exito p {
     color: var(--text-muted);
     margin-bottom: 26px;
+}
+
+/* ==========================================================================
+   PERFIL — hint de formulario y botón de cerrar sesión
+   ========================================================================== */
+
+.form-hint {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--text-faint);
+}
+
+.btn-logout {
+    width: 100%;
+    margin-top: 22px;
+    justify-content: center;
+}
+
+/* ==========================================================================
+   PANEL DE ADMINISTRADOR
+   ========================================================================== */
+
+.admin-panel {
+    margin-top: 48px;
+    padding-top: 40px;
+    border-top: 1px solid var(--border-soft);
+}
+
+.admin-panel-head {
+    margin-bottom: 26px;
+}
+
+.admin-panel-head .tag {
+    margin-bottom: 12px;
+    display: inline-block;
+}
+
+.admin-panel-head h2 {
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+}
+
+.admin-panel-head p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.admin-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 18px;
+    margin-bottom: 36px;
+}
+
+.admin-stat-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.admin-stat-value {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--gold);
+}
+
+.admin-stat-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.admin-subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 16px;
+}
+
+.admin-tickets-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.admin-ticket-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    padding: 16px 20px;
+}
+
+.admin-ticket-info {
+    flex-grow: 1;
+}
+
+.admin-ticket-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-bottom: 6px;
+}
+
+.admin-ticket-fecha {
+    color: var(--text-faint);
+    font-size: 0.78rem;
+}
+
+.admin-ticket-info p {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+}
+
+.admin-ticket-item .btn-secondary {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   HISTORIAL — recibo de compra (boleta)
+   ========================================================================== */
+
+.receipt {
+    background: var(--bg-card);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+}
+
+.receipt-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 16px;
+    border-bottom: 1px dashed var(--border);
+}
+
+.receipt-id {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+
+.receipt-date {
+    display: block;
+    color: var(--text-faint);
+    font-size: 0.82rem;
+}
+
+.receipt-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.receipt-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    font-family: 'Courier New', monospace;
+}
+
+.receipt-item span:last-child {
+    color: var(--text);
+}
+
+.receipt-totals {
+    border-top: 1px dashed var(--border);
+    padding-top: 14px;
+}
+
+.receipt-totals .summary-row {
+    margin-bottom: 8px;
+}
+
+.receipt-totals .summary-row.total {
+    border-top: none;
+    padding-top: 6px;
+    margin-top: 4px;
+    margin-bottom: 0;
 }
