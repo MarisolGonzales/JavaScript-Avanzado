@@ -30,7 +30,7 @@ function cargarBiblioteca() {
         tarjeta.className = "library-card";
 
         tarjeta.innerHTML = `
-            <img src="${juego.imagen}" alt="${juego.titulo}">
+            <img src="${juego.imagen}" alt="${juego.titulo}" onerror="manejarErrorImagen(this)">
             <div class="library-card-body">
                 <h3>${juego.titulo}</h3>
                 <p class="library-date">Adquirido: ${juego.fechaAdquisicion || "Reciente"}</p>

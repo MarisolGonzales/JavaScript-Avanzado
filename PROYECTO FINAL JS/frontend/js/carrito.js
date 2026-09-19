@@ -40,7 +40,7 @@ function cargarCarrito() {
         fila.className = "cart-item";
 
         fila.innerHTML = `
-            <img src="${item.imagen}" alt="${item.titulo}">
+            <img src="${item.imagen}" alt="${item.titulo}" onerror="manejarErrorImagen(this)">
             <div class="cart-item-info">
                 <h4>${item.titulo}</h4>
                 <span class="price">S/ ${item.precio.toFixed(2)}</span>
@@ -170,13 +170,22 @@ function inicializarModalPago() {
     });
 
     function confirmarPago() {
-        finalizarCompra();
+        const tabActiva = document.querySelector(".payment-tab.active");
+        const metodo = tabActiva ? tabActiva.dataset.metodo : "tarjeta";
+
+        finalizarCompra(metodo);
         pasoMetodo.style.display = "none";
         pasoExito.style.display = "block";
     }
 }
 
-function finalizarCompra() {
+const NOMBRES_METODO_PAGO = {
+    tarjeta: "Tarjeta de crédito/débito",
+    yape: "Yape",
+    plin: "Plin"
+};
+
+function finalizarCompra(metodo) {
     let carrito = JSON.parse(localStorage.getItem("nexus_carrito")) || [];
     if (carrito.length === 0) return;
 
@@ -196,11 +205,16 @@ function finalizarCompra() {
         }
     });
 
-    // Registrar la compra en el historial
+    // Registrar la compra en el historial como un recibo/boleta completo
+    const ahora = new Date();
     let historial = JSON.parse(localStorage.getItem("nexus_historial")) || [];
     historial.unshift({
-        fecha: new Date().toLocaleDateString(),
-        items: carrito.map(j => j.titulo),
+        boleta: `NX-${ahora.getFullYear()}${String(ahora.getMonth() + 1).padStart(2, "0")}-${String(historial.length + 1).padStart(4, "0")}`,
+        fecha: ahora.toLocaleDateString(),
+        hora: ahora.toLocaleTimeString(),
+        metodoPago: NOMBRES_METODO_PAGO[metodo] || "Tarjeta de crédito/débito",
+        items: carrito.map(j => ({ titulo: j.titulo, precio: j.precio })),
+        subtotal: total,
         total: total
     });
     localStorage.setItem("nexus_historial", JSON.stringify(historial));

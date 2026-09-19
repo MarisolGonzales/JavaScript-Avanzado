@@ -41,7 +41,7 @@
         <p class="profile-email" id="perfil-email">vanessa@utp.edu.pe</p>
         <div class="profile-stat">
           <span>Rango</span>
-          <span>Pro Gamer</span>
+          <span id="perfil-rango">Pro Gamer</span>
         </div>
         <div class="profile-stat">
           <span>Estado de cuenta</span>
@@ -51,6 +51,9 @@
           <span>Juegos en biblioteca</span>
           <span id="perfil-total-juegos">0</span>
         </div>
+        <button class="btn-danger btn-logout" id="btn-cerrar-sesion">
+          <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+        </button>
       </aside>
 
       <section class="profile-form">
@@ -63,6 +66,7 @@
           <div class="form-group">
             <label for="input-email">Correo electrónico</label>
             <input type="email" id="input-email" required>
+            <span class="form-hint">Tip: los correos @nexusgaming.pe obtienen acceso de administrador.</span>
           </div>
           <button type="submit" class="btn-primary">
             <i class="fa-solid fa-floppy-disk"></i> Guardar cambios
@@ -70,13 +74,45 @@
         </form>
       </section>
     </div>
+
+    <!-- PANEL DE ADMINISTRADOR — visible solo si el correo activo es @nexusgaming.pe -->
+    <section class="admin-panel" id="admin-panel" style="display:none;">
+      <div class="admin-panel-head">
+        <span class="tag"><i class="fa-solid fa-user-shield"></i> Acceso de administrador</span>
+        <h2>Panel de administrador</h2>
+        <p>Vista exclusiva para cuentas del staff de NEXUS GAMING.</p>
+      </div>
+
+      <div class="admin-stats">
+        <div class="admin-stat-card">
+          <span class="admin-stat-value" id="admin-stat-juegos">0</span>
+          <span class="admin-stat-label">Juegos en catálogo</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-value" id="admin-stat-ingresos">S/ 0.00</span>
+          <span class="admin-stat-label">Ingresos totales</span>
+        </div>
+        <div class="admin-stat-card">
+          <span class="admin-stat-value" id="admin-stat-tickets">0</span>
+          <span class="admin-stat-label">Tickets pendientes</span>
+        </div>
+      </div>
+
+      <h3 class="admin-subtitle">Tickets de soporte</h3>
+      <div class="admin-tickets-list" id="admin-tickets-list">
+        <!-- Renderizado por admin.js -->
+      </div>
+    </section>
   </main>
 
   <footer>
-    &copy; 2026 NEXUS GAMING — Proyecto académico UTP · JavaScript Avanzado
+    &copy; 2026 NEXUS GAMING
   </footer>
 
   <script src="../js/nav.js"></script>
+  <script>const IMG_BASE = "../";</script>
+  <script src="../js/juegos-data.js"></script>
   <script src="../js/usuario.js"></script>
+  <script src="../js/admin.js"></script>
 </body>
 </html>
