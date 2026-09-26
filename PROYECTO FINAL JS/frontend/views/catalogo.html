@@ -18,6 +18,8 @@
       <ul class="menu">
         <li><a href="../index.html"><i class="fa-solid fa-house"></i> Inicio</a></li>
         <li><a href="catalogo.html" class="active"><i class="fa-solid fa-gamepad"></i> Catálogo</a></li>
+        <li><a href="favoritos.html"><i class="fa-solid fa-heart"></i> Favoritos</a></li>
+        <li><a href="logros.html"><i class="fa-solid fa-trophy"></i> Logros</a></li>
         <li><a href="biblioteca.html"><i class="fa-solid fa-bookmark"></i> Mi Biblioteca</a></li>
         <li><a href="historial.html"><i class="fa-solid fa-clock-rotate-left"></i> Historial</a></li>
         <li><a href="perfil.html"><i class="fa-solid fa-user"></i> Perfil</a></li>
@@ -63,8 +65,15 @@
         <span class="tag" id="modal-tag"></span>
         <h2 id="modal-title"></h2>
         <p class="game-desc" id="modal-desc"></p>
+        <dl class="modal-details">
+          <div><dt>Desarrollador</dt><dd id="modal-developer"></dd></div>
+          <div><dt>Lanzamiento</dt><dd id="modal-year"></dd></div>
+          <div><dt>Plataformas</dt><dd id="modal-platforms"></dd></div>
+          <div><dt>Modalidad</dt><dd id="modal-mode"></dd></div>
+        </dl>
         <div class="modal-footer">
           <span class="price" id="modal-price"></span>
+          <button class="btn-favorite" id="modal-favorite" type="button" aria-pressed="false"></button>
           <button class="btn-buy" id="modal-buy">
             <i class="fa-solid fa-cart-plus"></i> Comprar
           </button>
@@ -80,6 +89,7 @@
   <script src="../js/nav.js"></script>
   <script>const IMG_BASE = "../";</script>
   <script src="../js/juegos-data.js"></script>
+  <script src="../js/game-progress.js"></script>
   <script src="../js/carrito-utils.js"></script>
   <script src="../js/game-modal.js"></script>
   <script src="../js/catalogo.js"></script>
