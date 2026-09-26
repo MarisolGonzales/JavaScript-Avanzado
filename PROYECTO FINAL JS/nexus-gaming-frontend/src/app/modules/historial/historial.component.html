@@ -1,0 +1,47 @@
+<header class="page-header">
+  <h1>Historial de compras</h1>
+  <p>Revisa el registro de todas tus transacciones dentro de la plataforma.</p>
+</header>
+
+<main class="page-body">
+  <div class="history-list" *ngIf="(historial$ | async) as historial">
+    <div class="empty-state" *ngIf="historial.length === 0">
+      <i class="fa-solid fa-clock-rotate-left"></i>
+      <h3>Aún no tienes compras registradas</h3>
+      <p>Cuando finalices una compra en el carrito, aparecerá aquí tu recibo.</p>
+      <a routerLink="/catalogo" class="btn-primary">Ir al catálogo</a>
+    </div>
+
+    <div class="receipt" *ngFor="let compra of historial">
+      <div class="receipt-head">
+        <div>
+          <span class="receipt-id">Boleta {{ compra.boleta }}</span>
+          <span class="receipt-date">
+            <i class="fa-solid fa-calendar"></i> {{ compra.fecha }} · {{ compra.hora }}
+          </span>
+        </div>
+        <span class="tag">
+          <i class="fa-solid fa-credit-card"></i> {{ compra.metodoPago }}
+        </span>
+      </div>
+
+      <div class="receipt-items">
+        <div class="receipt-item" *ngFor="let item of compra.items">
+          <span>{{ item.titulo }}</span>
+          <span>{{ item.precio | soles }}</span>
+        </div>
+      </div>
+
+      <div class="receipt-totals">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span>{{ compra.subtotal | soles }}</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total pagado</span>
+          <span class="total-amount">{{ compra.total | soles }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

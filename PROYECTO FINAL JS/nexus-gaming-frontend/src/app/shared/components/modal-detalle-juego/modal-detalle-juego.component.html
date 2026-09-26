@@ -1,0 +1,19 @@
+<div class="modal-overlay" [class.active]="juego" (click)="onFondoClick($event)" *ngIf="juego as j">
+  <div class="modal-card">
+    <button class="modal-close" (click)="cerrar.emit()" aria-label="Cerrar">
+      <i class="fa-solid fa-xmark"></i>
+    </button>
+    <img class="modal-img" [src]="j.image" [alt]="j.title" (error)="manejarErrorImagen($event)">
+    <div class="modal-body">
+      <span class="tag">{{ j.category }}</span>
+      <h2>{{ j.title }}</h2>
+      <p class="game-desc">{{ j.description }}</p>
+      <div class="modal-footer">
+        <span class="price">{{ j.price | soles }}</span>
+        <button class="btn-buy" (click)="comprar.emit(j)">
+          <i class="fa-solid fa-cart-plus"></i> Comprar
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
