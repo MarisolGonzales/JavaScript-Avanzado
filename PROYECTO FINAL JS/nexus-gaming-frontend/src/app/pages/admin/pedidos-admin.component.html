@@ -1,0 +1,96 @@
+<div class="dash-cab">
+  <div><h1 class="dash-titulo">Pedidos</h1><p class="muted" aria-live="polite">{{ filtrados().length }} {{ filtrados().length === 1 ? 'pedido encontrado' : 'pedidos encontrados' }}</p></div>
+  <button type="button" class="btn btn-secondary btn-sm" [disabled]="filtrados().length === 0" (click)="exportar()"><i class="fa-solid fa-file-csv" aria-hidden="true"></i> Exportar CSV</button>
+</div>
+
+<div class="tabs-linea" role="tablist" aria-label="Filtrar por estado">
+  <button type="button" role="tab" class="tab-linea" [class.activo]="estado() === 'TODOS'" [attr.aria-selected]="estado() === 'TODOS'" (click)="fijarEstado('TODOS')">Todos <span class="tab-n">{{ cuantos('TODOS') }}</span></button>
+  @for (e of estados; track e) {
+    <button type="button" role="tab" class="tab-linea" [class.activo]="estado() === e" [attr.aria-selected]="estado() === e" (click)="fijarEstado(e)">{{ e | estadoPedido }} <span class="tab-n">{{ cuantos(e) }}</span></button>
+  }
+</div>
+
+<div class="catalog-tools">
+  <label class="search-box"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="visually-hidden">Buscar pedidos</span>
+    <input type="search" placeholder="Buscar por código, cliente o comprobante…" [value]="texto()" (input)="buscar($event)" autocomplete="off"></label>
+  <label class="campo-inline"><span>Región</span>
+    <select [value]="region()" (change)="cambiarRegion($event)"><option value="TODAS">Todas</option>@for (r of regiones; track r.codigo) { <option [value]="r.codigo">{{ r.etiqueta }}</option> }</select></label>
+</div>
+
+@if (datos.error(); as e) {
+  <div class="banner-error en-panel" role="alert">{{ e }} <button type="button" class="btn-link" (click)="cargar()">Reintentar</button></div>
+} @else {
+  <div class="pedidos-admin-layout" [class.con-detalle]="seleccionado() !== null">
+    <div>
+      <div class="tabla-scroll">
+        <table class="tabla-nx tabla-filas">
+          <thead><tr><th scope="col">Pedido</th><th scope="col">Cliente</th><th scope="col">Región</th><th scope="col">Fecha</th><th scope="col">Total</th><th scope="col">Estado</th><th scope="col"><span class="visually-hidden">Acciones</span></th></tr></thead>
+          <tbody>
+            @for (p of visibles(); track p.codigo) {
+              <tr class="fila-click" [class.seleccionada]="seleccionado()?.codigo === p.codigo" (click)="seleccionado.set(p)">
+                <td><strong>{{ p.codigo }}</strong><br><small class="muted">{{ p.comprobante.tipo === 'FACTURA' ? 'Factura' : 'Boleta' }} {{ p.comprobante.numeroCompleto }}</small></td>
+                <td>{{ p.usuario }}</td>
+                <td>{{ etiquetaRegion(p.nodo) }}</td>
+                <td>{{ p.fecha | date: 'dd/MM/yy HH:mm' }}</td>
+                <td><strong>{{ p.total | soles }}</strong></td>
+                <td><app-estado-badge [estado]="p.estado" /></td>
+                <td><button type="button" class="btn btn-secondary btn-sm" [attr.aria-label]="'Ver detalle del pedido ' + p.codigo" (click)="seleccionado.set(p); $event.stopPropagation()">Ver</button></td>
+              </tr>
+            } @empty {
+              <tr><td colspan="7" class="muted text-center">{{ datos.cargando() ? 'Cargando…' : 'No hay pedidos con esos filtros.' }}</td></tr>
+            }
+          </tbody>
+        </table>
+      </div>
+      <nav class="paginacion" aria-label="Paginación de pedidos">
+        <span class="muted small">Mostrando {{ desde() }}–{{ hasta() }} de {{ filtrados().length }}</span>
+        <div class="paginas">
+          <button type="button" class="pag" [disabled]="pagina() === 1" aria-label="Página anterior" (click)="pagina.set(pagina() - 1)"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+          @for (n of paginas(); track n) { <button type="button" class="pag" [class.activo]="n === pagina()" [attr.aria-current]="n === pagina() ? 'page' : null" (click)="pagina.set(n)">{{ n }}</button> }
+          <button type="button" class="pag" [disabled]="pagina() === totalPaginas()" aria-label="Página siguiente" (click)="pagina.set(pagina() + 1)"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        </div>
+      </nav>
+    </div>
+
+    @if (seleccionado(); as p) {
+      <aside class="detalle-lateral" aria-label="Detalle del pedido">
+        <header class="detalle-lateral-cab">
+          <div><h2 class="h5 mb-0">{{ p.codigo }}</h2><span class="muted small">{{ p.fecha | date: "dd/MM/yyyy HH:mm" }}</span></div>
+          <button type="button" class="btn-icono" aria-label="Cerrar detalle" (click)="seleccionado.set(null)"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        </header>
+        <app-estado-badge [estado]="p.estado" />
+
+        <h3 class="mini-titulo">Cliente</h3>
+        <dl class="ficha ficha-1"><div><dt>Cuenta</dt><dd>{{ p.usuario }}</dd></div><div><dt>Región</dt><dd>{{ etiquetaRegion(p.nodo) }} · {{ p.entrega?.zona }}</dd></div>
+          <div><dt>Pago</dt><dd>{{ p.pago.metodo }} @if (p.pago.referencia) { <small>({{ p.pago.referencia }})</small> } · {{ p.pago.estado === 'REEMBOLSADO' ? 'Reembolsado' : 'Aprobado' }}</dd></div></dl>
+
+        <h3 class="mini-titulo">Comprobante</h3>
+        <dl class="ficha ficha-1"><div><dt>{{ p.comprobante.tipo === 'FACTURA' ? 'Factura' : 'Boleta' }}</dt><dd>{{ p.comprobante.numeroCompleto }}</dd></div>
+          <div><dt>{{ p.comprobante.receptor.tipoDoc === 'SIN DOC' ? 'Documento' : p.comprobante.receptor.tipoDoc }}</dt><dd>{{ p.comprobante.receptor.documento || 'Sin documento' }}</dd></div>
+          @if (p.comprobante.receptor.nombre) { <div><dt>{{ p.comprobante.tipo === 'FACTURA' ? 'Razón social' : 'Nombre' }}</dt><dd>{{ p.comprobante.receptor.nombre }}</dd></div> }
+          @if (p.comprobante.receptor.direccion) { <div><dt>Dirección fiscal</dt><dd>{{ p.comprobante.receptor.direccion }}</dd></div> }
+          <div><dt>Op. gravada · IGV · Total</dt><dd>{{ p.comprobante.subtotal | soles }} · {{ p.comprobante.igv | soles }} · <strong>{{ p.comprobante.total | soles }}</strong></dd></div></dl>
+        <div class="acciones">
+          <button type="button" class="btn btn-primary btn-sm" [disabled]="descargando()" (click)="pdf(p, false)"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> Descargar PDF</button>
+          <button type="button" class="btn btn-secondary btn-sm" [disabled]="descargando()" (click)="pdf(p, true)">Ver PDF</button>
+        </div>
+
+        <h3 class="mini-titulo">Juegos</h3>
+        <ul class="lineas lineas-mini">
+          @for (i of p.items; track $index) {
+            <li class="linea"><img [src]="i.imagen" [alt]="''" (error)="imagenRota($event)"><div class="linea-info"><strong>{{ i.titulo }}</strong>
+              <span class="muted small">{{ i.tipoEntrega === 'REGALO' ? 'Regalo → ' + p.entrega?.destinatario : 'Cuenta del cliente' }}</span>
+              @if (i.claveDigital) { <code class="clave">{{ i.claveDigital }}</code> }</div><span class="price">{{ i.subtotal | soles }}</span></li>
+          }
+        </ul>
+
+        <h3 class="mini-titulo">Seguimiento</h3>
+        <app-timeline-estados [historial]="p.historial" />
+
+        @if (puedeReembolsar(p)) {
+          <button type="button" class="btn btn-danger w-100" [disabled]="trabajando()" (click)="reembolsar(p)"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> {{ trabajando() ? 'Procesando…' : 'Aprobar reembolso' }}</button>
+        }
+      </aside>
+    }
+  </div>
+}

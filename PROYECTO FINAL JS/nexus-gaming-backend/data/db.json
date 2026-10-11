@@ -1,59 +1,245 @@
 {
+  "version": 3,
+  "usuarios": [
+    {
+      "email": "admin@nexusgaming.pe",
+      "nombre": "Administrador NEXUS",
+      "rol": "admin",
+      "departamento": "Lima",
+      "passwordHash": "scrypt$5e88e29b47ca7eefcdec17653db199c0$c83b39f3cc264004b5ac4d8b6484ba4ec8324123573c669c01fd4d7901f8e3b330f98fd1880d4ec9b3f9fb08dbc8c0b45e36eebbc8ea44c4494e8ad0205882b9"
+    },
+    {
+      "email": "soporte@nexusgaming.pe",
+      "nombre": "Soporte NEXUS",
+      "rol": "soporte",
+      "departamento": "Lima",
+      "passwordHash": "scrypt$8a3a72f5c539e464d30890f30ff8f4b8$7e0083bf514d13470a70cbb88fe84248634bb89b46054bd6d4e81c81a34826d29df863590b003cccc32e985db4976f2ca9f3ad952af5523d25c32d5d383a9b60"
+    },
+    {
+      "email": "vanessa@utp.edu.pe",
+      "nombre": "Vanessa Tito",
+      "rol": "cliente",
+      "departamento": "Lima",
+      "passwordHash": "scrypt$b18c8e8cd39b5051857e6f85ea90cd87$bbdc3c5fe51c4f716e69698b59103e41473878d2e0396a70746d4218da7cc424e36170d211670efdfb19d3519df93c91b2f6aa86275b06adfd613bd7ecf4db3a"
+    }
+  ],
   "juegos": [
     {
       "id": 1,
       "title": "The Witcher 3: Wild Hunt",
-      "price": 59.9,
       "category": "RPG",
+      "price": 59.9,
+      "stockInicial": 30,
       "image": "assets/img/witcher3.jpg",
       "banner": "assets/img/witcher3-banner.jpg",
-      "description": "Una aventura épica de mundo abierto impregnada de magia y decisiones con consecuencias."
+      "description": "Una aventura épica de mundo abierto impregnada de magia y decisiones con consecuencias.",
+      "developer": "CD PROJEKT RED",
+      "year": 2015,
+      "platforms": "PC, PlayStation, Xbox, Nintendo Switch",
+      "mode": "Un jugador",
+      "activo": true
     },
     {
       "id": 2,
       "title": "Grand Theft Auto V",
-      "price": 79.9,
       "category": "Acción",
+      "price": 79.9,
+      "stockInicial": 40,
       "image": "assets/img/gtav.png",
       "banner": "assets/img/gtav-cover.png",
-      "description": "Explora el vasto mundo abierto de Los Santos y Blaine County en una experiencia inolvidable."
+      "description": "Explora el vasto mundo abierto de Los Santos a través de tres protagonistas.",
+      "developer": "Rockstar North",
+      "year": 2013,
+      "platforms": "PC, PlayStation, Xbox",
+      "mode": "Un jugador y multijugador",
+      "activo": true
     },
     {
       "id": 3,
       "title": "Minecraft Ultra Edition",
-      "price": 69.9,
       "category": "Aventura",
+      "price": 69.9,
+      "stockInicial": 35,
       "image": "assets/img/minecraft.jpg",
       "banner": "assets/img/minecraft-cover.jpg",
-      "description": "Construye, sobrevive y da rienda suelta a tu imaginación en universos infinitos."
+      "description": "Construye, explora y sobrevive en un mundo infinito generado por bloques.",
+      "developer": "Mojang Studios",
+      "year": 2011,
+      "platforms": "PC, PlayStation, Xbox, Nintendo Switch, Móvil",
+      "mode": "Un jugador y multijugador",
+      "activo": true
     },
     {
       "id": 4,
       "title": "Dota 2",
-      "price": 49.9,
       "category": "Estrategia",
+      "price": 49.9,
+      "stockInicial": 25,
       "image": "assets/img/Dota_2.jpg",
-      "banner": "assets/img/Dota_2.jpg",
-      "description": "Combates tácticos multijugador en equipo donde la estrategia define la victoria."
+      "banner": null,
+      "description": "El MOBA competitivo de Valve: dos equipos, un antiguo y cientos de héroes.",
+      "developer": "Valve",
+      "year": 2013,
+      "platforms": "PC",
+      "mode": "Multijugador",
+      "activo": true
     },
     {
       "id": 5,
       "title": "Left 4 Dead 2",
-      "price": 39.9,
       "category": "Acción",
+      "price": 39.9,
+      "stockInicial": 20,
       "image": "assets/img/Left_4_Dead_2.jpg",
-      "banner": "assets/img/Left_4_Dead_2.jpg",
-      "description": "Acción cooperativa extrema para sobrevivir a implacables hordas de infectados."
+      "banner": null,
+      "description": "Sobrevive junto a tus amigos a hordas de infectados en campañas cooperativas.",
+      "developer": "Valve",
+      "year": 2009,
+      "platforms": "PC, Xbox",
+      "mode": "Cooperativo",
+      "activo": true
+    },
+    {
+      "id": 6,
+      "title": "Cyberpunk 2077",
+      "category": "RPG",
+      "price": 89.9,
+      "stockInicial": 30,
+      "image": "assets/img/cyberpunk-2077.jpg",
+      "banner": null,
+      "description": "Un RPG de acción en Night City, una megalópolis obsesionada con el poder y la modificación corporal.",
+      "developer": "CD PROJEKT RED",
+      "year": 2020,
+      "platforms": "PC, PlayStation, Xbox",
+      "mode": "Un jugador",
+      "activo": true
+    },
+    {
+      "id": 7,
+      "title": "Elden Ring",
+      "category": "RPG",
+      "price": 99.9,
+      "stockInicial": 25,
+      "image": "assets/img/elden-ring.jpg",
+      "banner": null,
+      "description": "Recorre las Tierras Intermedias en un mundo abierto creado por FromSoftware y George R. R. Martin.",
+      "developer": "FromSoftware",
+      "year": 2022,
+      "platforms": "PC, PlayStation, Xbox",
+      "mode": "Un jugador y multijugador",
+      "activo": true
+    },
+    {
+      "id": 8,
+      "title": "Stardew Valley",
+      "category": "Simulación",
+      "price": 29.9,
+      "stockInicial": 50,
+      "image": "assets/img/stardew-valley.jpg",
+      "banner": null,
+      "description": "Hereda la granja de tu abuelo y construye la vida que siempre soñaste.",
+      "developer": "ConcernedApe",
+      "year": 2016,
+      "platforms": "PC, PlayStation, Xbox, Nintendo Switch, Móvil",
+      "mode": "Un jugador y cooperativo",
+      "activo": true
+    },
+    {
+      "id": 9,
+      "title": "Hollow Knight",
+      "category": "Aventura",
+      "price": 34.9,
+      "stockInicial": 25,
+      "image": "assets/img/hollow-knight.jpg",
+      "banner": null,
+      "description": "Una aventura de acción en un vasto reino de insectos y héroes en ruinas.",
+      "developer": "Team Cherry",
+      "year": 2017,
+      "platforms": "PC, PlayStation, Xbox, Nintendo Switch",
+      "mode": "Un jugador",
+      "activo": true
+    },
+    {
+      "id": 10,
+      "title": "Resident Evil 4",
+      "category": "Acción",
+      "price": 119.9,
+      "stockInicial": 5,
+      "image": "assets/img/resident-evil-4.jpg",
+      "banner": null,
+      "description": "El remake del clásico de survival horror: Leon debe rescatar a la hija del presidente.",
+      "developer": "Capcom",
+      "year": 2023,
+      "platforms": "PC, PlayStation, Xbox",
+      "mode": "Un jugador",
+      "activo": true
     }
   ],
-  "tickets": [],
-  "historial": [],
-  "usuarios": [
-    {
-      "id": 1,
-      "nombre": "Vanessa Tito",
-      "email": "vanessa@utp.edu.pe",
-      "rol": "usuario"
+  "nodos": {
+    "NORTE": {
+      "stock": {
+        "1": 30,
+        "2": 40,
+        "3": 35,
+        "4": 25,
+        "5": 20,
+        "6": 30,
+        "7": 25,
+        "8": 50,
+        "9": 25,
+        "10": 5
+      },
+      "carritos": {},
+      "pedidos": [],
+      "seqPedido": 0,
+      "seqComprobante": {
+        "boleta": 0,
+        "factura": 0
+      }
+    },
+    "SUR": {
+      "stock": {
+        "1": 30,
+        "2": 40,
+        "3": 35,
+        "4": 25,
+        "5": 20,
+        "6": 30,
+        "7": 25,
+        "8": 50,
+        "9": 25,
+        "10": 5
+      },
+      "carritos": {},
+      "pedidos": [],
+      "seqPedido": 0,
+      "seqComprobante": {
+        "boleta": 0,
+        "factura": 0
+      }
+    },
+    "CENTRO": {
+      "stock": {
+        "1": 30,
+        "2": 40,
+        "3": 35,
+        "4": 25,
+        "5": 20,
+        "6": 30,
+        "7": 25,
+        "8": 50,
+        "9": 25,
+        "10": 5
+      },
+      "carritos": {},
+      "pedidos": [],
+      "seqPedido": 0,
+      "seqComprobante": {
+        "boleta": 0,
+        "factura": 0
+      }
     }
-  ]
+  },
+  "tickets": [],
+  "seqTicket": 0
 }

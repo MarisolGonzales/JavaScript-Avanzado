@@ -1,0 +1,78 @@
+@if (estado.cargando() && !estado.datos()) {
+  <section class="hero hero-skeleton skeleton" aria-busy="true" aria-label="Cargando portada"></section>
+} @else if (estado.error()) {
+  <section class="page-body">
+    <div class="estado-vacio" role="alert">
+      <i class="fa-solid fa-plug-circle-xmark" aria-hidden="true"></i>
+      <h2>No pudimos cargar el catálogo</h2>
+      <p>{{ estado.error() }}</p>
+      <button type="button" class="btn btn-primary" (click)="cargar()">Reintentar</button>
+    </div>
+  </section>
+} @else {
+  @if (slides().length > 0) {
+    <section class="hero" aria-roledescription="carrusel" aria-label="Juegos destacados"
+             (mouseenter)="pausado.set(true)" (mouseleave)="pausado.set(false)" (focusin)="pausado.set(true)" (focusout)="pausado.set(false)">
+      <div class="hero-track" [ngStyle]="{ transform: 'translateX(-' + indice() * 100 + '%)' }">
+        @for (j of slides(); track j.id; let i = $index) {
+          <article class="hero-slide" [attr.aria-hidden]="i !== indice()" [attr.aria-label]="(i + 1) + ' de ' + slides().length">
+            <img class="hero-img" [src]="j.banner || j.image" [alt]="'Arte de ' + j.title" (error)="imagenRota($event)">
+            <div class="hero-scrim"></div>
+            <div class="hero-content">
+              <span class="eyebrow">Destacado · {{ j.category }}</span>
+              <h1 class="hero-title">{{ j.title }}</h1>
+              <p class="hero-copy">{{ j.description }}</p>
+              <div class="hero-meta">
+                <span class="hero-price">{{ j.price | soles }}</span>
+                @if (j.developer) { <span class="hero-dev">{{ j.developer }}</span> }
+              </div>
+              <div class="hero-actions">
+                <a class="btn btn-primary" [routerLink]="['/juego', j.id]" [tabIndex]="i === indice() ? 0 : -1">Ver detalles</a>
+                <button type="button" class="btn btn-hero" [tabIndex]="i === indice() ? 0 : -1" (click)="agregar(j)"><i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Añadir</button>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+      @if (slides().length > 1) {
+        <button type="button" class="hero-flecha izq" aria-label="Juego anterior" (click)="anterior()"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+        <button type="button" class="hero-flecha der" aria-label="Juego siguiente" (click)="siguiente()"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+        <div class="hero-dots">
+          @for (j of slides(); track j.id; let i = $index) {
+            <button type="button" class="hero-dot" [class.activo]="i === indice()" [attr.aria-label]="'Ir a ' + j.title" [attr.aria-current]="i === indice()" (click)="ir(i)"></button>
+          }
+        </div>
+      }
+    </section>
+  }
+
+  <section class="section">
+    <div class="section-head">
+      <div><h2>Recién llegados</h2><p class="muted">Los lanzamientos más recientes del catálogo.</p></div>
+      <a class="link-ver" routerLink="/catalogo">Ver todo el catálogo <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+    </div>
+    <div class="games-grid">
+      @for (j of recientes(); track j.id) { <app-game-card [juego]="j" (agregar)="agregar($event)" /> }
+    </div>
+  </section>
+
+  @if (ultimas().length > 0) {
+    <section class="section">
+      <div class="section-head">
+        <div><h2><i class="fa-solid fa-fire" aria-hidden="true"></i> Últimas claves</h2><p class="muted">Quedan pocas licencias de estos juegos.</p></div>
+      </div>
+      <div class="games-grid">
+        @for (j of ultimas(); track j.id) { <app-game-card [juego]="j" (agregar)="agregar($event)" /> }
+      </div>
+    </section>
+  }
+
+  <section class="section">
+    <div class="features">
+      <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span><h3>Claves al instante</h3><p>Pagas y tu licencia aparece de inmediato en tu biblioteca, lista para activar.</p></article>
+      <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-gift" aria-hidden="true"></i></span><h3>Regala juegos</h3><p>Compra un juego para un amigo: la clave llega directo a su biblioteca.</p></article>
+      <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i></span><h3>Boleta o factura en PDF</h3><p>Elige tu comprobante al pagar y descárgalo cuando quieras.</p></article>
+      <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span><h3>Soporte con asistente</h3><p>Un asistente virtual resuelve tus dudas y, si hace falta, te pasa con una persona.</p></article>
+    </div>
+  </section>
+}

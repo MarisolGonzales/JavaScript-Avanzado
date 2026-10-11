@@ -1,0 +1,60 @@
+<section class="page-header">
+  <h1>Mis pedidos</h1>
+  <p>Consulta tus compras, descarga tus comprobantes y revisa su seguimiento.</p>
+</section>
+
+<section class="page-body">
+  @if (estado.cargando() && !estado.datos()) {
+    <div class="history-list" aria-busy="true"><div class="skeleton fila-skel"></div><div class="skeleton fila-skel"></div></div>
+  } @else if (estado.error()) {
+    <div class="estado-vacio" role="alert">
+      <i class="fa-solid fa-plug-circle-xmark" aria-hidden="true"></i><h2>No pudimos cargar tus pedidos</h2><p>{{ estado.error() }}</p>
+      <button type="button" class="btn btn-primary" (click)="cargar()">Reintentar</button>
+    </div>
+  } @else if (pedidos().length === 0) {
+    <div class="estado-vacio">
+      <i class="fa-solid fa-receipt" aria-hidden="true"></i><h2>Aún no tienes pedidos</h2><p>Cuando compres, aquí verás tu comprobante y el seguimiento.</p>
+      <a class="btn btn-primary" routerLink="/catalogo">Ir al catálogo</a>
+    </div>
+  } @else {
+    <div class="kpis">
+      <div class="kpi"><span class="kpi-valor">{{ pedidos().length }}</span><span class="kpi-label">Pedidos</span></div>
+      <div class="kpi"><span class="kpi-valor">{{ juegosComprados() }}</span><span class="kpi-label">Juegos recibidos</span></div>
+      <div class="kpi"><span class="kpi-valor">{{ gastoTotal() | soles }}</span><span class="kpi-label">Total gastado</span></div>
+    </div>
+
+    <div class="category-filters" role="group" aria-label="Filtrar por estado">
+      <button type="button" class="filter-chip" [class.active]="filtro() === 'TODOS'" [attr.aria-pressed]="filtro() === 'TODOS'" (click)="filtro.set('TODOS')">Todos ({{ pedidos().length }})</button>
+      @for (s of estados; track s) {
+        @if (cuantos(s) > 0) {
+          <button type="button" class="filter-chip" [class.active]="filtro() === s" [attr.aria-pressed]="filtro() === s" (click)="filtro.set(s)">{{ s | estadoPedido }} ({{ cuantos(s) }})</button>
+        }
+      }
+    </div>
+
+    <ul class="history-list">
+      @for (p of visibles(); track p.codigo) {
+        <li class="history-entry">
+          <div class="history-entry-head">
+            <div>
+              <a class="pedido-codigo" [routerLink]="['/pedidos', p.codigo]">{{ p.codigo }}</a>
+              <time class="muted small" [attr.datetime]="p.fecha"> · {{ p.fecha | date: "dd/MM/yyyy 'a las' HH:mm" }}</time>
+            </div>
+            <app-estado-badge [estado]="p.estado" />
+          </div>
+          <ul class="history-items">
+            @for (i of p.items; track $index) {
+              <li><span>{{ i.titulo }} @if (i.tipoEntrega === 'REGALO') { <small class="muted"> · <i class="fa-solid fa-gift" aria-hidden="true"></i> regalo</small> }</span></li>
+            }
+          </ul>
+          <div class="history-entry-foot">
+            <span><span class="price">{{ p.total | soles }}</span> <small class="muted">· {{ p.comprobante.tipo === 'FACTURA' ? 'Factura' : 'Boleta' }} {{ p.comprobante.numeroCompleto }}</small></span>
+            <a class="btn btn-secondary btn-sm" [routerLink]="['/pedidos', p.codigo]">Ver detalle y comprobante</a>
+          </div>
+        </li>
+      } @empty {
+        <li class="estado-vacio"><h2>Ningún pedido en este estado</h2></li>
+      }
+    </ul>
+  }
+</section>

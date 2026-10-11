@@ -1,27 +1,26 @@
-# NexusGamingFrontend
+# NEXUS GAMING · Interfaz (Angular 18)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.21.
+```powershell
+npm install
+npm start            # http://localhost:4200  (necesita la API en :3000)
+npm run build        # compilación de producción en dist/
+npm run test:logic   # 68 pruebas unitarias SIN navegador (Node + Jasmine)
+npm test             # las mismas pruebas en Chrome (Karma)
+```
 
-## Development server
+La URL de la API se cambia en `src/environments/environment.ts`.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+```
+src/app/
+  layouts/        tienda-layout (cliente) · admin-layout (panel de administración y soporte)
+  pages/          tienda/ · auth/ (login, registro) · admin/ (resumen, pedidos, clientes, soporte, catálogo)
+  core/
+    logic/        funciones puras y probadas: dinero (céntimos), ordenamiento, búsqueda, pagos, RUC/DNI, CSV, formato…
+    services/     auth, tema, juegos, carrito, pedidos, tickets, asistente, admin, toast (HttpClient + señales)
+    interceptors/ auth (Bearer + cierre de sesión si vence)      guards/ por sesión y por rol
+  shared/         models, pipes, directiva appStock, componentes y gráficos SVG (área, dona, barras)
+src/styles/       tokens (tema oscuro y claro), base, layout, tienda, auth, panel
+```
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+Convenciones: componentes **standalone** con `OnPush`, estado con **señales**, plantillas con `@if` / `@for` / `@switch`,
+formularios reactivos **tipados**, `strict` y `strictTemplates` activados.

@@ -1,19 +1,13 @@
-import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { CarritoService } from './core/services/carrito.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { ToastsComponent } from './shared/components/toasts.component';
 
+/** Raíz: solo aloja la página activa. Cada "layout" (tienda o panel) pone su propio marco. */
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  standalone: true,
+  imports: [RouterOutlet, ToastsComponent],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `<router-outlet /><app-toasts />`
 })
-export class AppComponent {
-  totalCarrito$: Observable<number>;
-
-  constructor(private carritoService: CarritoService) {
-    this.totalCarrito$ = this.carritoService.obtenerCarrito().pipe(
-      map(items => items.length)
-    );
-  }
-}
+export class AppComponent {}

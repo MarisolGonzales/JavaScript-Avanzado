@@ -1,0 +1,128 @@
+<div class="dash-cab">
+  <div>
+    <h1 class="dash-titulo">Hola, {{ auth.usuario()?.nombre?.split(' ')?.[0] }} 👋</h1>
+    <p class="muted">Así va NEXUS GAMING: ventas, pedidos y soporte en un vistazo.</p>
+  </div>
+  <button type="button" class="btn btn-secondary btn-sm" (click)="cargar()"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Actualizar</button>
+</div>
+
+@if (r(); as d) {
+  <div class="dash-rejilla">
+    <div class="dash-principal">
+      <!-- ===== Indicadores ===== -->
+      <div class="kpi-tarjetas">
+        <article class="kpi-t destacada">
+          <span class="kpi-t-et">Ingresos totales</span>
+          <strong class="kpi-t-valor">{{ d.ingresosTotales | soles }}</strong>
+          @if (d.variacionSemanal !== null) {
+            <span class="kpi-t-delta" [class.sube]="d.variacionSemanal >= 0" [class.baja]="d.variacionSemanal < 0">
+              <i class="fa-solid" [class]="d.variacionSemanal >= 0 ? 'fa-arrow-trend-up' : 'fa-arrow-trend-down'" aria-hidden="true"></i>
+              {{ d.variacionSemanal >= 0 ? '+' : '' }}{{ d.variacionSemanal }} % vs. semana anterior
+            </span>
+          } @else { <span class="kpi-t-delta">Sin semana anterior para comparar</span> }
+        </article>
+        <article class="kpi-t"><span class="kpi-t-et">Pedidos</span><strong class="kpi-t-valor">{{ d.pedidosValidos }}</strong><span class="kpi-t-delta">{{ d.reembolsos.pedidos }} reembolsados</span></article>
+        <article class="kpi-t"><span class="kpi-t-et">Clientes</span><strong class="kpi-t-valor">{{ d.clientes }}</strong><span class="kpi-t-delta">{{ d.totalJuegos }} juegos en catálogo</span></article>
+        <article class="kpi-t"><span class="kpi-t-et">Ticket promedio</span><strong class="kpi-t-valor">{{ d.ticketPromedio | soles }}</strong><span class="kpi-t-delta">Reembolsos: {{ d.reembolsos.monto | soles }}</span></article>
+      </div>
+
+      <!-- ===== Ventas + categorías ===== -->
+      <div class="dash-fila dos-uno">
+        <section class="tarjeta" aria-labelledby="t-ventas">
+          <header class="tarjeta-cab">
+            <div><h2 id="t-ventas" class="tarjeta-titulo">Ventas</h2><p class="muted small">Últimos {{ dias() }} días · {{ totalPeriodo() | soles }}</p></div>
+            <div class="chips-periodo" role="group" aria-label="Periodo">
+              <button type="button" class="chip-p" [class.activo]="dias() === 7" [attr.aria-pressed]="dias() === 7" (click)="dias.set(7)">7 días</button>
+              <button type="button" class="chip-p" [class.activo]="dias() === 14" [attr.aria-pressed]="dias() === 14" (click)="dias.set(14)">14 días</button>
+            </div>
+          </header>
+          <app-area-chart [puntos]="puntos()" />
+        </section>
+
+        <section class="tarjeta" aria-labelledby="t-cat">
+          <header class="tarjeta-cab"><div><h2 id="t-cat" class="tarjeta-titulo">Ventas por categoría</h2></div></header>
+          <app-donut-chart [segmentos]="categorias()" [centro]="centroDonut()" subcentro="Ingresos" />
+        </section>
+      </div>
+
+      <!-- ===== Regiones + más vendidos ===== -->
+      <div class="dash-fila dos">
+        <section class="tarjeta" aria-labelledby="t-reg">
+          <header class="tarjeta-cab"><div><h2 id="t-reg" class="tarjeta-titulo">Ingresos por región</h2><p class="muted small">Según el departamento del cliente</p></div></header>
+          <app-bar-list [datos]="regiones()" />
+        </section>
+        <section class="tarjeta" aria-labelledby="t-top">
+          <header class="tarjeta-cab"><div><h2 id="t-top" class="tarjeta-titulo">Juegos más vendidos</h2></div></header>
+          <app-bar-list [datos]="top()" />
+        </section>
+      </div>
+
+      <!-- ===== Últimos pedidos ===== -->
+      <section class="tarjeta" aria-labelledby="t-ult">
+        <header class="tarjeta-cab"><h2 id="t-ult" class="tarjeta-titulo">Últimos pedidos</h2><a class="link-ver" routerLink="/admin/pedidos">Ver todos <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></header>
+        <div class="tabla-scroll sin-borde">
+          <table class="tabla-nx">
+            <thead><tr><th scope="col">Pedido</th><th scope="col">Cliente</th><th scope="col">Fecha</th><th scope="col">Total</th><th scope="col">Estado</th></tr></thead>
+            <tbody>
+              @for (p of recientes(); track p.codigo) {
+                <tr>
+                  <td><strong>{{ p.codigo }}</strong><br><small class="muted">{{ p.comprobante.tipo === 'FACTURA' ? 'Factura' : 'Boleta' }} {{ p.comprobante.numeroCompleto }}</small></td>
+                  <td>{{ p.usuario }}</td>
+                  <td>{{ p.fecha | date: 'dd/MM HH:mm' }}</td>
+                  <td>{{ p.total | soles }}</td>
+                  <td><app-estado-badge [estado]="p.estado" /></td>
+                </tr>
+              } @empty { <tr><td colspan="5" class="muted text-center">Aún no hay pedidos.</td></tr> }
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      @if (auth.esAdmin() && d.stockBajo.length > 0) {
+        <section class="tarjeta" aria-labelledby="t-bajo">
+          <header class="tarjeta-cab"><h2 id="t-bajo" class="tarjeta-titulo"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Claves por agotarse (5 o menos)</h2><a class="link-ver" routerLink="/admin/catalogo">Reponer <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></header>
+          <ul class="stock-bajo-lista">
+            @for (s of d.stockBajo.slice(0, 8); track s.nodo + s.idJuego) { <li><span>{{ s.titulo }} <small class="muted">· {{ s.nodo }}</small></span><span class="stock-pill" [appStock]="s.stock">{{ s.stock }}</span></li> }
+          </ul>
+        </section>
+      }
+    </div>
+
+    <!-- ===== Columna derecha ===== -->
+    <aside class="dash-lateral" aria-label="Actividad y soporte">
+      <section class="tarjeta" aria-labelledby="t-pend">
+        <header class="tarjeta-cab"><h2 id="t-pend" class="tarjeta-titulo">Soporte</h2><a class="link-ver" routerLink="/admin/soporte">Abrir</a></header>
+        <div class="soporte-resumen">
+          <div><strong>{{ panel.abiertos().length }}</strong><span>Tickets abiertos</span></div>
+          <div><strong>{{ panel.tickets().length - panel.abiertos().length }}</strong><span>Resueltos</span></div>
+        </div>
+        @for (t of panel.abiertos().slice(0, 3); track t.id) {
+          <a class="ticket-mini" routerLink="/admin/soporte"><strong>{{ t.asunto }}</strong><span class="muted small">{{ t.usuario }} · {{ hace(t.fecha) }}</span></a>
+        }
+      </section>
+
+      <section class="tarjeta" aria-labelledby="t-act">
+        <header class="tarjeta-cab"><h2 id="t-act" class="tarjeta-titulo">Actividad reciente</h2></header>
+        <ul class="actividad">
+          @for (a of actividad(); track a.fecha + a.texto) {
+            <li><a [routerLink]="a.enlace"><span class="act-icono" [class]="'act-icono ' + a.clase"><i class="fa-solid" [class]="a.icono" aria-hidden="true"></i></span><span class="act-texto">{{ a.texto }}<small>{{ hace(a.fecha) }}</small></span></a></li>
+          } @empty { <li class="muted">Sin actividad todavía.</li> }
+        </ul>
+      </section>
+
+      <section class="tarjeta" aria-labelledby="t-est">
+        <header class="tarjeta-cab"><h2 id="t-est" class="tarjeta-titulo">Pedidos por estado</h2></header>
+        <ul class="estados-lista">
+          <li><app-estado-badge estado="ENTREGADO" /><strong>{{ d.pedidosPorEstado.ENTREGADO ?? 0 }}</strong></li>
+          <li><app-estado-badge estado="PAGADO" /><strong>{{ d.pedidosPorEstado.PAGADO ?? 0 }}</strong></li>
+          <li><app-estado-badge estado="PENDIENTE" /><strong>{{ d.pedidosPorEstado.PENDIENTE ?? 0 }}</strong></li>
+          <li><app-estado-badge estado="REEMBOLSADO" /><strong>{{ d.pedidosPorEstado.REEMBOLSADO ?? 0 }}</strong></li>
+        </ul>
+      </section>
+    </aside>
+  </div>
+} @else if (reportes.error()) {
+  <div class="banner-error en-panel" role="alert"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> {{ reportes.error() }} <button type="button" class="btn-link" (click)="cargar()">Reintentar</button></div>
+} @else {
+  <div class="dash-rejilla" aria-busy="true"><div class="dash-principal"><div class="kpi-tarjetas"><div class="skeleton kpi-skel"></div><div class="skeleton kpi-skel"></div><div class="skeleton kpi-skel"></div><div class="skeleton kpi-skel"></div></div><div class="skeleton grafico-skel"></div></div></div>
+}

@@ -1,0 +1,157 @@
+<section class="page-header">
+  <h1>Finalizar compra</h1>
+  <p>Elige tu comprobante y cómo pagar. Recibirás tus claves al instante.</p>
+</section>
+
+<section class="page-body">
+  @if (carrito.items().length === 0) {
+    <div class="estado-vacio">
+      <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><h2>No hay juegos para pagar</h2>
+      <a class="btn btn-primary" routerLink="/catalogo">Ir al catálogo</a>
+    </div>
+  } @else {
+    <div class="cart-layout">
+      <div class="checkout-pasos">
+
+        @if (carrito.hayRegalo()) {
+          <form class="panel-nx" [formGroup]="regaloForm" novalidate aria-labelledby="t-regalo">
+            <h2 id="t-regalo"><span class="paso-num"><i class="fa-solid fa-gift" aria-hidden="true"></i></span> ¿A quién le regalas?</h2>
+            <p class="muted small">Los juegos marcados como regalo llegan a la biblioteca de esta persona.</p>
+            <div class="form-group">
+              <label for="destinatario">Correo del destinatario</label>
+              <input id="destinatario" type="email" formControlName="destinatario" placeholder="amigo@correo.com" [class.invalido]="error(regaloForm.controls.destinatario)">
+              @if (error(regaloForm.controls.destinatario)) { <p class="msg-error">Escribe un correo válido.</p> }
+            </div>
+            <div class="form-group">
+              <label for="mensaje-regalo">Mensaje <span class="muted">(opcional)</span></label>
+              <textarea id="mensaje-regalo" rows="2" formControlName="mensaje" maxlength="200" placeholder="¡Feliz cumpleaños!"></textarea>
+            </div>
+          </form>
+        }
+
+        <form class="panel-nx" [formGroup]="comprobanteForm" novalidate aria-labelledby="t-comprobante">
+          <h2 id="t-comprobante"><span class="paso-num">{{ carrito.hayRegalo() ? 2 : 1 }}</span> Comprobante de pago</h2>
+          <div class="opciones-entrega" role="radiogroup" aria-label="Tipo de comprobante">
+            <label class="opcion" [class.activa]="tipo() === 'BOLETA'">
+              <input type="radio" formControlName="tipo" value="BOLETA">
+              <span><strong><i class="fa-solid fa-receipt" aria-hidden="true"></i> Boleta</strong><small>Para personas · DNI opcional</small></span>
+            </label>
+            <label class="opcion" [class.activa]="tipo() === 'FACTURA'">
+              <input type="radio" formControlName="tipo" value="FACTURA">
+              <span><strong><i class="fa-solid fa-file-invoice" aria-hidden="true"></i> Factura</strong><small>Para empresas · requiere RUC</small></span>
+            </label>
+          </div>
+
+          @if (tipo() === 'FACTURA') {
+            <div class="form-group">
+              <label for="ruc">RUC</label>
+              <input id="ruc" inputmode="numeric" maxlength="11" formControlName="documento" placeholder="20601234565" [class.invalido]="error(comprobanteForm.controls.documento)" (input)="soloDigitos(comprobanteForm.controls.documento, $event, 11)">
+              @if (error(comprobanteForm.controls.documento)) { <p class="msg-error">RUC no válido (11 dígitos y dígito de control correcto).</p> }
+            </div>
+            <div class="form-group">
+              <label for="razon">Razón social</label>
+              <input id="razon" formControlName="nombre" placeholder="Mi Empresa S.A.C." [class.invalido]="error(comprobanteForm.controls.nombre)">
+              @if (error(comprobanteForm.controls.nombre)) { <p class="msg-error">Escribe la razón social.</p> }
+            </div>
+            <div class="form-group">
+              <label for="dir-fiscal">Dirección fiscal</label>
+              <input id="dir-fiscal" formControlName="direccion" placeholder="Av. Principal 123, Lima" [class.invalido]="error(comprobanteForm.controls.direccion)">
+              @if (error(comprobanteForm.controls.direccion)) { <p class="msg-error">Escribe la dirección fiscal (mínimo 5 caracteres).</p> }
+            </div>
+          } @else {
+            <div class="form-fila">
+              <div class="form-group">
+                <label for="nombre-boleta">Nombre del cliente</label>
+                <input id="nombre-boleta" formControlName="nombre" autocomplete="name">
+              </div>
+              <div class="form-group">
+                <label for="dni">DNI {{ exigeDni() ? '' : '(opcional)' }}</label>
+                <input id="dni" inputmode="numeric" maxlength="8" formControlName="documento" placeholder="12345678" [class.invalido]="error(comprobanteForm.controls.documento)" (input)="soloDigitos(comprobanteForm.controls.documento, $event, 8)">
+                @if (error(comprobanteForm.controls.documento)) { <p class="msg-error">{{ exigeDni() ? 'Las boletas desde S/ ' + montoDni + ' requieren un DNI de 8 dígitos.' : 'El DNI debe tener 8 dígitos.' }}</p> }
+              </div>
+            </div>
+          }
+        </form>
+
+        <section class="panel-nx" aria-labelledby="t-pago">
+          <h2 id="t-pago"><span class="paso-num">{{ carrito.hayRegalo() ? 3 : 2 }}</span> Método de pago</h2>
+
+          <div class="payment-tabs" role="tablist" aria-label="Método de pago">
+            @for (m of metodos; track m.clave) {
+              <button type="button" role="tab" class="payment-tab" [class.active]="metodo() === m.clave" [attr.aria-selected]="metodo() === m.clave" (click)="metodo.set(m.clave)">
+                <i class="fa-solid" [class]="m.icono" aria-hidden="true"></i> {{ m.nombre }}
+              </button>
+            }
+          </div>
+
+          @switch (metodo()) {
+            @case ('TARJETA') {
+              <form class="payment-panel" [formGroup]="tarjetaForm" novalidate (ngSubmit)="confirmar()">
+                <div class="form-group">
+                  <label for="numero">Número de tarjeta</label>
+                  <input id="numero" formControlName="numero" inputmode="numeric" autocomplete="cc-number" placeholder="4242 4242 4242 4242" [class.invalido]="error(tarjetaForm.controls.numero)" (input)="formatearNumero($event)">
+                  @if (error(tarjetaForm.controls.numero)) { <p class="msg-error">Número de tarjeta no válido.</p> }
+                </div>
+                <div class="form-group">
+                  <label for="nombre-tarjeta">Nombre del titular</label>
+                  <input id="nombre-tarjeta" formControlName="nombre" autocomplete="cc-name" [class.invalido]="error(tarjetaForm.controls.nombre)">
+                  @if (error(tarjetaForm.controls.nombre)) { <p class="msg-error">Escribe el nombre como figura en la tarjeta.</p> }
+                </div>
+                <div class="form-fila">
+                  <div class="form-group">
+                    <label for="exp">Vencimiento (MM/AA)</label>
+                    <input id="exp" formControlName="exp" inputmode="numeric" autocomplete="cc-exp" placeholder="12/29" maxlength="5" [class.invalido]="error(tarjetaForm.controls.exp)" (input)="formatearExp($event)">
+                    @if (error(tarjetaForm.controls.exp)) { <p class="msg-error">Fecha vencida o inválida.</p> }
+                  </div>
+                  <div class="form-group">
+                    <label for="cvv">CVV</label>
+                    <input id="cvv" formControlName="cvv" inputmode="numeric" autocomplete="cc-csc" maxlength="4" placeholder="123" type="password" [class.invalido]="error(tarjetaForm.controls.cvv)" (input)="soloDigitos(tarjetaForm.controls.cvv, $event, 4)">
+                    @if (error(tarjetaForm.controls.cvv)) { <p class="msg-error">3 o 4 dígitos.</p> }
+                  </div>
+                </div>
+                <p class="form-hint"><i class="fa-solid fa-lock" aria-hidden="true"></i> Proyecto académico: no se procesa dinero real y solo se guardan los últimos 4 dígitos. Prueba con 4242 4242 4242 4242.</p>
+              </form>
+            }
+            @case ('YAPE') {
+              <form class="payment-panel" [formGroup]="yapeForm" novalidate (ngSubmit)="confirmar()">
+                <div class="form-group">
+                  <label for="yape">Celular asociado a Yape</label>
+                  <input id="yape" formControlName="celular" inputmode="numeric" maxlength="9" placeholder="987654321" [class.invalido]="error(yapeForm.controls.celular)" (input)="soloDigitos(yapeForm.controls.celular, $event, 9)">
+                  @if (error(yapeForm.controls.celular)) { <p class="msg-error">Celular de 9 dígitos que empiece con 9.</p> }
+                </div>
+              </form>
+            }
+            @case ('PLIN') {
+              <form class="payment-panel" [formGroup]="plinForm" novalidate (ngSubmit)="confirmar()">
+                <div class="form-group">
+                  <label for="plin">Celular asociado a Plin</label>
+                  <input id="plin" formControlName="celular" inputmode="numeric" maxlength="9" placeholder="987654321" [class.invalido]="error(plinForm.controls.celular)" (input)="soloDigitos(plinForm.controls.celular, $event, 9)">
+                  @if (error(plinForm.controls.celular)) { <p class="msg-error">Celular de 9 dígitos que empiece con 9.</p> }
+                </div>
+              </form>
+            }
+          }
+        </section>
+
+        @if (errorEnvio(); as e) { <div class="banner-error en-panel" role="alert"><i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i> {{ e }}</div> }
+      </div>
+
+      <aside class="cart-summary" aria-label="Resumen del pedido">
+        <h2>Tu pedido</h2>
+        <ul class="resumen-lista">
+          @for (i of carrito.items(); track i.idJuego + '-' + i.tipoEntrega) {
+            <li><span>{{ i.titulo }} @if (i.tipoEntrega === 'REGALO') { <small><i class="fa-solid fa-gift" aria-hidden="true"></i> regalo</small> }</span><span>{{ i.precio | soles }}</span></li>
+          }
+        </ul>
+        <div class="summary-row"><span>Op. gravada</span><span>{{ desglose().subtotal | soles }}</span></div>
+        <div class="summary-row"><span>IGV (18 %)</span><span>{{ desglose().igv | soles }}</span></div>
+        <div class="summary-row total"><span>Total</span><span>{{ carrito.total() | soles }}</span></div>
+        <p class="muted small">Comprobante: <strong>{{ tipo() === 'FACTURA' ? 'Factura' : 'Boleta' }}</strong> electrónica en PDF.</p>
+        <button type="button" class="btn btn-primary w-100" [disabled]="enviando()" (click)="confirmar()">
+          @if (enviando()) { <span class="spinner" aria-hidden="true"></span> Procesando… } @else { Pagar {{ carrito.total() | soles }} }
+        </button>
+        <a class="btn btn-link w-100" routerLink="/carrito">Volver al carrito</a>
+      </aside>
+    </div>
+  }
+</section>

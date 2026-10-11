@@ -1,0 +1,102 @@
+<section class="page-body">
+  <a routerLink="/pedidos" class="link-volver no-imprimir"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver a mis pedidos</a>
+
+  @if (estado.cargando() && !pedido()) {
+    <div class="skeleton fila-skel" aria-busy="true"></div>
+  } @else if (estado.error()) {
+    <div class="estado-vacio" role="alert">
+      <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><h2>No pudimos mostrar este pedido</h2><p>{{ estado.error() }}</p>
+      <a class="btn btn-primary" routerLink="/pedidos">Mis pedidos</a>
+    </div>
+  } @else {
+    @if (pedido(); as p) {
+    @if (nuevo() && p.estado === 'ENTREGADO') {
+      <div class="banner-exito no-imprimir" role="status">
+        <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+        <div><strong>¡Compra exitosa!</strong> {{ p.entrega?.canal === 'REGALO' ? 'Tu regalo ya fue enviado y tus claves están en tu biblioteca.' : 'Tus claves ya están disponibles en tu biblioteca.' }}</div>
+        <a routerLink="/biblioteca" class="btn btn-primary btn-sm">Ir a mi biblioteca</a>
+      </div>
+    }
+
+    <div class="pedido-cabecera">
+      <div>
+        <h1>Pedido {{ p.codigo }}</h1>
+        <p class="muted">{{ p.fecha | date: "dd 'de' MMMM 'de' yyyy, HH:mm" }}</p>
+      </div>
+      <app-estado-badge [estado]="p.estado" />
+    </div>
+
+    <div class="pedido-grid">
+      <div class="pedido-col">
+        <section class="panel-nx" aria-labelledby="t-items">
+          <h2 id="t-items">Juegos</h2>
+          <ul class="lineas">
+            @for (i of p.items; track $index) {
+              <li class="linea">
+                <img [src]="i.imagen" [alt]="'Portada de ' + i.titulo" (error)="imagenRota($event)">
+                <div class="linea-info">
+                  <strong>{{ i.titulo }}</strong>
+                  <span class="muted small">
+                    @if (i.tipoEntrega === 'REGALO') { <i class="fa-solid fa-gift" aria-hidden="true"></i> Regalo para {{ p.entrega?.destinatario }} } @else { <i class="fa-solid fa-user" aria-hidden="true"></i> Para tu cuenta }
+                  </span>
+                  @if (i.claveDigital; as clave) {
+                    @if (i.tipoEntrega === 'DIGITAL') {
+                      <span class="clave-fila">
+                        <code class="clave">{{ visibles().has('k' + $index) ? clave : oculta(clave) }}</code>
+                        <button type="button" class="btn-icono" [attr.aria-label]="visibles().has('k' + $index) ? 'Ocultar clave' : 'Mostrar clave'" (click)="alternar('k' + $index)"><i class="fa-solid" [class]="visibles().has('k' + $index) ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i></button>
+                        <button type="button" class="btn-icono" aria-label="Copiar clave" (click)="copiar(clave)"><i class="fa-regular fa-copy" aria-hidden="true"></i></button>
+                      </span>
+                    } @else {
+                      <span class="muted small">La clave se entregó al destinatario.</span>
+                    }
+                  }
+                </div>
+                <span class="price">{{ i.subtotal | soles }}</span>
+              </li>
+            }
+          </ul>
+        </section>
+
+        @if (p.entrega?.canal === 'REGALO') {
+          <section class="panel-nx" aria-labelledby="t-regalo">
+            <h2 id="t-regalo"><i class="fa-solid fa-gift" aria-hidden="true"></i> Regalo</h2>
+            <dl class="ficha"><div><dt>Destinatario</dt><dd>{{ p.entrega?.destinatario }}</dd></div>@if (p.entrega?.mensaje) { <div><dt>Tu mensaje</dt><dd>{{ p.entrega?.mensaje }}</dd></div> }</dl>
+          </section>
+        }
+
+        <section class="panel-nx no-imprimir" aria-labelledby="t-hist">
+          <h2 id="t-hist">Seguimiento</h2>
+          <app-timeline-estados [historial]="p.historial" />
+          @if (puedeReembolso()) {
+            <p class="muted small">¿Algo salió mal? Puedes pedir el reembolso hasta {{ diasReembolso }} días después de la compra.</p>
+            <a class="btn btn-secondary btn-sm" routerLink="/soporte" [queryParams]="{ tipo: 'REEMBOLSO', pedido: p.codigo }"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Solicitar reembolso</a>
+          }
+        </section>
+      </div>
+
+      <aside class="comprobante" aria-labelledby="t-comp">
+        <header class="comprobante-cab">
+          <strong>NEXUS GAMING</strong>
+          <span>{{ p.comprobante.tipo === 'FACTURA' ? 'FACTURA ELECTRÓNICA' : 'BOLETA DE VENTA ELECTRÓNICA' }}</span>
+          <span id="t-comp" class="comprobante-num">{{ p.comprobante.numeroCompleto }}</span>
+        </header>
+        <dl class="comprobante-datos">
+          <div><dt>Emisión</dt><dd>{{ p.comprobante.emitidoEn | date: 'dd/MM/yyyy HH:mm' }}</dd></div>
+          <div><dt>{{ p.comprobante.tipo === 'FACTURA' ? 'Razón social' : 'Cliente' }}</dt><dd>{{ p.comprobante.receptor.nombre || p.usuario }}</dd></div>
+          <div><dt>{{ p.comprobante.receptor.tipoDoc === 'SIN DOC' ? 'Documento' : p.comprobante.receptor.tipoDoc }}</dt><dd>{{ p.comprobante.receptor.documento || 'Sin documento' }}</dd></div>
+          @if (p.comprobante.receptor.direccion) { <div><dt>Dirección</dt><dd>{{ p.comprobante.receptor.direccion }}</dd></div> }
+          <div><dt>Pago</dt><dd>{{ p.pago.metodo }} @if (p.pago.referencia) { <small>({{ p.pago.referencia }})</small> } · {{ p.pago.estado === 'REEMBOLSADO' ? 'Reembolsado' : 'Aprobado' }}</dd></div>
+        </dl>
+        <div class="summary-row"><span>Op. gravada</span><span>{{ p.comprobante.subtotal | soles }}</span></div>
+        <div class="summary-row"><span>IGV (18 %)</span><span>{{ p.comprobante.igv | soles }}</span></div>
+        <div class="summary-row total"><span>Total</span><span>{{ p.comprobante.total | soles }}</span></div>
+        <div class="comprobante-acciones no-imprimir">
+          <button type="button" class="btn btn-primary w-100" [disabled]="descargando()" (click)="descargar(false)"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i> {{ descargando() ? 'Generando…' : 'Descargar PDF' }}</button>
+          <button type="button" class="btn btn-secondary w-100" [disabled]="descargando()" (click)="descargar(true)"><i class="fa-regular fa-eye" aria-hidden="true"></i> Ver PDF</button>
+          <button type="button" class="btn btn-link w-100" (click)="imprimir()"><i class="fa-solid fa-print" aria-hidden="true"></i> Imprimir esta página</button>
+        </div>
+      </aside>
+    </div>
+    }
+  }
+</section>

@@ -1,0 +1,56 @@
+<section class="page-body">
+  <a routerLink="/catalogo" class="link-volver"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Volver al catálogo</a>
+
+  @if (estado.cargando() && !juego()) {
+    <div class="detalle-layout" aria-busy="true"><div class="skeleton detalle-skel"></div><div class="skeleton detalle-skel"></div></div>
+  } @else if (estado.error()) {
+    <div class="estado-vacio" role="alert">
+      <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i><h2>No encontramos este juego</h2><p>{{ estado.error() }}</p>
+      <a class="btn btn-primary" routerLink="/catalogo">Ir al catálogo</a>
+    </div>
+  } @else {
+    @if (juego(); as j) {
+    <article class="detalle-layout">
+      <img class="detalle-img" [src]="j.image" [alt]="'Portada de ' + j.title" (error)="imagenRota($event)">
+
+      <div class="detalle-info">
+        <span class="tag">{{ j.category }}</span>
+        <h1>{{ j.title }}</h1>
+        <p class="detalle-desc">{{ j.description }}</p>
+
+        <dl class="ficha">
+          @if (j.developer) { <div><dt>Desarrollador</dt><dd>{{ j.developer }}</dd></div> }
+          @if (j.year) { <div><dt>Año</dt><dd>{{ j.year }}</dd></div> }
+          @if (j.platforms) { <div><dt>Plataformas</dt><dd>{{ j.platforms }}</dd></div> }
+          @if (j.mode) { <div><dt>Modo</dt><dd>{{ j.mode }}</dd></div> }
+        </dl>
+
+        <div class="panel-compra">
+          <div class="panel-compra-top">
+            <span class="price price-grande">{{ j.price | soles }}</span>
+            <span class="stock-pill" [appStock]="j.stock">{{ textoStock(j.stock) }}</span>
+          </div>
+
+          <fieldset class="opciones-entrega" [disabled]="j.stock === 0">
+            <legend>¿Para quién es?</legend>
+            <label class="opcion" [class.activa]="tipo() === 'DIGITAL'">
+              <input type="radio" name="tipo" value="DIGITAL" [checked]="tipo() === 'DIGITAL'" (change)="tipo.set('DIGITAL')">
+              <span><strong><i class="fa-solid fa-user" aria-hidden="true"></i> Para mi cuenta</strong><small>La clave llega a tu biblioteca</small></span>
+            </label>
+            <label class="opcion" [class.activa]="tipo() === 'REGALO'">
+              <input type="radio" name="tipo" value="REGALO" [checked]="tipo() === 'REGALO'" (change)="tipo.set('REGALO')">
+              <span><strong><i class="fa-solid fa-gift" aria-hidden="true"></i> Es un regalo</strong><small>La recibe otra persona (indicas su correo al pagar)</small></span>
+            </label>
+          </fieldset>
+
+          <div class="panel-compra-acciones">
+            <button type="button" class="btn btn-primary" [disabled]="j.stock === 0" (click)="agregar()"><i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</button>
+            <button type="button" class="btn btn-secondary" [disabled]="j.stock === 0" (click)="comprarAhora()">Comprar ahora</button>
+          </div>
+          <p class="form-hint"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Entrega inmediata · Reembolso dentro de 14 días · Boleta o factura en PDF</p>
+        </div>
+      </div>
+    </article>
+    }
+  }
+</section>

@@ -1,0 +1,63 @@
+<div class="dash-cab">
+  <div><h1 class="dash-titulo">Soporte</h1><p class="muted">Responde consultas y aprueba reembolsos. Las respuestas le llegan al cliente en "Mis tickets".</p></div>
+</div>
+
+<div class="soporte-admin">
+  <section class="tarjeta lista-tickets" aria-label="Lista de tickets">
+    <div class="tabs-linea" role="tablist" aria-label="Estado del ticket">
+      @for (f of ['ABIERTOS', 'RESUELTOS', 'TODOS']; track f) {
+        <button type="button" role="tab" class="tab-linea" [class.activo]="filtro() === f" [attr.aria-selected]="filtro() === f" (click)="filtro.set($any(f))">{{ f === 'ABIERTOS' ? 'Abiertos' : f === 'RESUELTOS' ? 'Resueltos' : 'Todos' }} <span class="tab-n">{{ cuantos($any(f)) }}</span></button>
+      }
+    </div>
+    <label class="check-inline"><input type="checkbox" [checked]="soloReembolsos()" (change)="soloReembolsos.set($any($event.target).checked)"> Solo reembolsos</label>
+
+    <ul class="tickets-lista">
+      @for (t of visibles(); track t.id) {
+        <li><button type="button" class="ticket-item" [class.activo]="seleccionadoId() === t.id" (click)="elegir(t)">
+          <span class="ticket-item-cab"><strong>#{{ t.id }} · {{ t.asunto }}</strong>
+            @if (t.tipo === 'REEMBOLSO') { <span class="estado-badge est-reembolsado"><i class="fa-solid fa-rotate-left" aria-hidden="true"></i> Reembolso</span> }</span>
+          <span class="muted small">{{ t.usuario }} · {{ hace(t.fecha) }}{{ t.estado === 'RESUELTO' ? ' · resuelto' : '' }}</span>
+        </button></li>
+      } @empty { <li class="muted text-center py-3">No hay tickets en esta vista.</li> }
+    </ul>
+  </section>
+
+  <section class="tarjeta detalle-ticket" aria-label="Detalle del ticket">
+    @if (seleccionado(); as t) {
+      <header class="tarjeta-cab">
+        <div><h2 class="tarjeta-titulo">#{{ t.id }} · {{ t.asunto }}</h2><p class="muted small">{{ t.usuario }} · {{ t.fecha | date: 'dd/MM/yyyy HH:mm' }}</p></div>
+        <span class="estado-badge" [class.est-entregado]="t.estado === 'RESUELTO'" [class.est-pendiente]="t.estado === 'ABIERTO'">{{ t.estado === 'RESUELTO' ? 'Resuelto' : 'Abierto' }}</span>
+      </header>
+
+      <div class="mensaje-cliente"><span class="avatar" aria-hidden="true">{{ t.usuario.charAt(0).toUpperCase() }}</span><p>{{ t.mensaje }}</p></div>
+
+      @if (t.tipo === 'REEMBOLSO' && t.pedido) {
+        <div class="aviso-reembolso">
+          <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
+          <div><strong>Solicitud de reembolso del pedido {{ t.pedido }}</strong><p class="muted small mb-0">Al aprobarla, el pedido pasa a Reembolsado, la clave se anula y se repone el stock.</p></div>
+          <a routerLink="/admin/pedidos" class="btn btn-secondary btn-sm">Ver pedidos</a>
+        </div>
+      }
+
+      @if (t.respuesta) {
+        <div class="ticket-respuesta"><strong><i class="fa-solid fa-headset" aria-hidden="true"></i> {{ t.respondidoPor }} · {{ t.respondidoEn ? hace(t.respondidoEn) : '' }}</strong><p>{{ t.respuesta }}</p></div>
+      }
+
+      <form novalidate (submit)="$event.preventDefault(); responder(t, true)">
+        <div class="form-group">
+          <label for="respuesta">{{ t.respuesta ? 'Editar respuesta' : 'Tu respuesta' }}</label>
+          <textarea id="respuesta" rows="4" [formControl]="respuesta" placeholder="Escribe una respuesta clara y amable…" [class.invalido]="respuesta.touched && respuesta.invalid"></textarea>
+          @if (respuesta.touched && respuesta.invalid) { <p class="msg-error">Escribe una respuesta de al menos 3 caracteres.</p> }
+        </div>
+        <div class="acciones">
+          <button type="submit" class="btn btn-primary" [disabled]="trabajando()"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> Responder y resolver</button>
+          <button type="button" class="btn btn-secondary" [disabled]="trabajando()" (click)="responder(t, false)">Solo responder</button>
+          @if (t.tipo === 'REEMBOLSO' && t.estado === 'ABIERTO') { <button type="button" class="btn btn-danger" [disabled]="trabajando()" (click)="aprobarReembolso(t)">Aprobar reembolso</button> }
+          @if (auth.esAdmin()) { <button type="button" class="btn btn-link" (click)="eliminar(t)"><i class="fa-solid fa-trash" aria-hidden="true"></i> Eliminar</button> }
+        </div>
+      </form>
+    } @else {
+      <div class="estado-vacio sin-borde"><i class="fa-solid fa-inbox" aria-hidden="true"></i><h2>Elige un ticket</h2><p>Selecciona uno de la lista para leerlo y responder.</p></div>
+    }
+  </section>
+</div>

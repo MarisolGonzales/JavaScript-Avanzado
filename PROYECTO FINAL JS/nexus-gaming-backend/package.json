@@ -1,15 +1,23 @@
 {
   "name": "nexus-gaming-backend",
-  "version": "1.0.0",
-  "description": "API REST para NEXUS GAMING - Proyecto académico UTP (JavaScript Avanzado)",
-  "main": "server.js",
-  "type": "commonjs",
+  "version": "2.0.0",
+  "description": "API REST de NEXUS GAMING (Node.js + Express). Persistencia en JSON o PostgreSQL distribuido (FDW).",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20.11"
+  },
   "scripts": {
-    "start": "node server.js",
-    "dev": "node --watch server.js"
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test tests/dominio.test.js tests/api.test.js",
+    "test:pg": "node tests/run-pg.mjs",
+    "demo": "node scripts/demo.js"
   },
   "dependencies": {
-    "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "cors": "2.8.5",
+    "express": "4.21.2",
+    "pdfkit": "0.15.2",
+    "pg": "8.13.1"
   }
 }

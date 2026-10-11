@@ -1,0 +1,14 @@
+{
+  "name": "nexus-gaming",
+  "version": "2.0.0",
+  "private": true,
+  "description": "NEXUS GAMING · proyecto final de JavaScript Avanzado (UTP)",
+  "scripts": {
+    "instalar": "npm --prefix nexus-gaming-backend install && npm --prefix nexus-gaming-frontend install",
+    "backend": "npm --prefix nexus-gaming-backend start",
+    "frontend": "npm --prefix nexus-gaming-frontend start",
+    "build": "npm --prefix nexus-gaming-frontend run build",
+    "test": "npm --prefix nexus-gaming-backend test && npm --prefix nexus-gaming-frontend run test:logic",
+    "demo": "npm --prefix nexus-gaming-backend run demo"
+  }
+}

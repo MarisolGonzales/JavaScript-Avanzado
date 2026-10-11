@@ -1,0 +1,73 @@
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+
+<header class="navbar-nx">
+  <div class="navbar-inner">
+    <a routerLink="/inicio" class="logo-enlace" aria-label="NEXUS GAMING, ir al inicio"><app-logo /></a>
+
+    <button type="button" class="menu-toggle" [attr.aria-expanded]="menuAbierto()" aria-controls="menu-principal"
+            aria-label="Abrir o cerrar el menú" (click)="menuAbierto.set(!menuAbierto())">
+      <i class="fa-solid" [class]="menuAbierto() ? 'fa-xmark' : 'fa-bars'" aria-hidden="true"></i>
+    </button>
+
+    <nav id="menu-principal" class="menu-zona" [class.abierto]="menuAbierto()" aria-label="Navegación principal">
+      <ul class="menu">
+        <li><a routerLink="/inicio" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-house" aria-hidden="true"></i> Inicio</a></li>
+        <li><a routerLink="/catalogo" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Catálogo</a></li>
+        @if (auth.logueado()) {
+          <li><a routerLink="/biblioteca" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-key" aria-hidden="true"></i> Mi biblioteca</a></li>
+        }
+        <li><a routerLink="/soporte" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-headset" aria-hidden="true"></i> Soporte</a></li>
+      </ul>
+
+      <div class="navbar-acciones">
+        <app-theme-toggle />
+        <a routerLink="/carrito" class="btn-carrito" [attr.aria-label]="'Carrito, ' + carrito.cantidad() + ' juego(s)'">
+          <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> <span class="solo-ancho">Carrito</span>
+          <span class="badge-carrito">{{ carrito.cantidad() }}</span>
+        </a>
+
+        @if (auth.usuario(); as u) {
+          <div class="usuario-zona">
+            <button type="button" class="usuario-btn" [attr.aria-expanded]="menuUsuario()" aria-haspopup="menu" (click)="menuUsuario.set(!menuUsuario())">
+              <span class="avatar" aria-hidden="true">{{ auth.inicial() }}</span>
+              <span class="usuario-nombre">{{ u.nombre.split(' ')[0] }}</span>
+              <i class="fa-solid fa-chevron-down" aria-hidden="true"></i>
+            </button>
+            @if (menuUsuario()) {
+              <div class="usuario-menu" role="menu">
+                <div class="usuario-menu-cab">
+                  <strong>{{ u.nombre }}</strong>
+                  <span class="muted small">{{ u.email }}</span>
+                  <span class="rol-badge" [class.admin]="auth.esStaff()">{{ auth.rolEtiqueta() }}</span>
+                </div>
+                @if (auth.esStaff()) {
+                  <a role="menuitem" routerLink="/admin"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Ir al panel</a>
+                } @else {
+                  <a role="menuitem" routerLink="/pedidos"><i class="fa-solid fa-receipt" aria-hidden="true"></i> Mis pedidos</a>
+                  <a role="menuitem" routerLink="/biblioteca"><i class="fa-solid fa-key" aria-hidden="true"></i> Mi biblioteca</a>
+                }
+                <a role="menuitem" routerLink="/perfil"><i class="fa-solid fa-user" aria-hidden="true"></i> Mi perfil</a>
+                <button type="button" role="menuitem" (click)="salir()"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Cerrar sesión</button>
+              </div>
+            }
+          </div>
+        } @else {
+          <a routerLink="/login" class="btn btn-secondary btn-sm">Ingresar</a>
+          <a routerLink="/registro" class="btn btn-primary btn-sm">Crear cuenta</a>
+        }
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido" tabindex="-1">
+  <router-outlet />
+</main>
+
+<footer class="footer-nx">
+  <div class="footer-inner">
+    <app-logo [tamano]="26" />
+    <span>&copy; {{ anio }} NEXUS GAMING · Proyecto académico de JavaScript Avanzado (UTP)</span>
+    <nav aria-label="Pie de página"><a routerLink="/catalogo">Catálogo</a> · <a routerLink="/soporte">Soporte</a></nav>
+  </div>
+</footer>

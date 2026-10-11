@@ -1,0 +1,54 @@
+<section class="page-header">
+  <h1>Mi biblioteca</h1>
+  <p>Tus juegos y sus claves de activación, incluidos los regalos que recibiste.</p>
+</section>
+
+<section class="page-body">
+  @if (estado.cargando() && !estado.datos()) {
+    <div class="library-grid" aria-busy="true"><div class="skeleton library-skel"></div><div class="skeleton library-skel"></div></div>
+  } @else if (estado.error()) {
+    <div class="estado-vacio" role="alert">
+      <i class="fa-solid fa-plug-circle-xmark" aria-hidden="true"></i><h2>No pudimos cargar tu biblioteca</h2><p>{{ estado.error() }}</p>
+      <button type="button" class="btn btn-primary" (click)="cargar()">Reintentar</button>
+    </div>
+  } @else if ((estado.datos() ?? []).length === 0) {
+    <div class="estado-vacio">
+      <i class="fa-solid fa-key" aria-hidden="true"></i><h2>Tu biblioteca está vacía</h2><p>Tus compras y regalos aparecerán aquí al instante.</p>
+      <a class="btn btn-primary" routerLink="/catalogo">Explorar catálogo</a>
+    </div>
+  } @else {
+    <div class="catalog-tools">
+      <label class="search-box">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="visually-hidden">Buscar en mi biblioteca</span>
+        <input type="search" placeholder="Buscar en mi biblioteca…" [value]="texto()" (input)="escribir($event)" autocomplete="off">
+      </label>
+      <span class="muted small" aria-live="polite">{{ juegos().length }} de {{ (estado.datos() ?? []).length }} juegos</span>
+    </div>
+
+    <div class="library-grid">
+      @for (j of juegos(); track j.llave) {
+        <article class="library-card">
+          <img [src]="j.imagen" [alt]="'Portada de ' + j.titulo" loading="lazy" (error)="imagenRota($event)">
+          <div class="library-card-body">
+            <h2 class="h6">{{ j.titulo }}</h2>
+            @if (j.origen === 'REGALO') {
+              <span class="chip-entrega regalo"><i class="fa-solid fa-gift" aria-hidden="true"></i> Regalo de {{ j.de }}</span>
+              @if (j.mensaje) { <p class="regalo-mensaje">“{{ j.mensaje }}”</p> }
+            }
+            <span class="library-date">{{ j.fecha | date: 'dd/MM/yyyy' }}</span>
+            @if (j.clave; as clave) {
+              <div class="clave-fila">
+                <code class="clave">{{ visibles().has(j.llave) ? clave : oculta(clave) }}</code>
+                <button type="button" class="btn-icono" [attr.aria-label]="visibles().has(j.llave) ? 'Ocultar clave' : 'Mostrar clave'" (click)="alternar(j.llave)"><i class="fa-solid" [class]="visibles().has(j.llave) ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i></button>
+                <button type="button" class="btn-icono" aria-label="Copiar clave" (click)="copiar(clave)"><i class="fa-regular fa-copy" aria-hidden="true"></i></button>
+              </div>
+            }
+            @if (j.pedido) { <a class="link-ver" [routerLink]="['/pedidos', j.pedido]">Pedido {{ j.pedido }}</a> }
+          </div>
+        </article>
+      } @empty {
+        <div class="estado-vacio span-all"><h2>Ningún juego coincide</h2></div>
+      }
+    </div>
+  }
+</section>

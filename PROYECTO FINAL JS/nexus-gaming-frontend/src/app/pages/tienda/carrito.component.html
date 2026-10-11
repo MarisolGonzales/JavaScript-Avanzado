@@ -1,0 +1,49 @@
+<section class="page-header">
+  <h1>Tu carrito</h1>
+  <p>Revisa tus juegos antes de pagar. Los precios incluyen IGV.</p>
+</section>
+
+<section class="page-body">
+  @if (carrito.items().length === 0) {
+    <div class="estado-vacio">
+      <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i><h2>Tu carrito está vacío</h2><p>Descubre juegos nuevos en el catálogo.</p>
+      <a class="btn btn-primary" routerLink="/catalogo">Explorar catálogo</a>
+    </div>
+  } @else {
+    <div class="cart-layout">
+      <ul class="cart-items" aria-label="Juegos en el carrito">
+        @for (item of carrito.items(); track item.idJuego + '-' + item.tipoEntrega) {
+          <li class="cart-item">
+            <img [src]="item.imagen" [alt]="'Portada de ' + item.titulo" (error)="imagenRota($event)">
+            <div class="cart-item-info">
+              <a [routerLink]="['/juego', item.idJuego]" class="cart-item-titulo">{{ item.titulo }}</a>
+              <span class="chip-entrega" [class.regalo]="item.tipoEntrega === 'REGALO'">
+                <i class="fa-solid" [class]="item.tipoEntrega === 'DIGITAL' ? 'fa-user' : 'fa-gift'" aria-hidden="true"></i>
+                {{ item.tipoEntrega === 'DIGITAL' ? 'Para mi cuenta' : 'Es un regalo' }}
+              </span>
+            </div>
+            <button type="button" class="btn btn-link btn-sm" (click)="alternarRegalo(item)">
+              {{ item.tipoEntrega === 'DIGITAL' ? 'Cambiar a regalo' : 'Cambiar a mi cuenta' }}
+            </button>
+            <span class="cart-item-total price">{{ item.precio | soles }}</span>
+            <button type="button" class="btn-icono" [attr.aria-label]="'Quitar ' + item.titulo" (click)="quitar(item)"><i class="fa-solid fa-trash" aria-hidden="true"></i></button>
+          </li>
+        }
+      </ul>
+
+      <aside class="cart-summary" aria-label="Resumen de la compra">
+        <h2>Resumen</h2>
+        <div class="summary-row"><span>Subtotal</span><span>{{ desglose().subtotal | soles }}</span></div>
+        <div class="summary-row"><span>IGV (18 %)</span><span>{{ desglose().igv | soles }}</span></div>
+        <div class="summary-row total"><span>Total</span><span>{{ carrito.total() | soles }}</span></div>
+        @if (carrito.hayRegalo()) { <p class="muted small"><i class="fa-solid fa-gift" aria-hidden="true"></i> En el pago indicarás el correo de quien recibe el regalo.</p> }
+        @if (auth.logueado() && !auth.esCliente()) {
+          <p class="msg-error">Las cuentas del personal no pueden comprar.</p>
+        } @else {
+          <a class="btn btn-primary w-100" routerLink="/checkout">{{ auth.logueado() ? 'Continuar con el pago' : 'Ingresa para pagar' }}</a>
+        }
+        <button type="button" class="btn btn-link w-100" (click)="vaciar()">Vaciar carrito</button>
+      </aside>
+    </div>
+  }
+</section>

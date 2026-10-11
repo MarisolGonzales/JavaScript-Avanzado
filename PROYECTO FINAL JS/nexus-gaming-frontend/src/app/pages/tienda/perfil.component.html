@@ -1,0 +1,82 @@
+<section class="page-header">
+  <h1>Mi perfil</h1>
+  <p>Administra tus datos, tu contraseña y la apariencia de la tienda.</p>
+</section>
+
+<section class="page-body">
+  @if (auth.usuario(); as u) {
+    <div class="profile-layout">
+      <aside class="profile-card">
+        <div class="profile-avatar" aria-hidden="true">{{ auth.inicial() }}</div>
+        <h2 class="profile-name">{{ u.nombre }}</h2>
+        <p class="profile-email">{{ u.email }}</p>
+        <span class="rol-badge" [class.admin]="auth.esStaff()">{{ auth.rolEtiqueta() }}</span>
+
+        @if (auth.esCliente()) {
+          <dl class="profile-stats">
+            <div><dt>Pedidos</dt><dd>{{ stats().pedidos }}</dd></div>
+            <div><dt>Juegos</dt><dd>{{ stats().juegos }}</dd></div>
+            <div><dt>Gastado</dt><dd>{{ stats().gasto | soles }}</dd></div>
+          </dl>
+          <a class="btn btn-secondary w-100" routerLink="/pedidos"><i class="fa-solid fa-receipt" aria-hidden="true"></i> Mis pedidos</a>
+        } @else {
+          <a class="btn btn-primary w-100" routerLink="/admin"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Ir al panel</a>
+        }
+        <button type="button" class="btn btn-link w-100" (click)="cerrarSesion()"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Cerrar sesión</button>
+      </aside>
+
+      <div class="profile-forms">
+        <form class="panel-nx" [formGroup]="form" (ngSubmit)="guardar()" novalidate aria-labelledby="t-datos">
+          <h2 id="t-datos">Datos personales</h2>
+          <div class="form-group">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" formControlName="nombre" autocomplete="name" [class.invalido]="invalido('form', 'nombre')">
+            @if (invalido('form', 'nombre')) { <p class="msg-error">Escribe tu nombre (2 a 80 caracteres).</p> }
+          </div>
+          <div class="form-group">
+            <label for="email">Correo electrónico</label>
+            <input id="email" type="email" [value]="u.email" disabled aria-describedby="ayuda-email">
+            <p id="ayuda-email" class="form-hint">El correo es tu usuario y no se puede cambiar.</p>
+          </div>
+          <div class="form-group">
+            <label for="departamento">Departamento</label>
+            <select id="departamento" formControlName="departamento">
+              @for (d of ubicacion.departamentos(); track d) { <option [value]="d">{{ d }}</option> }
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="guardando()">{{ guardando() ? 'Guardando…' : 'Guardar cambios' }}</button>
+        </form>
+
+        <form class="panel-nx" [formGroup]="claveForm" (ngSubmit)="cambiarClave()" novalidate aria-labelledby="t-clave">
+          <h2 id="t-clave">Cambiar contraseña</h2>
+          <div class="form-group">
+            <label for="clave-actual">Contraseña actual</label>
+            <input id="clave-actual" type="password" formControlName="actual" autocomplete="current-password" [class.invalido]="invalido('claveForm', 'actual')">
+            @if (invalido('claveForm', 'actual')) { <p class="msg-error">Escribe tu contraseña actual.</p> }
+          </div>
+          <div class="form-fila">
+            <div class="form-group">
+              <label for="clave-nueva">Nueva contraseña</label>
+              <input id="clave-nueva" type="password" formControlName="nueva" autocomplete="new-password" [class.invalido]="invalido('claveForm', 'nueva')">
+              @if (invalido('claveForm', 'nueva')) { <p class="msg-error">Mínimo 8 caracteres con letras y números.</p> }
+            </div>
+            <div class="form-group">
+              <label for="clave-confirmar">Repite la nueva</label>
+              <input id="clave-confirmar" type="password" formControlName="confirmar" autocomplete="new-password" [class.invalido]="claveForm.touched && claveForm.hasError('noCoinciden')">
+              @if (claveForm.touched && claveForm.hasError('noCoinciden')) { <p class="msg-error">Las contraseñas no coinciden.</p> }
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" [disabled]="cambiandoClave()">{{ cambiandoClave() ? 'Actualizando…' : 'Actualizar contraseña' }}</button>
+        </form>
+
+        <section class="panel-nx" aria-labelledby="t-apariencia">
+          <h2 id="t-apariencia">Apariencia</h2>
+          <div class="fila-apariencia">
+            <div><strong>Tema {{ theme.tema() === 'oscuro' ? 'oscuro' : 'claro' }}</strong><p class="muted small">Se recuerda en este navegador, tanto en la tienda como en el panel.</p></div>
+            <app-theme-toggle />
+          </div>
+        </section>
+      </div>
+    </div>
+  }
+</section>

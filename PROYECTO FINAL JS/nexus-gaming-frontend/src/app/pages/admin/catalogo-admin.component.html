@@ -1,0 +1,60 @@
+<div class="dash-cab">
+  <div><h1 class="dash-titulo">Catálogo y stock</h1><p class="muted">Cada servidor regional administra sus propias claves; el catálogo se replica a los tres.</p></div>
+  <button type="button" class="btn btn-primary btn-sm" (click)="nuevo()"><i class="fa-solid fa-plus" aria-hidden="true"></i> Nuevo juego</button>
+</div>
+
+@if (editando() !== null) {
+  <form class="tarjeta" [formGroup]="form" (ngSubmit)="guardar()" novalidate aria-labelledby="t-form-juego">
+    <h2 id="t-form-juego" class="tarjeta-titulo">{{ editando() === 'nuevo' ? 'Nuevo juego' : 'Editar juego' }}</h2>
+    <p class="muted small">Al guardar, el catálogo se replica a los 3 servidores. Editar un juego <strong>no pisa</strong> las claves de cada servidor.</p>
+    <div class="form-fila">
+      <div class="form-group"><label for="j-title">Título</label><input id="j-title" formControlName="title" [class.invalido]="invalido('title')">@if (invalido('title')) { <p class="msg-error">Título de 2 a 120 caracteres.</p> }</div>
+      <div class="form-group"><label for="j-price">Precio (S/)</label><input id="j-price" type="number" step="0.01" min="0" formControlName="price" [class.invalido]="invalido('price')">@if (invalido('price')) { <p class="msg-error">Precio entre 0 y 9999.</p> }</div>
+    </div>
+    <div class="form-fila">
+      <div class="form-group"><label for="j-cat">Categoría</label><input id="j-cat" formControlName="category" [class.invalido]="invalido('category')">@if (invalido('category')) { <p class="msg-error">Categoría requerida.</p> }</div>
+      <div class="form-group"><label for="j-dev">Desarrollador</label><input id="j-dev" formControlName="developer"></div>
+    </div>
+    <div class="form-group"><label for="j-desc">Descripción</label><textarea id="j-desc" rows="3" formControlName="description"></textarea></div>
+    <div class="form-fila">
+      <div class="form-group"><label for="j-img">Ruta de imagen</label><input id="j-img" formControlName="image"></div>
+      <div class="form-group"><label for="j-year">Año</label><input id="j-year" type="number" formControlName="year" [class.invalido]="invalido('year')"></div>
+      @if (editando() === 'nuevo') { <div class="form-group"><label for="j-stock">Claves iniciales por servidor</label><input id="j-stock" type="number" min="0" formControlName="stockInicial" [class.invalido]="invalido('stockInicial')"></div> }
+    </div>
+    <div class="acciones"><button type="submit" class="btn btn-primary">Guardar</button><button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button></div>
+  </form>
+}
+
+<div class="catalog-tools">
+  <label class="search-box"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="visually-hidden">Buscar juegos</span>
+    <input type="search" placeholder="Buscar juego o categoría…" [value]="texto()" (input)="buscar($event)" autocomplete="off"></label>
+</div>
+
+@if (datos.error(); as e) {
+  <div class="banner-error en-panel" role="alert">{{ e }} <button type="button" class="btn-link" (click)="cargar()">Reintentar</button></div>
+} @else {
+  <div class="tabla-scroll">
+    <table class="tabla-nx tabla-filas">
+      <thead><tr><th scope="col">Juego</th><th scope="col">Precio</th>
+        @for (s of servidores; track s.codigo) { <th scope="col">Claves {{ s.etiqueta }}</th> }
+        <th scope="col">Total</th><th scope="col"><span class="visually-hidden">Acciones</span></th></tr></thead>
+      <tbody>
+        @for (j of filtrados(); track j.id) {
+          <tr>
+            <td><div class="celda-usuario"><img class="miniatura" [src]="j.image" alt="" (error)="imagenRota($event)"><div><strong>{{ j.title }}</strong><br><small class="muted">{{ j.category }}</small></div></div></td>
+            <td>{{ j.price | soles }}</td>
+            @for (s of servidores; track s.codigo) {
+              <td><input class="input-stock" type="number" min="0" [value]="stock(j, s.codigo)" (input)="editarStock(j, s.codigo, $event)" [attr.aria-label]="'Claves de ' + j.title + ' en el servidor ' + s.etiqueta"></td>
+            }
+            <td><span class="stock-pill" [appStock]="total(j)">{{ total(j) }}</span></td>
+            <td class="acciones">
+              <button type="button" class="btn btn-primary btn-sm" [disabled]="!hayCambios(j)" (click)="guardarStock(j)">Guardar claves</button>
+              <button type="button" class="btn btn-secondary btn-sm" (click)="editar(j)">Editar</button>
+              <button type="button" class="btn btn-danger btn-sm" (click)="baja(j)">Baja</button>
+            </td>
+          </tr>
+        } @empty { <tr><td colspan="7" class="muted text-center">{{ datos.cargando() ? 'Cargando…' : 'No hay juegos.' }}</td></tr> }
+      </tbody>
+    </table>
+  </div>
+}

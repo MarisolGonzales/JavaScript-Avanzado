@@ -1,0 +1,112 @@
+<section class="page-header">
+  <h1>Soporte</h1>
+  <p>Pregúntale a nuestro asistente virtual o abre un ticket para hablar con una persona.</p>
+</section>
+
+<section class="page-body">
+  <div class="soporte-layout">
+    <!-- ===== Asistente virtual ===== -->
+    <section class="chat-card" aria-labelledby="t-chat">
+      <header class="chat-cab">
+        <span class="chat-avatar" aria-hidden="true"><i class="fa-solid fa-robot"></i></span>
+        <div><h2 id="t-chat" class="h6 mb-0">Asistente NEXUS</h2><span class="muted small"><span class="punto-en-linea"></span> En línea · responde al instante</span></div>
+        <button type="button" class="btn btn-link btn-sm ms-auto" (click)="asistente.reiniciar()"><i class="fa-solid fa-rotate" aria-hidden="true"></i> Reiniciar</button>
+      </header>
+
+      <div class="chat-mensajes" #chat role="log" aria-live="polite" aria-label="Conversación con el asistente">
+        @for (m of asistente.mensajes(); track m.id) {
+          <div class="burbuja" [class.mia]="m.rol === 'usuario'">
+            <p>{{ m.texto }}</p>
+            @if (m.accion; as a) {
+              <button type="button" class="btn btn-primary btn-sm" (click)="abrirTicket(a)">
+                <i class="fa-solid fa-ticket" aria-hidden="true"></i> {{ a.ticketTipo === 'REEMBOLSO' ? 'Solicitar reembolso' : 'Abrir un ticket' }}
+              </button>
+            }
+            @if (m.origen === 'ia') { <small class="burbuja-origen"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i> Respuesta con IA</small> }
+          </div>
+        }
+        @if (asistente.escribiendo()) { <div class="burbuja escribiendo" aria-label="El asistente está escribiendo"><span></span><span></span><span></span></div> }
+      </div>
+
+      @if (ultimasSugerencias().length > 0) {
+        <div class="chat-sugerencias" aria-label="Preguntas sugeridas">
+          @for (s of ultimasSugerencias(); track s) { <button type="button" class="filter-chip" (click)="s === 'Hablar con una persona' ? abrirTicket() : enviarChat(s)">{{ s }}</button> }
+        </div>
+      }
+
+      <!-- (submit), no (ngSubmit): este formulario no usa [formGroup], y ngSubmit solo existe en formularios de Angular. -->
+      <form class="chat-form" novalidate (submit)="$event.preventDefault(); enviarChat()">
+        <label class="visually-hidden" for="mensaje-chat">Escribe tu pregunta</label>
+        <input id="mensaje-chat" type="text" [formControl]="mensajeChat" placeholder="Escribe tu pregunta…" maxlength="500" autocomplete="off">
+        <button type="submit" class="btn btn-primary" [disabled]="asistente.escribiendo() || !mensajeChat.value.trim()" aria-label="Enviar mensaje"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
+      </form>
+    </section>
+
+    <!-- ===== Tickets y preguntas frecuentes ===== -->
+    <div class="soporte-lado">
+      <section class="panel-nx" aria-labelledby="t-tickets">
+        <div class="admin-bar">
+          <h2 id="t-tickets" class="mb-0">Mis tickets</h2>
+          <button type="button" class="btn btn-primary btn-sm" (click)="abrirTicket()"><i class="fa-solid fa-plus" aria-hidden="true"></i> Nuevo ticket</button>
+        </div>
+
+        @if (!auth.logueado()) {
+          <p class="muted">Inicia sesión para abrir tickets y ver las respuestas del equipo.</p>
+          <a class="btn btn-secondary btn-sm" routerLink="/login" [queryParams]="{ volver: '/soporte' }">Ingresar</a>
+        } @else {
+          @if (formAbierto()) {
+            <form id="form-ticket" class="ticket-form" [formGroup]="form" (ngSubmit)="enviarTicket()" novalidate aria-label="Nuevo ticket">
+              <div class="form-fila">
+                <div class="form-group"><label for="tipo-ticket">Tipo</label>
+                  <select id="tipo-ticket" formControlName="tipo"><option value="CONSULTA">Consulta</option><option value="REEMBOLSO">Reembolso</option></select></div>
+                @if (form.controls.tipo.value === 'REEMBOLSO') {
+                  <div class="form-group"><label for="pedido-ticket">Pedido</label>
+                    <select id="pedido-ticket" formControlName="pedido">
+                      <option value="">Elige un pedido…</option>
+                      @for (p of reembolsables(); track p.codigo) { <option [value]="p.codigo">{{ p.codigo }}</option> }
+                      @if (pedidoFueraDeLista()) { <option [value]="form.controls.pedido.value">{{ form.controls.pedido.value }}</option> }
+                    </select></div>
+                }
+              </div>
+              <div class="form-group"><label for="asunto">Asunto</label>
+                <input id="asunto" formControlName="asunto" [class.invalido]="invalido('asunto')">
+                @if (invalido('asunto')) { <p class="msg-error">Escribe un asunto de al menos 3 caracteres.</p> }</div>
+              <div class="form-group"><label for="mensaje-ticket">Mensaje</label>
+                <textarea id="mensaje-ticket" rows="4" formControlName="mensaje" [class.invalido]="invalido('mensaje')"></textarea>
+                @if (invalido('mensaje')) { <p class="msg-error">Cuéntanos más (mínimo 5 caracteres).</p> }</div>
+              @if (form.controls.tipo.value === 'REEMBOLSO') { <p class="form-hint">Los reembolsos se aceptan hasta 14 días después de la compra.</p> }
+              <div class="acciones">
+                <button type="submit" class="btn btn-primary" [disabled]="enviando()">{{ enviando() ? 'Enviando…' : 'Enviar ticket' }}</button>
+                <button type="button" class="btn btn-secondary" (click)="formAbierto.set(false)">Cancelar</button>
+              </div>
+            </form>
+          }
+
+          @if (mios.error(); as e) { <p class="msg-error">{{ e }}</p> }
+          <ul class="tickets-mios">
+            @for (t of mios.datos() ?? []; track t.id) {
+              <li class="ticket-cliente">
+                <div class="ticket-cab">
+                  <strong>#{{ t.id }} · {{ t.asunto }}</strong>
+                  <span class="estado-badge" [class.est-entregado]="t.estado === 'RESUELTO'" [class.est-pendiente]="t.estado === 'ABIERTO'">{{ t.estado === 'RESUELTO' ? 'Resuelto' : 'Abierto' }}</span>
+                </div>
+                <p class="muted small">{{ t.tipo === 'REEMBOLSO' ? 'Reembolso · ' + t.pedido + ' · ' : '' }}{{ t.fecha | date: 'dd/MM/yyyy HH:mm' }}</p>
+                <p>{{ t.mensaje }}</p>
+                @if (t.respuesta) {
+                  <div class="ticket-respuesta"><strong><i class="fa-solid fa-headset" aria-hidden="true"></i> {{ t.respondidoPor }}</strong><p>{{ t.respuesta }}</p></div>
+                }
+              </li>
+            } @empty {
+              @if (!mios.cargando()) { <li class="muted">Aún no tienes tickets.</li> }
+            }
+          </ul>
+        }
+      </section>
+
+      <section class="panel-nx" aria-labelledby="t-faq">
+        <h2 id="t-faq">Preguntas frecuentes</h2>
+        @for (f of faq; track f.p) { <details class="faq"><summary>{{ f.p }}</summary><p>{{ f.r }}</p></details> }
+      </section>
+    </div>
+  </div>
+</section>

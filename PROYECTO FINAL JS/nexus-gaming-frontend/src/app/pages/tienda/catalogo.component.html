@@ -1,0 +1,51 @@
+<section class="page-header">
+  <h1>Catálogo</h1>
+  <p>Explora los juegos disponibles y añade a tu carrito los que quieras.</p>
+</section>
+
+<section class="page-body">
+  <div class="catalog-tools">
+    <label class="search-box">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <span class="visually-hidden">Buscar juegos</span>
+      <input type="search" placeholder="Buscar por título, género o estudio…" [value]="texto()" (input)="escribir($event)" autocomplete="off">
+    </label>
+    <label class="campo-inline">
+      <span>Ordenar por</span>
+      <select [value]="orden()" (change)="cambiarOrden($event)">
+        <option value="precio-asc">Precio: menor a mayor</option>
+        <option value="precio-desc">Precio: mayor a menor</option>
+        <option value="nombre">Nombre (A-Z)</option>
+        <option value="reciente">Más recientes</option>
+      </select>
+    </label>
+    <label class="check-inline"><input type="checkbox" [checked]="soloDisponibles()" (change)="alternarDisponibles($event)"> Solo con claves</label>
+  </div>
+
+  <div class="category-filters" role="group" aria-label="Filtrar por categoría">
+    @for (c of categorias(); track c) {
+      <button type="button" class="filter-chip" [class.active]="categoria() === c" [attr.aria-pressed]="categoria() === c" (click)="categoria.set(c)">{{ c }}</button>
+    }
+  </div>
+
+  @if (estado.cargando() && !estado.datos()) {
+    <div class="games-grid" aria-busy="true">@for (n of esqueleto; track n) { <div class="game-card skeleton"></div> }</div>
+  } @else if (estado.error()) {
+    <div class="estado-vacio" role="alert">
+      <i class="fa-solid fa-plug-circle-xmark" aria-hidden="true"></i><h2>No pudimos cargar el catálogo</h2><p>{{ estado.error() }}</p>
+      <button type="button" class="btn btn-primary" (click)="cargar()">Reintentar</button>
+    </div>
+  } @else {
+    <p class="resultados" aria-live="polite">{{ resultado().length }} {{ resultado().length === 1 ? 'juego encontrado' : 'juegos encontrados' }}</p>
+    <div class="games-grid">
+      @for (j of resultado(); track j.id) {
+        <app-game-card [juego]="j" (agregar)="agregar($event)" />
+      } @empty {
+        <div class="estado-vacio span-all">
+          <i class="fa-solid fa-ghost" aria-hidden="true"></i><h2>Sin resultados</h2><p>No encontramos juegos con esos filtros.</p>
+          <button type="button" class="btn btn-secondary" (click)="limpiar()">Limpiar filtros</button>
+        </div>
+      }
+    </div>
+  }
+</section>

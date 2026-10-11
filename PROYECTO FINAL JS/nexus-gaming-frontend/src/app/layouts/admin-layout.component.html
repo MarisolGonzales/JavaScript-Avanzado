@@ -1,0 +1,58 @@
+<a class="saltar" href="#panel-contenido">Saltar al contenido</a>
+
+<div class="panel" [class.lateral-abierto]="lateralAbierto()">
+  <aside class="lateral" aria-label="Menú del panel">
+    <a routerLink="/admin" class="lateral-logo" aria-label="Panel NEXUS GAMING"><app-logo /></a>
+
+    <nav class="lateral-nav">
+      <p class="lateral-seccion">Panel</p>
+      <a routerLink="/admin" routerLinkActive="activo" [routerLinkActiveOptions]="{ exact: true }" ariaCurrentWhenActive="page"><i class="fa-solid fa-table-cells-large" aria-hidden="true"></i> Resumen</a>
+      <a routerLink="/admin/pedidos" routerLinkActive="activo" ariaCurrentWhenActive="page"><i class="fa-solid fa-receipt" aria-hidden="true"></i> Pedidos</a>
+      <a routerLink="/admin/clientes" routerLinkActive="activo" ariaCurrentWhenActive="page"><i class="fa-solid fa-users" aria-hidden="true"></i> Clientes</a>
+      <a routerLink="/admin/soporte" routerLinkActive="activo" ariaCurrentWhenActive="page">
+        <i class="fa-solid fa-headset" aria-hidden="true"></i> Soporte
+        @if (panel.abiertos().length > 0) { <span class="lateral-badge" [attr.aria-label]="panel.abiertos().length + ' tickets abiertos'">{{ panel.abiertos().length }}</span> }
+      </a>
+      @if (auth.esAdmin()) {
+        <p class="lateral-seccion">Gestión</p>
+        <a routerLink="/admin/catalogo" routerLinkActive="activo" ariaCurrentWhenActive="page"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Catálogo y stock</a>
+      }
+    </nav>
+
+    <div class="lateral-pie">
+      <a routerLink="/inicio" class="lateral-tienda"><i class="fa-solid fa-store" aria-hidden="true"></i> Ver la tienda</a>
+      @if (auth.usuario(); as u) {
+        <div class="lateral-usuario">
+          <span class="avatar" aria-hidden="true">{{ auth.inicial() }}</span>
+          <div class="lateral-usuario-datos"><strong>{{ u.nombre }}</strong><span>{{ auth.rolEtiqueta() }}</span></div>
+          <button type="button" class="btn-icono" aria-label="Cerrar sesión" title="Cerrar sesión" (click)="salir()"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i></button>
+        </div>
+      }
+    </div>
+  </aside>
+
+  @if (lateralAbierto()) { <button type="button" class="lateral-velo" aria-label="Cerrar menú" (click)="lateralAbierto.set(false)"></button> }
+
+  <div class="panel-principal">
+    <header class="panel-barra">
+      <button type="button" class="btn-icono panel-hamburguesa" aria-label="Abrir menú" [attr.aria-expanded]="lateralAbierto()" (click)="lateralAbierto.set(!lateralAbierto())">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+      <nav aria-label="Ruta" class="panel-migas"><span class="muted">Panel</span> <i class="fa-solid fa-chevron-right" aria-hidden="true"></i> <strong>{{ titulo() }}</strong></nav>
+      <div class="panel-barra-acciones">
+        <app-theme-toggle />
+        <a routerLink="/admin/soporte" class="btn-icono campana" [attr.aria-label]="'Notificaciones: ' + panel.abiertos().length + ' tickets abiertos'">
+          <i class="fa-regular fa-bell" aria-hidden="true"></i>
+          @if (panel.abiertos().length > 0) { <span class="campana-punto">{{ panel.abiertos().length }}</span> }
+        </a>
+        @if (auth.usuario(); as u) {
+          <span class="barra-usuario"><span class="avatar" aria-hidden="true">{{ auth.inicial() }}</span><span class="barra-usuario-nombre">{{ u.nombre }}</span></span>
+        }
+      </div>
+    </header>
+
+    <main id="panel-contenido" class="panel-contenido" tabindex="-1">
+      <router-outlet />
+    </main>
+  </div>
+</div>

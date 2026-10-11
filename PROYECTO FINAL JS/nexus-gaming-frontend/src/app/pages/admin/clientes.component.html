@@ -1,0 +1,34 @@
+<div class="dash-cab">
+  <div><h1 class="dash-titulo">Clientes</h1><p class="muted">Cuentas registradas y lo que han comprado.</p></div>
+</div>
+
+<div class="kpi-tarjetas tres">
+  <article class="kpi-t destacada"><span class="kpi-t-et">Clientes registrados</span><strong class="kpi-t-valor">{{ (datos.datos() ?? []).length }}</strong><span class="kpi-t-delta">{{ conCompras() }} con compras</span></article>
+  <article class="kpi-t"><span class="kpi-t-et">Gasto promedio</span><strong class="kpi-t-valor">{{ gastoPromedio() | soles }}</strong><span class="kpi-t-delta">Entre quienes compraron</span></article>
+  <article class="kpi-t"><span class="kpi-t-et">Mejor cliente</span><strong class="kpi-t-valor kpi-chico">{{ visibles()[0]?.nombre ?? '—' }}</strong><span class="kpi-t-delta">{{ (visibles()[0]?.gasto ?? 0) | soles }}</span></article>
+</div>
+
+<div class="catalog-tools">
+  <label class="search-box"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><span class="visually-hidden">Buscar clientes</span>
+    <input type="search" placeholder="Buscar por nombre, correo o departamento…" [value]="texto()" (input)="buscar($event)" autocomplete="off"></label>
+  <label class="campo-inline"><span>Ordenar por</span>
+    <select [value]="orden()" (change)="cambiarOrden($event)"><option value="gasto">Mayor gasto</option><option value="nombre">Nombre (A-Z)</option><option value="reciente">Más recientes</option></select></label>
+</div>
+
+@if (datos.error(); as e) {
+  <div class="banner-error en-panel" role="alert">{{ e }} <button type="button" class="btn-link" (click)="cargar()">Reintentar</button></div>
+} @else {
+  <div class="tabla-scroll">
+    <table class="tabla-nx tabla-filas">
+      <thead><tr><th scope="col">Cliente</th><th scope="col">Departamento</th><th scope="col">Región</th><th scope="col">Pedidos</th><th scope="col">Gasto</th><th scope="col">Desde</th></tr></thead>
+      <tbody>
+        @for (c of visibles(); track c.email) {
+          <tr>
+            <td><div class="celda-usuario"><span class="avatar" aria-hidden="true">{{ iniciales(c.nombre) }}</span><div><strong>{{ c.nombre }}</strong><br><small class="muted">{{ c.email }}</small></div></div></td>
+            <td>{{ c.departamento }}</td><td>{{ regiones[c.nodo] }}</td><td>{{ c.pedidos }}</td><td><strong>{{ c.gasto | soles }}</strong></td><td>{{ c.creadoEn | date: 'dd/MM/yyyy' }}</td>
+          </tr>
+        } @empty { <tr><td colspan="6" class="muted text-center">{{ datos.cargando() ? 'Cargando…' : 'No hay clientes con esa búsqueda.' }}</td></tr> }
+      </tbody>
+    </table>
+  </div>
+}
