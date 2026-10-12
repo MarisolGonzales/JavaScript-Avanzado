@@ -1,4 +1,4 @@
-import { DIAS_REEMBOLSO, MONTO_BOLETA_CON_DNI, dentroDePlazoReembolso, esDni, esRuc } from './documentos';
+import { DIAS_REEMBOLSO, MONTO_BOLETA_CON_DNI, dentroDePlazoReembolso, esDni, esDniVerosimil, esRuc } from './documentos';
 
 describe('documentos de identidad', () => {
   it('valida el DNI (8 dígitos)', () => {
@@ -7,6 +7,17 @@ describe('documentos de identidad', () => {
     expect(esDni('123456789')).toBeFalse();
     expect(esDni('1234567a')).toBeFalse();
     expect(esDni('')).toBeFalse();
+  });
+
+  it('descarta DNI inverosímiles: iguales, escaleras y repeticiones', () => {
+    for (const falso of ['00000000', '11111111', '12345678', '87654321', '01234567', '89012345', '12121212', '12341234']) {
+      expect(esDniVerosimil(falso)).withContext(falso).toBeFalse();
+    }
+    for (const real of ['74528196', '45217896', '70123456', '08765432', '40198273']) {
+      expect(esDniVerosimil(real)).withContext(real).toBeTrue();
+    }
+    expect(esDniVerosimil('1234567')).toBeFalse();
+    expect(esDniVerosimil('7452819a')).toBeFalse();
   });
 
   it('valida el RUC con su dígito de control', () => {

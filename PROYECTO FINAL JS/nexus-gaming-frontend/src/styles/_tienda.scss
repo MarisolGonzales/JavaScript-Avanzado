@@ -116,6 +116,14 @@
 .payment-tabs { display: flex; gap: .5rem; margin-bottom: 1rem; flex-wrap: wrap; }
 .payment-tab { flex: 1 1 110px; display: inline-flex; align-items: center; justify-content: center; gap: .5rem; padding: .7rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-md); color: var(--text-muted); font-weight: 600; }
 .payment-tab.active { border-color: var(--accent); color: var(--text); background: var(--accent-soft); }
+// Yape y Plin: QR a la izquierda y pasos a la derecha (en pantallas chicas se apilan).
+.pago-qr { display: grid; grid-template-columns: auto 1fr; gap: 1.5rem; align-items: start; }
+.qr-caja { display: flex; flex-direction: column; align-items: center; gap: .35rem; padding: .9rem; background: var(--bg-elevated); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.qr-monto { font-family: var(--font-display); font-size: 1.35rem; color: var(--text); margin-top: .35rem; }
+.qr-pasos { margin: .2rem 0 1rem; padding-left: 1.3rem; list-style: decimal; display: grid; gap: .55rem; color: var(--text-muted); font-size: .92rem; }
+.qr-pasos li::marker { color: var(--accent); font-weight: 700; }
+.qr-pasos strong { color: var(--text); }
+@media (max-width: 640px) { .pago-qr { grid-template-columns: 1fr; justify-items: center; } .qr-detalle { width: 100%; } }
 
 // ---------- Pedidos ----------
 .kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1.25rem; }

@@ -1,6 +1,6 @@
 import {
   celularPeruValido, cumpleLuhn, enmascararCelular, formatearTarjeta, formatearVencimiento,
-  ultimos4, vencimientoVigente
+  numeroOperacion, ultimos4, vencimientoVigente
 } from './validaciones-pago';
 
 describe('validaciones de pago', () => {
@@ -45,5 +45,11 @@ describe('validaciones de pago', () => {
   it('guarda solo referencias enmascaradas', () => {
     expect(ultimos4('4242 4242 4242 4242')).toBe('4242');
     expect(enmascararCelular('987654321')).toBe('9XXXXX321');
+  });
+
+  it('genera números de operación de 8 dígitos para Yape y Plin', () => {
+    expect(numeroOperacion(() => 0.48215937)).toBe('Op. 48215937');
+    expect(numeroOperacion(() => 0.000123)).toBe('Op. 00012300');
+    expect(numeroOperacion()).toMatch(/^Op\. \d{8}$/);
   });
 });

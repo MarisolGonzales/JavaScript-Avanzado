@@ -5,19 +5,20 @@ import { Router, RouterLink } from '@angular/router';
 import { mensajeError } from '../../core/http-error';
 import { desglosarIgv } from '../../core/logic/dinero';
 import { MONTO_BOLETA_CON_DNI } from '../../core/logic/documentos';
-import { enmascararCelular, formatearTarjeta, formatearVencimiento, ultimos4 } from '../../core/logic/validaciones-pago';
+import { formatearTarjeta, formatearVencimiento, numeroOperacion, ultimos4 } from '../../core/logic/validaciones-pago';
 import { AuthService } from '../../core/services/auth.service';
 import { CarritoService } from '../../core/services/carrito.service';
 import { PedidosService } from '../../core/services/pedidos.service';
 import { ToastService } from '../../core/services/toast.service';
-import { celularValido, dniObligatorio, dniOpcional, rucValido, tarjetaValida, textoMinimo, vencimientoValido } from '../../core/validadores';
+import { dniObligatorio, dniOpcional, rucValido, tarjetaValida, textoMinimo, vencimientoValido } from '../../core/validadores';
 import type { MetodoPago, NuevoPedido, TipoComprobante } from '../../shared/models';
+import { QrComponent } from '../../shared/components/qr.component';
 import { SolesPipe } from '../../shared/pipes/soles.pipe';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [ReactiveFormsModule, RouterLink, SolesPipe],
+  imports: [ReactiveFormsModule, RouterLink, QrComponent, SolesPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './checkout.component.html'
 })
@@ -46,8 +47,6 @@ export class CheckoutComponent {
     exp: ['', [Validators.required, vencimientoValido]],
     cvv: ['', [Validators.required, Validators.pattern(/^\d{3,4}$/)]]
   });
-  protected readonly yapeForm = this.fb.group({ celular: ['', [Validators.required, celularValido]] });
-  protected readonly plinForm = this.fb.group({ celular: ['', [Validators.required, celularValido]] });
 
   protected readonly metodo = signal<MetodoPago>('TARJETA');
   protected readonly enviando = signal(false);
@@ -59,6 +58,9 @@ export class CheckoutComponent {
   /** Por norma, una boleta de S/ 700 o más debe llevar el DNI del cliente. */
   protected readonly exigeDni = computed(() => this.tipo() === 'BOLETA' && this.carrito.total() >= MONTO_BOLETA_CON_DNI);
   protected readonly desglose = computed(() => desglosarIgv(this.carrito.total()));
+  /** Contenido del QR de Yape/Plin: comercio y monto a pagar. Es solo ASCII para no pasar el límite del generador. */
+  protected readonly textoQr = computed(() =>
+    `${this.metodo() === 'PLIN' ? 'Plin' : 'Yape'} | NEXUS GAMING S.A.C. | S/ ${this.carrito.total().toFixed(2)} | Pago simulado - proyecto academico`);
 
   protected readonly metodos: readonly { clave: MetodoPago; nombre: string; icono: string }[] = [
     { clave: 'TARJETA', nombre: 'Tarjeta', icono: 'fa-credit-card' },
@@ -96,12 +98,11 @@ export class CheckoutComponent {
   protected formatearNumero(e: Event): void { this.tarjetaForm.controls.numero.setValue(formatearTarjeta((e.target as HTMLInputElement).value), { emitEvent: false }); }
   protected formatearExp(e: Event): void { this.tarjetaForm.controls.exp.setValue(formatearVencimiento((e.target as HTMLInputElement).value), { emitEvent: false }); }
 
-  private formPago(): { form: AbstractControl; referencia: string } {
-    switch (this.metodo()) {
-      case 'TARJETA': return { form: this.tarjetaForm, referencia: ultimos4(this.tarjetaForm.controls.numero.value) };
-      case 'YAPE': return { form: this.yapeForm, referencia: enmascararCelular(this.yapeForm.controls.celular.value) };
-      case 'PLIN': return { form: this.plinForm, referencia: enmascararCelular(this.plinForm.controls.celular.value) };
-    }
+  /** Yape y Plin no piden datos: el cliente paga escaneando el QR y se guarda un número de operación. */
+  private formPago(): { form: AbstractControl | null; referencia: string } {
+    return this.metodo() === 'TARJETA'
+      ? { form: this.tarjetaForm, referencia: ultimos4(this.tarjetaForm.controls.numero.value) }
+      : { form: null, referencia: numeroOperacion() };
   }
 
   protected confirmar(): void {
@@ -111,9 +112,9 @@ export class CheckoutComponent {
 
     const { form, referencia } = this.formPago();
     const regalo = this.carrito.hayRegalo();
-    form.markAllAsTouched(); this.comprobanteForm.markAllAsTouched();
+    form?.markAllAsTouched(); this.comprobanteForm.markAllAsTouched();
     if (regalo) this.regaloForm.markAllAsTouched();
-    if (form.invalid || this.comprobanteForm.invalid || (regalo && this.regaloForm.invalid)) {
+    if (form?.invalid || this.comprobanteForm.invalid || (regalo && this.regaloForm.invalid)) {
       this.toast.error('Revisa los campos marcados en rojo.');
       return;
     }

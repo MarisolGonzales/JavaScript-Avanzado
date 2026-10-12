@@ -66,8 +66,8 @@
               </div>
               <div class="form-group">
                 <label for="dni">DNI {{ exigeDni() ? '' : '(opcional)' }}</label>
-                <input id="dni" inputmode="numeric" maxlength="8" formControlName="documento" placeholder="12345678" [class.invalido]="error(comprobanteForm.controls.documento)" (input)="soloDigitos(comprobanteForm.controls.documento, $event, 8)">
-                @if (error(comprobanteForm.controls.documento)) { <p class="msg-error">{{ exigeDni() ? 'Las boletas desde S/ ' + montoDni + ' requieren un DNI de 8 dígitos.' : 'El DNI debe tener 8 dígitos.' }}</p> }
+                <input id="dni" inputmode="numeric" maxlength="8" formControlName="documento" placeholder="74528196" [class.invalido]="error(comprobanteForm.controls.documento)" (input)="soloDigitos(comprobanteForm.controls.documento, $event, 8)">
+                @if (error(comprobanteForm.controls.documento)) { <p class="msg-error">{{ exigeDni() ? 'Las boletas desde S/ ' + montoDni + ' requieren un DNI real de 8 dígitos.' : 'Escribe un DNI real de 8 dígitos (no valen secuencias como 12345678).' }}</p> }
               </div>
             </div>
           }
@@ -113,22 +113,38 @@
               </form>
             }
             @case ('YAPE') {
-              <form class="payment-panel" [formGroup]="yapeForm" novalidate (ngSubmit)="confirmar()">
-                <div class="form-group">
-                  <label for="yape">Celular asociado a Yape</label>
-                  <input id="yape" formControlName="celular" inputmode="numeric" maxlength="9" placeholder="987654321" [class.invalido]="error(yapeForm.controls.celular)" (input)="soloDigitos(yapeForm.controls.celular, $event, 9)">
-                  @if (error(yapeForm.controls.celular)) { <p class="msg-error">Celular de 9 dígitos que empiece con 9.</p> }
+              <div class="payment-panel pago-qr">
+                <div class="qr-caja">
+                  <app-qr [texto]="textoQr()" [tamano]="176" color="#742284" etiqueta="Código QR para pagar con Yape" />
+                  <strong class="qr-monto">{{ carrito.total() | soles }}</strong>
+                  <span class="muted small">NEXUS GAMING S.A.C.</span>
                 </div>
-              </form>
+                <div class="qr-detalle">
+                  <ol class="qr-pasos">
+                    <li>Abre <strong>Yape</strong> en tu celular y elige <strong>Escanear QR</strong>.</li>
+                    <li>Apunta la cámara al código y confirma el monto de {{ carrito.total() | soles }}.</li>
+                    <li>Cuando Yape te muestre el pago exitoso, pulsa <strong>Pagar</strong> para recibir tus claves.</li>
+                  </ol>
+                  <p class="form-hint"><i class="fa-solid fa-lock" aria-hidden="true"></i> Proyecto académico: el pago es simulado y no se cobra dinero real.</p>
+                </div>
+              </div>
             }
             @case ('PLIN') {
-              <form class="payment-panel" [formGroup]="plinForm" novalidate (ngSubmit)="confirmar()">
-                <div class="form-group">
-                  <label for="plin">Celular asociado a Plin</label>
-                  <input id="plin" formControlName="celular" inputmode="numeric" maxlength="9" placeholder="987654321" [class.invalido]="error(plinForm.controls.celular)" (input)="soloDigitos(plinForm.controls.celular, $event, 9)">
-                  @if (error(plinForm.controls.celular)) { <p class="msg-error">Celular de 9 dígitos que empiece con 9.</p> }
+              <div class="payment-panel pago-qr">
+                <div class="qr-caja">
+                  <app-qr [texto]="textoQr()" [tamano]="176" color="#0b4f9c" etiqueta="Código QR para pagar con Plin" />
+                  <strong class="qr-monto">{{ carrito.total() | soles }}</strong>
+                  <span class="muted small">NEXUS GAMING S.A.C.</span>
                 </div>
-              </form>
+                <div class="qr-detalle">
+                  <ol class="qr-pasos">
+                    <li>Abre la app de tu banco con <strong>Plin</strong> y elige <strong>Pagar con QR</strong>.</li>
+                    <li>Apunta la cámara al código y confirma el monto de {{ carrito.total() | soles }}.</li>
+                    <li>Cuando tu banco te muestre el pago exitoso, pulsa <strong>Pagar</strong> para recibir tus claves.</li>
+                  </ol>
+                  <p class="form-hint"><i class="fa-solid fa-lock" aria-hidden="true"></i> Proyecto académico: el pago es simulado y no se cobra dinero real.</p>
+                </div>
+              </div>
             }
           }
         </section>

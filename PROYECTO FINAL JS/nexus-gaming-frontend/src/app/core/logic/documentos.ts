@@ -5,6 +5,18 @@
 export const esDni = (valor: string): boolean => /^\d{8}$/.test(valor);
 
 /**
+ * DNI "creíble": además de tener 8 dígitos, descarta los números que nadie tiene en la realidad:
+ * todos iguales (11111111), escaleras (12345678, 87654321, 89012345) y repeticiones (12121212, 12341234).
+ */
+export function esDniVerosimil(valor: string): boolean {
+  if (!esDni(valor)) return false;
+  const pasos = [...valor].slice(1).map((d, i) => (Number(d) - Number(valor[i]) + 10) % 10);
+  const escalera = pasos.every((p) => p === 1) || pasos.every((p) => p === 9);
+  const repetido = [1, 2, 4].some((n) => valor === valor.slice(0, n).repeat(8 / n));
+  return !escalera && !repetido;
+}
+
+/**
  * RUC: 11 dígitos que empiezan con 10, 15, 17 o 20. El último es un dígito de control:
  * se multiplican los 10 primeros por 5,4,3,2,7,6,5,4,3,2, se suman, y
  * control = 11 − (suma mod 11)  (10 → 0, 11 → 1).

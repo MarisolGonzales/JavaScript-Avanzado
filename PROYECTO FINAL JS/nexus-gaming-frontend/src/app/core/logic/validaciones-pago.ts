@@ -50,3 +50,7 @@ export const celularPeruValido = (v: string): boolean => /^9\d{8}$/.test(v);
 /** Enmascara para guardar solo referencias seguras (nunca el número completo). */
 export const ultimos4 = (numero: string): string => soloDigitos(numero).slice(-4);
 export const enmascararCelular = (celular: string): string => `${celular.slice(0, 1)}XXXXX${celular.slice(-3)}`;
+
+/** Número de operación de 8 dígitos, como el que muestran Yape y Plin en su constancia: "Op. 48215937". */
+export const numeroOperacion = (azar: () => number = Math.random): string =>
+  `Op. ${String(Math.floor(azar() * 1e8)).padStart(8, '0')}`;
