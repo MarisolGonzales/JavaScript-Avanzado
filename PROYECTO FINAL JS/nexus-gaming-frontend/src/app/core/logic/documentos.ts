@@ -5,7 +5,7 @@
 export const esDni = (valor: string): boolean => /^\d{8}$/.test(valor);
 
 /**
- * DNI "creíble": además de tener 8 dígitos, descarta los números que nadie tiene en la realidad:
+ * El DNI debe tener 8 dígitos, descarta los números que nadie tiene en la realidad:
  * todos iguales (11111111), escaleras (12345678, 87654321, 89012345) y repeticiones (12121212, 12341234).
  */
 export function esDniVerosimil(valor: string): boolean {

@@ -10,9 +10,11 @@ export const tarjetaValida: ValidatorFn = (c) => (cumpleLuhn(String(c.value ?? '
 export const vencimientoValido: ValidatorFn = (c) => (vencimientoVigente(String(c.value ?? '')) ? null : { vencimiento: true });
 export const celularValido: ValidatorFn = (c) => (celularPeruValido(String(c.value ?? '')) ? null : { celular: true });
 export const rucValido: ValidatorFn = (c) => (esRuc(String(c.value ?? '').trim()) ? null : { ruc: true });
+
 /** DNI opcional: vacío es válido; si se escribe, debe tener 8 dígitos y verse real (no 12345678 ni 11111111). */
 export const dniOpcional: ValidatorFn = (c) => { const v = String(c.value ?? '').trim(); return !v || esDniVerosimil(v) ? null : { dni: true }; };
 export const dniObligatorio: ValidatorFn = (c) => (esDniVerosimil(String(c.value ?? '').trim()) ? null : { dni: true });
+
 /** Texto con al menos `min` caracteres reales (los espacios no cuentan). */
 export const textoMinimo = (min: number): ValidatorFn => (c) =>
   String(c.value ?? '').trim().length >= min ? null : { textoMinimo: { min } };
