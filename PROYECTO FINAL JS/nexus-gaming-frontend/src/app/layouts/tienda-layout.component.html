@@ -66,8 +66,60 @@
 
 <footer class="footer-nx">
   <div class="footer-inner">
-    <app-logo [tamano]="26" />
-    <span>&copy; {{ anio }} NEXUS GAMING · Proyecto académico de JavaScript Avanzado (UTP)</span>
-    <nav aria-label="Pie de página"><a routerLink="/catalogo">Catálogo</a> · <a routerLink="/soporte">Soporte</a></nav>
+    <div class="footer-marca">
+      <a routerLink="/inicio" class="logo-enlace" aria-label="NEXUS GAMING, ir al inicio"><app-logo [tamano]="30" /></a>
+      <p>&copy; {{ anio }} NEXUS GAMING S.A.C. · RUC 20601234565 · Lima, Perú. Todos los derechos reservados.
+        Los nombres, logotipos e imágenes de los juegos son marcas de sus respectivos propietarios.
+        Todos los precios están en soles e incluyen IGV.</p>
+      <ul class="footer-redes" aria-label="Redes sociales">
+        @for (r of redes; track r.nombre) {
+          <li><a [href]="r.url" target="_blank" rel="noopener" [attr.aria-label]="'NEXUS GAMING en ' + r.nombre"><i class="fa-brands" [class]="r.icono" aria-hidden="true"></i></a></li>
+        }
+      </ul>
+    </div>
+
+    <nav class="footer-col" aria-labelledby="f-tienda">
+      <h2 id="f-tienda">Tienda</h2>
+      <ul>
+        <li><a routerLink="/inicio">Inicio</a></li>
+        <li><a routerLink="/catalogo">Catálogo</a></li>
+        <li><a routerLink="/carrito">Carrito</a></li>
+      </ul>
+    </nav>
+    <nav class="footer-col" aria-labelledby="f-cuenta">
+      <h2 id="f-cuenta">Mi cuenta</h2>
+      <ul>
+        @if (!auth.logueado()) {
+          <li><a routerLink="/login">Ingresar</a></li>
+          <li><a routerLink="/registro">Crear cuenta</a></li>
+        } @else if (auth.esStaff()) {
+          <li><a routerLink="/admin">Panel de administración</a></li>
+          <li><a routerLink="/perfil">Mi perfil</a></li>
+        } @else {
+          <li><a routerLink="/biblioteca">Mi biblioteca</a></li>
+          <li><a routerLink="/pedidos">Mis pedidos</a></li>
+          <li><a routerLink="/perfil">Mi perfil</a></li>
+        }
+      </ul>
+    </nav>
+    <div class="footer-col">
+      <h2>Ayuda</h2>
+      <ul>
+        <li><a routerLink="/soporte">Soporte y asistente virtual</a></li>
+        <li>Reembolsos hasta {{ diasReembolso }} días</li>
+        <li>Boleta o factura electrónica</li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h2>Medios de pago</h2>
+      <ul class="footer-pagos" aria-label="Medios de pago aceptados">
+        <li title="Visa"><i class="fa-brands fa-cc-visa" aria-hidden="true"></i><span class="visually-hidden">Visa</span></li>
+        <li title="Mastercard"><i class="fa-brands fa-cc-mastercard" aria-hidden="true"></i><span class="visually-hidden">Mastercard</span></li>
+        <li title="American Express"><i class="fa-brands fa-cc-amex" aria-hidden="true"></i><span class="visually-hidden">American Express</span></li>
+        <li class="pago-yape">Yape</li>
+        <li class="pago-plin">Plin</li>
+      </ul>
+      <button type="button" class="btn-subir" (click)="subir()">Volver al principio <i class="fa-solid fa-circle-arrow-up" aria-hidden="true"></i></button>
+    </div>
   </div>
 </footer>

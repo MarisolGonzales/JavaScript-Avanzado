@@ -43,9 +43,27 @@
 }
 @media (max-width: 1100px) { .solo-ancho { display: none; } }
 
-.footer-nx { border-top: 1px solid var(--border-soft); margin-top: 4rem; color: var(--text-muted); font-size: .88rem; }
-.footer-inner { max-width: var(--container); margin: 0 auto; padding: 1.5rem 1.25rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+// ---------- Pie de página (compacto, estilo Steam: marca a la izquierda, columnas a la derecha) ----------
+.footer-nx { border-top: 1px solid var(--border-soft); margin-top: 4rem; background: var(--bg-elevated); color: var(--text-muted); font-size: .88rem; }
+.footer-inner { max-width: var(--container); margin: 0 auto; padding: 2.25rem 1.25rem; display: grid; grid-template-columns: minmax(260px, 1.6fr) repeat(4, minmax(0, 1fr)); gap: 2rem; align-items: start; }
 .footer-inner a { color: var(--text-muted); }
+.footer-inner a:hover { color: var(--text); text-decoration: none; }
+.footer-marca { display: grid; gap: .9rem; max-width: 380px; }
+.footer-marca p { margin: 0; font-size: .78rem; line-height: 1.6; }
+.footer-redes { display: flex; gap: .45rem; }
+.footer-redes a { width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; border-radius: 50%; border: 1px solid var(--border); font-size: .95rem; transition: color .15s, border-color .15s, background .15s; }
+.footer-redes a:hover { color: var(--text); border-color: var(--accent-border); background: var(--accent-soft); }
+.footer-col h2 { font-family: var(--font-display); font-size: .82rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--text); margin: .35rem 0 .9rem; }
+.footer-col ul { display: grid; gap: .55rem; }
+.footer-col .footer-pagos { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1.1rem; }
+.footer-pagos li { display: inline-flex; align-items: center; justify-content: center; min-width: 46px; height: 30px; padding: 0 .5rem; border-radius: var(--radius-sm); background: var(--bg-card); border: 1px solid var(--border); color: var(--text); font-size: 1.35rem; }
+.footer-pagos .pago-yape, .footer-pagos .pago-plin { font-family: var(--font-display); font-size: .8rem; font-weight: 700; color: #fff; border: 0; }
+.footer-pagos .pago-yape { background: #742284; }
+.footer-pagos .pago-plin { background: linear-gradient(135deg, #00b5e2, #0b4f9c); }
+.btn-subir { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .85rem; border-radius: var(--radius-md); background: var(--bg-card); border: 1px solid var(--border); color: var(--text); font: inherit; font-size: .82rem; font-weight: 600; }
+.btn-subir:hover { border-color: var(--accent-border); background: var(--accent-soft); }
+@media (max-width: 1000px) { .footer-inner { grid-template-columns: repeat(4, minmax(0, 1fr)); } .footer-marca { grid-column: 1 / -1; max-width: 520px; } }
+@media (max-width: 640px) { .footer-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 
 // ---------- Avisos ----------
 .banner-error { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; border: 1px solid transparent; @include tinte(var(--danger)); padding: .75rem 1.25rem; font-size: .92rem; }

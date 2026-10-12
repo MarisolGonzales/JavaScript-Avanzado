@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostListener, inject, s
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { NavigationEnd, Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
+import { DIAS_REEMBOLSO } from '../core/logic/documentos';
 import { AuthService } from '../core/services/auth.service';
 import { CarritoService } from '../core/services/carrito.service';
 import { ToastService } from '../core/services/toast.service';
@@ -26,6 +27,14 @@ export class TiendaLayoutComponent {
   protected readonly menuAbierto = signal(false);
   protected readonly menuUsuario = signal(false);
   protected readonly anio = new Date().getFullYear();
+  protected readonly diasReembolso = DIAS_REEMBOLSO;
+  protected readonly redes: readonly { nombre: string; icono: string; url: string }[] = [
+    { nombre: 'Facebook', icono: 'fa-facebook-f', url: 'https://www.facebook.com' },
+    { nombre: 'Instagram', icono: 'fa-instagram', url: 'https://www.instagram.com' },
+    { nombre: 'X', icono: 'fa-x-twitter', url: 'https://x.com' },
+    { nombre: 'YouTube', icono: 'fa-youtube', url: 'https://www.youtube.com' },
+    { nombre: 'Discord', icono: 'fa-discord', url: 'https://discord.com' }
+  ];
 
   constructor() {
     // En cada navegación se cierran los menús y se vuelve arriba.
@@ -42,6 +51,13 @@ export class TiendaLayoutComponent {
 
   @HostListener('document:keydown.escape')
   protected alEscape(): void { this.menuUsuario.set(false); this.menuAbierto.set(false); }
+
+  /** "Volver al principio" del pie: sube suave, salvo que el usuario prefiera menos animaciones. */
+  protected subir(): void {
+    const suave = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top: 0, behavior: suave ? 'smooth' : 'auto' });
+    document.getElementById('contenido')?.focus({ preventScroll: true });
+  }
 
   protected salir(): void {
     this.auth.cerrarSesion();
