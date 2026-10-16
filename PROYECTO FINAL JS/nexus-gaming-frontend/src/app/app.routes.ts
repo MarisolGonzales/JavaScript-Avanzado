@@ -37,6 +37,8 @@ export const routes: Routes = [
       { path: 'inicio', title: 'Inicio · NEXUS GAMING', loadComponent: () => import('./pages/tienda/inicio.component').then((m) => m.InicioComponent) },
       { path: 'catalogo', title: 'Catálogo · NEXUS GAMING', loadComponent: () => import('./pages/tienda/catalogo.component').then((m) => m.CatalogoComponent) },
       { path: 'juego/:id', title: 'Detalle del juego · NEXUS GAMING', loadComponent: () => import('./pages/tienda/juego-detalle.component').then((m) => m.JuegoDetalleComponent) },
+      { path: 'favoritos', title: 'Mis favoritos · NEXUS GAMING', canActivate: [authGuard, clienteGuard], loadComponent: () => import('./pages/tienda/favoritos.component').then((m) => m.FavoritosComponent) },
+      { path: 'logros', title: 'Mis logros · NEXUS GAMING', canActivate: [authGuard, clienteGuard], loadComponent: () => import('./pages/tienda/logros.component').then((m) => m.LogrosComponent) },
       { path: 'carrito', title: 'Carrito · NEXUS GAMING', loadComponent: () => import('./pages/tienda/carrito.component').then((m) => m.CarritoComponent) },
       { path: 'checkout', title: 'Finalizar compra · NEXUS GAMING', canActivate: [authGuard, clienteGuard], loadComponent: () => import('./pages/tienda/checkout.component').then((m) => m.CheckoutComponent) },
       { path: 'pedidos', title: 'Mis pedidos · NEXUS GAMING', canActivate: [authGuard], loadComponent: () => import('./pages/tienda/pedidos.component').then((m) => m.PedidosComponent) },

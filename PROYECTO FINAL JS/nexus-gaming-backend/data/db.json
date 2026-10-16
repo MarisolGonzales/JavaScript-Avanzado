@@ -381,6 +381,20 @@
       }
     }
   },
-  "tickets": [],
-  "seqTicket": 0
+  "tickets": [
+    {
+      "id": 1,
+      "asunto": "nuevo",
+      "mensaje": "RUEBA",
+      "tipo": "CONSULTA",
+      "pedido": null,
+      "usuario": "vanessa@utp.edu.pe",
+      "fecha": "2026-10-16T23:32:24.091Z",
+      "estado": "ABIERTO",
+      "respuesta": null,
+      "respondidoPor": null,
+      "respondidoEn": null
+    }
+  ],
+  "seqTicket": 1
 }

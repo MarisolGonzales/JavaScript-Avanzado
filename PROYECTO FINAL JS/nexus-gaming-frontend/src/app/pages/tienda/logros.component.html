@@ -1,0 +1,27 @@
+<section class="page-header">
+  <h1>Mis logros</h1>
+  <p>Tu progreso en NEXUS GAMING.</p>
+</section>
+
+<section class="page-body">
+  <div class="logros-resumen" aria-live="polite"><strong>{{ desbloqueados() }} / {{ logros().length }}</strong><span>logros desbloqueados</span></div>
+  @if (biblioteca.error()) { <p class="msg-error" role="alert">No se pudo consultar la biblioteca para calcular los logros de colección. {{ biblioteca.error() }}</p> }
+  @if (biblioteca.cargando() && !biblioteca.datos()) { <p class="muted">Consultando tu biblioteca…</p> }
+
+  <div class="logros-lista">
+    @for (logro of logros(); track logro.id) {
+      <article class="logro-item" [class.desbloqueado]="logro.desbloqueado">
+        <span class="logro-icono"><i class="fa-solid" [class]="'fa-solid ' + logro.icono" aria-hidden="true"></i></span>
+        <div class="logro-contenido">
+          <div class="logro-cab"><h2>{{ logro.titulo }}</h2><span>{{ logro.desbloqueado ? 'Desbloqueado' : 'En progreso' }}</span></div>
+          <p>{{ logro.descripcion }}</p>
+          <div class="logro-barra" role="progressbar" [attr.aria-label]="'Progreso: ' + logro.titulo" [attr.aria-valuenow]="logro.progreso" [attr.aria-valuemin]="0" [attr.aria-valuemax]="logro.objetivo">
+            <span [style.width.%]="porcentaje(logro.progreso, logro.objetivo)"></span>
+          </div>
+          <small>{{ logro.progreso }} / {{ logro.objetivo }}</small>
+        </div>
+      </article>
+    }
+  </div>
+  <a class="btn btn-secondary mt-3" routerLink="/catalogo">Explorar catálogo</a>
+</section>

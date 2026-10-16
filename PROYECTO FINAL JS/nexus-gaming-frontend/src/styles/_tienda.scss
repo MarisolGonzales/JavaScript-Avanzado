@@ -48,6 +48,21 @@
 .price { font-family: var(--font-display); font-weight: 700; font-size: 1.3rem; color: var(--gold); }
 .price-grande { font-size: 2rem; }
 .game-card.skeleton { min-height: 420px; }
+.favorito-card .acciones { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin-top: auto; }
+.logros-resumen { display: flex; align-items: baseline; gap: .65rem; margin-bottom: 1.25rem; color: var(--text-muted); }
+.logros-resumen strong { color: var(--gold); font: 700 1.8rem var(--font-display); }
+.logros-lista { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: .85rem; }
+.logro-item { display: grid; grid-template-columns: 52px minmax(0, 1fr); gap: .9rem; align-items: start; padding: 1rem; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); }
+.logro-item:not(.desbloqueado) { opacity: .78; }
+.logro-icono { display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; color: var(--gold); background: var(--accent-soft); }
+.logro-contenido { min-width: 0; }
+.logro-cab { display: flex; justify-content: space-between; align-items: baseline; gap: .75rem; }
+.logro-cab h2 { margin: 0; font-size: 1.1rem; }
+.logro-cab span, .logro-contenido small { color: var(--text-muted); font-size: .8rem; }
+.logro-item.desbloqueado .logro-cab span { color: var(--success); }
+.logro-contenido p { margin: .35rem 0 .7rem; color: var(--text-muted); font-size: .9rem; }
+.logro-barra { height: 6px; margin-bottom: .3rem; overflow: hidden; border-radius: 999px; background: var(--border-soft); }
+.logro-barra span { display: block; height: 100%; background: var(--gold); transition: width .25s ease; }
 
 .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.25rem; }
 .feature-card { background: var(--bg-card); border: 1px solid var(--border-soft); border-radius: var(--radius-lg); padding: 1.5rem; box-shadow: var(--shadow-suave); }

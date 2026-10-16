@@ -46,6 +46,14 @@
           <div class="panel-compra-acciones">
             <button type="button" class="btn btn-primary" [disabled]="j.stock === 0" (click)="agregar()"><i class="fa-solid fa-cart-plus" aria-hidden="true"></i> Añadir al carrito</button>
             <button type="button" class="btn btn-secondary" [disabled]="j.stock === 0" (click)="comprarAhora()">Comprar ahora</button>
+            @if (auth.esCliente()) {
+              <button type="button" class="btn btn-secondary" [attr.aria-pressed]="progreso.esFavorito(j.id)" (click)="alternarFavorito()">
+                <i class="fa-heart" [class.fa-solid]="progreso.esFavorito(j.id)" [class.fa-regular]="!progreso.esFavorito(j.id)" aria-hidden="true"></i>
+                {{ progreso.esFavorito(j.id) ? 'Quitar de favoritos' : 'Guardar en favoritos' }}
+              </button>
+            } @else {
+              <a class="btn btn-secondary" routerLink="/login" [queryParams]="{ volver: '/juego/' + j.id }">Ingresar para guardar</a>
+            }
           </div>
           <p class="form-hint"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Entrega inmediata · Reembolso dentro de 14 días · Boleta o factura en PDF</p>
         </div>

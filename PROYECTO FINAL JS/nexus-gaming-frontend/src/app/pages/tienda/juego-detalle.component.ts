@@ -2,8 +2,11 @@ import { ChangeDetectionStrategy, Component, computed, effect, inject, input, si
 import { Router, RouterLink } from '@angular/router';
 import { EstadoCarga } from '../../core/carga';
 import { imagenRota } from '../../core/logic/imagen';
+import { AuthService } from '../../core/services/auth.service';
 import { CarritoService } from '../../core/services/carrito.service';
+import { FavoritosLogrosService } from '../../core/services/favoritos-logros.service';
 import { JuegosService } from '../../core/services/juegos.service';
+import { ToastService } from '../../core/services/toast.service';
 import { StockDirective, textoStock } from '../../shared/directives/stock.directive';
 import type { Juego, TipoEntrega } from '../../shared/models';
 import { SolesPipe } from '../../shared/pipes/soles.pipe';
@@ -20,6 +23,9 @@ export class JuegoDetalleComponent {
   readonly id = input.required<string>();
 
   private readonly carrito = inject(CarritoService);
+  protected readonly auth = inject(AuthService);
+  protected readonly progreso = inject(FavoritosLogrosService);
+  private readonly toast = inject(ToastService);
   private readonly router = inject(Router);
   private readonly api = inject(JuegosService);
 
@@ -31,12 +37,23 @@ export class JuegoDetalleComponent {
 
   constructor() {
     effect(() => {
+      const juego = this.juego();
+      if (juego) untracked(() => this.progreso.registrarDetalle(juego.id));
+    });
+    effect(() => {
       const id = Number(this.id());
       untracked(() => {
         if (!Number.isInteger(id) || id <= 0) { this.estado.error.set('Identificador de juego inválido.'); return; }
         this.estado.ejecutar(this.api.obtener(id));
       });
     });
+  }
+
+  protected alternarFavorito(): void {
+    const juego = this.juego();
+    if (!juego) return;
+    const agregado = this.progreso.alternar(juego.id);
+    this.toast.exito(agregado ? `${juego.title} se guardó en Favoritos.` : `${juego.title} se quitó de Favoritos.`);
   }
 
   protected agregar(): boolean {

@@ -1,0 +1,34 @@
+<section class="page-header">
+  <h1>Mis favoritos</h1>
+  <p>Juegos que guardaste para revisar más tarde.</p>
+</section>
+
+<section class="page-body">
+  @if (estado.cargando() && !estado.datos()) {
+    <p class="muted" aria-live="polite">Cargando favoritos…</p>
+  } @else if (estado.error()) {
+    <div class="estado-vacio" role="alert"><i class="fa-solid fa-plug-circle-xmark" aria-hidden="true"></i><h2>No pudimos cargar tus favoritos</h2><p>{{ estado.error() }}</p><button type="button" class="btn btn-primary" (click)="cargar()">Reintentar</button></div>
+  } @else if (juegos().length === 0) {
+    <div class="estado-vacio"><i class="fa-regular fa-heart" aria-hidden="true"></i><h2>Aún no tienes favoritos</h2><p>Abre el detalle de un juego y guárdalo para encontrarlo aquí.</p><a class="btn btn-primary" routerLink="/catalogo">Explorar catálogo</a></div>
+  } @else {
+    <div class="games-grid">
+      @for (j of juegos(); track j.id) {
+        <article class="game-card favorito-card">
+          <a class="game-media" [style.--portada]="'url(' + j.image + ')'" [routerLink]="['/juego', j.id]" [attr.aria-label]="'Ver detalle de ' + j.title">
+            <img [src]="j.image" [alt]="'Portada de ' + j.title" (error)="imagenRota($event)">
+            <span class="tag">{{ j.category }}</span>
+          </a>
+          <div class="game-info">
+            <h2 class="game-title"><a [routerLink]="['/juego', j.id]">{{ j.title }}</a></h2>
+            <p class="game-desc">{{ j.description }}</p>
+            <div class="game-bottom"><span class="price">{{ j.price | soles }}</span><span class="muted small">{{ j.stock > 0 ? 'Disponible' : 'Agotado' }}</span></div>
+            <div class="acciones">
+              <a class="btn btn-secondary btn-sm" [routerLink]="['/juego', j.id]">Ver detalle</a>
+              <button type="button" class="btn btn-link btn-sm" (click)="quitar(j)"><i class="fa-solid fa-heart-crack" aria-hidden="true"></i> Quitar</button>
+            </div>
+          </div>
+        </article>
+      }
+    </div>
+  }
+</section>
