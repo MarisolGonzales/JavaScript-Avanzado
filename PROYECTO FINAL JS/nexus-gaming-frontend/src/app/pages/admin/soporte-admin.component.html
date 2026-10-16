@@ -34,7 +34,7 @@
       @if (t.tipo === 'REEMBOLSO' && t.pedido) {
         <div class="aviso-reembolso">
           <i class="fa-solid fa-rotate-left" aria-hidden="true"></i>
-          <div><strong>Solicitud de reembolso del pedido {{ t.pedido }}</strong><p class="muted small mb-0">Al aprobarla, el pedido pasa a Reembolsado, la clave se anula y se repone el stock.</p></div>
+          <div><strong>Solicitud de reembolso del pedido {{ t.pedido }}</strong><p class="muted small mb-0">Al aprobarla, el pedido pasa a Reembolsado, el juego sale de la biblioteca del cliente y se repone el stock.</p></div>
           <a routerLink="/admin/pedidos" class="btn btn-secondary btn-sm">Ver pedidos</a>
         </div>
       }

@@ -5,7 +5,7 @@ export function infoEstado(estado: EstadoPedido): { etiqueta: string; icono: str
   switch (estado) {
     case 'PENDIENTE':   return { etiqueta: 'Pendiente',   icono: 'fa-hourglass-half', clase: 'est-pendiente' };
     case 'PAGADO':      return { etiqueta: 'Pagado',      icono: 'fa-circle-check',   clase: 'est-pagado' };
-    case 'ENTREGADO':   return { etiqueta: 'Entregado',   icono: 'fa-key',            clase: 'est-entregado' };
+    case 'ENTREGADO':   return { etiqueta: 'Entregado',   icono: 'fa-box-open',       clase: 'est-entregado' };
     case 'REEMBOLSADO': return { etiqueta: 'Reembolsado', icono: 'fa-rotate-left',    clase: 'est-reembolsado' };
   }
 }

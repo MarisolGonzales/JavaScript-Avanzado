@@ -5,6 +5,7 @@ import { filter } from 'rxjs';
 import { DIAS_REEMBOLSO } from '../core/logic/documentos';
 import { AuthService } from '../core/services/auth.service';
 import { CarritoService } from '../core/services/carrito.service';
+import { InstalacionesService } from '../core/services/instalaciones.service';
 import { ToastService } from '../core/services/toast.service';
 import { LogoComponent } from '../shared/components/logo.component';
 import { ThemeToggleComponent } from '../shared/components/theme-toggle.component';
@@ -20,6 +21,7 @@ import { ThemeToggleComponent } from '../shared/components/theme-toggle.componen
 export class TiendaLayoutComponent {
   protected readonly auth = inject(AuthService);
   protected readonly carrito = inject(CarritoService);
+  protected readonly instalaciones = inject(InstalacionesService);
   private readonly router = inject(Router);
   private readonly toast = inject(ToastService);
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef);

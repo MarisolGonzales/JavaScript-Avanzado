@@ -14,8 +14,8 @@ export const normalizar = (t) => String(t ?? '').normalize('NFD').replace(/[\u03
 export const BASE_CONOCIMIENTO = `
 NEXUS GAMING es una tienda en línea de videojuegos DIGITALES (como Steam o Epic Games).
 - Compra: el cliente agrega juegos al carrito, elige boleta o factura, y paga con tarjeta, Yape o Plin (el pago es simulado en este proyecto académico).
-- Entrega: inmediata. La clave de activación aparece en "Mi biblioteca" y en el detalle del pedido apenas se aprueba el pago.
-- Regalos: se puede comprar un juego para otra persona indicando su correo; la clave llega a la biblioteca del destinatario.
+- Entrega: inmediata. El juego aparece en "Mi biblioteca" apenas se aprueba el pago; desde ahí se instala con el botón "Instalar" (la instalación es simulada en este proyecto académico).
+- Regalos: se puede comprar un juego para otra persona indicando su correo; el juego llega a la biblioteca del destinatario.
 - Comprobantes: boleta (DNI opcional; obligatorio desde S/ 700) o factura (requiere RUC válido, razón social y dirección fiscal). Se descargan en PDF desde el detalle del pedido.
 - Reembolsos: dentro de ${POLITICA_REEMBOLSO_DIAS} días desde la compra, solicitándolos con un ticket de tipo Reembolso; el personal lo revisa y aprueba.
 - Pagos rechazados: revisar el número, el vencimiento y el CVV, o probar con Yape/Plin.
@@ -23,7 +23,7 @@ NEXUS GAMING es una tienda en línea de videojuegos DIGITALES (como Steam o Epic
 - Estados de un pedido: Pendiente, Pagado, Entregado, Reembolsado.
 `.trim();
 
-const SUGERENCIAS_BASE = ['¿Dónde está mi pedido?', '¿Cómo pido un reembolso?', 'No me llega mi clave', 'Quiero factura', 'Hablar con una persona'];
+const SUGERENCIAS_BASE = ['¿Dónde está mi pedido?', '¿Cómo pido un reembolso?', '¿Cómo instalo mi juego?', 'Quiero factura', 'Hablar con una persona'];
 const soles = (n) => `S/ ${Number(n).toFixed(2)}`;
 const ESTADO_TXT = { PENDIENTE: 'pendiente de pago', PAGADO: 'pagado', ENTREGADO: 'entregado', REEMBOLSADO: 'reembolsado' };
 const respuesta = (texto, sugerencias = SUGERENCIAS_BASE, accion = null) => ({ respuesta: texto, sugerencias, accion, origen: 'local' });
@@ -38,7 +38,7 @@ const INTENCIONES = [
   { id: 'reembolso', patron: /(reembols|devol|devuelv|me arrepent|cancelar compra|cancelar mi)/ },
   { id: 'regalo', patron: /(regal)/ },
   { id: 'comprobante', patron: /(boleta|factura|ruc|comprobante|pdf|dni|razon social)/ },
-  { id: 'clave', patron: /(clave|key|activacion|activar|licencia|no me llega|no llego|biblioteca)/ },
+  { id: 'clave', patron: /(clave|key|activacion|activar|licencia|instal|descarg|no me llega|no llego|no aparece|biblioteca)/ },
   { id: 'pago', patron: /(pago|pagar|tarjeta|yape|plin|rechaz|cobr)/ },
   { id: 'pedido', patron: /(pedido|compra|orden|donde esta|estado|nx-)/ },
   { id: 'cuenta', patron: /(contrasena|password|cuenta|correo|perfil|iniciar sesion|registr)/ },
@@ -62,7 +62,7 @@ export function responderLocal(mensaje, { nombre = null, pedidos = [], ahora = n
 
   switch (intencion) {
     case 'saludo':
-      return respuesta(`¡Hola${nombre ? `, ${nombre.split(' ')[0]}` : ''}! Soy el asistente de NEXUS GAMING. Puedo ayudarte con pedidos, claves, pagos, comprobantes y reembolsos. ¿Qué necesitas?`);
+      return respuesta(`¡Hola${nombre ? `, ${nombre.split(' ')[0]}` : ''}! Soy el asistente de NEXUS GAMING. Puedo ayudarte con pedidos, instalaciones, pagos, comprobantes y reembolsos. ¿Qué necesitas?`);
     case 'gracias':
       return respuesta('¡Con gusto! Si necesitas algo más, aquí estoy.', ['Hablar con una persona', '¿Dónde está mi pedido?']);
     case 'humano':
@@ -70,16 +70,16 @@ export function responderLocal(mensaje, { nombre = null, pedidos = [], ahora = n
         [], { tipo: 'ticket', ticketTipo: 'CONSULTA', pedido: pedidoCitado?.codigo ?? null });
     case 'pedido':
     case 'clave': {
-      if (!logueado) return respuesta('Para consultar tus pedidos y claves necesito que inicies sesión. Luego las verás en "Mi biblioteca" y en "Mis pedidos".', ['Hablar con una persona']);
-      if (pedidos.length === 0) return respuesta('Aún no tienes compras registradas. Cuando compres, tu clave aparecerá al instante en "Mi biblioteca".', ['Hablar con una persona']);
+      if (!logueado) return respuesta('Para consultar tus pedidos y juegos necesito que inicies sesión. Luego los verás en "Mi biblioteca" y en "Mis pedidos".', ['Hablar con una persona']);
+      if (pedidos.length === 0) return respuesta('Aún no tienes compras registradas. Cuando compres, tu juego aparecerá al instante en "Mi biblioteca", listo para instalar.', ['Hablar con una persona']);
       const foco = pedidoCitado ?? pedidos[0];
       const extra = intencion === 'clave'
         ? (foco.estado === 'ENTREGADO'
-          ? 'Tu clave ya está disponible: entra a "Mi biblioteca" o al detalle del pedido y pulsa el ojo para verla. Si fue un regalo, la recibe el destinatario en su biblioteca.'
-          : foco.estado === 'REEMBOLSADO' ? 'Ese pedido fue reembolsado, así que su clave ya no es válida.' : 'El pago aún no se confirma; apenas se apruebe, la clave aparece sola.')
+          ? 'Tu juego ya está en "Mi biblioteca": pulsa "Instalar" en su tarjeta y espera a que termine la descarga. Si fue un regalo, lo recibe el destinatario en su biblioteca.'
+          : foco.estado === 'REEMBOLSADO' ? 'Ese pedido fue reembolsado, así que el juego ya no está en tu biblioteca.' : 'El pago aún no se confirma; apenas se apruebe, el juego aparece solo en tu biblioteca.')
         : '';
       return respuesta(`${pedidoCitado ? `Tu pedido ${foco.codigo}` : `Tu pedido más reciente, ${foco.codigo},`} está ${ESTADO_TXT[foco.estado] ?? foco.estado} (${soles(foco.total)}).\n${extra}\n\nTus últimos pedidos:\n${resumenPedidos(pedidos)}`.replace(/\n{3,}/g, '\n\n'),
-        ['No me llega mi clave', '¿Cómo pido un reembolso?', 'Hablar con una persona']);
+        ['¿Cómo instalo mi juego?', '¿Cómo pido un reembolso?', 'Hablar con una persona']);
     }
     case 'reembolso': {
       const elegibles = pedidos.filter((p) => p.estado !== 'REEMBOLSADO' && p.estado !== 'PENDIENTE' && dentroDePlazoReembolso(p.fecha, ahora));
@@ -94,15 +94,15 @@ export function responderLocal(mensaje, { nombre = null, pedidos = [], ahora = n
       return respuesta('En el pago eliges Boleta (el DNI es opcional, y obligatorio desde S/ 700) o Factura (necesitas RUC válido, razón social y dirección fiscal). ' +
         'Después descargas el PDF desde "Mis pedidos" → detalle del pedido → "Descargar comprobante".', ['Quiero factura', 'Hablar con una persona']);
     case 'regalo':
-      return respuesta('Para regalar un juego, abre su ficha y elige "Es un regalo" (o al añadirlo al carrito). En el pago escribes el correo del destinatario y un mensaje opcional. La clave llega a su biblioteca al instante.', ['Quiero factura', 'Hablar con una persona']);
+      return respuesta('Para regalar un juego, abre su ficha y elige "Es un regalo" (o al añadirlo al carrito). En el pago escribes el correo del destinatario y un mensaje opcional. El juego llega a su biblioteca al instante.', ['Quiero factura', 'Hablar con una persona']);
     case 'pago':
       return respuesta('Aceptamos tarjeta, Yape y Plin. Si tu pago fue rechazado, revisa el número de la tarjeta, el vencimiento y el CVV, o prueba con Yape/Plin (celular de 9 dígitos que empiece con 9). El pago es simulado en este proyecto académico.', ['¿Cómo pido un reembolso?', 'Hablar con una persona']);
     case 'cuenta':
       return respuesta('Puedes cambiar tu nombre, departamento y contraseña en "Mi perfil". Si olvidaste tu contraseña, abre un ticket y el equipo te ayuda a recuperarla.', ['Hablar con una persona']);
     case 'catalogo':
-      return respuesta('En el Catálogo puedes buscar por título o género, ordenar por precio y filtrar por categoría. Si un juego aparece como "Agotado", vuelve más tarde: el equipo repone las claves.', ['Hablar con una persona']);
+      return respuesta('En el Catálogo puedes buscar por título o género, ordenar por precio y filtrar por categoría. Si un juego aparece como "Agotado", vuelve más tarde: el equipo repone el stock.', ['Hablar con una persona']);
     default:
-      return respuesta('No estoy seguro de haber entendido. Puedo ayudarte con pedidos, claves, pagos, comprobantes, regalos y reembolsos; o abre un ticket para hablar con una persona.',
+      return respuesta('No estoy seguro de haber entendido. Puedo ayudarte con pedidos, instalaciones, pagos, comprobantes, regalos y reembolsos; o abre un ticket para hablar con una persona.',
         SUGERENCIAS_BASE, { tipo: 'ticket', ticketTipo: 'CONSULTA', pedido: null });
   }
 }

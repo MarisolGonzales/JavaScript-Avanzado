@@ -35,7 +35,7 @@
             <legend>¿Para quién es?</legend>
             <label class="opcion" [class.activa]="tipo() === 'DIGITAL'">
               <input type="radio" name="tipo" value="DIGITAL" [checked]="tipo() === 'DIGITAL'" (change)="tipo.set('DIGITAL')">
-              <span><strong><i class="fa-solid fa-user" aria-hidden="true"></i> Para mi cuenta</strong><small>La clave llega a tu biblioteca</small></span>
+              <span><strong><i class="fa-solid fa-user" aria-hidden="true"></i> Para mi cuenta</strong><small>El juego llega a tu biblioteca</small></span>
             </label>
             <label class="opcion" [class.activa]="tipo() === 'REGALO'">
               <input type="radio" name="tipo" value="REGALO" [checked]="tipo() === 'REGALO'" (change)="tipo.set('REGALO')">

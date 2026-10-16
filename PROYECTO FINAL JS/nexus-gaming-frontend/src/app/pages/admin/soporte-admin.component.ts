@@ -61,7 +61,7 @@ export class SoporteAdminComponent {
   }
 
   protected aprobarReembolso(t: Ticket): void {
-    if (!confirm(`¿Aprobar el reembolso del pedido ${t.pedido}? La clave quedará anulada y se repondrá el stock.`)) return;
+    if (!confirm(`¿Aprobar el reembolso del pedido ${t.pedido}? El juego saldrá de la biblioteca del cliente y se repondrá el stock.`)) return;
     this.trabajando.set(true);
     this.api.aprobarReembolso(t.id, this.respuesta.value.trim() || undefined).subscribe(this.tras(() => undefined, `Reembolso de ${t.pedido} aprobado.`));
   }

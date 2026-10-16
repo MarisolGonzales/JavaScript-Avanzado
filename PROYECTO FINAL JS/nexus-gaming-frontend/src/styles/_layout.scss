@@ -18,6 +18,10 @@
 .navbar-acciones { display: flex; align-items: center; gap: .6rem; }
 .btn-carrito { display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .9rem; border-radius: var(--radius-md); background: var(--accent); color: var(--on-accent); font-weight: 600; }
 .btn-carrito:hover { background: var(--accent-strong); text-decoration: none; color: var(--on-accent); }
+.btn-descargas { display: inline-flex; align-items: center; gap: .4rem; padding: .5rem .8rem; border-radius: var(--radius-md); border: 1px solid var(--accent-border); background: var(--accent-soft); color: var(--accent-strong); font-weight: 700; font-variant-numeric: tabular-nums; }
+.btn-descargas:hover { text-decoration: none; border-color: var(--accent); }
+.btn-descargas i { animation: baja 1.2s ease-in-out infinite; }
+@keyframes baja { 0%, 100% { transform: translateY(-2px); } 50% { transform: translateY(2px); } }
 .badge-carrito { background: var(--on-accent); color: var(--accent); border-radius: 999px; min-width: 1.4rem; height: 1.4rem; display: inline-flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; padding: 0 .35rem; }
 
 .avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), #4b34c9); color: #fff; display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 1rem; flex: none; }

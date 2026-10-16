@@ -71,7 +71,7 @@ export class CatalogoAdminComponent {
     forkJoin(cambios.map((s) => this.api.ajustarStock(s.codigo, j.id, this.stock(j, s.codigo)))).subscribe({
       next: () => {
         this.borradorStock.update((b) => Object.fromEntries(Object.entries(b).filter(([k]) => !k.startsWith(`${j.id}-`))));
-        this.toast.exito(`Claves de ${j.title} actualizadas.`);
+        this.toast.exito(`Stock de ${j.title} actualizado.`);
         this.cargar();
       },
       error: (e: unknown) => this.toast.error(mensajeError(e))
@@ -98,7 +98,7 @@ export class CatalogoAdminComponent {
       : (() => { const { stockInicial: _omitido, ...catalogo } = datos; return this.api.actualizarJuego(id as number, catalogo); })();
     peticion.subscribe({
       next: (j) => {
-        this.toast.exito(id === 'nuevo' ? `${j.title} se creó y se replicó a los 3 servidores.` : `${j.title} se actualizó (las claves de cada servidor se conservan).`);
+        this.toast.exito(id === 'nuevo' ? `${j.title} se creó y se replicó a los 3 servidores.` : `${j.title} se actualizó (las licencias de cada servidor se conservan).`);
         this.editando.set(null);
         this.cargar();
       },

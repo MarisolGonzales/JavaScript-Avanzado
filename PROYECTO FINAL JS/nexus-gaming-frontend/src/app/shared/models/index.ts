@@ -29,7 +29,7 @@ export interface Juego {
   readonly year: number | null;
   readonly platforms: string | null;
   readonly mode: string | null;
-  /** Claves disponibles para quien consulta. */
+  /** Licencias disponibles para quien consulta. */
   readonly stock: number;
   /** Desglose por servidor regional: solo lo recibe administración. */
   readonly stockPorNodo?: Readonly<Record<CodigoNodo, number>>;
@@ -54,6 +54,7 @@ export interface LineaPedido {
   readonly precioUnitario: number;
   readonly subtotal: number;
   readonly tipoEntrega: TipoEntrega;
+  /** Identificador interno de la licencia (no se muestra: el juego se instala desde la biblioteca). */
   readonly claveDigital: string | null;
 }
 export interface PagoPedido {
@@ -119,6 +120,7 @@ export interface ElementoBiblioteca {
   readonly idJuego: number;
   readonly titulo: string;
   readonly imagen: string;
+  /** Identificador interno de la licencia (no se muestra). */
   readonly clave: string | null;
   readonly fecha: string;
   readonly pedido: string | null;

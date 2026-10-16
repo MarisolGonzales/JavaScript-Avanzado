@@ -14,13 +14,19 @@
         <li><a routerLink="/inicio" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-house" aria-hidden="true"></i> Inicio</a></li>
         <li><a routerLink="/catalogo" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-gamepad" aria-hidden="true"></i> Catálogo</a></li>
         @if (auth.logueado()) {
-          <li><a routerLink="/biblioteca" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-key" aria-hidden="true"></i> Mi biblioteca</a></li>
+          <li><a routerLink="/biblioteca" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Mi biblioteca</a></li>
         }
         <li><a routerLink="/soporte" routerLinkActive="active" ariaCurrentWhenActive="page"><i class="fa-solid fa-headset" aria-hidden="true"></i> Soporte</a></li>
       </ul>
 
       <div class="navbar-acciones">
         <app-theme-toggle />
+        @if (instalaciones.activas() > 0) {
+          <a routerLink="/biblioteca" class="btn-descargas" title="Descargas en curso"
+             [attr.aria-label]="instalaciones.activas() + ' descarga(s) en curso, ir a Mi biblioteca'">
+            <i class="fa-solid fa-download" aria-hidden="true"></i> {{ instalaciones.activas() }}
+          </a>
+        }
         <a routerLink="/carrito" class="btn-carrito" [attr.aria-label]="'Carrito, ' + carrito.cantidad() + ' juego(s)'">
           <i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> <span class="solo-ancho">Carrito</span>
           <span class="badge-carrito">{{ carrito.cantidad() }}</span>
@@ -44,7 +50,7 @@
                   <a role="menuitem" routerLink="/admin"><i class="fa-solid fa-chart-line" aria-hidden="true"></i> Ir al panel</a>
                 } @else {
                   <a role="menuitem" routerLink="/pedidos"><i class="fa-solid fa-receipt" aria-hidden="true"></i> Mis pedidos</a>
-                  <a role="menuitem" routerLink="/biblioteca"><i class="fa-solid fa-key" aria-hidden="true"></i> Mi biblioteca</a>
+                  <a role="menuitem" routerLink="/biblioteca"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Mi biblioteca</a>
                 }
                 <a role="menuitem" routerLink="/perfil"><i class="fa-solid fa-user" aria-hidden="true"></i> Mi perfil</a>
                 <button type="button" role="menuitem" (click)="salir()"><i class="fa-solid fa-right-from-bracket" aria-hidden="true"></i> Cerrar sesión</button>

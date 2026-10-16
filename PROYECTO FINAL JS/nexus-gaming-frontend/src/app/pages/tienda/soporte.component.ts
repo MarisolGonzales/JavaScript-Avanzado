@@ -52,10 +52,10 @@ export class SoporteComponent {
   });
 
   protected readonly faq: readonly { p: string; r: string }[] = [
-    { p: '¿Cuándo recibo mi clave?', r: 'Apenas se aprueba el pago. La verás en Mi biblioteca y en el detalle del pedido.' },
+    { p: '¿Cuándo puedo instalar mi juego?', r: 'Apenas se aprueba el pago: aparece en Mi biblioteca y desde ahí pulsas Instalar.' },
     { p: '¿Puedo pedir un reembolso?', r: 'Sí, dentro de 14 días desde la compra. Abre un ticket de tipo Reembolso y el equipo lo revisa y aprueba.' },
     { p: '¿Cómo pido factura?', r: 'En el pago elige "Factura", escribe tu RUC, razón social y dirección fiscal. Podrás descargarla en PDF.' },
-    { p: '¿Cómo funcionan los regalos?', r: 'Marca el juego como regalo, indica el correo de quien lo recibe y la clave llegará a su biblioteca.' }
+    { p: '¿Cómo funcionan los regalos?', r: 'Marca el juego como regalo, indica el correo de quien lo recibe y el juego llegará a su biblioteca.' }
   ];
 
   constructor() {

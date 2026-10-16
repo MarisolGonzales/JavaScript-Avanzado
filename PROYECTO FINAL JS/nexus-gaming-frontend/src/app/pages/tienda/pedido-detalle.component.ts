@@ -30,7 +30,6 @@ export class PedidoDetalleComponent {
 
   protected readonly estado = new EstadoCarga<Pedido>();
   protected readonly descargando = signal(false);
-  protected readonly visibles = signal<ReadonlySet<string>>(new Set());
   protected readonly imagenRota = imagenRota;
   protected readonly diasReembolso = DIAS_REEMBOLSO;
   protected readonly pedido = computed(() => this.estado.datos());
@@ -53,15 +52,5 @@ export class PedidoDetalleComponent {
     });
   }
 
-  protected alternar(llave: string): void {
-    this.visibles.update((s) => { const n = new Set(s); if (n.has(llave)) n.delete(llave); else n.add(llave); return n; });
-  }
-
-  protected async copiar(clave: string): Promise<void> {
-    try { await navigator.clipboard.writeText(clave); this.toast.exito('Clave copiada al portapapeles.'); }
-    catch { this.toast.error('No se pudo copiar. Selecciónala y copia manualmente.'); }
-  }
-
   protected imprimir(): void { window.print(); }
-  protected oculta(clave: string): string { return clave.replace(/[A-Z0-9]/g, (c, i) => (i < 5 ? c : '•')); }
 }

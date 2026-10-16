@@ -46,7 +46,7 @@ export class CarritoService {
   }
 
   agregar(juego: Juego, tipo: TipoEntrega = 'DIGITAL'): ResultadoCarrito {
-    if (juego.stock <= 0) return { exito: false, mensaje: `${juego.title} no tiene claves disponibles por ahora.` };
+    if (juego.stock <= 0) return { exito: false, mensaje: `${juego.title} no tiene licencias disponibles por ahora.` };
     if (this.items().some((i) => i.idJuego === juego.id && i.tipoEntrega === tipo))
       return { exito: false, mensaje: tipo === 'REGALO' ? 'Ese regalo ya está en tu carrito.' : 'Ese juego ya está en tu carrito.' };
     const item: ItemCarrito = { idJuego: juego.id, titulo: juego.title, imagen: juego.image, precio: juego.price, tipoEntrega: tipo };

@@ -13,8 +13,8 @@ export interface MensajeChat {
   readonly origen?: 'local' | 'ia';
 }
 
-const SALUDO = '¡Hola! Soy el asistente virtual de NEXUS GAMING. Puedo ayudarte con pedidos, claves, pagos, comprobantes, regalos y reembolsos. ¿En qué te ayudo?';
-const SUGERENCIAS_INICIALES = ['¿Dónde está mi pedido?', '¿Cómo pido un reembolso?', 'No me llega mi clave', 'Quiero factura'];
+const SALUDO = '¡Hola! Soy el asistente virtual de NEXUS GAMING. Puedo ayudarte con pedidos, instalaciones, pagos, comprobantes, regalos y reembolsos. ¿En qué te ayudo?';
+const SUGERENCIAS_INICIALES = ['¿Dónde está mi pedido?', '¿Cómo pido un reembolso?', '¿Cómo instalo mi juego?', 'Quiero factura'];
 
 /** Conversación con el asistente de soporte. Es un servicio raíz: el chat no se pierde al cambiar de página. */
 @Injectable({ providedIn: 'root' })

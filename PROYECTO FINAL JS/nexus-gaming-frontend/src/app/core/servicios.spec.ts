@@ -123,7 +123,7 @@ describe('CarritoService', () => {
     expect(c.cantidad()).toBe(2); expect(c.hayRegalo()).toBeTrue();
   });
 
-  it('rechaza juegos sin claves', () => {
+  it('rechaza juegos sin licencias', () => {
     const { c } = carritoDe(usuario());
     expect(c.agregar(juego(3, 0)).exito).toBeFalse();
     expect(c.cantidad()).toBe(0);

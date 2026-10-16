@@ -13,7 +13,7 @@
     @if (nuevo() && p.estado === 'ENTREGADO') {
       <div class="banner-exito no-imprimir" role="status">
         <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
-        <div><strong>¡Compra exitosa!</strong> {{ p.entrega?.canal === 'REGALO' ? 'Tu regalo ya fue enviado y tus claves están en tu biblioteca.' : 'Tus claves ya están disponibles en tu biblioteca.' }}</div>
+        <div><strong>¡Compra exitosa!</strong> {{ p.entrega?.canal === 'REGALO' ? 'Tu regalo ya fue enviado y tus juegos están en tu biblioteca.' : 'Tus juegos ya están en tu biblioteca, listos para instalar.' }}</div>
         <a routerLink="/biblioteca" class="btn btn-primary btn-sm">Ir a mi biblioteca</a>
       </div>
     }
@@ -39,15 +39,11 @@
                   <span class="muted small">
                     @if (i.tipoEntrega === 'REGALO') { <i class="fa-solid fa-gift" aria-hidden="true"></i> Regalo para {{ p.entrega?.destinatario }} } @else { <i class="fa-solid fa-user" aria-hidden="true"></i> Para tu cuenta }
                   </span>
-                  @if (i.claveDigital; as clave) {
+                  @if (p.estado === 'ENTREGADO') {
                     @if (i.tipoEntrega === 'DIGITAL') {
-                      <span class="clave-fila">
-                        <code class="clave">{{ visibles().has('k' + $index) ? clave : oculta(clave) }}</code>
-                        <button type="button" class="btn-icono" [attr.aria-label]="visibles().has('k' + $index) ? 'Ocultar clave' : 'Mostrar clave'" (click)="alternar('k' + $index)"><i class="fa-solid" [class]="visibles().has('k' + $index) ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i></button>
-                        <button type="button" class="btn-icono" aria-label="Copiar clave" (click)="copiar(clave)"><i class="fa-regular fa-copy" aria-hidden="true"></i></button>
-                      </span>
+                      <a class="link-ver small" routerLink="/biblioteca"><i class="fa-solid fa-download" aria-hidden="true"></i> Instalar desde Mi biblioteca</a>
                     } @else {
-                      <span class="muted small">La clave se entregó al destinatario.</span>
+                      <span class="muted small">El juego se agregó a la biblioteca del destinatario.</span>
                     }
                   }
                 </div>

@@ -80,7 +80,7 @@
 
       @if (auth.esAdmin() && d.stockBajo.length > 0) {
         <section class="tarjeta" aria-labelledby="t-bajo">
-          <header class="tarjeta-cab"><h2 id="t-bajo" class="tarjeta-titulo"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Claves por agotarse (5 o menos)</h2><a class="link-ver" routerLink="/admin/catalogo">Reponer <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></header>
+          <header class="tarjeta-cab"><h2 id="t-bajo" class="tarjeta-titulo"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i> Licencias por agotarse (5 o menos)</h2><a class="link-ver" routerLink="/admin/catalogo">Reponer <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></header>
           <ul class="stock-bajo-lista">
             @for (s of d.stockBajo.slice(0, 8); track s.nodo + s.idJuego) { <li><span>{{ s.titulo }} <small class="muted">· {{ s.nodo }}</small></span><span class="stock-pill" [appStock]="s.stock">{{ s.stock }}</span></li> }
           </ul>

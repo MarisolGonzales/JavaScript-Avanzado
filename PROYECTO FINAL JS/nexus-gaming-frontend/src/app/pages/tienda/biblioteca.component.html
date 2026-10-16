@@ -1,6 +1,6 @@
 <section class="page-header">
   <h1>Mi biblioteca</h1>
-  <p>Tus juegos y sus claves de activación, incluidos los regalos que recibiste.</p>
+  <p>Tus juegos, listos para instalar, incluidos los regalos que recibiste.</p>
 </section>
 
 <section class="page-body">
@@ -13,7 +13,7 @@
     </div>
   } @else if ((estado.datos() ?? []).length === 0) {
     <div class="estado-vacio">
-      <i class="fa-solid fa-key" aria-hidden="true"></i><h2>Tu biblioteca está vacía</h2><p>Tus compras y regalos aparecerán aquí al instante.</p>
+      <i class="fa-solid fa-layer-group" aria-hidden="true"></i><h2>Tu biblioteca está vacía</h2><p>Tus compras y regalos aparecerán aquí al instante.</p>
       <a class="btn btn-primary" routerLink="/catalogo">Explorar catálogo</a>
     </div>
   } @else {
@@ -36,14 +36,45 @@
               @if (j.mensaje) { <p class="regalo-mensaje">“{{ j.mensaje }}”</p> }
             }
             <span class="library-date">{{ j.fecha | date: 'dd/MM/yyyy' }}</span>
-            @if (j.clave; as clave) {
-              <div class="clave-fila">
-                <code class="clave">{{ visibles().has(j.llave) ? clave : oculta(clave) }}</code>
-                <button type="button" class="btn-icono" [attr.aria-label]="visibles().has(j.llave) ? 'Ocultar clave' : 'Mostrar clave'" (click)="alternar(j.llave)"><i class="fa-solid" [class]="visibles().has(j.llave) ? 'fa-eye-slash' : 'fa-eye'" aria-hidden="true"></i></button>
-                <button type="button" class="btn-icono" aria-label="Copiar clave" (click)="copiar(clave)"><i class="fa-regular fa-copy" aria-hidden="true"></i></button>
+            @if (j.pedido) { <a class="link-ver" [routerLink]="['/pedidos', j.pedido]">Pedido {{ j.pedido }}</a> }
+
+            @if (instalaciones.estado(j.llave); as inst) {
+              <div class="instalacion">
+                @switch (inst.estado) {
+                  @case ('NO_INSTALADO') {
+                    <span class="inst-info"><i class="fa-solid fa-hard-drive" aria-hidden="true"></i> {{ tamanoTexto(j) }}</span>
+                    <button type="button" class="btn btn-primary btn-sm" (click)="instalar(j)"><i class="fa-solid fa-download" aria-hidden="true"></i> Instalar</button>
+                  }
+                  @case ('INSTALADO') {
+                    <span class="inst-info inst-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Instalado · {{ tamanoTexto(j) }}</span>
+                    <div class="inst-acciones">
+                      <button type="button" class="btn btn-primary btn-sm" (click)="instalaciones.jugar(j.titulo)"><i class="fa-solid fa-play" aria-hidden="true"></i> Jugar</button>
+                      <button type="button" class="btn-icono" [attr.aria-label]="'Desinstalar ' + j.titulo" title="Desinstalar" (click)="desinstalar(j)"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></button>
+                    </div>
+                  }
+                  @default {
+                    <div class="inst-cab">
+                      <span>{{ inst.estado === 'INSTALANDO' ? 'Instalando…' : inst.estado === 'PAUSADO' ? 'En pausa' : 'Descargando…' }}</span>
+                      <strong>{{ inst.porcentaje }}%</strong>
+                    </div>
+                    <div class="barra" role="progressbar" aria-valuemin="0" aria-valuemax="100" [attr.aria-valuenow]="inst.porcentaje" [attr.aria-label]="'Progreso de ' + j.titulo">
+                      <div class="barra-relleno" [class.pausada]="inst.estado === 'PAUSADO'" [class.instalando]="inst.estado === 'INSTALANDO'" [style.width.%]="inst.porcentaje"></div>
+                    </div>
+                    <span class="inst-detalle">{{ inst.detalle }}</span>
+                    @if (inst.estado !== 'INSTALANDO') {
+                      <div class="inst-acciones">
+                        @if (inst.estado === 'PAUSADO') {
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="instalaciones.reanudar(j.llave)"><i class="fa-solid fa-play" aria-hidden="true"></i> Reanudar</button>
+                        } @else {
+                          <button type="button" class="btn btn-secondary btn-sm" (click)="instalaciones.pausar(j.llave)"><i class="fa-solid fa-pause" aria-hidden="true"></i> Pausar</button>
+                        }
+                        <button type="button" class="btn-icono" [attr.aria-label]="'Cancelar la descarga de ' + j.titulo" title="Cancelar" (click)="instalaciones.cancelar(j.llave)"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+                      </div>
+                    }
+                  }
+                }
               </div>
             }
-            @if (j.pedido) { <a class="link-ver" [routerLink]="['/pedidos', j.pedido]">Pedido {{ j.pedido }}</a> }
           </div>
         </article>
       } @empty {

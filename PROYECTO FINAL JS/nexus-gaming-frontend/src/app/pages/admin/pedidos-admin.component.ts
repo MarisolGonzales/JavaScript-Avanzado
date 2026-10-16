@@ -70,7 +70,7 @@ export class PedidosAdminComponent {
   protected etiquetaRegion(c: CodigoNodo): string { return REGIONES.find((r) => r.codigo === c)?.etiqueta ?? c; }
 
   protected reembolsar(p: Pedido): void {
-    if (!confirm(`¿Aprobar el reembolso del pedido ${p.codigo}? La clave quedará anulada y se repondrá el stock.`)) return;
+    if (!confirm(`¿Aprobar el reembolso del pedido ${p.codigo}? El juego saldrá de la biblioteca del cliente y se repondrá el stock.`)) return;
     this.trabajando.set(true);
     this.api.cambiarEstado(p.codigo, 'REEMBOLSADO').subscribe({
       next: (nuevo) => {

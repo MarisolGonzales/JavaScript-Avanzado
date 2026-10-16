@@ -143,8 +143,6 @@
 .linea img { width: 84px; height: 54px; object-fit: cover; border-radius: var(--radius-sm); }
 .linea-info { display: flex; flex-direction: column; gap: .2rem; min-width: 0; }
 .lineas-mini .linea { grid-template-columns: 56px 1fr auto; } .lineas-mini .linea img { width: 56px; height: 38px; }
-.clave-fila { display: inline-flex; align-items: center; gap: .5rem; flex-wrap: wrap; }
-.clave { background: var(--bg-elevated); border: 1px dashed var(--accent-border); color: var(--accent-strong); padding: .25rem .6rem; border-radius: var(--radius-sm); letter-spacing: .08em; font-size: .88rem; }
 
 // Comprobante en pantalla: siempre con aspecto de "papel", en ambos temas.
 .comprobante { background: var(--papel); color: var(--papel-texto); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.25rem; display: flex; flex-direction: column; gap: .5rem; position: sticky; top: 5rem; box-shadow: var(--shadow); }
@@ -173,6 +171,19 @@
 .library-card-body { padding: 1rem; display: flex; flex-direction: column; gap: .5rem; flex: 1; }
 .library-card-body h2 { margin: 0; }
 .library-date { color: var(--text-muted); font-size: .8rem; }
+
+// Instalación simulada (biblioteca)
+.instalacion { margin-top: auto; padding-top: .75rem; border-top: 1px solid var(--border-soft); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .5rem; }
+.inst-info { color: var(--text-muted); font-size: .82rem; display: inline-flex; align-items: center; gap: .35rem; }
+.inst-ok { color: var(--success); font-weight: 600; }
+.inst-acciones { display: inline-flex; align-items: center; gap: .4rem; }
+.inst-cab { width: 100%; display: flex; justify-content: space-between; font-size: .82rem; color: var(--text-muted); }
+.inst-cab strong { color: var(--text); }
+.inst-detalle { width: 100%; color: var(--text-faint); font-size: .76rem; font-variant-numeric: tabular-nums; }
+.barra { width: 100%; height: 8px; border-radius: 999px; background: var(--bg-elevated); border: 1px solid var(--border-soft); overflow: hidden; }
+.barra-relleno { height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--accent), var(--accent-strong)); transition: width .2s linear; }
+.barra-relleno.instalando { background: linear-gradient(90deg, var(--success), #7be3a8); }
+.barra-relleno.pausada { background: var(--text-faint); }
 .regalo-mensaje { color: var(--text-muted); font-style: italic; margin: 0; font-size: .88rem; }
 .profile-layout { display: grid; grid-template-columns: 320px 1fr; gap: 1.5rem; align-items: start; }
 @media (max-width: 860px) { .profile-layout { grid-template-columns: 1fr; } }

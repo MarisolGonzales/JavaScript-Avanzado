@@ -79,8 +79,7 @@
         <ul class="lineas lineas-mini">
           @for (i of p.items; track $index) {
             <li class="linea"><img [src]="i.imagen" [alt]="''" (error)="imagenRota($event)"><div class="linea-info"><strong>{{ i.titulo }}</strong>
-              <span class="muted small">{{ i.tipoEntrega === 'REGALO' ? 'Regalo → ' + p.entrega?.destinatario : 'Cuenta del cliente' }}</span>
-              @if (i.claveDigital) { <code class="clave">{{ i.claveDigital }}</code> }</div><span class="price">{{ i.subtotal | soles }}</span></li>
+              <span class="muted small">{{ i.tipoEntrega === 'REGALO' ? 'Regalo → ' + p.entrega?.destinatario : 'Cuenta del cliente' }}</span></div><span class="price">{{ i.subtotal | soles }}</span></li>
           }
         </ul>
 

@@ -4,8 +4,9 @@ import { RouterLink } from '@angular/router';
 import { EstadoCarga } from '../../core/carga';
 import { IndiceBusqueda } from '../../core/logic/indice-busqueda';
 import { imagenRota } from '../../core/logic/imagen';
+import { formatoTamano, tamanoJuego } from '../../core/logic/instalacion';
+import { InstalacionesService } from '../../core/services/instalaciones.service';
 import { PedidosService } from '../../core/services/pedidos.service';
-import { ToastService } from '../../core/services/toast.service';
 import type { ElementoBiblioteca } from '../../shared/models';
 
 @Component({
@@ -17,11 +18,10 @@ import type { ElementoBiblioteca } from '../../shared/models';
 })
 export class BibliotecaComponent {
   private readonly api = inject(PedidosService);
-  private readonly toast = inject(ToastService);
+  protected readonly instalaciones = inject(InstalacionesService);
 
   protected readonly estado = new EstadoCarga<ElementoBiblioteca[]>();
   protected readonly imagenRota = imagenRota;
-  protected readonly visibles = signal<ReadonlySet<string>>(new Set());
   protected readonly texto = signal('');
 
   private readonly todos = computed(() => this.estado.datos() ?? []);
@@ -35,15 +35,17 @@ export class BibliotecaComponent {
 
   constructor() { this.cargar(); }
 
-  protected cargar(): void { this.estado.ejecutar(this.api.biblioteca()); }
+  /** Si un juego salió de la biblioteca (p. ej. por un reembolso), deja de figurar como instalado. */
+  protected cargar(): void {
+    this.estado.ejecutar(this.api.biblioteca(), (lista) => this.instalaciones.sincronizar(lista.map((j) => j.llave)));
+  }
   protected escribir(e: Event): void { this.texto.set((e.target as HTMLInputElement).value); }
 
-  protected alternar(llave: string): void {
-    this.visibles.update((s) => { const n = new Set(s); if (n.has(llave)) n.delete(llave); else n.add(llave); return n; });
+  protected tamano(j: ElementoBiblioteca): number { return tamanoJuego(j.titulo, j.idJuego); }
+  protected tamanoTexto(j: ElementoBiblioteca): string { return formatoTamano(this.tamano(j)); }
+
+  protected instalar(j: ElementoBiblioteca): void { this.instalaciones.instalar(j.llave, j.titulo, this.tamano(j)); }
+  protected desinstalar(j: ElementoBiblioteca): void {
+    if (confirm(`¿Desinstalar ${j.titulo}? Podrás volver a instalarlo cuando quieras.`)) this.instalaciones.desinstalar(j.llave, j.titulo);
   }
-  protected async copiar(clave: string): Promise<void> {
-    try { await navigator.clipboard.writeText(clave); this.toast.exito('Clave copiada.'); }
-    catch { this.toast.error('No se pudo copiar la clave.'); }
-  }
-  protected oculta(clave: string): string { return clave.replace(/[A-Z0-9]/g, (c, i) => (i < 5 ? c : '•')); }
 }

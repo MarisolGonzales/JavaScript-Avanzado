@@ -227,15 +227,156 @@
         "5": 20,
         "6": 30,
         "7": 25,
-        "8": 50,
-        "9": 25,
+        "8": 49,
+        "9": 24,
         "10": 5
       },
       "carritos": {},
-      "pedidos": [],
-      "seqPedido": 0,
+      "pedidos": [
+        {
+          "codigo": "NX-CUS-000001",
+          "nodo": "CENTRO",
+          "usuario": "vanessa@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 34.9,
+          "fecha": "2026-10-11T23:07:17.629Z",
+          "fechaEntrega": "2026-10-11T23:07:17.629Z",
+          "items": [
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "JTHR6-2W85Z-4QV67"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "Op. 09656194",
+            "monto": 34.9,
+            "estado": "APROBADO",
+            "fecha": "2026-10-11T23:07:17.629Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 1,
+            "numeroCompleto": "B003-00000001",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Vanessa Tito",
+              "direccion": null
+            },
+            "subtotal": 29.58,
+            "igv": 5.32,
+            "total": 34.9,
+            "emitidoEn": "2026-10-11T23:07:17.629Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-10-11T23:07:17.629Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-10-11T23:07:17.629Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-10-11T23:07:17.629Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000002",
+          "nodo": "CENTRO",
+          "usuario": "vanessa@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 29.9,
+          "fecha": "2026-10-11T23:09:13.757Z",
+          "fechaEntrega": "2026-10-11T23:09:13.757Z",
+          "items": [
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "T367Y-C6HPR-LSBA9"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "3737",
+            "monto": 29.9,
+            "estado": "APROBADO",
+            "fecha": "2026-10-11T23:09:13.757Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 2,
+            "numeroCompleto": "B003-00000002",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Vanessa Tito",
+              "direccion": null
+            },
+            "subtotal": 25.34,
+            "igv": 4.56,
+            "total": 29.9,
+            "emitidoEn": "2026-10-11T23:09:13.757Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-10-11T23:09:13.757Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-10-11T23:09:13.757Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-10-11T23:09:13.757Z"
+            }
+          ]
+        }
+      ],
+      "seqPedido": 2,
       "seqComprobante": {
-        "boleta": 0,
+        "boleta": 2,
         "factura": 0
       }
     }

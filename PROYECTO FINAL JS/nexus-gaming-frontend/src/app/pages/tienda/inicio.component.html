@@ -59,7 +59,7 @@
   @if (ultimas().length > 0) {
     <section class="section">
       <div class="section-head">
-        <div><h2><i class="fa-solid fa-fire" aria-hidden="true"></i> Últimas claves</h2><p class="muted">Quedan pocas licencias de estos juegos.</p></div>
+        <div><h2><i class="fa-solid fa-fire" aria-hidden="true"></i> Últimas unidades</h2><p class="muted">Quedan pocas licencias de estos juegos.</p></div>
       </div>
       <div class="games-grid">
         @for (j of ultimas(); track j.id) { <app-game-card [juego]="j" (agregar)="agregar($event)" /> }
@@ -69,8 +69,8 @@
 
   <section class="section">
     <div class="features">
-      <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span><h3>Claves al instante</h3><p>Pagas y tu licencia aparece de inmediato en tu biblioteca, lista para activar.</p></article>
-      <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-gift" aria-hidden="true"></i></span><h3>Regala juegos</h3><p>Compra un juego para un amigo: la clave llega directo a su biblioteca.</p></article>
+      <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span><h3>Disponible al instante</h3><p>Pagas y el juego aparece de inmediato en tu biblioteca, listo para instalar.</p></article>
+      <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-gift" aria-hidden="true"></i></span><h3>Regala juegos</h3><p>Compra un juego para un amigo: el juego llega directo a su biblioteca.</p></article>
       <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-file-invoice" aria-hidden="true"></i></span><h3>Boleta o factura en PDF</h3><p>Elige tu comprobante al pagar y descárgalo cuando quieras.</p></article>
       <article class="feature-card"><span class="feature-icon"><i class="fa-solid fa-robot" aria-hidden="true"></i></span><h3>Soporte con asistente</h3><p>Un asistente virtual resuelve tus dudas y, si hace falta, te pasa con una persona.</p></article>
     </div>
