@@ -1,0 +1,15 @@
+/*
+ * Ajustes mínimos para React. Los SCSS de src/styles son los MISMOS de la versión Angular;
+ * aquí solo se replican las reglas que en Angular apuntaban a etiquetas propias
+ * (<app-game-card>, <app-area-chart>…) o a estilos internos de un componente (:host).
+ */
+
+/* .games-grid > app-game-card { display: block; height: 100%; min-width: 0; } */
+.games-grid > .game-card { min-width: 0; }
+
+/* app-area-chart, app-donut-chart, app-bar-list { display: block; min-width: 0; } */
+.app-area-chart, .app-donut-chart, .app-bar-list { display: block; min-width: 0; }
+
+/* QrComponent → :host { display: inline-block; line-height: 0; } .qr { … } */
+.qr-host { display: inline-block; line-height: 0; }
+.qr-host .qr { border-radius: 10px; box-shadow: 0 0 0 1px rgba(0, 0, 0, .08); }

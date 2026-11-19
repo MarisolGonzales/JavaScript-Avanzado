@@ -1,0 +1,7 @@
+// Bootstrap (CSS) se carga desde angular.json (Semana 7); aquí va nuestro sistema de diseño.
+@use 'styles/tokens';
+@use 'styles/base';
+@use 'styles/layout';
+@use 'styles/tienda';
+@use 'styles/auth';
+@use 'styles/panel';

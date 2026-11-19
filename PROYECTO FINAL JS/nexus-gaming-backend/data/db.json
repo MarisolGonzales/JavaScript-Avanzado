@@ -21,6 +21,70 @@
       "rol": "cliente",
       "departamento": "Lima",
       "passwordHash": "scrypt$b18c8e8cd39b5051857e6f85ea90cd87$bbdc3c5fe51c4f716e69698b59103e41473878d2e0396a70746d4218da7cc424e36170d211670efdfb19d3519df93c91b2f6aa86275b06adfd613bd7ecf4db3a"
+    },
+    {
+      "email": "ana.torres@utp.edu.pe",
+      "nombre": "Ana Torres",
+      "passwordHash": "scrypt$9412b80c3726b5c0b62835ae829222ca$8eb8e520ff666b35f5b3a32ae82ecaab051037954b77b0afd24beb981329296a85f1e7fd0dbdf2a132ba2a7d015b6c4f8087d44f3242c6a97ff5abea642ef807",
+      "rol": "cliente",
+      "departamento": "Arequipa",
+      "creadoEn": "2026-11-19T10:10:05.354Z"
+    },
+    {
+      "email": "luis.ramirez@utp.edu.pe",
+      "nombre": "Luis Ramírez",
+      "passwordHash": "scrypt$9412b80c3726b5c0b62835ae829222ca$8eb8e520ff666b35f5b3a32ae82ecaab051037954b77b0afd24beb981329296a85f1e7fd0dbdf2a132ba2a7d015b6c4f8087d44f3242c6a97ff5abea642ef807",
+      "rol": "cliente",
+      "departamento": "Piura",
+      "creadoEn": "2026-11-19T10:10:05.360Z"
+    },
+    {
+      "email": "maria.paredes@utp.edu.pe",
+      "nombre": "María Paredes",
+      "passwordHash": "scrypt$9412b80c3726b5c0b62835ae829222ca$8eb8e520ff666b35f5b3a32ae82ecaab051037954b77b0afd24beb981329296a85f1e7fd0dbdf2a132ba2a7d015b6c4f8087d44f3242c6a97ff5abea642ef807",
+      "rol": "cliente",
+      "departamento": "Cusco",
+      "creadoEn": "2026-11-19T10:10:05.363Z"
+    },
+    {
+      "email": "carlos.vega@utp.edu.pe",
+      "nombre": "Carlos Vega",
+      "passwordHash": "scrypt$9412b80c3726b5c0b62835ae829222ca$8eb8e520ff666b35f5b3a32ae82ecaab051037954b77b0afd24beb981329296a85f1e7fd0dbdf2a132ba2a7d015b6c4f8087d44f3242c6a97ff5abea642ef807",
+      "rol": "cliente",
+      "departamento": "Lima",
+      "creadoEn": "2026-11-19T10:10:05.367Z"
+    },
+    {
+      "email": "sofia.medina@utp.edu.pe",
+      "nombre": "Sofía Medina",
+      "passwordHash": "scrypt$9412b80c3726b5c0b62835ae829222ca$8eb8e520ff666b35f5b3a32ae82ecaab051037954b77b0afd24beb981329296a85f1e7fd0dbdf2a132ba2a7d015b6c4f8087d44f3242c6a97ff5abea642ef807",
+      "rol": "cliente",
+      "departamento": "La Libertad",
+      "creadoEn": "2026-11-19T10:10:05.371Z"
+    },
+    {
+      "email": "diego.salas@utp.edu.pe",
+      "nombre": "Diego Salas",
+      "passwordHash": "scrypt$9412b80c3726b5c0b62835ae829222ca$8eb8e520ff666b35f5b3a32ae82ecaab051037954b77b0afd24beb981329296a85f1e7fd0dbdf2a132ba2a7d015b6c4f8087d44f3242c6a97ff5abea642ef807",
+      "rol": "cliente",
+      "departamento": "Lima",
+      "creadoEn": "2026-11-19T10:10:05.375Z"
+    },
+    {
+      "email": "valeria.quispe@utp.edu.pe",
+      "nombre": "Valeria Quispe",
+      "passwordHash": "scrypt$9412b80c3726b5c0b62835ae829222ca$8eb8e520ff666b35f5b3a32ae82ecaab051037954b77b0afd24beb981329296a85f1e7fd0dbdf2a132ba2a7d015b6c4f8087d44f3242c6a97ff5abea642ef807",
+      "rol": "cliente",
+      "departamento": "Puno",
+      "creadoEn": "2026-11-19T10:10:05.378Z"
+    },
+    {
+      "email": "jorge.rojas@utp.edu.pe",
+      "nombre": "Jorge Rojas",
+      "passwordHash": "scrypt$9412b80c3726b5c0b62835ae829222ca$8eb8e520ff666b35f5b3a32ae82ecaab051037954b77b0afd24beb981329296a85f1e7fd0dbdf2a132ba2a7d015b6c4f8087d44f3242c6a97ff5abea642ef807",
+      "rol": "cliente",
+      "departamento": "Junín",
+      "creadoEn": "2026-11-19T10:10:05.381Z"
     }
   ],
   "juegos": [
@@ -179,57 +243,1917 @@
     "NORTE": {
       "stock": {
         "1": 30,
-        "2": 40,
-        "3": 35,
-        "4": 25,
-        "5": 20,
-        "6": 30,
-        "7": 25,
+        "2": 39,
+        "3": 32,
+        "4": 23,
+        "5": 19,
+        "6": 29,
+        "7": 24,
         "8": 50,
-        "9": 25,
-        "10": 5
+        "9": 24,
+        "10": 4
       },
       "carritos": {},
-      "pedidos": [],
-      "seqPedido": 0,
+      "pedidos": [
+        {
+          "codigo": "NX-TRU-000001",
+          "nodo": "NORTE",
+          "usuario": "luis.ramirez@utp.edu.pe",
+          "estado": "REEMBOLSADO",
+          "total": 119.9,
+          "fecha": "2026-11-06T22:56:00.000Z",
+          "fechaEntrega": "2026-11-06T22:56:00.000Z",
+          "items": [
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "U3W66-XZDEL-9HRD2"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 119.9,
+            "estado": "REEMBOLSADO",
+            "fecha": "2026-11-06T22:56:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B001",
+            "numero": 1,
+            "numeroCompleto": "B001-00000001",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Luis Ramírez",
+              "direccion": null
+            },
+            "subtotal": 101.61,
+            "igv": 18.29,
+            "total": 119.9,
+            "emitidoEn": "2026-11-06T22:56:00.000Z"
+          },
+          "entrega": {
+            "zona": "Piura",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-06T22:56:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-06T22:56:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-06T22:56:00.000Z"
+            },
+            {
+              "estadoAnterior": "ENTREGADO",
+              "estadoNuevo": "REEMBOLSADO",
+              "comentario": "Reembolso aprobado (datos de demostración)",
+              "fecha": "2026-11-19T10:10:05.772Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-TRU-000002",
+          "nodo": "NORTE",
+          "usuario": "luis.ramirez@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 89.9,
+          "fecha": "2026-11-09T18:29:00.000Z",
+          "fechaEntrega": "2026-11-09T18:29:00.000Z",
+          "items": [
+            {
+              "idJuego": 6,
+              "titulo": "Cyberpunk 2077",
+              "imagen": "assets/img/cyberpunk-2077.jpg",
+              "cantidad": 1,
+              "precioUnitario": 89.9,
+              "subtotal": 89.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "HXL2C-V5V9K-LYTFK"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 89.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-09T18:29:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F001",
+            "numero": 1,
+            "numeroCompleto": "F001-00000001",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20601234565",
+              "nombre": "Estudio Pixel S.A.C.",
+              "direccion": "Jr. de la Unión 123, Cercado de Lima"
+            },
+            "subtotal": 76.19,
+            "igv": 13.71,
+            "total": 89.9,
+            "emitidoEn": "2026-11-09T18:29:00.000Z"
+          },
+          "entrega": {
+            "zona": "Piura",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-09T18:29:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-09T18:29:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-09T18:29:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-TRU-000003",
+          "nodo": "NORTE",
+          "usuario": "sofia.medina@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 69.9,
+          "fecha": "2026-11-12T19:15:00.000Z",
+          "fechaEntrega": "2026-11-12T19:15:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "97ZCQ-WUTAD-L9YQY"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 69.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-12T19:15:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F001",
+            "numero": 2,
+            "numeroCompleto": "F001-00000002",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20601234565",
+              "nombre": "Estudio Pixel S.A.C.",
+              "direccion": "Jr. de la Unión 123, Cercado de Lima"
+            },
+            "subtotal": 59.24,
+            "igv": 10.66,
+            "total": 69.9,
+            "emitidoEn": "2026-11-12T19:15:00.000Z"
+          },
+          "entrega": {
+            "zona": "La Libertad",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-12T19:15:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-12T19:15:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-12T19:15:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-TRU-000004",
+          "nodo": "NORTE",
+          "usuario": "sofia.medina@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 189.8,
+          "fecha": "2026-11-13T20:47:00.000Z",
+          "fechaEntrega": "2026-11-13T20:47:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "REGALO",
+              "claveDigital": "YDBUM-L4L38-Y2DNG"
+            },
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "A9XWY-XZ4GJ-7RK9D"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 189.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-13T20:47:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B001",
+            "numero": 2,
+            "numeroCompleto": "B001-00000002",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Sofía Medina",
+              "direccion": null
+            },
+            "subtotal": 160.85,
+            "igv": 28.95,
+            "total": 189.8,
+            "emitidoEn": "2026-11-13T20:47:00.000Z"
+          },
+          "entrega": {
+            "zona": "La Libertad",
+            "canal": "REGALO",
+            "destinatario": "ana.torres@utp.edu.pe",
+            "mensaje": "¡Para que lo disfrutes!"
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-13T20:47:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-13T20:47:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Regalo enviado a ana.torres@utp.edu.pe",
+              "fecha": "2026-11-13T20:47:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-TRU-000005",
+          "nodo": "NORTE",
+          "usuario": "sofia.medina@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 49.9,
+          "fecha": "2026-11-13T23:31:00.000Z",
+          "fechaEntrega": "2026-11-13T23:31:00.000Z",
+          "items": [
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "LY9N9-RWQ6L-TWX89"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 49.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-13T23:31:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B001",
+            "numero": 3,
+            "numeroCompleto": "B001-00000003",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Sofía Medina",
+              "direccion": null
+            },
+            "subtotal": 42.29,
+            "igv": 7.61,
+            "total": 49.9,
+            "emitidoEn": "2026-11-13T23:31:00.000Z"
+          },
+          "entrega": {
+            "zona": "La Libertad",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-13T23:31:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-13T23:31:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-13T23:31:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-TRU-000006",
+          "nodo": "NORTE",
+          "usuario": "luis.ramirez@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 139.8,
+          "fecha": "2026-11-15T19:36:00.000Z",
+          "fechaEntrega": "2026-11-15T19:36:00.000Z",
+          "items": [
+            {
+              "idJuego": 7,
+              "titulo": "Elden Ring",
+              "imagen": "assets/img/elden-ring.jpg",
+              "cantidad": 1,
+              "precioUnitario": 99.9,
+              "subtotal": 99.9,
+              "tipoEntrega": "REGALO",
+              "claveDigital": "TLRRZ-YWNN7-APJXC"
+            },
+            {
+              "idJuego": 5,
+              "titulo": "Left 4 Dead 2",
+              "imagen": "assets/img/Left_4_Dead_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 39.9,
+              "subtotal": 39.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "4YW7R-Y6VY6-3Y76J"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 139.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-15T19:36:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B001",
+            "numero": 4,
+            "numeroCompleto": "B001-00000004",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Luis Ramírez",
+              "direccion": null
+            },
+            "subtotal": 118.47,
+            "igv": 21.33,
+            "total": 139.8,
+            "emitidoEn": "2026-11-15T19:36:00.000Z"
+          },
+          "entrega": {
+            "zona": "Piura",
+            "canal": "REGALO",
+            "destinatario": "ana.torres@utp.edu.pe",
+            "mensaje": "¡Para que lo disfrutes!"
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-15T19:36:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-15T19:36:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Regalo enviado a ana.torres@utp.edu.pe",
+              "fecha": "2026-11-15T19:36:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-TRU-000007",
+          "nodo": "NORTE",
+          "usuario": "sofia.medina@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 119.8,
+          "fecha": "2026-11-16T22:36:00.000Z",
+          "fechaEntrega": "2026-11-16T22:36:00.000Z",
+          "items": [
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "AHSY4-EHPTP-X6ZFW"
+            },
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "6JAC2-MRG9C-RMLQQ"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 119.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-16T22:36:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B001",
+            "numero": 5,
+            "numeroCompleto": "B001-00000005",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Sofía Medina",
+              "direccion": null
+            },
+            "subtotal": 101.53,
+            "igv": 18.27,
+            "total": 119.8,
+            "emitidoEn": "2026-11-16T22:36:00.000Z"
+          },
+          "entrega": {
+            "zona": "La Libertad",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-16T22:36:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-16T22:36:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-16T22:36:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-TRU-000008",
+          "nodo": "NORTE",
+          "usuario": "sofia.medina@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 114.8,
+          "fecha": "2026-11-19T10:00:05.762Z",
+          "fechaEntrega": "2026-11-19T10:00:05.762Z",
+          "items": [
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "REGALO",
+              "claveDigital": "5ZDP8-A3S2E-W34RR"
+            },
+            {
+              "idJuego": 2,
+              "titulo": "Grand Theft Auto V",
+              "imagen": "assets/img/gtav.png",
+              "cantidad": 1,
+              "precioUnitario": 79.9,
+              "subtotal": 79.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "LGUKE-BRUSL-NM3ME"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 114.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-19T10:00:05.762Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B001",
+            "numero": 6,
+            "numeroCompleto": "B001-00000006",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Sofía Medina",
+              "direccion": null
+            },
+            "subtotal": 97.29,
+            "igv": 17.51,
+            "total": 114.8,
+            "emitidoEn": "2026-11-19T10:00:05.762Z"
+          },
+          "entrega": {
+            "zona": "La Libertad",
+            "canal": "REGALO",
+            "destinatario": "luis.ramirez@utp.edu.pe",
+            "mensaje": "¡Para que lo disfrutes!"
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-19T10:00:05.762Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-19T10:00:05.762Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Regalo enviado a luis.ramirez@utp.edu.pe",
+              "fecha": "2026-11-19T10:00:05.762Z"
+            }
+          ]
+        }
+      ],
+      "seqPedido": 8,
       "seqComprobante": {
-        "boleta": 0,
-        "factura": 0
+        "boleta": 6,
+        "factura": 2
       }
     },
     "SUR": {
       "stock": {
-        "1": 30,
-        "2": 40,
-        "3": 35,
-        "4": 25,
-        "5": 20,
-        "6": 30,
-        "7": 25,
-        "8": 50,
-        "9": 25,
-        "10": 5
+        "1": 27,
+        "2": 38,
+        "3": 34,
+        "4": 23,
+        "5": 18,
+        "6": 27,
+        "7": 23,
+        "8": 47,
+        "9": 21,
+        "10": 1
       },
       "carritos": {},
-      "pedidos": [],
-      "seqPedido": 0,
+      "pedidos": [
+        {
+          "codigo": "NX-AQP-000001",
+          "nodo": "SUR",
+          "usuario": "valeria.quispe@utp.edu.pe",
+          "estado": "REEMBOLSADO",
+          "total": 69.9,
+          "fecha": "2026-11-06T20:09:00.000Z",
+          "fechaEntrega": "2026-11-06T20:09:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "8JCCS-2US72-VBEV9"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 69.9,
+            "estado": "REEMBOLSADO",
+            "fecha": "2026-11-06T20:09:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 1,
+            "numeroCompleto": "B002-00000001",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Valeria Quispe",
+              "direccion": null
+            },
+            "subtotal": 59.24,
+            "igv": 10.66,
+            "total": 69.9,
+            "emitidoEn": "2026-11-06T20:09:00.000Z"
+          },
+          "entrega": {
+            "zona": "Puno",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-06T20:09:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-06T20:09:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-06T20:09:00.000Z"
+            },
+            {
+              "estadoAnterior": "ENTREGADO",
+              "estadoNuevo": "REEMBOLSADO",
+              "comentario": "Reembolso aprobado (datos de demostración)",
+              "fecha": "2026-11-19T10:10:05.768Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000002",
+          "nodo": "SUR",
+          "usuario": "valeria.quispe@utp.edu.pe",
+          "estado": "REEMBOLSADO",
+          "total": 34.9,
+          "fecha": "2026-11-06T16:02:00.000Z",
+          "fechaEntrega": "2026-11-06T16:02:00.000Z",
+          "items": [
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "MHKTZ-W598L-HP3GC"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 34.9,
+            "estado": "REEMBOLSADO",
+            "fecha": "2026-11-06T16:02:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 2,
+            "numeroCompleto": "B002-00000002",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Valeria Quispe",
+              "direccion": null
+            },
+            "subtotal": 29.58,
+            "igv": 5.32,
+            "total": 34.9,
+            "emitidoEn": "2026-11-06T16:02:00.000Z"
+          },
+          "entrega": {
+            "zona": "Puno",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-06T16:02:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-06T16:02:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-06T16:02:00.000Z"
+            },
+            {
+              "estadoAnterior": "ENTREGADO",
+              "estadoNuevo": "REEMBOLSADO",
+              "comentario": "Reembolso aprobado (datos de demostración)",
+              "fecha": "2026-11-19T10:10:05.777Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000003",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 169.8,
+          "fecha": "2026-11-08T01:20:00.000Z",
+          "fechaEntrega": "2026-11-08T01:20:00.000Z",
+          "items": [
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "VH25Y-XGCMJ-UQXRS"
+            },
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "AFR6C-T4LNJ-ARPJA"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 169.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-08T01:20:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 3,
+            "numeroCompleto": "B002-00000003",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Ana Torres",
+              "direccion": null
+            },
+            "subtotal": 143.9,
+            "igv": 25.9,
+            "total": 169.8,
+            "emitidoEn": "2026-11-08T01:20:00.000Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-08T01:20:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-08T01:20:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-08T01:20:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000004",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 89.9,
+          "fecha": "2026-11-07T16:31:00.000Z",
+          "fechaEntrega": "2026-11-07T16:31:00.000Z",
+          "items": [
+            {
+              "idJuego": 6,
+              "titulo": "Cyberpunk 2077",
+              "imagen": "assets/img/cyberpunk-2077.jpg",
+              "cantidad": 1,
+              "precioUnitario": 89.9,
+              "subtotal": 89.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "QPTVP-VD6KF-JEEFA"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 89.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-07T16:31:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F002",
+            "numero": 1,
+            "numeroCompleto": "F002-00000001",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20100070970",
+              "nombre": "Cabinas Gamer Perú E.I.R.L.",
+              "direccion": "Av. Arequipa 2450, Lince, Lima"
+            },
+            "subtotal": 76.19,
+            "igv": 13.71,
+            "total": 89.9,
+            "emitidoEn": "2026-11-07T16:31:00.000Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-07T16:31:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-07T16:31:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-07T16:31:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000005",
+          "nodo": "SUR",
+          "usuario": "valeria.quispe@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 259.7,
+          "fecha": "2026-11-08T23:30:00.000Z",
+          "fechaEntrega": "2026-11-08T23:30:00.000Z",
+          "items": [
+            {
+              "idJuego": 7,
+              "titulo": "Elden Ring",
+              "imagen": "assets/img/elden-ring.jpg",
+              "cantidad": 1,
+              "precioUnitario": 99.9,
+              "subtotal": 99.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "WJR8C-2ASBH-NMJEL"
+            },
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "PEESA-RK4W7-FC5MU"
+            },
+            {
+              "idJuego": 5,
+              "titulo": "Left 4 Dead 2",
+              "imagen": "assets/img/Left_4_Dead_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 39.9,
+              "subtotal": 39.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "TSBEJ-RDLPQ-DTLRA"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 259.7,
+            "estado": "APROBADO",
+            "fecha": "2026-11-08T23:30:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 4,
+            "numeroCompleto": "B002-00000004",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Valeria Quispe",
+              "direccion": null
+            },
+            "subtotal": 220.08,
+            "igv": 39.62,
+            "total": 259.7,
+            "emitidoEn": "2026-11-08T23:30:00.000Z"
+          },
+          "entrega": {
+            "zona": "Puno",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-08T23:30:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-08T23:30:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-08T23:30:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000006",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 194.7,
+          "fecha": "2026-11-09T20:04:00.000Z",
+          "fechaEntrega": "2026-11-09T20:04:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "D325X-TYTWH-GB4M3"
+            },
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "JU2H2-XHMRH-6TDSM"
+            },
+            {
+              "idJuego": 6,
+              "titulo": "Cyberpunk 2077",
+              "imagen": "assets/img/cyberpunk-2077.jpg",
+              "cantidad": 1,
+              "precioUnitario": 89.9,
+              "subtotal": 89.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "TW79S-2YFKF-3FAZ6"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 194.7,
+            "estado": "APROBADO",
+            "fecha": "2026-11-09T20:04:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 5,
+            "numeroCompleto": "B002-00000005",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Ana Torres",
+              "direccion": null
+            },
+            "subtotal": 165,
+            "igv": 29.7,
+            "total": 194.7,
+            "emitidoEn": "2026-11-09T20:04:00.000Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-09T20:04:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-09T20:04:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-09T20:04:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000007",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 79.9,
+          "fecha": "2026-11-11T15:37:00.000Z",
+          "fechaEntrega": "2026-11-11T15:37:00.000Z",
+          "items": [
+            {
+              "idJuego": 2,
+              "titulo": "Grand Theft Auto V",
+              "imagen": "assets/img/gtav.png",
+              "cantidad": 1,
+              "precioUnitario": 79.9,
+              "subtotal": 79.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "6D4GU-KEC9F-Z8DWN"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 79.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-11T15:37:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 6,
+            "numeroCompleto": "B002-00000006",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Ana Torres",
+              "direccion": null
+            },
+            "subtotal": 67.71,
+            "igv": 12.19,
+            "total": 79.9,
+            "emitidoEn": "2026-11-11T15:37:00.000Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-11T15:37:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-11T15:37:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-11T15:37:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000008",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 64.8,
+          "fecha": "2026-11-11T23:04:00.000Z",
+          "fechaEntrega": "2026-11-11T23:04:00.000Z",
+          "items": [
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "4BMJV-AQ5ZH-SPJ7G"
+            },
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "3AWW9-CUKHK-A93LQ"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 64.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-11T23:04:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F002",
+            "numero": 2,
+            "numeroCompleto": "F002-00000002",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20100070970",
+              "nombre": "Cabinas Gamer Perú E.I.R.L.",
+              "direccion": "Av. Arequipa 2450, Lince, Lima"
+            },
+            "subtotal": 54.92,
+            "igv": 9.88,
+            "total": 64.8,
+            "emitidoEn": "2026-11-11T23:04:00.000Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-11T23:04:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-11T23:04:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-11T23:04:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000009",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 89.9,
+          "fecha": "2026-11-14T16:40:00.000Z",
+          "fechaEntrega": "2026-11-14T16:40:00.000Z",
+          "items": [
+            {
+              "idJuego": 6,
+              "titulo": "Cyberpunk 2077",
+              "imagen": "assets/img/cyberpunk-2077.jpg",
+              "cantidad": 1,
+              "precioUnitario": 89.9,
+              "subtotal": 89.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "FM3FD-4YB6K-VDDFR"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 89.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-14T16:40:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 7,
+            "numeroCompleto": "B002-00000007",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Ana Torres",
+              "direccion": null
+            },
+            "subtotal": 76.19,
+            "igv": 13.71,
+            "total": 89.9,
+            "emitidoEn": "2026-11-14T16:40:00.000Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-14T16:40:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-14T16:40:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-14T16:40:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000010",
+          "nodo": "SUR",
+          "usuario": "valeria.quispe@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 99.8,
+          "fecha": "2026-11-16T15:06:00.000Z",
+          "fechaEntrega": "2026-11-16T15:06:00.000Z",
+          "items": [
+            {
+              "idJuego": 5,
+              "titulo": "Left 4 Dead 2",
+              "imagen": "assets/img/Left_4_Dead_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 39.9,
+              "subtotal": 39.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "NS2PL-6AJQ3-GCDD2"
+            },
+            {
+              "idJuego": 1,
+              "titulo": "The Witcher 3: Wild Hunt",
+              "imagen": "assets/img/witcher3.jpg",
+              "cantidad": 1,
+              "precioUnitario": 59.9,
+              "subtotal": 59.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "FMMXJ-7VT3R-YKQH5"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 99.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-16T15:06:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 8,
+            "numeroCompleto": "B002-00000008",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Valeria Quispe",
+              "direccion": null
+            },
+            "subtotal": 84.58,
+            "igv": 15.22,
+            "total": 99.8,
+            "emitidoEn": "2026-11-16T15:06:00.000Z"
+          },
+          "entrega": {
+            "zona": "Puno",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-16T15:06:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-16T15:06:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-16T15:06:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000011",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 159.8,
+          "fecha": "2026-11-17T00:47:00.000Z",
+          "fechaEntrega": "2026-11-17T00:47:00.000Z",
+          "items": [
+            {
+              "idJuego": 7,
+              "titulo": "Elden Ring",
+              "imagen": "assets/img/elden-ring.jpg",
+              "cantidad": 1,
+              "precioUnitario": 99.9,
+              "subtotal": 99.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "WB72M-T2NRB-6S2LW"
+            },
+            {
+              "idJuego": 1,
+              "titulo": "The Witcher 3: Wild Hunt",
+              "imagen": "assets/img/witcher3.jpg",
+              "cantidad": 1,
+              "precioUnitario": 59.9,
+              "subtotal": 59.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "98XGT-YDH2Z-W33C4"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 159.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-17T00:47:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 9,
+            "numeroCompleto": "B002-00000009",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Ana Torres",
+              "direccion": null
+            },
+            "subtotal": 135.42,
+            "igv": 24.38,
+            "total": 159.8,
+            "emitidoEn": "2026-11-17T00:47:00.000Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-17T00:47:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-17T00:47:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-17T00:47:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000012",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 49.9,
+          "fecha": "2026-11-17T18:51:00.000Z",
+          "fechaEntrega": "2026-11-17T18:51:00.000Z",
+          "items": [
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "SL2VY-3REUT-5JEPG"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 49.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-17T18:51:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 10,
+            "numeroCompleto": "B002-00000010",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Ana Torres",
+              "direccion": null
+            },
+            "subtotal": 42.29,
+            "igv": 7.61,
+            "total": 49.9,
+            "emitidoEn": "2026-11-17T18:51:00.000Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-17T18:51:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-17T18:51:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-17T18:51:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000013",
+          "nodo": "SUR",
+          "usuario": "valeria.quispe@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 149.8,
+          "fecha": "2026-11-19T03:40:00.000Z",
+          "fechaEntrega": "2026-11-19T03:40:00.000Z",
+          "items": [
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "56AQW-E7F9K-WYVJJ"
+            },
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "BG6C8-9FR7E-FM2S2"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 149.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-19T03:40:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 11,
+            "numeroCompleto": "B002-00000011",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Valeria Quispe",
+              "direccion": null
+            },
+            "subtotal": 126.95,
+            "igv": 22.85,
+            "total": 149.8,
+            "emitidoEn": "2026-11-19T03:40:00.000Z"
+          },
+          "entrega": {
+            "zona": "Puno",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-19T03:40:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-19T03:40:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-19T03:40:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000014",
+          "nodo": "SUR",
+          "usuario": "valeria.quispe@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 114.8,
+          "fecha": "2026-11-18T22:39:00.000Z",
+          "fechaEntrega": "2026-11-18T22:39:00.000Z",
+          "items": [
+            {
+              "idJuego": 2,
+              "titulo": "Grand Theft Auto V",
+              "imagen": "assets/img/gtav.png",
+              "cantidad": 1,
+              "precioUnitario": 79.9,
+              "subtotal": 79.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "EFS6J-B6YA8-7TV8C"
+            },
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "JDGW2-6BTVZ-H8ZAB"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 114.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-18T22:39:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 12,
+            "numeroCompleto": "B002-00000012",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Valeria Quispe",
+              "direccion": null
+            },
+            "subtotal": 97.29,
+            "igv": 17.51,
+            "total": 114.8,
+            "emitidoEn": "2026-11-18T22:39:00.000Z"
+          },
+          "entrega": {
+            "zona": "Puno",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-18T22:39:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-18T22:39:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-18T22:39:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000015",
+          "nodo": "SUR",
+          "usuario": "valeria.quispe@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 124.7,
+          "fecha": "2026-11-18T22:13:00.000Z",
+          "fechaEntrega": "2026-11-18T22:13:00.000Z",
+          "items": [
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "XGMRE-AEQVL-WUDKX"
+            },
+            {
+              "idJuego": 1,
+              "titulo": "The Witcher 3: Wild Hunt",
+              "imagen": "assets/img/witcher3.jpg",
+              "cantidad": 1,
+              "precioUnitario": 59.9,
+              "subtotal": 59.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "BC7GV-PFENF-HAMLD"
+            },
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "UM6L8-JW4C9-TVY96"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 124.7,
+            "estado": "APROBADO",
+            "fecha": "2026-11-18T22:13:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 13,
+            "numeroCompleto": "B002-00000013",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Valeria Quispe",
+              "direccion": null
+            },
+            "subtotal": 105.68,
+            "igv": 19.02,
+            "total": 124.7,
+            "emitidoEn": "2026-11-18T22:13:00.000Z"
+          },
+          "entrega": {
+            "zona": "Puno",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-18T22:13:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-18T22:13:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-18T22:13:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-AQP-000016",
+          "nodo": "SUR",
+          "usuario": "ana.torres@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 119.9,
+          "fecha": "2026-11-19T10:00:05.747Z",
+          "fechaEntrega": "2026-11-19T10:00:05.747Z",
+          "items": [
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "6LZJH-FZ3ZJ-DJ27U"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 119.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-19T10:00:05.747Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B002",
+            "numero": 14,
+            "numeroCompleto": "B002-00000014",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Ana Torres",
+              "direccion": null
+            },
+            "subtotal": 101.61,
+            "igv": 18.29,
+            "total": 119.9,
+            "emitidoEn": "2026-11-19T10:00:05.747Z"
+          },
+          "entrega": {
+            "zona": "Arequipa",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-19T10:00:05.747Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-19T10:00:05.747Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-19T10:00:05.747Z"
+            }
+          ]
+        }
+      ],
+      "seqPedido": 16,
       "seqComprobante": {
-        "boleta": 0,
-        "factura": 0
+        "boleta": 14,
+        "factura": 2
       }
     },
     "CENTRO": {
       "stock": {
-        "1": 30,
-        "2": 40,
-        "3": 35,
-        "4": 25,
-        "5": 20,
-        "6": 30,
+        "1": 27,
+        "2": 38,
+        "3": 28,
+        "4": 19,
+        "5": 17,
+        "6": 28,
         "7": 25,
-        "8": 49,
-        "9": 24,
-        "10": 5
+        "8": 44,
+        "9": 19,
+        "10": 2
       },
       "carritos": {},
       "pedidos": [
@@ -372,12 +2296,1752 @@
               "fecha": "2026-10-11T23:09:13.757Z"
             }
           ]
+        },
+        {
+          "codigo": "NX-CUS-000003",
+          "nodo": "CENTRO",
+          "usuario": "diego.salas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 209.8,
+          "fecha": "2026-11-07T20:16:00.000Z",
+          "fechaEntrega": "2026-11-07T20:16:00.000Z",
+          "items": [
+            {
+              "idJuego": 6,
+              "titulo": "Cyberpunk 2077",
+              "imagen": "assets/img/cyberpunk-2077.jpg",
+              "cantidad": 1,
+              "precioUnitario": 89.9,
+              "subtotal": 89.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "DXKSU-K5VKF-VHPG2"
+            },
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "N5M5N-CN92H-RY89B"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 209.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-07T20:16:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F003",
+            "numero": 1,
+            "numeroCompleto": "F003-00000001",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20100070970",
+              "nombre": "Cabinas Gamer Perú E.I.R.L.",
+              "direccion": "Av. Arequipa 2450, Lince, Lima"
+            },
+            "subtotal": 177.8,
+            "igv": 32,
+            "total": 209.8,
+            "emitidoEn": "2026-11-07T20:16:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-07T20:16:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-07T20:16:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-07T20:16:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000004",
+          "nodo": "CENTRO",
+          "usuario": "jorge.rojas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 49.9,
+          "fecha": "2026-11-08T00:33:00.000Z",
+          "fechaEntrega": "2026-11-08T00:33:00.000Z",
+          "items": [
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "A4XPP-TWDNJ-AEPJR"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 49.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-08T00:33:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 3,
+            "numeroCompleto": "B003-00000003",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Jorge Rojas",
+              "direccion": null
+            },
+            "subtotal": 42.29,
+            "igv": 7.61,
+            "total": 49.9,
+            "emitidoEn": "2026-11-08T00:33:00.000Z"
+          },
+          "entrega": {
+            "zona": "Junín",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-08T00:33:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-08T00:33:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-08T00:33:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000005",
+          "nodo": "CENTRO",
+          "usuario": "carlos.vega@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 84.8,
+          "fecha": "2026-11-08T21:04:00.000Z",
+          "fechaEntrega": "2026-11-08T21:04:00.000Z",
+          "items": [
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "LFX59-Z4JX2-5NTFK"
+            },
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "Q3KGR-WSBWS-A2LGR"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 84.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-08T21:04:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F003",
+            "numero": 2,
+            "numeroCompleto": "F003-00000002",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20601234565",
+              "nombre": "Estudio Pixel S.A.C.",
+              "direccion": "Jr. de la Unión 123, Cercado de Lima"
+            },
+            "subtotal": 71.86,
+            "igv": 12.94,
+            "total": 84.8,
+            "emitidoEn": "2026-11-08T21:04:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-08T21:04:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-08T21:04:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-08T21:04:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000006",
+          "nodo": "CENTRO",
+          "usuario": "maria.paredes@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 94.8,
+          "fecha": "2026-11-09T23:06:00.000Z",
+          "fechaEntrega": "2026-11-09T23:06:00.000Z",
+          "items": [
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "5DSKK-2583R-EGZCG"
+            },
+            {
+              "idJuego": 1,
+              "titulo": "The Witcher 3: Wild Hunt",
+              "imagen": "assets/img/witcher3.jpg",
+              "cantidad": 1,
+              "precioUnitario": 59.9,
+              "subtotal": 59.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "N7EPU-RRDKD-626E7"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 94.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-09T23:06:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F003",
+            "numero": 3,
+            "numeroCompleto": "F003-00000003",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20601234565",
+              "nombre": "Estudio Pixel S.A.C.",
+              "direccion": "Jr. de la Unión 123, Cercado de Lima"
+            },
+            "subtotal": 80.34,
+            "igv": 14.46,
+            "total": 94.8,
+            "emitidoEn": "2026-11-09T23:06:00.000Z"
+          },
+          "entrega": {
+            "zona": "Cusco",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-09T23:06:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-09T23:06:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-09T23:06:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000007",
+          "nodo": "CENTRO",
+          "usuario": "diego.salas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 99.8,
+          "fecha": "2026-11-09T14:20:00.000Z",
+          "fechaEntrega": "2026-11-09T14:20:00.000Z",
+          "items": [
+            {
+              "idJuego": 1,
+              "titulo": "The Witcher 3: Wild Hunt",
+              "imagen": "assets/img/witcher3.jpg",
+              "cantidad": 1,
+              "precioUnitario": 59.9,
+              "subtotal": 59.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "ABBZ7-HSQSC-SF8YD"
+            },
+            {
+              "idJuego": 5,
+              "titulo": "Left 4 Dead 2",
+              "imagen": "assets/img/Left_4_Dead_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 39.9,
+              "subtotal": 39.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "RENAH-S2HFD-W9UTB"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 99.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-09T14:20:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 4,
+            "numeroCompleto": "B003-00000004",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Diego Salas",
+              "direccion": null
+            },
+            "subtotal": 84.58,
+            "igv": 15.22,
+            "total": 99.8,
+            "emitidoEn": "2026-11-09T14:20:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-09T14:20:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-09T14:20:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-09T14:20:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000008",
+          "nodo": "CENTRO",
+          "usuario": "diego.salas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 179.8,
+          "fecha": "2026-11-11T01:55:00.000Z",
+          "fechaEntrega": "2026-11-11T01:55:00.000Z",
+          "items": [
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "Q9Z7Q-9KS5V-9EF2J"
+            },
+            {
+              "idJuego": 1,
+              "titulo": "The Witcher 3: Wild Hunt",
+              "imagen": "assets/img/witcher3.jpg",
+              "cantidad": 1,
+              "precioUnitario": 59.9,
+              "subtotal": 59.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "J5G9L-JD48Q-VXUWZ"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 179.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-11T01:55:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 5,
+            "numeroCompleto": "B003-00000005",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Diego Salas",
+              "direccion": null
+            },
+            "subtotal": 152.37,
+            "igv": 27.43,
+            "total": 179.8,
+            "emitidoEn": "2026-11-11T01:55:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-11T01:55:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-11T01:55:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-11T01:55:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000009",
+          "nodo": "CENTRO",
+          "usuario": "carlos.vega@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 29.9,
+          "fecha": "2026-11-11T01:27:00.000Z",
+          "fechaEntrega": "2026-11-11T01:27:00.000Z",
+          "items": [
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "NCJWW-WUBMS-DSQUZ"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 29.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-11T01:27:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 6,
+            "numeroCompleto": "B003-00000006",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Carlos Vega",
+              "direccion": null
+            },
+            "subtotal": 25.34,
+            "igv": 4.56,
+            "total": 29.9,
+            "emitidoEn": "2026-11-11T01:27:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-11T01:27:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-11T01:27:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-11T01:27:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000010",
+          "nodo": "CENTRO",
+          "usuario": "carlos.vega@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 49.9,
+          "fecha": "2026-11-11T02:52:00.000Z",
+          "fechaEntrega": "2026-11-11T02:52:00.000Z",
+          "items": [
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "YR3ZZ-3FQWA-FNHBW"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 49.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-11T02:52:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 7,
+            "numeroCompleto": "B003-00000007",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Carlos Vega",
+              "direccion": null
+            },
+            "subtotal": 42.29,
+            "igv": 7.61,
+            "total": 49.9,
+            "emitidoEn": "2026-11-11T02:52:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-11T02:52:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-11T02:52:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-11T02:52:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000011",
+          "nodo": "CENTRO",
+          "usuario": "jorge.rojas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 89.9,
+          "fecha": "2026-11-11T14:58:00.000Z",
+          "fechaEntrega": "2026-11-11T14:58:00.000Z",
+          "items": [
+            {
+              "idJuego": 6,
+              "titulo": "Cyberpunk 2077",
+              "imagen": "assets/img/cyberpunk-2077.jpg",
+              "cantidad": 1,
+              "precioUnitario": 89.9,
+              "subtotal": 89.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "F8VLC-A487F-E2DAJ"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 89.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-11T14:58:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F003",
+            "numero": 4,
+            "numeroCompleto": "F003-00000004",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20100070970",
+              "nombre": "Cabinas Gamer Perú E.I.R.L.",
+              "direccion": "Av. Arequipa 2450, Lince, Lima"
+            },
+            "subtotal": 76.19,
+            "igv": 13.71,
+            "total": 89.9,
+            "emitidoEn": "2026-11-11T14:58:00.000Z"
+          },
+          "entrega": {
+            "zona": "Junín",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-11T14:58:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-11T14:58:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-11T14:58:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000012",
+          "nodo": "CENTRO",
+          "usuario": "diego.salas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 69.9,
+          "fecha": "2026-11-11T15:52:00.000Z",
+          "fechaEntrega": "2026-11-11T15:52:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "REGALO",
+              "claveDigital": "XFFLD-2XM8L-PJ8TL"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 69.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-11T15:52:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 8,
+            "numeroCompleto": "B003-00000008",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Diego Salas",
+              "direccion": null
+            },
+            "subtotal": 59.24,
+            "igv": 10.66,
+            "total": 69.9,
+            "emitidoEn": "2026-11-11T15:52:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "REGALO",
+            "destinatario": "maria.paredes@utp.edu.pe",
+            "mensaje": "¡Para que lo disfrutes!"
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-11T15:52:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-11T15:52:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Regalo enviado a maria.paredes@utp.edu.pe",
+              "fecha": "2026-11-11T15:52:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000013",
+          "nodo": "CENTRO",
+          "usuario": "jorge.rojas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 49.9,
+          "fecha": "2026-11-12T18:41:00.000Z",
+          "fechaEntrega": "2026-11-12T18:41:00.000Z",
+          "items": [
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "6PNND-YFY4C-WVGPC"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 49.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-12T18:41:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 9,
+            "numeroCompleto": "B003-00000009",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Jorge Rojas",
+              "direccion": null
+            },
+            "subtotal": 42.29,
+            "igv": 7.61,
+            "total": 49.9,
+            "emitidoEn": "2026-11-12T18:41:00.000Z"
+          },
+          "entrega": {
+            "zona": "Junín",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-12T18:41:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-12T18:41:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-12T18:41:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000014",
+          "nodo": "CENTRO",
+          "usuario": "diego.salas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 64.8,
+          "fecha": "2026-11-13T22:00:00.000Z",
+          "fechaEntrega": "2026-11-13T22:00:00.000Z",
+          "items": [
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "W4UU5-5AAA5-NLQ8Z"
+            },
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "BQFBU-P267Q-UJH2V"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 64.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-13T22:00:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 10,
+            "numeroCompleto": "B003-00000010",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Diego Salas",
+              "direccion": null
+            },
+            "subtotal": 54.92,
+            "igv": 9.88,
+            "total": 64.8,
+            "emitidoEn": "2026-11-13T22:00:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-13T22:00:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-13T22:00:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-13T22:00:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000015",
+          "nodo": "CENTRO",
+          "usuario": "carlos.vega@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 69.8,
+          "fecha": "2026-11-13T14:00:00.000Z",
+          "fechaEntrega": "2026-11-13T14:00:00.000Z",
+          "items": [
+            {
+              "idJuego": 5,
+              "titulo": "Left 4 Dead 2",
+              "imagen": "assets/img/Left_4_Dead_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 39.9,
+              "subtotal": 39.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "9R9MJ-K56JZ-A3QJW"
+            },
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "XSVPD-69S3T-T337F"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 69.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-13T14:00:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "FACTURA",
+            "serie": "F003",
+            "numero": 5,
+            "numeroCompleto": "F003-00000005",
+            "receptor": {
+              "tipoDoc": "RUC",
+              "documento": "20100070970",
+              "nombre": "Cabinas Gamer Perú E.I.R.L.",
+              "direccion": "Av. Arequipa 2450, Lince, Lima"
+            },
+            "subtotal": 59.15,
+            "igv": 10.65,
+            "total": 69.8,
+            "emitidoEn": "2026-11-13T14:00:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-13T14:00:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-13T14:00:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-13T14:00:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000016",
+          "nodo": "CENTRO",
+          "usuario": "diego.salas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 84.8,
+          "fecha": "2026-11-14T03:30:00.000Z",
+          "fechaEntrega": "2026-11-14T03:30:00.000Z",
+          "items": [
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "BH8XC-AHYNS-9C7J9"
+            },
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "AXEJK-V5XTX-B85K7"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 84.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-14T03:30:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 11,
+            "numeroCompleto": "B003-00000011",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Diego Salas",
+              "direccion": null
+            },
+            "subtotal": 71.86,
+            "igv": 12.94,
+            "total": 84.8,
+            "emitidoEn": "2026-11-14T03:30:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-14T03:30:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-14T03:30:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-14T03:30:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000017",
+          "nodo": "CENTRO",
+          "usuario": "jorge.rojas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 69.9,
+          "fecha": "2026-11-14T18:53:00.000Z",
+          "fechaEntrega": "2026-11-14T18:53:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "2DJJM-YQZND-4M2TF"
+            }
+          ],
+          "pago": {
+            "metodo": "PLIN",
+            "referencia": "4242",
+            "monto": 69.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-14T18:53:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 12,
+            "numeroCompleto": "B003-00000012",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Jorge Rojas",
+              "direccion": null
+            },
+            "subtotal": 59.24,
+            "igv": 10.66,
+            "total": 69.9,
+            "emitidoEn": "2026-11-14T18:53:00.000Z"
+          },
+          "entrega": {
+            "zona": "Junín",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-14T18:53:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Plin",
+              "fecha": "2026-11-14T18:53:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-14T18:53:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000018",
+          "nodo": "CENTRO",
+          "usuario": "jorge.rojas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 99.8,
+          "fecha": "2026-11-14T21:14:00.000Z",
+          "fechaEntrega": "2026-11-14T21:14:00.000Z",
+          "items": [
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "VCGNA-JFDG2-GN4XW"
+            },
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "6NEZM-9BJAR-JZK7H"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 99.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-14T21:14:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 13,
+            "numeroCompleto": "B003-00000013",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Jorge Rojas",
+              "direccion": null
+            },
+            "subtotal": 84.58,
+            "igv": 15.22,
+            "total": 99.8,
+            "emitidoEn": "2026-11-14T21:14:00.000Z"
+          },
+          "entrega": {
+            "zona": "Junín",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-14T21:14:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-14T21:14:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-14T21:14:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000019",
+          "nodo": "CENTRO",
+          "usuario": "diego.salas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 69.9,
+          "fecha": "2026-11-15T17:50:00.000Z",
+          "fechaEntrega": "2026-11-15T17:50:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "REGALO",
+              "claveDigital": "TJEEF-U2T7A-JMUFB"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 69.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-15T17:50:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 14,
+            "numeroCompleto": "B003-00000014",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Diego Salas",
+              "direccion": null
+            },
+            "subtotal": 59.24,
+            "igv": 10.66,
+            "total": 69.9,
+            "emitidoEn": "2026-11-15T17:50:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "REGALO",
+            "destinatario": "jorge.rojas@utp.edu.pe",
+            "mensaje": "¡Para que lo disfrutes!"
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-15T17:50:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-15T17:50:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Regalo enviado a jorge.rojas@utp.edu.pe",
+              "fecha": "2026-11-15T17:50:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000020",
+          "nodo": "CENTRO",
+          "usuario": "maria.paredes@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 119.8,
+          "fecha": "2026-11-16T03:37:00.000Z",
+          "fechaEntrega": "2026-11-16T03:37:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "B7KVF-J8H9Z-MD257"
+            },
+            {
+              "idJuego": 4,
+              "titulo": "Dota 2",
+              "imagen": "assets/img/Dota_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 49.9,
+              "subtotal": 49.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "NPUYW-DX22S-JL9AR"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 119.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-16T03:37:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 15,
+            "numeroCompleto": "B003-00000015",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "María Paredes",
+              "direccion": null
+            },
+            "subtotal": 101.53,
+            "igv": 18.27,
+            "total": 119.8,
+            "emitidoEn": "2026-11-16T03:37:00.000Z"
+          },
+          "entrega": {
+            "zona": "Cusco",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-16T03:37:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-16T03:37:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-16T03:37:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000021",
+          "nodo": "CENTRO",
+          "usuario": "jorge.rojas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 119.9,
+          "fecha": "2026-11-17T02:26:00.000Z",
+          "fechaEntrega": "2026-11-17T02:26:00.000Z",
+          "items": [
+            {
+              "idJuego": 10,
+              "titulo": "Resident Evil 4",
+              "imagen": "assets/img/resident-evil-4.jpg",
+              "cantidad": 1,
+              "precioUnitario": 119.9,
+              "subtotal": 119.9,
+              "tipoEntrega": "REGALO",
+              "claveDigital": "QJN2Z-VCBMY-B57ZC"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 119.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-17T02:26:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 16,
+            "numeroCompleto": "B003-00000016",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Jorge Rojas",
+              "direccion": null
+            },
+            "subtotal": 101.61,
+            "igv": 18.29,
+            "total": 119.9,
+            "emitidoEn": "2026-11-17T02:26:00.000Z"
+          },
+          "entrega": {
+            "zona": "Junín",
+            "canal": "REGALO",
+            "destinatario": "maria.paredes@utp.edu.pe",
+            "mensaje": "¡Para que lo disfrutes!"
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-17T02:26:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-17T02:26:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Regalo enviado a maria.paredes@utp.edu.pe",
+              "fecha": "2026-11-17T02:26:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000022",
+          "nodo": "CENTRO",
+          "usuario": "maria.paredes@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 149.8,
+          "fecha": "2026-11-17T20:20:00.000Z",
+          "fechaEntrega": "2026-11-17T20:20:00.000Z",
+          "items": [
+            {
+              "idJuego": 2,
+              "titulo": "Grand Theft Auto V",
+              "imagen": "assets/img/gtav.png",
+              "cantidad": 1,
+              "precioUnitario": 79.9,
+              "subtotal": 79.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "XFUXZ-5RMDH-G5P5Q"
+            },
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "2KRWQ-EBZKV-KZJ9L"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 149.8,
+            "estado": "APROBADO",
+            "fecha": "2026-11-17T20:20:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 17,
+            "numeroCompleto": "B003-00000017",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "María Paredes",
+              "direccion": null
+            },
+            "subtotal": 126.95,
+            "igv": 22.85,
+            "total": 149.8,
+            "emitidoEn": "2026-11-17T20:20:00.000Z"
+          },
+          "entrega": {
+            "zona": "Cusco",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-17T20:20:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-17T20:20:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-17T20:20:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000023",
+          "nodo": "CENTRO",
+          "usuario": "carlos.vega@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 149.7,
+          "fecha": "2026-11-18T20:32:00.000Z",
+          "fechaEntrega": "2026-11-18T20:32:00.000Z",
+          "items": [
+            {
+              "idJuego": 2,
+              "titulo": "Grand Theft Auto V",
+              "imagen": "assets/img/gtav.png",
+              "cantidad": 1,
+              "precioUnitario": 79.9,
+              "subtotal": 79.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "G7E63-FXMNU-MRBUQ"
+            },
+            {
+              "idJuego": 8,
+              "titulo": "Stardew Valley",
+              "imagen": "assets/img/stardew-valley.jpg",
+              "cantidad": 1,
+              "precioUnitario": 29.9,
+              "subtotal": 29.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "M3XPP-QFF2C-VWDBF"
+            },
+            {
+              "idJuego": 5,
+              "titulo": "Left 4 Dead 2",
+              "imagen": "assets/img/Left_4_Dead_2.jpg",
+              "cantidad": 1,
+              "precioUnitario": 39.9,
+              "subtotal": 39.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "7HPCQ-33BVG-T6EAK"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "4242",
+            "monto": 149.7,
+            "estado": "APROBADO",
+            "fecha": "2026-11-18T20:32:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 18,
+            "numeroCompleto": "B003-00000018",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Carlos Vega",
+              "direccion": null
+            },
+            "subtotal": 126.86,
+            "igv": 22.84,
+            "total": 149.7,
+            "emitidoEn": "2026-11-18T20:32:00.000Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-18T20:32:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-18T20:32:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-18T20:32:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000024",
+          "nodo": "CENTRO",
+          "usuario": "jorge.rojas@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 69.9,
+          "fecha": "2026-11-18T20:02:00.000Z",
+          "fechaEntrega": "2026-11-18T20:02:00.000Z",
+          "items": [
+            {
+              "idJuego": 3,
+              "titulo": "Minecraft Ultra Edition",
+              "imagen": "assets/img/minecraft.jpg",
+              "cantidad": 1,
+              "precioUnitario": 69.9,
+              "subtotal": 69.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "N7EEA-DEQES-E3BNH"
+            }
+          ],
+          "pago": {
+            "metodo": "TARJETA",
+            "referencia": "4242",
+            "monto": 69.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-18T20:02:00.000Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 19,
+            "numeroCompleto": "B003-00000019",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Jorge Rojas",
+              "direccion": null
+            },
+            "subtotal": 59.24,
+            "igv": 10.66,
+            "total": 69.9,
+            "emitidoEn": "2026-11-18T20:02:00.000Z"
+          },
+          "entrega": {
+            "zona": "Junín",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-18T20:02:00.000Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con tarjeta",
+              "fecha": "2026-11-18T20:02:00.000Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-18T20:02:00.000Z"
+            }
+          ]
+        },
+        {
+          "codigo": "NX-CUS-000025",
+          "nodo": "CENTRO",
+          "usuario": "vanessa@utp.edu.pe",
+          "estado": "ENTREGADO",
+          "total": 34.9,
+          "fecha": "2026-11-19T10:43:36.954Z",
+          "fechaEntrega": "2026-11-19T10:43:36.954Z",
+          "items": [
+            {
+              "idJuego": 9,
+              "titulo": "Hollow Knight",
+              "imagen": "assets/img/hollow-knight.jpg",
+              "cantidad": 1,
+              "precioUnitario": 34.9,
+              "subtotal": 34.9,
+              "tipoEntrega": "DIGITAL",
+              "claveDigital": "66QJY-H53SD-X6C7S"
+            }
+          ],
+          "pago": {
+            "metodo": "YAPE",
+            "referencia": "Op. 81143943",
+            "monto": 34.9,
+            "estado": "APROBADO",
+            "fecha": "2026-11-19T10:43:36.954Z"
+          },
+          "comprobante": {
+            "tipo": "BOLETA",
+            "serie": "B003",
+            "numero": 20,
+            "numeroCompleto": "B003-00000020",
+            "receptor": {
+              "tipoDoc": "SIN DOC",
+              "documento": null,
+              "nombre": "Vanessa Tito",
+              "direccion": null
+            },
+            "subtotal": 29.58,
+            "igv": 5.32,
+            "total": 34.9,
+            "emitidoEn": "2026-11-19T10:43:36.954Z"
+          },
+          "entrega": {
+            "zona": "Lima",
+            "canal": "BIBLIOTECA",
+            "destinatario": null,
+            "mensaje": null
+          },
+          "historial": [
+            {
+              "estadoAnterior": null,
+              "estadoNuevo": "PENDIENTE",
+              "comentario": "Pedido creado",
+              "fecha": "2026-11-19T10:43:36.954Z"
+            },
+            {
+              "estadoAnterior": "PENDIENTE",
+              "estadoNuevo": "PAGADO",
+              "comentario": "Pago aprobado con Yape",
+              "fecha": "2026-11-19T10:43:36.954Z"
+            },
+            {
+              "estadoAnterior": "PAGADO",
+              "estadoNuevo": "ENTREGADO",
+              "comentario": "Claves entregadas en tu biblioteca",
+              "fecha": "2026-11-19T10:43:36.954Z"
+            }
+          ]
         }
       ],
-      "seqPedido": 2,
+      "seqPedido": 25,
       "seqComprobante": {
-        "boleta": 2,
-        "factura": 0
+        "boleta": 20,
+        "factura": 5
       }
     }
   },
@@ -394,7 +4058,72 @@
       "respuesta": null,
       "respondidoPor": null,
       "respondidoEn": null
+    },
+    {
+      "id": 2,
+      "asunto": "No puedo activar mi clave",
+      "mensaje": "Copié la clave pero el juego dice que no es válida.",
+      "tipo": "CONSULTA",
+      "pedido": null,
+      "usuario": "ana.torres@utp.edu.pe",
+      "fecha": "2026-11-19T10:10:05.782Z",
+      "estado": "RESUELTO",
+      "respuesta": "Hola Ana, revisamos tu pedido y la clave es correcta. Verifica que no tenga espacios al final y que elijas la región Latinoamérica.",
+      "respondidoPor": "Soporte NEXUS",
+      "respondidoEn": "2026-11-19T10:10:05.786Z"
+    },
+    {
+      "id": 3,
+      "asunto": "¿Aceptan factura a nombre de mi empresa?",
+      "mensaje": "Compré con boleta pero necesito factura de la compra de ayer.",
+      "tipo": "CONSULTA",
+      "pedido": null,
+      "usuario": "diego.salas@utp.edu.pe",
+      "fecha": "2026-11-19T10:10:05.791Z",
+      "estado": "ABIERTO",
+      "respuesta": null,
+      "respondidoPor": null,
+      "respondidoEn": null
+    },
+    {
+      "id": 4,
+      "asunto": "Olvidé mi contraseña",
+      "mensaje": "No puedo entrar a mi cuenta desde mi celular.",
+      "tipo": "CONSULTA",
+      "pedido": null,
+      "usuario": "jorge.rojas@utp.edu.pe",
+      "fecha": "2026-11-19T10:10:05.795Z",
+      "estado": "ABIERTO",
+      "respuesta": null,
+      "respondidoPor": null,
+      "respondidoEn": null
+    },
+    {
+      "id": 5,
+      "asunto": "Reembolso del pedido NX-CUS-000017",
+      "mensaje": "Compré el juego por error y quisiera el reembolso.",
+      "tipo": "REEMBOLSO",
+      "pedido": "NX-CUS-000017",
+      "usuario": "jorge.rojas@utp.edu.pe",
+      "fecha": "2026-11-19T10:10:05.800Z",
+      "estado": "ABIERTO",
+      "respuesta": null,
+      "respondidoPor": null,
+      "respondidoEn": null
+    },
+    {
+      "id": 6,
+      "asunto": "Reembolso del pedido NX-CUS-000018",
+      "mensaje": "Compré el juego por error y quisiera el reembolso.",
+      "tipo": "REEMBOLSO",
+      "pedido": "NX-CUS-000018",
+      "usuario": "jorge.rojas@utp.edu.pe",
+      "fecha": "2026-11-19T10:10:05.806Z",
+      "estado": "ABIERTO",
+      "respuesta": null,
+      "respondidoPor": null,
+      "respondidoEn": null
     }
   ],
-  "seqTicket": 1
+  "seqTicket": 6
 }

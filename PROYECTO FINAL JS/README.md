@@ -6,7 +6,8 @@ administración y soporte** (estilo dashboard SaaS). Incluye **tema claro y oscu
 
 | Capa | Tecnología | Carpeta |
 |---|---|---|
-| Interfaz | Angular 18 · standalone · señales · `@if/@for` · Bootstrap 5.3 · TypeScript estricto | `nexus-gaming-frontend/` |
+| Interfaz (principal) | **React 19** · Hooks · React Router · TanStack Query · Axios · Zod · Bootstrap 5.3 · Vite | `nexus-gaming-react/` ([detalle y arquitectura](nexus-gaming-react/README.md)) |
+| Interfaz (versión anterior) | Angular 18 · standalone · señales · `@if/@for` · Bootstrap 5.3 · TypeScript estricto | `nexus-gaming-frontend/` |
 | API | Node.js + Express (ESM) · login con token firmado · PDF con PDFKit | `nexus-gaming-backend/` |
 | Datos | JSON (sin instalar nada) **o** PostgreSQL distribuido con `postgres_fdw` | `database/` |
 
@@ -26,11 +27,13 @@ Con `npm run demo` se cargan 8 clientes más (contraseña `Cliente2026!`, p. ej.
 **Requisito: Node.js 24 LTS** (`node --version` → `v24.x`). Con Node 20.11 Angular 18 puede negarse a compilar.
 
 ```powershell
-npm run instalar     # una sola vez: instala backend y frontend
+npm run instalar     # una sola vez: instala backend y la interfaz React
 npm run demo         # (opcional) datos de ejemplo para el panel
 npm run backend      # terminal 1 -> http://localhost:3000/api
-npm run frontend     # terminal 2 -> http://localhost:4200
+npm run react        # terminal 2 -> http://127.0.0.1:5173  (interfaz React)
 ```
+
+La versión Angular sigue disponible: `npm run instalar:angular` y luego `npm run frontend` (http://localhost:4200).
 
 Los datos quedan en `nexus-gaming-backend/data/db.json` (se crea solo; bórralo para reiniciar).
 
@@ -54,7 +57,7 @@ Los datos quedan en `nexus-gaming-backend/data/db.json` (se crea solo; bórralo 
 ## Pruebas
 
 ```powershell
-npm test                                    # backend: 53 · frontend: 68 pruebas unitarias
+npm test                                    # backend: 53 · React: 13 pruebas (la versión Angular tiene 68 con `npm --prefix nexus-gaming-frontend run test:logic`)
 cd nexus-gaming-backend ; npm run test:pg   # la API completa contra PostgreSQL: 30
 ```
 Además se recorrió la aplicación compilada de punta a punta (login, compra con factura y regalo, PDF, asistente, reembolso, paneles de soporte y administración, temas): 52 comprobaciones sin fallos.

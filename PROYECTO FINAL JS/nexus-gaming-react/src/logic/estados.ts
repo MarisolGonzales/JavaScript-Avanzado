@@ -1,0 +1,28 @@
+﻿import type { EstadoPedido } from '../models';
+
+/** Etiqueta, icono y estilo de cada estado (switch: Semana 1). */
+export function infoEstado(estado: EstadoPedido): { etiqueta: string; icono: string; clase: string } {
+  switch (estado) {
+    case 'PENDIENTE':   return { etiqueta: 'Pendiente',   icono: 'fa-hourglass-half', clase: 'est-pendiente' };
+    case 'PAGADO':      return { etiqueta: 'Pagado',      icono: 'fa-circle-check',   clase: 'est-pagado' };
+    case 'ENTREGADO':   return { etiqueta: 'Entregado',   icono: 'fa-box-open',       clase: 'est-entregado' };
+    case 'REEMBOLSADO': return { etiqueta: 'Reembolsado', icono: 'fa-rotate-left',    clase: 'est-reembolsado' };
+  }
+}
+
+export const ESTADOS_PEDIDO: readonly EstadoPedido[] = ['PENDIENTE', 'PAGADO', 'ENTREGADO', 'REEMBOLSADO'];
+
+/**
+ * Ciclo de vida: PENDIENTE → PAGADO → ENTREGADO; REEMBOLSADO es final.
+ * Misma regla que transicionValida() del backend, para no ofrecer cambios que el servidor rechazaría.
+ */
+export function transicionValida(actual: EstadoPedido, nuevo: EstadoPedido): boolean {
+  if (actual === nuevo) return true;
+  if (actual === 'REEMBOLSADO') return false;
+  if (nuevo === 'REEMBOLSADO') return true;
+  const orden: readonly EstadoPedido[] = ['PENDIENTE', 'PAGADO', 'ENTREGADO'];
+  return orden.indexOf(nuevo) > orden.indexOf(actual);
+}
+
+/** Un pedido se puede reembolsar mientras esté pagado o entregado (y no antes). */
+export const admiteReembolso = (estado: EstadoPedido): boolean => estado === 'PAGADO' || estado === 'ENTREGADO';

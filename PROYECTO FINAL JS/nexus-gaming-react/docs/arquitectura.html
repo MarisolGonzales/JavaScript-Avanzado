@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arquitectura NEXUS GAMING</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una lámina técnica; capas apiladas de arriba (navegador) a abajo (datos), luego tablas de detalle. */
+:root {
+  --bg: #f6f6fb; --panel: #ffffff; --ink: #17172a; --muted: #5d5f78; --line: #dcdcea;
+  --accent: #5b3df5; --accent-soft: #ecE8ff;
+  --hook: #9a5a00; --hook-soft: #fff1dc;
+  --lib: #0b7a75; --lib-soft: #dcf5f3;
+  --comp: #5b3df5; --comp-soft: #ece8ff;
+  --data: #3d4663; --data-soft: #e8eaf3;
+  --f-display: 'Rajdhani', 'Segoe UI', sans-serif;
+  --f-body: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --f-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0e0e16; --panel: #171723; --ink: #ececf6; --muted: #a3a4bb; --line: #2b2b3c;
+  --accent: #a18bff; --accent-soft: #2a2350;
+  --hook: #f3b45a; --hook-soft: #3a2a12; --lib: #4fd1c5; --lib-soft: #10302e;
+  --comp: #a18bff; --comp-soft: #2a2350; --data: #b4bbd6; --data-soft: #232637; color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0e0e16; --panel: #171723; --ink: #ececf6; --muted: #a3a4bb; --line: #2b2b3c;
+  --accent: #a18bff; --accent-soft: #2a2350;
+  --hook: #f3b45a; --hook-soft: #3a2a12; --lib: #4fd1c5; --lib-soft: #10302e;
+  --comp: #a18bff; --comp-soft: #2a2350; --data: #b4bbd6; --data-soft: #232637; color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 32px 56px; }
+.hoja { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+h1, h2, h3 { font-family: var(--f-display); font-weight: 700; line-height: 1.1; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(2rem, 4.5vw, 3rem); letter-spacing: 0.01em; }
+h2 { font-size: 1.6rem; margin-bottom: 6px; }
+h3 { font-size: 1.15rem; }
+p { margin: 0; }
+code, .mono { font-family: var(--f-mono); font-size: 0.82em; }
+.suave { color: var(--muted); }
+.etiqueta { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 600; }
+
+/* ---------- Cabecera ---------- */
+header.portada { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; border-bottom: 2px solid var(--ink); padding-bottom: 20px; }
+header.portada p { max-width: 64ch; margin-top: 10px; color: var(--muted); }
+.ficha { font-family: var(--f-mono); font-size: 0.78rem; color: var(--muted); display: grid; grid-template-columns: auto auto; gap: 2px 14px; }
+.ficha b { color: var(--ink); font-weight: 500; }
+
+/* ---------- Leyenda y chips ---------- */
+.leyenda { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--f-mono); font-size: 0.76rem; line-height: 1.3;
+  padding: 3px 8px; border-radius: 6px; border: 1px solid transparent; white-space: nowrap; }
+.c-comp { color: var(--comp); background: var(--comp-soft); }
+.c-hook { color: var(--hook); background: var(--hook-soft); }
+.c-lib { color: var(--lib); background: var(--lib-soft); }
+.c-data { color: var(--data); background: var(--data-soft); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ---------- Diagrama de capas ---------- */
+.diagrama { display: flex; flex-direction: column; gap: 0; }
+.capa { display: grid; grid-template-columns: 230px 1fr; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.capa-nombre { padding: 14px 16px; border-right: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+.capa-nombre h3 { color: var(--ink); }
+.capa-nombre .mono { color: var(--muted); }
+.capa-cuerpo { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.capa-cuerpo p { font-size: 0.9rem; color: var(--muted); max-width: 80ch; }
+.flecha { display: flex; align-items: center; gap: 10px; padding: 6px 0 6px 108px; color: var(--muted); font-size: 0.8rem; }
+.flecha::before { content: ""; width: 2px; height: 22px; background: var(--accent); }
+.flecha span { font-family: var(--f-mono); }
+.capa.externa { background: transparent; border-style: dashed; }
+.sub { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+.caja { border: 1px solid var(--line); border-radius: 8px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.caja h4 { margin: 0; font-size: 0.86rem; font-weight: 600; }
+
+/* ---------- Árbol ---------- */
+.dos { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.arbol { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; overflow-x: auto; }
+.arbol pre { margin: 0; font-family: var(--f-mono); font-size: 0.78rem; line-height: 1.65; color: var(--ink); }
+.arbol .k { color: var(--comp); } .arbol .h { color: var(--hook); } .arbol .l { color: var(--lib); } .arbol .m { color: var(--muted); }
+
+/* ---------- Tabla funcionalidad ---------- */
+.tabla-env { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; min-width: 860px; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+th { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; background: var(--bg); }
+tr:last-child td { border-bottom: 0; }
+td:first-child { font-weight: 600; width: 190px; }
+td:first-child small { display: block; font-weight: 400; color: var(--muted); font-size: 0.8rem; margin-top: 2px; }
+td.archivos { font-family: var(--f-mono); font-size: 0.76rem; color: var(--muted); width: 200px; }
+
+/* ---------- Flujo de compra ---------- */
+.flujo { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0; counter-reset: paso; }
+.paso { position: relative; padding: 16px 18px 16px 18px; background: var(--panel); border: 1px solid var(--line); margin: -1px 0 0 -1px; display: flex; flex-direction: column; gap: 8px; }
+.paso::before { counter-increment: paso; content: counter(paso); font-family: var(--f-display); font-weight: 700; font-size: 1.6rem; color: var(--accent); line-height: 1; }
+.paso p { font-size: 0.88rem; color: var(--muted); }
+
+.notas { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.nota { border-top: 2px solid var(--accent); padding-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.nota p { font-size: 0.9rem; color: var(--muted); }
+footer { border-top: 1px solid var(--line); padding-top: 14px; font-size: 0.82rem; color: var(--muted); }
+
+@media (max-width: 760px) {
+  header.portada { grid-template-columns: 1fr; }
+  .capa { grid-template-columns: 1fr; }
+  .capa-nombre { border-right: 0; border-bottom: 1px solid var(--line); }
+  .flecha { padding-left: 16px; }
+  .dos { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="hoja">
+  <header class="portada">
+    <div>
+      <span class="etiqueta">JavaScript Avanzado · Proyecto final · Arquitectura de software</span>
+      <h1>NEXUS GAMING en React</h1>
+      <p>Tienda de videojuegos digitales. La interfaz está hecha con React 19 y consume la API REST del proyecto (Node.js + Express). Este esquema muestra cómo se aplican los componentes y hooks de React y las librerías adicionales en cada funcionalidad implementada.</p>
+    </div>
+    <div class="ficha">
+      <span>Interfaz</span><b>React 19.3 + TypeScript 7</b>
+      <span>Build</span><b>Vite 8</b>
+      <span>API</span><b>Express 4 · puerto 3000</b>
+      <span>Datos</span><b>JSON o PostgreSQL</b>
+      <span>Carpeta</span><b>nexus-gaming-react/</b>
+    </div>
+  </header>
+
+  <!-- ===================== 1. CAPAS ===================== -->
+  <section>
+    <h2>Esquema por capas</h2>
+    <p class="suave" style="margin-bottom:14px">Cada capa solo habla con la de abajo. Los colores indican qué es cada pieza.</p>
+    <div class="leyenda" style="margin-bottom:16px">
+      <span class="chip c-comp">Componente</span>
+      <span class="chip c-hook">Hook / API de React</span>
+      <span class="chip c-lib">Librería adicional</span>
+      <span class="chip c-data">Datos / servidor</span>
+    </div>
+
+    <div class="diagrama">
+      <div class="capa">
+        <div class="capa-nombre"><span class="etiqueta">Capa 1</span><h3>Arranque y proveedores</h3><span class="mono">main.tsx</span></div>
+        <div class="capa-cuerpo">
+          <p>Monta la app y envuelve todo con proveedores que comparten estado global.</p>
+          <div class="chips">
+            <span class="chip c-hook">StrictMode</span><span class="chip c-hook">createRoot</span>
+            <span class="chip c-lib">QueryClientProvider</span><span class="chip c-lib">BrowserRouter</span>
+            <span class="chip c-comp">TemaProvider</span><span class="chip c-comp">ToastProvider</span><span class="chip c-comp">AuthProvider</span>
+            <span class="chip c-comp">FavoritosProvider</span><span class="chip c-comp">CarritoProvider</span>
+            <span class="chip c-comp">InstalacionesProvider</span><span class="chip c-comp">AsistenteProvider</span>
+            <span class="chip c-lib">Bootstrap 5.3 + SCSS (mismo diseño que la versión Angular)</span>
+          </div>
+        </div>
+      </div>
+      <div class="flecha"><span>renderiza &lt;App/&gt;</span></div>
+
+      <div class="capa">
+        <div class="capa-nombre"><span class="etiqueta">Capa 2</span><h3>Rutas y layouts</h3><span class="mono">App.tsx · components/*Layout.tsx</span></div>
+        <div class="capa-cuerpo">
+          <p>Dos interfaces: la tienda (cliente) y el panel (admin y soporte); login y registro van a pantalla completa. Cada página se descarga al visitarla y las rutas privadas pasan por un guard según el rol.</p>
+          <div class="chips">
+            <span class="chip c-lib">Routes · Route · Outlet</span><span class="chip c-lib">NavLink · Navigate</span>
+            <span class="chip c-hook">lazy</span><span class="chip c-hook">Suspense</span>
+            <span class="chip c-comp">ErrorBoundary (clase)</span><span class="chip c-comp">RutaProtegida</span>
+            <span class="chip c-comp">TiendaLayout</span><span class="chip c-comp">AdminLayout</span>
+          </div>
+        </div>
+      </div>
+      <div class="flecha"><span>&lt;Outlet/&gt; dibuja la página de la ruta</span></div>
+
+      <div class="capa">
+        <div class="capa-nombre"><span class="etiqueta">Capa 3</span><h3>Páginas</h3><span class="mono">pages/ · pages/admin/</span></div>
+        <div class="capa-cuerpo">
+          <div class="sub">
+            <div class="caja"><h4>Tienda</h4><div class="chips">
+              <span class="chip c-comp">Inicio</span><span class="chip c-comp">Catalogo</span><span class="chip c-comp">JuegoDetalle</span>
+              <span class="chip c-comp">Carrito</span><span class="chip c-comp">Checkout</span><span class="chip c-comp">Soporte</span></div></div>
+            <div class="caja"><h4>Cuenta del cliente</h4><div class="chips">
+              <span class="chip c-comp">Pedidos</span><span class="chip c-comp">PedidoDetalle</span><span class="chip c-comp">Biblioteca</span>
+              <span class="chip c-comp">Favoritos</span><span class="chip c-comp">Logros</span><span class="chip c-comp">Perfil</span></div></div>
+            <div class="caja"><h4>Acceso</h4><div class="chips">
+              <span class="chip c-comp">Login</span><span class="chip c-comp">Registro</span><span class="chip c-comp">NoEncontrada</span></div></div>
+            <div class="caja"><h4>Panel</h4><div class="chips">
+              <span class="chip c-comp">Dashboard</span><span class="chip c-comp">PedidosAdmin</span>
+              <span class="chip c-comp">Clientes</span><span class="chip c-comp">SoporteAdmin</span><span class="chip c-comp">CatalogoAdmin</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flecha"><span>usan componentes reutilizables</span></div>
+
+      <div class="capa">
+        <div class="capa-nombre"><span class="etiqueta">Capa 4</span><h3>Componentes reutilizables</h3><span class="mono">components/</span></div>
+        <div class="capa-cuerpo">
+          <div class="chips">
+            <span class="chip c-comp">GameCard · memo</span><span class="chip c-comp">CampoTexto · useId + useImperativeHandle</span>
+            <span class="chip c-comp">Toasts · createPortal</span><span class="chip c-comp">Qr · useMemo</span>
+            <span class="chip c-comp">Graficos: AreaChart · DonutChart · BarList (SVG)</span>
+            <span class="chip c-comp">Logo · ThemeToggle · EstadoBadge · StockPill · TimelineEstados</span>
+          </div>
+        </div>
+      </div>
+      <div class="flecha"><span>leen y cambian estado con hooks</span></div>
+
+      <div class="capa">
+        <div class="capa-nombre"><span class="etiqueta">Capa 5</span><h3>Estado: contextos y hooks</h3><span class="mono">context/ · hooks/</span></div>
+        <div class="capa-cuerpo">
+          <div class="sub">
+            <div class="caja"><h4>Estado global del cliente (Context)</h4><div class="chips">
+              <span class="chip c-comp">AuthContext</span><span class="chip c-comp">CarritoContext + carritoReducer</span>
+              <span class="chip c-comp">FavoritosContext</span><span class="chip c-comp">TemaContext</span><span class="chip c-comp">ToastContext</span>
+              <span class="chip c-comp">InstalacionesContext</span><span class="chip c-comp">AsistenteContext</span>
+              <span class="chip c-hook">createContext · useContext</span><span class="chip c-hook">useReducer</span><span class="chip c-hook">useEffectEvent</span></div></div>
+            <div class="caja"><h4>Estado del servidor (caché)</h4><div class="chips">
+              <span class="chip c-lib">useQuery</span><span class="chip c-lib">useMutation</span><span class="chip c-lib">invalidateQueries</span>
+              <span class="chip c-comp">hooks/consultas.ts</span></div></div>
+            <div class="caja"><h4>Hooks propios</h4><div class="chips">
+              <span class="chip c-hook">useConexion · useSyncExternalStore</span><span class="chip c-hook">useTitulo · useEffect</span></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="flecha"><span>llaman a funciones de servicio</span></div>
+
+      <div class="capa">
+        <div class="capa-nombre"><span class="etiqueta">Capa 6</span><h3>Servicios HTTP</h3><span class="mono">api/http.ts · contrato.ts · servicios.ts</span></div>
+        <div class="capa-cuerpo">
+          <p>Una función por endpoint. Axios añade el token y convierte errores; Zod comprueba que la respuesta cumple el contrato antes de usarla.</p>
+          <div class="chips">
+            <span class="chip c-lib">Axios · interceptores (Bearer, 401, timeout)</span><span class="chip c-lib">Zod · juegoSchema · sesionSchema · pedidoSchema</span>
+            <span class="chip c-comp">authApi · juegosApi · carritoApi · pedidosApi · soporteApi · adminApi</span>
+          </div>
+        </div>
+      </div>
+      <div class="flecha"><span>/api → proxy de Vite → http://localhost:3000/api</span></div>
+
+      <div class="capa externa">
+        <div class="capa-nombre"><span class="etiqueta">Capa 7</span><h3>Backend y datos</h3><span class="mono">nexus-gaming-backend/</span></div>
+        <div class="capa-cuerpo">
+          <div class="chips">
+            <span class="chip c-data">Express · rutas REST</span><span class="chip c-data">token firmado + scrypt</span>
+            <span class="chip c-data">PDFKit (comprobante)</span><span class="chip c-data">db.json o PostgreSQL (3 servidores regionales)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 2. ÁRBOL ===================== -->
+  <section>
+    <h2>Árbol de componentes</h2>
+    <p class="suave" style="margin-bottom:14px">Cómo se anidan en tiempo de ejecución. Los proveedores de arriba están disponibles para todo lo que está debajo.</p>
+    <div class="dos">
+      <div class="arbol"><pre><span class="h">&lt;StrictMode&gt;</span>
+ <span class="l">&lt;QueryClientProvider&gt;</span>   <span class="m">caché HTTP</span>
+  <span class="l">&lt;BrowserRouter&gt;</span>
+   <span class="k">&lt;TemaProvider&gt;</span>        <span class="m">claro / oscuro</span>
+    <span class="k">&lt;ToastProvider&gt;</span>      <span class="m">avisos</span>
+     <span class="k">&lt;AuthProvider&gt;</span>      <span class="m">sesión y rol</span>
+      <span class="k">&lt;FavoritosProvider&gt;</span>
+       <span class="k">&lt;CarritoProvider&gt;</span>
+        <span class="k">&lt;InstalacionesProvider&gt;</span> <span class="m">descargas</span>
+         <span class="k">&lt;AsistenteProvider&gt;</span>    <span class="m">chat</span>
+          <span class="k">&lt;App&gt;</span>
+           <span class="l">&lt;Routes&gt;</span> …
+           <span class="k">&lt;Toasts/&gt;</span>     <span class="m">createPortal → body</span></pre></div>
+      <div class="arbol"><pre><span class="l">&lt;Route&gt;</span> <span class="k">&lt;TiendaLayout&gt;</span>
+  <span class="k">&lt;BannerConexion/&gt;</span>  <span class="m">useConexion</span>
+  <span class="k">&lt;ErrorBoundary&gt;</span>
+   <span class="h">&lt;Suspense&gt;</span>
+    <span class="l">&lt;Outlet/&gt;</span>  <span class="m">→ Catalogo, Checkout…</span>
+<span class="l">&lt;Route path="admin"&gt;</span>
+  <span class="k">&lt;RutaProtegida requiere="staff"&gt;</span>
+   <span class="k">&lt;AdminLayout&gt;</span>
+    <span class="l">&lt;Outlet/&gt;</span>  <span class="m">→ Dashboard, PedidosAdmin…</span>
+
+<span class="k">&lt;PedidoDetalle&gt;</span>
+  <span class="k">&lt;ErrorBoundary&gt;</span> <span class="h">&lt;Suspense&gt;</span>
+    <span class="k">&lt;CuerpoPedido/&gt;</span>  <span class="m">use(promesa)</span></pre></div>
+    </div>
+  </section>
+
+  <!-- ===================== 3. TABLA ===================== -->
+  <section>
+    <h2>React aplicado a cada funcionalidad</h2>
+    <p class="suave" style="margin-bottom:14px">Qué hook, componente o librería resuelve cada parte de lo implementado.</p>
+    <div class="tabla-env">
+      <table>
+        <thead><tr><th>Funcionalidad</th><th>Archivos</th><th>React</th><th>Librerías</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>Sesión y roles<small>login, registro, rutas privadas</small></td>
+            <td class="archivos">AuthContext · Login · Registro · RutaProtegida</td>
+            <td><div class="chips"><span class="chip c-hook">createContext / useContext</span><span class="chip c-hook">useEffect + AbortController</span><span class="chip c-hook">useEffectEvent</span><span class="chip c-hook">useMemo · useCallback</span><span class="chip c-hook">useRef → enfocar()</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">Navigate · useSearchParams</span><span class="chip c-lib">Axios (token, 401)</span><span class="chip c-lib">Zod sesionSchema</span></div></td>
+          </tr>
+          <tr>
+            <td>Página de inicio<small>carrusel de destacados</small></td>
+            <td class="archivos">Inicio · GameCard</td>
+            <td><div class="chips"><span class="chip c-hook">useState (diapositiva, pausa)</span><span class="chip c-hook">useEffect + setInterval + limpieza</span><span class="chip c-hook">useMemo</span><span class="chip c-hook">eventos onMouseEnter / onFocus</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useQuery ['juegos']</span><span class="chip c-lib">Link</span></div></td>
+          </tr>
+          <tr>
+            <td>Catálogo y búsqueda<small>buscador, orden, categorías</small></td>
+            <td class="archivos">Catalogo · GameCard · logic/indice-busqueda</td>
+            <td><div class="chips"><span class="chip c-hook">useDeferredValue</span><span class="chip c-hook">useTransition</span><span class="chip c-hook">useMemo (índice Map)</span><span class="chip c-hook">useCallback + memo</span><span class="chip c-hook">useId</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useQuery ['juegos']</span><span class="chip c-lib">useSearchParams</span></div></td>
+          </tr>
+          <tr>
+            <td>Detalle del juego</td>
+            <td class="archivos">JuegoDetalle</td>
+            <td><div class="chips"><span class="chip c-hook">useEffect (registrar visita)</span><span class="chip c-hook">useContext (carrito, favoritos)</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useParams</span><span class="chip c-lib">useQuery ['juegos', id]</span></div></td>
+          </tr>
+          <tr>
+            <td>Carrito<small>licencia propia o regalo</small></td>
+            <td class="archivos">CarritoContext · carritoReducer · Carrito</td>
+            <td><div class="chips"><span class="chip c-hook">useReducer</span><span class="chip c-hook">useEffect (localStorage)</span><span class="chip c-hook">useRef (antirrebote)</span><span class="chip c-hook">useMemo (total)</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">Axios PUT /carrito</span><span class="chip c-lib">fetchQuery</span></div></td>
+          </tr>
+          <tr>
+            <td>Pago<small>tarjeta, Yape, Plin · boleta o factura</small></td>
+            <td class="archivos">Checkout · CampoTexto · Qr</td>
+            <td><div class="chips"><span class="chip c-hook">useActionState</span><span class="chip c-hook">useFormStatus</span><span class="chip c-hook">useState (campos controlados)</span><span class="chip c-hook">useMemo (QR)</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">Axios POST /pedidos</span><span class="chip c-lib">invalidateQueries</span><span class="chip c-lib">useNavigate</span></div></td>
+          </tr>
+          <tr>
+            <td>Pedidos y comprobante PDF</td>
+            <td class="archivos">Pedidos · PedidoDetalle</td>
+            <td><div class="chips"><span class="chip c-hook">use(promesa)</span><span class="chip c-hook">Suspense</span><span class="chip c-comp">ErrorBoundary</span><span class="chip c-hook">useMemo</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useQuery · fetchQuery</span><span class="chip c-lib">Axios blob (PDF)</span><span class="chip c-lib">Zod pedidoSchema</span></div></td>
+          </tr>
+          <tr>
+            <td>Biblioteca<small>instalación simulada</small></td>
+            <td class="archivos">Biblioteca · InstalacionesContext</td>
+            <td><div class="chips"><span class="chip c-hook">Context (sigue al cambiar de página)</span><span class="chip c-hook">useEffect + setInterval + limpieza</span><span class="chip c-hook">useEffectEvent</span><span class="chip c-hook">useRef</span><span class="chip c-hook">useDeferredValue</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useQuery ['biblioteca']</span></div></td>
+          </tr>
+          <tr>
+            <td>Favoritos y logros</td>
+            <td class="archivos">FavoritosContext · Favoritos · Logros</td>
+            <td><div class="chips"><span class="chip c-hook">useState · useContext</span><span class="chip c-hook">useMemo (logros derivados)</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useQuery</span><span class="chip c-data">localStorage</span></div></td>
+          </tr>
+          <tr>
+            <td>Soporte<small>asistente virtual y tickets</small></td>
+            <td class="archivos">Soporte · AsistenteContext</td>
+            <td><div class="chips"><span class="chip c-hook">useOptimistic</span><span class="chip c-hook">useTransition</span><span class="chip c-hook">useLayoutEffect (scroll)</span><span class="chip c-hook">useRef</span><span class="chip c-hook">useEffectEvent</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useMutation</span><span class="chip c-lib">useQuery</span><span class="chip c-lib">invalidateQueries</span></div></td>
+          </tr>
+          <tr>
+            <td>Panel de administración<small>resumen, pedidos, clientes, tickets</small></td>
+            <td class="archivos">Dashboard · PedidosAdmin · Clientes · SoporteAdmin</td>
+            <td><div class="chips"><span class="chip c-hook">useOptimistic (aprobar reembolso)</span><span class="chip c-hook">useTransition</span><span class="chip c-hook">useMemo</span><span class="chip c-comp">AreaChart · DonutChart · BarList</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useQuery · useMutation</span><span class="chip c-lib">setQueryData</span><span class="chip c-lib">NavLink</span></div></td>
+          </tr>
+          <tr>
+            <td>Catálogo y stock<small>solo administración</small></td>
+            <td class="archivos">CatalogoAdmin</td>
+            <td><div class="chips"><span class="chip c-hook">useState (formulario y borrador de stock)</span><span class="chip c-hook">useMemo</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">useQuery ['juegos']</span><span class="chip c-lib">Axios POST/PUT/DELETE</span><span class="chip c-lib">invalidateQueries</span></div></td>
+          </tr>
+          <tr>
+            <td>Transversal<small>tema, avisos, conexión, carga</small></td>
+            <td class="archivos">TemaContext · ToastContext · Toasts · useConexion · App</td>
+            <td><div class="chips"><span class="chip c-hook">useState (inicial perezoso)</span><span class="chip c-hook">useReducer</span><span class="chip c-hook">createPortal</span><span class="chip c-hook">useSyncExternalStore · useDebugValue</span><span class="chip c-hook">lazy + Suspense</span><span class="chip c-hook">StrictMode</span></div></td>
+            <td><div class="chips"><span class="chip c-lib">Bootstrap data-bs-theme</span><span class="chip c-lib">React Router</span></div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ===================== 4. FLUJO ===================== -->
+  <section>
+    <h2>Recorrido de una compra</h2>
+    <p class="suave" style="margin-bottom:14px">La funcionalidad principal atraviesa todas las capas.</p>
+    <div class="flujo">
+      <div class="paso"><h3>Ver el juego</h3><p><code>JuegoDetalle</code> lee el id con <code>useParams</code> y los datos con <code>useQuery</code>.</p></div>
+      <div class="paso"><h3>Añadir al carrito</h3><p><code>dispatch({type:'agregar'})</code> en el <code>useReducer</code> del <code>CarritoContext</code>; un <code>useEffect</code> lo guarda y lo sincroniza.</p></div>
+      <div class="paso"><h3>Pagar</h3><p><code>&lt;form action={pagar}&gt;</code> con <code>useActionState</code> valida (Luhn, RUC, DNI); <code>useFormStatus</code> muestra «Procesando pago…».</p></div>
+      <div class="paso"><h3>Enviar a la API</h3><p><code>pedidosApi.crear</code> → Axios añade el token → Express descuenta stock → Zod valida la respuesta.</p></div>
+      <div class="paso"><h3>Actualizar la caché</h3><p><code>invalidateQueries</code> de pedidos, biblioteca y juegos; se vacía el carrito y <code>navigate</code> lleva al pedido.</p></div>
+      <div class="paso"><h3>Ver el pedido</h3><p><code>use(promesa)</code> dentro de <code>Suspense</code> y <code>ErrorBoundary</code>; el PDF se descarga con Axios como blob.</p></div>
+    </div>
+  </section>
+
+  <!-- ===================== 5. LABORATORIOS ===================== -->
+  <section>
+    <h2>Relación con los laboratorios</h2>
+    <div class="notas" style="margin-top:14px">
+      <div class="nota"><span class="etiqueta">Laboratorio 13 · Hooks</span>
+        <p>Agenda → <code>useReducer</code> del carrito. Catálogo → <code>useDeferredValue</code>, <code>useTransition</code>, <code>memo</code>. Foco → <code>CampoTexto</code>. Plataforma → <code>useConexion</code>. Reserva → <code>useActionState</code>, <code>useFormStatus</code>, <code>useOptimistic</code>. Recursos → <code>use</code> + <code>Suspense</code> + <code>ErrorBoundary</code>. Avisos → <code>useEffectEvent</code>.</p></div>
+      <div class="nota"><span class="etiqueta">Laboratorio 14 · Servicios</span>
+        <p>Axios con interceptores, TanStack Query (<code>useQuery</code>, <code>useMutation</code>, invalidación), contrato con Zod, cancelación con <code>AbortSignal</code> y proxy <code>/api</code> en Vite.</p></div>
+      <div class="nota"><span class="etiqueta">Laboratorio 10 · Angular</span>
+        <p>La versión anterior del frontend sigue en <code>nexus-gaming-frontend/</code>. La versión React usa su mismo SCSS y el mismo HTML en cada pantalla, y reutiliza su lógica pura (dinero, Luhn, RUC, índice de búsqueda, burbuja, QR, instalación) en <code>src/logic/</code>.</p></div>
+      <div class="nota"><span class="etiqueta">Pruebas</span>
+        <p>13 pruebas con Vitest y Testing Library: reductor del carrito, validaciones del pago, reglas de estado, carrusel del inicio, <code>GameCard</code>, <code>CampoTexto</code>, <code>ErrorBoundary</code>, <code>useConexion</code> y el catálogo con TanStack Query.</p></div>
+    </div>
+  </section>
+
+  <footer>NEXUS GAMING · Proyecto académico de JavaScript Avanzado (UTP) · Los pagos y comprobantes son simulados.</footer>
+</div>
+
+</html>
