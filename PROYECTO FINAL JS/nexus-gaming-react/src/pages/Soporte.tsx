@@ -114,7 +114,7 @@ export function Soporte() {
     if (malo) { setTocados({ asunto: true, mensaje: true }); toast.error('Completa los campos del ticket.'); return; }
     crear.mutate();
   }
-
+  
   return (
     <>
       <section className="page-header">

@@ -11,6 +11,8 @@ package-lock.json
 # Compilados
 dist/
 build/
+.next/
+/PROYECTO FINAL JS.zip
 
 # Archivos del sistema
 .DS_Store
